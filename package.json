@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "audit": "node scripts/audit-coverage.mjs",
     "check": "node scripts/validate-data.mjs",
     "check-readme": "node scripts/sync-readme.mjs --check",
     "sync-readme": "node scripts/sync-readme.mjs",

@@ -13,15 +13,27 @@ for (const [label, items] of [["model", data.models], ["benchmark", data.benchma
 for (const model of data.models) {
   if (!new Set(["language", "vision", "omni"]).has(model.modality)) errors.push(`invalid modality: ${model.id}`);
   if (!sourceIds.has(model.sourceId)) errors.push(`missing model source: ${model.id} -> ${model.sourceId}`);
+  if (!data.observations.some((observation) => observation.modelId === model.id) && !model.scoreStatus) errors.push(`model has no scoreStatus and no observations: ${model.id}`);
+}
+
+for (const benchmark of data.benchmarks) {
+  if (!new Set(["higher", "lower"]).has(benchmark.direction)) errors.push(`invalid benchmark direction: ${benchmark.id}`);
 }
 
 for (const observation of data.observations) {
   if (!modelIds.has(observation.modelId)) errors.push(`missing model: ${observation.id} -> ${observation.modelId}`);
   if (!benchmarkIds.has(observation.benchmarkId)) errors.push(`missing benchmark: ${observation.id} -> ${observation.benchmarkId}`);
   if (observation.value === "" || observation.value == null) errors.push(`empty score: ${observation.id}`);
+  if (!observation.sourceIds.length) errors.push(`score has no source: ${observation.id}`);
   for (const sourceId of observation.sourceIds) {
     if (!sourceIds.has(sourceId)) errors.push(`missing source: ${observation.id} -> ${sourceId}`);
   }
+}
+
+
+for (const benchmark of data.benchmarks) {
+  const units = new Set(data.observations.filter((observation) => observation.benchmarkId === benchmark.id).map((observation) => observation.unit));
+  if (units.size > 1) errors.push(`mixed units in benchmark: ${benchmark.id} -> ${[...units].join(", ")}`);
 }
 
 if (errors.length) {

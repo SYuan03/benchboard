@@ -31,7 +31,7 @@
 
     <section class="notice" aria-label="覆盖范围说明">
       <strong>持续补全中</strong>
-      <span>当前是可核验数据集，不是“所有 Benchmark 已齐”的宣称。SkillsBench 1.1 已加入；新模型没有独立公开分数时会显示待补，不拿旧版代替。</span>
+      <span>当前是可核验数据集，不宣称已经收齐。Qwen3.8 官方表、SkillsBench 1.1、PinchBench v2 与 WildClawBench 已加入；没有独立公开分数的模型会显示待补。</span>
     </section>
 
     <section class="app-shell" aria-label="排行榜数据库">
@@ -78,7 +78,7 @@
       <section id="panel-models" role="tabpanel" aria-labelledby="tab-models" hidden>
         <div class="section-head">
           <div><p class="eyebrow">MODEL REGISTRY</p><h2>模型目录</h2></div>
-          <p>明确版本、别名、原生输入模态与开放方式；日期快照不会与稳定名称混在一起。</p>
+          <p>点击任一模型查看它报告过的全部 Benchmark、口径与逐条来源；日期快照不会与稳定名称混在一起。</p>
         </div>
         <div class="table-wrap"><table class="data-table" id="models-table"></table></div>
       </section>
@@ -104,6 +104,15 @@
     <div><strong>Frontier AI Leaderboard</strong><span>公开资料索引，不代表独立复测或商业推荐。</span></div>
     <a href="README.md">维护说明</a>
   </footer>
+
+  <div class="drawer-backdrop" id="model-drawer-backdrop" hidden></div>
+  <aside class="model-drawer" id="model-drawer" role="dialog" aria-modal="true" aria-labelledby="model-drawer-title" aria-hidden="true" hidden>
+    <div class="drawer-topbar">
+      <span>MODEL PROFILE</span>
+      <button class="drawer-close" id="model-drawer-close" type="button" aria-label="关闭模型详情">关闭 ×</button>
+    </div>
+    <div id="model-drawer-content"></div>
+  </aside>
 
   <script src="data.js"></script>
   <script src="app.js"></script>
