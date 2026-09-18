@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check": "node scripts/validate-data.mjs && node scripts/sync-readme.mjs --check",
+    "check": "node scripts/validate-data.mjs",
+    "check-readme": "node scripts/sync-readme.mjs --check",
     "sync-readme": "node scripts/sync-readme.mjs",
     "serve": "python3 -m http.server 8000"
   }
