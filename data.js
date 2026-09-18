@@ -16,12 +16,13 @@ window.BENCH_DATA = (() => {
     { id: "qwen38", vendorId: "alibaba", publisher: "Qwen / Alibaba Cloud", date: "2026-08-03", tier: "official", title: "Qwen3.8-Max: A New Bar for Coding and Cowork", url: "https://qwen.ai/blog?id=qwen3.8" },
     { id: "qwen38-hf", vendorId: "alibaba", publisher: "Qwen", date: "2026-08-13", tier: "official", title: "Qwen3.8-2.4T-A95B — Official Model Card", url: "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B" },
     { id: "qwen38-omni", vendorId: "alibaba", publisher: "Qwen", date: "2026-09-18", tier: "official", title: "Qwen3.8-Omni-Flash: Omni Senses. Agentic Delivery.", url: "https://qwen.ai/blog?id=qwen3.8-omni-flash" },
-    { id: "wildclawbench", vendorId: "wildclawbench", publisher: "WildClawBench / InternLM", date: "2026-07-20", tier: "official", title: "WildClawBench Official Leaderboard", url: "https://internlm.github.io/WildClawBench/" },
+    { id: "wildclawbench", vendorId: "wildclawbench", kind: "benchmark", publisher: "WildClawBench / InternLM", date: "2026-07-20", tier: "official", title: "WildClawBench Official Leaderboard", url: "https://internlm.github.io/WildClawBench/" },
     { id: "alibaba-lifecycle", vendorId: "alibaba", publisher: "Alibaba Cloud Model Studio", date: "2026-09-18", tier: "official", title: "模型上下架与更新", url: "https://help.aliyun.com/zh/model-studio/newly-released-models" },
     { id: "seed21", vendorId: "bytedance", publisher: "ByteDance Seed", date: "2026-06-23", tier: "official", title: "Seed2.1 — Model Card", url: "https://seed.bytedance.com/en/seed2_1" },
     { id: "hy4", vendorId: "tencent", publisher: "Tencent Hy", date: "2026-08-28", tier: "official", title: "Hy4-preview — Official Model Card", url: "https://huggingface.co/tencent/Hy4-preview" },
-    { id: "skillsbench-1-1", vendorId: "benchflow", publisher: "SkillsBench / BenchFlow", date: "2026-07-16", tier: "official", title: "SkillsBench 1.1 Official Leaderboard", url: "https://www.skillsbench.ai/" },
-    { id: "pinchbench-v2", vendorId: "pinchbench", publisher: "PinchBench", date: "2026-09-18", tier: "official", title: "PinchBench v2 — OpenClaw Benchmark Leaderboard", url: "https://pinchbench.com/" }
+    { id: "skillsbench-1-1", vendorId: "benchflow", kind: "benchmark", publisher: "SkillsBench / BenchFlow", date: "2026-07-16", tier: "official", title: "SkillsBench 1.1 Official Leaderboard", url: "https://www.skillsbench.ai/" },
+    { id: "pinchbench-v2", vendorId: "pinchbench", kind: "benchmark", publisher: "PinchBench", date: "2026-09-18", tier: "official", title: "PinchBench v2 — OpenClaw Benchmark Leaderboard", url: "https://pinchbench.com/" },
+    { id: "rngbench", vendorId: "rngbench", kind: "benchmark", publisher: "RNG-Bench / InternLM", date: "2026-07-07", tier: "official", title: "RNG-Bench Official Results", url: "https://internlm.github.io/RNGBench/" }
   ];
 
   const models = [
@@ -29,6 +30,7 @@ window.BENCH_DATA = (() => {
     { id: "gpt-5-6-sol", name: "GPT-5.6 Sol", vendorId: "openai", vendor: "OpenAI", releaseDate: "2026-07-09", modality: "vision", modalityDetail: "文本、图像、屏幕/计算机操作 → 文本", context: "1M 档长上下文评测", access: "闭源 API", aliases: ["gpt-5.6-sol", "GPT-5.6 Sol"], sourceId: "openai-gpt56", summary: "GPT-5.6 家族旗舰，覆盖编码、知识工作、科研和多模态。" },
     { id: "gpt-5-6-terra", name: "GPT-5.6 Terra", vendorId: "openai", vendor: "OpenAI", releaseDate: "2026", modality: "vision", modalityDetail: "多模态模型；当前仅收录 Z.ai 官方表中的精确版本名与对照成绩", context: "未核实", access: "闭源 API", aliases: ["gpt-5.6-terra", "GPT-5.6 Terra"], sourceId: "zai-glm53-flash", summary: "GLM-5.3 Flash 官方表使用的独立对照版本；不与 GPT-5.6 Sol 合并。" },
     { id: "gpt-5-6-luna", name: "GPT-5.6 Luna", vendorId: "openai", vendor: "OpenAI", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像、工具调用 → 文本", context: "未披露", access: "闭源 API", aliases: ["openai/gpt-5.6-luna"], sourceId: "openai-gpt56", summary: "GPT-5.6 家族的低延迟版本；PinchBench v2 当前榜单中的前沿模型。" },
+    { id: "gpt-5-4", name: "GPT-5.4", vendorId: "openai", vendor: "OpenAI", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像 → 文本；RNGBench 官方主榜使用的精确模型名", context: "未核实", access: "API", aliases: ["gpt-5.4", "GPT-5.4"], sourceId: "rngbench", summary: "RNG-Bench 官方主榜中的多模态对照模型；不与 GPT-5.6 系列合并。" },
     { id: "claude-fable-5-1", name: "Claude Fable 5.1", vendorId: "anthropic", vendor: "Anthropic", releaseDate: "2026-09-01", modality: "vision", modalityDetail: "文本、图像、屏幕/计算机操作 → 文本", context: "未披露", access: "闭源 API", aliases: ["claude-fable-5-1"], sourceId: "anthropic-fable51", summary: "面向编码、知识工作与长程任务的最新 Fable 模型。" },
     { id: "claude-mythos-5-1", name: "Claude Mythos 5.1", vendorId: "anthropic", vendor: "Anthropic", releaseDate: "2026-09-01", modality: "vision", modalityDetail: "与 Fable 5.1 同模型，安全策略更宽松", context: "未披露", access: "受限访问", aliases: ["claude-mythos-5-1"], sourceId: "anthropic-fable51", summary: "与 Fable 5.1 权重相同，面向经审核的网络安全与生命科学用户。" },
     { id: "claude-opus-5", name: "Claude Opus 5", vendorId: "anthropic", vendor: "Anthropic", releaseDate: "2026-07-24", modality: "vision", modalityDetail: "文本、图像、屏幕/计算机操作 → 文本", context: "未披露", access: "闭源 API", aliases: ["claude-opus-5"], sourceId: "anthropic-fable51", summary: "Anthropic Opus 系列前沿模型，作为多份同期官方表的强基线。" },
@@ -48,10 +50,13 @@ window.BENCH_DATA = (() => {
     { id: "qwen3-8-flash", name: "Qwen3.8 Flash", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-08-26", modality: "vision", modalityDetail: "文本、图像、长视频 → 文本", context: "1M", access: "API", aliases: ["qwen3.8-flash"], sourceId: "alibaba-lifecycle", scoreStatus: "pending", summary: "多模态高并发版本，面向编程、Agent 与长上下文。" },
     { id: "qwen3-8-omni-flash", name: "Qwen3.8 Omni Flash", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-09-18", modality: "omni", modalityDetail: "文本、图像、音频、视频 → 文本", context: "1M", access: "闭源 API", aliases: ["qwen3.8-omni-flash"], sourceId: "qwen38-omni", summary: "Qwen3.8 的原生全模态版本，面向音视频 Agent、编码和长程任务。" },
     { id: "qwen3-5-omni-plus", name: "Qwen3.5 Omni Plus", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026", modality: "omni", modalityDetail: "文本、图像、音频、视频 → 文本", context: "未核实", access: "闭源 API", aliases: ["qwen3.5-omni-plus"], sourceId: "qwen38-omni", summary: "Qwen3.8 Omni Flash 官方发布表中的上一代全模态对照模型。" },
+    { id: "qwen3-5-397b", name: "Qwen3.5-397B", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像 → 文本；RNGBench 官方主榜使用的精确模型名", context: "未核实", access: "具体快照未核实", aliases: ["Qwen3.5-397B", "qwen3.5-397b"], sourceId: "rngbench", summary: "RNG-Bench 官方主榜中的多模态对照模型；保留其原始版本标签。" },
     { id: "glm-5-3", name: "GLM-5.3", vendorId: "zai", vendor: "Z.ai", releaseDate: "2026-08-14", modality: "language", modalityDetail: "文本 → 文本", context: "1M", access: "开放权重 / API", aliases: ["glm-5.3"], sourceId: "zai-glm53", summary: "纯语言长程 Agent 旗舰，突出编码与网络安全。" },
     { id: "glm-5-3-flash", name: "GLM-5.3 Flash", vendorId: "zai", vendor: "Z.ai", releaseDate: "2026-08-26", modality: "vision", modalityDetail: "文本、图像、视频、文件 → 文本", context: "1M", access: "开放权重 / API", aliases: ["glm-5.3-flash", "ox-alpha"], sourceId: "zai-glm53-flash", summary: "GLM-5 系列首个原生多模态模型，320B/18B active。" },
+    { id: "seed2-0-lite", name: "Seed-2.0-Lite", vendorId: "bytedance", vendor: "ByteDance Seed", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像 → 文本；RNGBench 官方主榜使用的精确模型名", context: "未核实", access: "API", aliases: ["Seed-2.0-Lite", "seed-2.0-lite"], sourceId: "rngbench", summary: "RNG-Bench 官方主榜中的多模态对照模型；与 Seed2.1 系列分开保存。" },
     { id: "seed2-1-pro", name: "Seed2.1 Pro", vendorId: "bytedance", vendor: "ByteDance Seed", releaseDate: "2026-06-23", modality: "vision", modalityDetail: "文本、图像、视频 → 文本", context: "128K+ 多模态长上下文评测", access: "闭源 API", aliases: ["seed2.1-pro", "Doubao Seed 2.1 Pro"], sourceId: "seed21", summary: "面向现实生产力、编码交付和视觉/视频理解的 Pro 版本。" },
     { id: "seed2-1-turbo", name: "Seed2.1 Turbo", vendorId: "bytedance", vendor: "ByteDance Seed", releaseDate: "2026-06-23", modality: "vision", modalityDetail: "文本、图像、视频 → 文本", context: "128K+ 多模态长上下文评测", access: "闭源 API", aliases: ["seed2.1-turbo", "Doubao Seed 2.1 Turbo"], sourceId: "seed21", summary: "Seed2.1 家族效率版本，保留 Agent、编码和多模态能力。" },
+    { id: "kimi-k2-5", name: "Kimi-K2.5", vendorId: "moonshot", vendor: "Moonshot AI", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像 → 文本；RNGBench 官方主榜使用的精确模型名", context: "未核实", access: "具体快照未核实", aliases: ["Kimi-K2.5", "kimi-k2.5"], sourceId: "rngbench", summary: "RNG-Bench 官方主榜中的多模态对照模型；与 Kimi K3 分开保存。" },
     { id: "kimi-k3", name: "Kimi K3", vendorId: "moonshot", vendor: "Moonshot AI", releaseDate: "2026-07-17", modality: "vision", modalityDetail: "文本、图像 → 文本", context: "1M", access: "开放权重 / API", aliases: ["kimi-k3", "K3"], sourceId: "alibaba-lifecycle", summary: "2.8T KDA 混合线性注意力旗舰，原生视觉理解。" },
     { id: "hy4-preview", name: "Hy4 Preview", vendorId: "tencent", vendor: "Tencent Hy", releaseDate: "2026-08-28", modality: "language", modalityDetail: "文本 → 文本", context: "1M", access: "开放权重", aliases: ["hy4-preview", "Tencent Hy4"], sourceId: "hy4", summary: "770B/49B active 的纯语言 MoE 旗舰预览版。" }
   ];
@@ -100,6 +105,18 @@ window.BENCH_DATA = (() => {
     { id: "worldvqa", name: "WorldVQA", category: "多模态", direction: "higher", description: "视觉世界知识。" },
     { id: "erqa", name: "ERQA", category: "多模态", direction: "higher", description: "空间推理。" },
     { id: "mathvision", name: "MathVision", category: "多模态", direction: "higher", description: "视觉数学推理；工具设置需注明。" },
+    { id: "rngbench-matching-pf", name: "RNG-Bench · Matching Pairs Parse Failure", category: "多模态", direction: "lower", description: "10×10 图像棋盘、noise theme 的解析失败率；数值越低越好。" },
+    { id: "rngbench-matching-ia", name: "RNG-Bench · Matching Pairs Invalid Action", category: "多模态", direction: "lower", description: "10×10 图像棋盘、noise theme 的无效动作率；数值越低越好。" },
+    { id: "rngbench-matching-responses", name: "RNG-Bench · Matching Pairs Responses per Score", category: "多模态", direction: "lower", description: "10×10 图像棋盘、noise theme 中每成功匹配一对卡牌所需的响应数；数值越低越好。" },
+    { id: "rngbench-matching-pairs", name: "RNG-Bench · Matching Pairs Score", category: "多模态", direction: "higher", description: "重构式非马尔可夫记忆任务；10×10 图像棋盘、noise theme，Score 为成功匹配的卡牌对比例。" },
+    { id: "rngbench-maze-sr", name: "RNG-Bench · 3D Maze Success Rate", category: "多模态", direction: "higher", description: "13×13、无 minimap 的 3D Maze 成功率。" },
+    { id: "rngbench-maze-explore", name: "RNG-Bench · 3D Maze Explore Rate", category: "多模态", direction: "higher", description: "13×13、无 minimap 的 3D Maze 探索率。" },
+    { id: "rngbench-maze-walls", name: "RNG-Bench · 3D Maze Wall Collisions", category: "多模态", direction: "lower", description: "13×13、无 minimap 的 3D Maze 撞墙次数；数值越低越好。" },
+    { id: "rngbench-maze-efficiency", name: "RNG-Bench · 3D Maze Efficiency", category: "多模态", direction: "higher", description: "13×13、无 minimap 的成功 episode 路径效率。" },
+    { id: "rngbench-maze", name: "RNG-Bench · 3D Maze Game Score", category: "多模态", direction: "higher", description: "重构式空间记忆任务；13×13、无 minimap，GS 综合成功率、效率与探索率。" },
+    { id: "rngbench-duel-win", name: "RNG-Bench · Duel Win Rate", category: "多模态", direction: "higher", description: "Matching Pairs 双模型对战胜率；每个模型与其余四个模型进行 16 局。" },
+    { id: "rngbench-duel-score", name: "RNG-Bench · Duel Score", category: "多模态", direction: "higher", description: "Matching Pairs 双模型对战中的平均匹配得分比例。" },
+    { id: "rngbench-duel-elo", name: "RNG-Bench · Duel Elo", category: "多模态", direction: "higher", description: "Matching Pairs 双模型对战 Elo；与胜率和得分分榜展示。" },
     { id: "exploitbench", name: "ExploitBench", category: "网络安全", direction: "higher", description: "真实漏洞利用；安全策略、时间预算和 Harness 影响很大。" },
     { id: "exploitgym-rate", name: "ExploitGym · Success Rate", category: "网络安全", direction: "higher", description: "漏洞利用成功率；不与完成任务数混排。" },
     { id: "exploitgym-tasks", name: "ExploitGym · Solved Tasks", category: "网络安全", direction: "higher", description: "在给定时间预算内完成的任务数；分母保留在设置中。" },
@@ -278,6 +295,55 @@ window.BENCH_DATA = (() => {
   add(["seed21"], "mathvision", "seed2-1-pro", "92.6 (94.5)", "%", "with tools；括号为修正后");
   add(["seed21"], "mathvision", "seed2-1-turbo", "90.1 (92.7)", "%", "with tools；括号为修正后");
   add(["qwen38"], "mathvision", "qwen3-8-max", "95.2 / 97.7", "%", "without CI / with CI");
+
+  batch(["rngbench"], "rngbench-matching-pairs", [
+    ["seed2-1-pro", 64.6], ["gpt-5-4", 62.3], ["gemini-3-1-pro", 50.0],
+    ["seed2-0-lite", 43.2], ["kimi-k2-5", 38.0], ["qwen3-5-397b", 25.3]
+  ], "%", "single-player · 10×10 · image · noise theme");
+  batch(["rngbench"], "rngbench-matching-pf", [
+    ["seed2-1-pro", 6.3], ["gpt-5-4", 0.0], ["gemini-3-1-pro", 0.4],
+    ["seed2-0-lite", 1.2], ["kimi-k2-5", 1.8], ["qwen3-5-397b", 0.0]
+  ], "%", "single-player · 10×10 · image · noise theme");
+  batch(["rngbench"], "rngbench-matching-ia", [
+    ["seed2-1-pro", 4.1], ["gpt-5-4", 4.3], ["gemini-3-1-pro", 2.5],
+    ["seed2-0-lite", 4.3], ["kimi-k2-5", 2.8], ["qwen3-5-397b", 3.0]
+  ], "%", "single-player · 10×10 · image · noise theme");
+  batch(["rngbench"], "rngbench-matching-responses", [
+    ["seed2-1-pro", 7.9], ["gpt-5-4", 8.0], ["gemini-3-1-pro", 10.0],
+    ["seed2-0-lite", 11.6], ["kimi-k2-5", 13.2], ["qwen3-5-397b", 19.7]
+  ], "resp/score", "single-player · 10×10 · image · noise theme");
+  batch(["rngbench"], "rngbench-maze", [
+    ["gemini-3-1-pro", 49.7], ["seed2-1-pro", 32.0], ["gpt-5-4", 30.5],
+    ["seed2-0-lite", 21.7], ["kimi-k2-5", 16.1], ["qwen3-5-397b", 10.5]
+  ], "%", "single-player · 13×13 · no minimap · mean optimal path 60 steps");
+  batch(["rngbench"], "rngbench-maze-sr", [
+    ["gemini-3-1-pro", 50.0], ["seed2-1-pro", 30.0], ["gpt-5-4", 20.0],
+    ["seed2-0-lite", 20.0], ["kimi-k2-5", 10.0], ["qwen3-5-397b", 0.0]
+  ], "%", "single-player · 13×13 · no minimap · mean optimal path 60 steps");
+  batch(["rngbench"], "rngbench-maze-explore", [
+    ["gemini-3-1-pro", 36.4], ["seed2-1-pro", 35.4], ["gpt-5-4", 32.3],
+    ["qwen3-5-397b", 21.0], ["seed2-0-lite", 19.4], ["kimi-k2-5", 17.9]
+  ], "%", "single-player · 13×13 · no minimap · mean optimal path 60 steps");
+  batch(["rngbench"], "rngbench-maze-walls", [
+    ["gemini-3-1-pro", 0.1], ["gpt-5-4", 3.2], ["kimi-k2-5", 7.1],
+    ["qwen3-5-397b", 9.9], ["seed2-1-pro", 12.9], ["seed2-0-lite", 16.6]
+  ], "walls", "single-player · 13×13 · no minimap · mean optimal path 60 steps");
+  batch(["rngbench"], "rngbench-maze-efficiency", [
+    ["gpt-5-4", 75.7], ["gemini-3-1-pro", 62.5], ["kimi-k2-5", 61.1],
+    ["seed2-0-lite", 38.9], ["seed2-1-pro", 29.1], ["qwen3-5-397b", 0.0]
+  ], "%", "successful episodes only · 13×13 · no minimap · mean optimal path 60 steps");
+  batch(["rngbench"], "rngbench-duel-win", [
+    ["gemini-3-1-pro", 100.0], ["gpt-5-4", 50.0], ["qwen3-5-397b", 46.7],
+    ["kimi-k2-5", 37.5], ["seed2-0-lite", 15.6]
+  ], "%", "Matching Pairs · image · poker theme · 16 games per model");
+  batch(["rngbench"], "rngbench-duel-score", [
+    ["gemini-3-1-pro", 36.5], ["gpt-5-4", 25.3], ["qwen3-5-397b", 18.0],
+    ["kimi-k2-5", 18.0], ["seed2-0-lite", 12.3]
+  ], "%", "Matching Pairs · image · poker theme · 16 games per model");
+  batch(["rngbench"], "rngbench-duel-elo", [
+    ["gemini-3-1-pro", 1803], ["gpt-5-4", 1492], ["qwen3-5-397b", 1476],
+    ["kimi-k2-5", 1423], ["seed2-0-lite", 1306]
+  ], "Elo", "Matching Pairs · image · poker theme · 16 games per model");
 
   batch(["openai-astra"], "exploitbench", [["gpt-6-astra",100.0],["gpt-5-6-sol",78.5],["claude-opus-5",70.0]], "%", "无生产安全策略");
   batch(["zai-glm53"], "exploitbench", [["glm-5-3",54.4],["kimi-k3",32.2],["qwen3-8-max",28.8],["claude-fable-5",78.0],["gpt-5-6-sol",76.5]], "%", "Z.ai设置");

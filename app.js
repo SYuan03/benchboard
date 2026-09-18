@@ -37,6 +37,12 @@
     .replaceAll('"', "&quot;").replaceAll("'", "&#039;");
   const unique = (items) => [...new Set(items.filter(Boolean))];
   const normalize = (value) => String(value ?? "").toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/g, " ").trim();
+  const matchesSearch = (haystack, needle) => {
+    const text = normalize(haystack);
+    const query = normalize(needle);
+    if (!query) return true;
+    return text.includes(query) || text.replaceAll(" ", "").includes(query.replaceAll(" ", ""));
+  };
   const numericValue = (value) => {
     const match = String(value).match(/-?\d+(?:\.\d+)?/);
     return match ? Number(match[0]) : Number.NEGATIVE_INFINITY;
@@ -71,7 +77,7 @@
     if (state.vendor && model.vendorId !== state.vendor) return false;
     if (state.modality && model.modality !== state.modality) return false;
     if (!state.search) return true;
-    return normalize([model.name, model.vendor, model.summary, ...(model.aliases || [])].join(" ")).includes(normalize(state.search));
+    return matchesSearch([model.name, model.vendor, model.summary, ...(model.aliases || [])].join(" "), state.search);
   }
 
   function matchesObservation(obs, ignoreCategory = false) {
@@ -80,7 +86,7 @@
     if (!model || !bench || !matchesModelWithoutSearch(model)) return false;
     if (!ignoreCategory && state.category && bench.category !== state.category) return false;
     if (!state.search) return true;
-    return normalize([bench.name, bench.category, model.name, model.vendor, obs.setting, obs.note].join(" ")).includes(normalize(state.search));
+    return matchesSearch([bench.name, bench.category, model.name, model.vendor, obs.setting, obs.note].join(" "), state.search);
   }
 
   function matchesModelWithoutSearch(model) {
@@ -96,7 +102,7 @@
   function sourceLinks(obs, model) {
     return obs.sourceIds.map((id) => sourcesById.get(id)).filter(Boolean).map((source) => {
       const own = source.vendorId === model.vendorId;
-      const benchmarkOfficial = ["benchflow", "pinchbench", "wildclawbench"].includes(source.vendorId);
+      const benchmarkOfficial = source.kind === "benchmark";
       const label = own ? `${source.publisher} · 厂商官方` : `${source.publisher} · ${benchmarkOfficial ? "Benchmark 官方" : "他测"}`;
       return `<a class="${own ? "" : "cross"}" href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(label)} ↗</a>`;
     }).join("");
@@ -215,11 +221,12 @@
 
   function renderSources() {
     let sources = [...data.sources];
-    if (state.search) sources = sources.filter((source) => normalize([source.title, source.publisher].join(" ")).includes(normalize(state.search)));
+    if (state.search) sources = sources.filter((source) => matchesSearch([source.title, source.publisher].join(" "), state.search));
     sources.sort((a, b) => String(b.date).localeCompare(String(a.date)));
     els.sourcesTable.innerHTML = `<thead><tr><th>日期</th><th>来源</th><th>发布方</th><th>类型</th><th>引用记录</th></tr></thead><tbody>${sources.length ? sources.map((source) => {
       const count = data.observations.filter((obs) => obs.sourceIds.includes(source.id)).length;
-      return `<tr><td>${escapeHtml(source.date)}</td><td class="source-title"><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.title)} ↗</a></td><td>${escapeHtml(source.publisher)}</td><td><span class="modality">官方发布</span></td><td>${count} 条</td></tr>`;
+      const type = source.kind === "benchmark" ? "Benchmark 官方" : "模型厂商官方";
+      return `<tr><td>${escapeHtml(source.date)}</td><td class="source-title"><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.title)} ↗</a></td><td>${escapeHtml(source.publisher)}</td><td><span class="modality">${type}</span></td><td>${count} 条</td></tr>`;
     }).join("") : `<tr><td colspan="5" class="empty">没有匹配的来源。</td></tr>`}</tbody>`;
   }
 
@@ -283,7 +290,7 @@
         <div><dt>发布日期</dt><dd>${escapeHtml(model.releaseDate)}</dd></div>
         <div><dt>别名 / API 名</dt><dd>${escapeHtml((model.aliases || []).join(" · ") || "—")}</dd></div>
       </dl>
-      ${modelSource ? `<a class="primary-source" href="${escapeHtml(modelSource.url)}" target="_blank" rel="noreferrer">打开模型官方出处 ↗</a>` : ""}
+      ${modelSource ? `<a class="primary-source" href="${escapeHtml(modelSource.url)}" target="_blank" rel="noreferrer">${modelSource.kind === "benchmark" ? "打开收录依据" : "打开模型官方出处"} ↗</a>` : ""}
       <div class="drawer-results">
         ${rows.length ? [...groups.entries()].map(([category, items]) => `
           <section class="result-group">

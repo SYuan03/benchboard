@@ -9,10 +9,10 @@ BenchBoard collects public benchmark results for current language, multimodal, a
 ## Coverage
 
 <!-- DATA_SUMMARY_START -->
-- 29 model releases
-- 75 registered benchmarks
-- 482 deduplicated public results
-- 16 primary sources
+- 33 model releases
+- 87 registered benchmarks
+- 551 deduplicated public results
+- 17 primary sources
 <!-- DATA_SUMMARY_END -->
 
 The first release focuses on general, coding, multimodal, and agent models near the frontier in 2026. It includes GPT-6 Astra, GPT-5.6 Sol, Claude 5, Gemini 3.8, DeepSeek V4.1, Qwen3.8, GLM-5.3, Seed2.1, Kimi K3, and Hy4.
@@ -20,6 +20,8 @@ The first release focuses on general, coding, multimodal, and agent models near 
 All rows from the Coding Agent, General Agent, and General Capabilities tables in the official Qwen3.8 model card are recorded individually. Qwen3.8 Max currently has public results for 51 distinct benchmarks. The open-weight `Qwen3.8-2.4T-A95B` language model and the vision-and-tool-enabled Qwen3.8 Max service are listed separately.
 
 SkillsBench 1.1, PinchBench v2, WildClawBench, and WildClawBench-MM are included. Agent harnesses are kept for SkillsBench. PinchBench stores Best Success Rate and Average Success Rate separately. WildClawBench stores Overall, Elapsed Time, and Total Cost separately. WildClawBench-MM includes multimodal agent results such as the official 71.0 score reported for Qwen3.8 Omni Flash.
+
+[RNG-Bench](https://internlm.github.io/RNGBench/) is split into 12 leaderboards for the comparable rates, scores, efficiency measures, error rates, and Elo in its official main-results tables. The records cover the 10×10 Matching Pairs setting, the 13×13 Maze, and the 16-game-per-model Duel protocol. Raw win, tie, and loss counts remain on the source page.
 
 Coverage is still expanding as model providers and benchmark maintainers publish new tables.
 

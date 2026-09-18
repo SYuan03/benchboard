@@ -1,31 +1,31 @@
-# 贡献数据
+# Contributing data
 
-欢迎补充新模型、新 Benchmark 和已有记录的来源。一次提交尽量只处理一个模型发布或一张成绩表，方便核对。
+Contributions may add a model, a benchmark, a source, or a correction to an existing result. Keep each pull request focused on one model release or one result table when possible; smaller changes are easier to verify.
 
-提交前请检查：
+Before submitting:
 
-1. 来源链接指向模型厂商、Benchmark 官方页面、论文或模型卡。找不到一手来源时，在说明里写明二手来源。
-2. 模型名称对应具体版本。日期快照和稳定别名分开登记。
-3. Benchmark 名称包含会影响可比性的版本号。
-4. `setting` 写明 Harness、工具权限、推理强度、任务数量和采样次数中已知的部分。
-5. 相同分数和相同设置合并 `sourceIds`；不同数值或设置分别保存。
-6. `npm` 或构建工具不是必需依赖。提交后应能直接打开 `index.html`。
+1. Link to a model provider, official benchmark page, paper, or model card. If no primary source is available, identify the secondary source clearly.
+2. Use an exact model release. Keep dated snapshots, previews, and stable aliases separate.
+3. Include the benchmark version whenever it affects comparability.
+4. Record known evaluation details in `setting`, including the harness, tool access, reasoning setting, task count, and sample count.
+5. Merge identical values with identical settings by combining `sourceIds`. Keep different values or settings as separate observations.
+6. Do not add a build dependency. The site must still work by opening `index.html` directly.
 
-可以在 Pull Request 中附上原表截图，数据仍需链接到可访问的原始页面。
+Screenshots of the original table are useful in a pull request, but every record still needs a link to an accessible source.
 
-## 修改流程
+## Workflow
 
-1. 在 `data.js` 中登记或更新 `sources`、`models`、`benchmarks` 和 `observations`。
-2. 运行 `npm run check`，确认 ID、来源、单位和模型版本引用有效。
-3. 运行 `npm run sync-readme`，同步 README 中的收录数量。
-4. 运行 `npm run check-readme` 和 `node --check app.js`。
-5. 在 Pull Request 说明中附上原始来源，并指出新增或修正了哪些记录。
+1. Add or update `sources`, `models`, `benchmarks`, and `observations` in `data.js`.
+2. Run `npm run check` to validate IDs, references, units, and model-version mappings.
+3. Run `npm run sync-readme` to refresh the coverage counts in README.
+4. Run `npm run check-readme` and `node --check app.js`.
+5. In the pull request, link the original source and list the records added or corrected.
 
-如果只是报告错误，不必先改代码。请提交 Issue，写清模型、Benchmark、当前值、建议值和原始来源。
+You can report an error without editing the repository. Open an issue with the model, benchmark, current value, proposed value, and primary source.
 
-## 不接受的改动
+## Changes we cannot accept
 
-- 没有可访问来源的榜单截图或转述。
-- 把日期快照、预览版、稳定别名或不同 Harness 的结果当作同一个分数。
-- 为填满表格而沿用相邻版本、同系列模型或推测值。
-- 把不同单位、指标方向或任务集版本合并排名。
+- Scores from an inaccessible screenshot or an unattributed summary.
+- Results copied between dated snapshots, previews, stable aliases, or different harnesses.
+- Guessed values based on a nearby release or another model in the same family.
+- Rankings that combine incompatible units, metrics, or benchmark versions.
