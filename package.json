@@ -1,11 +1,11 @@
 {
-  "name": "frontier-ai-leaderboard",
+  "name": "benchboard",
   "version": "0.1.0",
   "private": true,
-  "description": "A source-linked leaderboard for frontier language, multimodal, and agent models.",
+  "description": "A source-linked collection of published AI model benchmark scores.",
   "license": "MIT",
-  "repository": "github:SYuan03/frontier-ai-leaderboard",
-  "homepage": "https://syuan03.github.io/frontier-ai-leaderboard/",
+  "repository": "github:SYuan03/benchboard",
+  "homepage": "https://syuan03.github.io/benchboard/",
   "type": "module",
   "scripts": {
     "audit": "node scripts/audit-coverage.mjs",

@@ -1,6 +1,6 @@
 window.BENCH_DATA = (() => {
   const meta = {
-    title: "FrontierBench",
+    title: "BenchBoard",
     updated: "2026-09-18",
     scope: "截至 2026-09-18 的领先通用/Agent 模型公开成绩首版"
   };

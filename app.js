@@ -364,7 +364,7 @@
     const url = URL.createObjectURL(new Blob(["\ufeff", csv], { type: "text/csv;charset=utf-8" }));
     const link = document.createElement("a");
     link.href = url;
-    link.download = `frontier-ai-leaderboard-${data.meta.updated}.csv`;
+    link.download = `benchboard-${data.meta.updated}.csv`;
     link.click();
     URL.revokeObjectURL(url);
   }

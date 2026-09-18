@@ -1,12 +1,12 @@
-# FrontierBench
+# BenchBoard
 
-[在线榜单](https://syuan03.github.io/frontier-ai-leaderboard/) · [贡献数据](CONTRIBUTING.md) · [MIT License](LICENSE)
+[在线榜单](https://syuan03.github.io/benchboard/) · [贡献数据](CONTRIBUTING.md) · [MIT License](LICENSE)
 
-FrontierBench 收集领先语言模型、多模态模型和 Agent 模型公开过的 Benchmark 成绩。这里不计算一个笼统的“总分”。不同 Benchmark 的任务、版本和测评环境差别很大，把它们加权成一个数字通常会掩盖问题。
+BenchBoard 汇总领先语言模型、多模态模型和 Agent 模型公开过的 Benchmark 成绩。这里不计算一个笼统的“总分”。不同 Benchmark 的任务、版本和测评环境差别很大，把它们加权成一个数字通常会掩盖问题。
 
 网站默认按 Benchmark 展示排名。每条成绩保留测评设置和原始链接；同一结果被多处发布时合并来源，数值或 Harness 不一致时则并列保存。
 
-[![FrontierBench 榜单页面](assets/frontierbench-preview.png)](https://syuan03.github.io/frontier-ai-leaderboard/)
+[![BenchBoard 榜单页面](assets/benchboard-preview.png)](https://syuan03.github.io/benchboard/)
 
 ## 当前收录
 
