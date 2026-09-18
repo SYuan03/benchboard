@@ -27,7 +27,7 @@ python3 -m http.server 8000
 
 然后访问 `http://localhost:8000`。
 
-改动数据后运行 `npm run check`。这个命令会检查 ID、引用关系和空分数，并把 README 的收录数量更新为 `data.js` 中的实际值。
+改动数据后先运行 `npm run check` 检查 ID、引用关系和空分数，再运行 `npm run sync-readme` 更新 README 的收录数量。`npm run check-readme` 可以检查两个地方是否一致。
 
 仓库保持私有期间，Pages 工作流只允许手动触发。GitHub 个人账户会把私有仓库的 Pages 站点公开发布，因此正式上线前需要先在 Settings > Pages 选择 GitHub Actions，再手动运行 `Deploy GitHub Pages`。
 
