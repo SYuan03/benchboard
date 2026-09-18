@@ -7,17 +7,17 @@ Frontier AI Leaderboard 收集领先语言模型、多模态模型和 Agent 模�
 ## 当前收录
 
 <!-- DATA_SUMMARY_START -->
-- 28 个模型或版本
-- 74 个已登记 Benchmark
-- 433 条去重公开成绩
-- 15 个官方来源
+- 29 个模型或版本
+- 75 个已登记 Benchmark
+- 436 条去重公开成绩
+- 16 个官方来源
 <!-- DATA_SUMMARY_END -->
 
 首版集中在 2026 年仍处于前沿位置的通用、编码、多模态和 Agent 模型，包括 GPT-6 Astra、GPT-5.6 Sol、Claude 5 系列、Gemini 3.8、DeepSeek V4.1、Qwen3.8、GLM-5.3、Seed2.1、Kimi K3 和 Hy4。
 
 Qwen3.8 官方模型卡的 Coding Agent、General Agent 和 General Capabilities 三张表已经逐行录入。Qwen3.8 Max 目前有 51 个不同 Benchmark 的公开结果。开放权重的 `Qwen3.8-2.4T-A95B` 是纯语言模型，Qwen3.8 Max 是支持视觉和官方工具的服务版；两者在模型目录中分开登记。
 
-SkillsBench 1.1、PinchBench v2 和 WildClawBench 已收录。SkillsBench 保留 Agent Harness，PinchBench 把 Best Success Rate 和 Average Success Rate 分开，WildClawBench 把 Overall、Elapsed Time 和 Total Cost 分开。
+SkillsBench 1.1、PinchBench v2、WildClawBench 和 WildClawBench-MM 已收录。SkillsBench 保留 Agent Harness，PinchBench 分为 Best Success Rate 和 Average Success Rate，WildClawBench 分为 Overall、Elapsed Time 和 Total Cost。WildClawBench-MM 单独记录多模态 Agent 成绩，包括 Qwen3.8 Omni Flash 官方发布的 71.0 分。
 
 这些数字描述当前仓库，不代表覆盖已经完成。模型厂商发布新表，或者 Benchmark 官方榜更新后，记录会继续补充。
 
@@ -35,12 +35,13 @@ python3 -m http.server 8000
 
 仓库保持私有期间，Pages 工作流只允许手动触发。GitHub 个人账户会把私有仓库的 Pages 站点公开发布，因此正式上线前需要先在 Settings > Pages 选择 GitHub Actions，再手动运行 `Deploy GitHub Pages`。
 
-页面有四个视图：
+页面有五个视图：
 
-- Leaderboards：选择一个 Benchmark，查看模型排名、模态、测评设置和来源。
-- Matrix：横向查看 Benchmark 与模型的覆盖情况。
-- Models：核对模型版本、别名、上下文、原生模态和开放方式。点击模型后会打开详情，列出该模型的全部成绩、测评设置和来源。
-- Sources：查看每个来源支撑了多少条原始记录。
+- 榜单：按能力域和 Benchmark 查看排名、模态、测评设置和来源。
+- 模型对比：选择两到三个模型，查看共同参与或各自参与的 Benchmark。页面不计算跨 Benchmark 总分。
+- 覆盖矩阵：横向查看 Benchmark 与模型的覆盖情况。
+- 模型：核对版本、别名、上下文、原生模态和开放方式。点击模型后会打开详情，列出全部成绩、设置和来源。
+- 来源：查看每个发布页支撑了多少条原始记录。
 
 ## 数据结构
 

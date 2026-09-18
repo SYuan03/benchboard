@@ -3,49 +3,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="领先 AI 模型 Benchmark 排行榜：统一名称、保留测评口径、逐条标注来源。">
-  <title>Frontier AI Leaderboard</title>
+  <meta name="description" content="按 Benchmark 查询前沿模型公开成绩，保留版本、测评设置和原始来源。">
+  <title>FrontierBench</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="Frontier AI Leaderboard 首页">
+    <a class="brand" href="#top" aria-label="FrontierBench 首页">
       <span class="brand-mark">F</span>
-      <span><strong>Frontier AI</strong><small>Leaderboard</small></span>
+      <span><strong>FrontierBench</strong><small>Public model scores</small></span>
     </a>
     <nav class="header-nav" aria-label="站点链接">
       <span id="freshness"></span>
-      <a href="https://github.com/SYuan03/frontier-ai-leaderboard" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="README.md">数据说明</a>
+      <a href="https://github.com/SYuan03/frontier-ai-leaderboard" target="_blank" rel="noreferrer">GitHub</a>
     </nav>
   </header>
 
   <main id="top">
-    <section class="overview">
+    <section class="overview" aria-labelledby="page-title">
       <div class="overview-copy">
-        <p class="eyebrow">SOURCE-FIRST · MODEL BENCHMARK DATABASE</p>
-        <h1>前沿 AI 模型，<br>一张表看清。</h1>
-        <p>汇总领先语言、多模态与 Agent 模型的公开成绩。相同结果合并出处；分数或口径冲突时并列保留，不做未经依据的平均。</p>
+        <p class="eyebrow">公开成绩索引</p>
+        <h1 id="page-title">模型与 Benchmark</h1>
+        <p>按 Benchmark 查成绩，点模型看完整记录。每条数据都保留版本、测评设置和原始来源。</p>
       </div>
       <div class="overview-stats" id="stats" aria-label="数据库概览"></div>
     </section>
 
     <section class="notice" aria-label="覆盖范围说明">
-      <strong>持续补全中</strong>
-      <span>当前是可核验数据集，不宣称已经收齐。Qwen3.8 官方表、SkillsBench 1.1、PinchBench v2 与 WildClawBench 已加入；没有独立公开分数的模型会显示待补。</span>
+      <strong>收录状态</strong>
+      <span>数据仍在补录。已收录 Qwen3.8 官方表、SkillsBench 1.1、PinchBench v2、WildClawBench 和 WildClawBench-MM。待补模型会明确标记，不沿用相邻版本的成绩。</span>
     </section>
 
     <section class="app-shell" aria-label="排行榜数据库">
       <div class="tabs" role="tablist" aria-label="数据视图">
-        <button class="tab active" id="tab-leaderboard" type="button" role="tab" aria-selected="true" aria-controls="panel-leaderboard" data-tab="leaderboard">Leaderboards</button>
-        <button class="tab" id="tab-matrix" type="button" role="tab" aria-selected="false" aria-controls="panel-matrix" data-tab="matrix">Matrix</button>
-        <button class="tab" id="tab-models" type="button" role="tab" aria-selected="false" aria-controls="panel-models" data-tab="models">Models</button>
-        <button class="tab" id="tab-sources" type="button" role="tab" aria-selected="false" aria-controls="panel-sources" data-tab="sources">Sources</button>
+        <button class="tab active" id="tab-leaderboard" type="button" role="tab" aria-selected="true" aria-controls="panel-leaderboard" data-tab="leaderboard">榜单</button>
+        <button class="tab" id="tab-compare" type="button" role="tab" aria-selected="false" aria-controls="panel-compare" data-tab="compare">模型对比</button>
+        <button class="tab" id="tab-matrix" type="button" role="tab" aria-selected="false" aria-controls="panel-matrix" data-tab="matrix">覆盖矩阵</button>
+        <button class="tab" id="tab-models" type="button" role="tab" aria-selected="false" aria-controls="panel-models" data-tab="models">模型</button>
+        <button class="tab" id="tab-sources" type="button" role="tab" aria-selected="false" aria-controls="panel-sources" data-tab="sources">来源</button>
       </div>
 
       <div class="filters" id="filters">
         <label class="search-field">
           <span>搜索</span>
-          <input id="search" type="search" placeholder="模型、Bench、厂商…" autocomplete="off">
+          <input id="search" type="search" placeholder="搜索模型或 Benchmark" autocomplete="off">
         </label>
         <label><span>厂商</span><select id="vendor-filter"><option value="">全部厂商</option></select></label>
         <label><span>模态</span><select id="modality-filter"><option value="">全部模态</option><option value="language">纯语言</option><option value="vision">视觉语言</option><option value="omni">全模态</option></select></label>
@@ -55,21 +57,34 @@
       </div>
 
       <section id="panel-leaderboard" role="tabpanel" aria-labelledby="tab-leaderboard">
-        <div class="leaderboard-layout">
-          <aside class="bench-sidebar">
-            <div class="sidebar-heading"><span>Benchmarks</span><strong id="bench-count"></strong></div>
-            <div id="benchmark-nav"></div>
-          </aside>
-          <div class="leaderboard-main">
-            <div class="leaderboard-heading" id="leaderboard-heading"></div>
-            <div class="table-wrap"><table class="data-table leaderboard-table" id="leaderboard-table"></table></div>
-          </div>
+        <div class="benchmark-toolbar">
+          <div class="category-tabs" id="category-tabs" aria-label="能力分类"></div>
+          <label class="benchmark-picker"><span>Benchmark</span><select id="benchmark-select"></select><small><b id="bench-count"></b> 个结果集</small></label>
         </div>
+        <div class="leaderboard-main">
+          <div class="leaderboard-heading" id="leaderboard-heading"></div>
+          <div class="table-wrap leaderboard-wrap"><table class="data-table leaderboard-table" id="leaderboard-table"></table></div>
+        </div>
+      </section>
+
+      <section id="panel-compare" role="tabpanel" aria-labelledby="tab-compare" hidden>
+        <div class="section-head compare-head">
+          <div><p class="eyebrow">按共同 Benchmark 对照</p><h2>模型对比</h2></div>
+          <p>不同 Benchmark 不做归一化或总分。表格只并排列出公开原值和口径。</p>
+        </div>
+        <div class="compare-controls">
+          <label><span>模型 A</span><select id="compare-model-a"></select></label>
+          <label><span>模型 B</span><select id="compare-model-b"></select></label>
+          <label><span>模型 C（可选）</span><select id="compare-model-c"><option value="">不选择</option></select></label>
+          <label class="check-field"><input id="compare-common-only" type="checkbox" checked><span>只看共同参与</span></label>
+        </div>
+        <div class="compare-summary" id="compare-summary"></div>
+        <div class="table-wrap compare-wrap"><table class="data-table compare-table" id="compare-table"></table></div>
       </section>
 
       <section id="panel-matrix" role="tabpanel" aria-labelledby="tab-matrix" hidden>
         <div class="section-head">
-          <div><p class="eyebrow">BENCHMARK × MODEL</p><h2>成绩矩阵</h2></div>
+          <div><p class="eyebrow">Benchmark × 模型</p><h2>覆盖矩阵</h2></div>
           <p>单元格显示该口径最高公开值；橙点表示同模型存在多条不同结果。悬停可查看设置。</p>
         </div>
         <div class="table-wrap matrix-wrap"><table class="data-table matrix-table" id="matrix-table"></table></div>
@@ -77,7 +92,7 @@
 
       <section id="panel-models" role="tabpanel" aria-labelledby="tab-models" hidden>
         <div class="section-head">
-          <div><p class="eyebrow">MODEL REGISTRY</p><h2>模型目录</h2></div>
+          <div><p class="eyebrow">版本与模态</p><h2>模型目录</h2></div>
           <p>点击任一模型查看它报告过的全部 Benchmark、口径与逐条来源；日期快照不会与稳定名称混在一起。</p>
         </div>
         <div class="table-wrap"><table class="data-table" id="models-table"></table></div>
@@ -85,30 +100,24 @@
 
       <section id="panel-sources" role="tabpanel" aria-labelledby="tab-sources" hidden>
         <div class="section-head">
-          <div><p class="eyebrow">PROVENANCE LEDGER</p><h2>来源登记</h2></div>
+          <div><p class="eyebrow">原始发布页</p><h2>来源登记</h2></div>
           <p>优先模型厂商、Benchmark 官方榜与技术报告；厂商测友商的数据会保留发布方身份。</p>
         </div>
         <div class="table-wrap"><table class="data-table" id="sources-table"></table></div>
       </section>
     </section>
 
-    <section class="methodology">
-      <div><span>01</span><h3>同 Bench 合并</h3><p>统一名称和版本，避免同一榜单散落在不同发布页。</p></div>
-      <div><span>02</span><h3>口径不抹平</h3><p>Harness、工具、推理强度、任务版本不同就保留说明。</p></div>
-      <div><span>03</span><h3>冲突不平均</h3><p>同模型的不同公开结果并列展示，让读者自行判断。</p></div>
-      <div><span>04</span><h3>每分可追溯</h3><p>成绩直接链接到原始来源，不用搜索摘要充当证据。</p></div>
-    </section>
   </main>
 
   <footer>
-    <div><strong>Frontier AI Leaderboard</strong><span>公开资料索引，不代表独立复测或商业推荐。</span></div>
+    <div><strong>FrontierBench</strong><span>公开资料索引，不代表独立复测或商业推荐。</span></div>
     <a href="README.md">维护说明</a>
   </footer>
 
   <div class="drawer-backdrop" id="model-drawer-backdrop" hidden></div>
   <aside class="model-drawer" id="model-drawer" role="dialog" aria-modal="true" aria-labelledby="model-drawer-title" aria-hidden="true" hidden>
     <div class="drawer-topbar">
-      <span>MODEL PROFILE</span>
+      <span>模型详情</span>
       <button class="drawer-close" id="model-drawer-close" type="button" aria-label="关闭模型详情">关闭 ×</button>
     </div>
     <div id="model-drawer-content"></div>

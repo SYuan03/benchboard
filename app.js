@@ -13,6 +13,8 @@
     modality: "",
     category: "",
     conflictsOnly: false,
+    compareModelIds: ["qwen3-8-max", "gpt-5-6-sol", "claude-opus-5"],
+    compareCommonOnly: true,
     openModelId: ""
   };
 
@@ -21,8 +23,10 @@
     stats: $("#stats"), freshness: $("#freshness"), search: $("#search"),
     vendor: $("#vendor-filter"), modality: $("#modality-filter"), category: $("#category-filter"),
     conflicts: $("#conflicts-only"), download: $("#download-csv"),
-    benchCount: $("#bench-count"), benchmarkNav: $("#benchmark-nav"),
+    benchCount: $("#bench-count"), categoryTabs: $("#category-tabs"), benchmarkSelect: $("#benchmark-select"),
     leaderboardHeading: $("#leaderboard-heading"), leaderboardTable: $("#leaderboard-table"),
+    compareModelA: $("#compare-model-a"), compareModelB: $("#compare-model-b"), compareModelC: $("#compare-model-c"),
+    compareCommonOnly: $("#compare-common-only"), compareSummary: $("#compare-summary"), compareTable: $("#compare-table"),
     matrixTable: $("#matrix-table"), modelsTable: $("#models-table"), sourcesTable: $("#sources-table"),
     drawer: $("#model-drawer"), drawerBackdrop: $("#model-drawer-backdrop"),
     drawerContent: $("#model-drawer-content"), drawerClose: $("#model-drawer-close")
@@ -70,11 +74,11 @@
     return normalize([model.name, model.vendor, model.summary, ...(model.aliases || [])].join(" ")).includes(normalize(state.search));
   }
 
-  function matchesObservation(obs) {
+  function matchesObservation(obs, ignoreCategory = false) {
     const model = modelsById.get(obs.modelId);
     const bench = benchesById.get(obs.benchmarkId);
     if (!model || !bench || !matchesModelWithoutSearch(model)) return false;
-    if (state.category && bench.category !== state.category) return false;
+    if (!ignoreCategory && state.category && bench.category !== state.category) return false;
     if (!state.search) return true;
     return normalize([bench.name, bench.category, model.name, model.vendor, obs.setting, obs.note].join(" ")).includes(normalize(state.search));
   }
@@ -83,8 +87,8 @@
     return (!state.vendor || model.vendorId === state.vendor) && (!state.modality || model.modality === state.modality);
   }
 
-  function filteredObservations() {
-    const visible = observations.filter(matchesObservation);
+  function filteredObservations(ignoreCategory = false) {
+    const visible = observations.filter((obs) => matchesObservation(obs, ignoreCategory));
     if (!state.conflictsOnly) return visible;
     return visible.filter((obs) => conflictFor(obs.benchmarkId, obs.modelId, visible));
   }
@@ -113,6 +117,15 @@
     ];
     els.stats.innerHTML = stats.map(([value, label]) => `<div class="stat"><strong>${value}</strong><span>${label}</span></div>`).join("");
     els.freshness.textContent = `更新于 ${data.meta.updated}`;
+
+    const compareOptions = data.models
+      .filter((model) => observations.some((obs) => obs.modelId === model.id))
+      .sort((a, b) => a.vendor.localeCompare(b.vendor) || a.name.localeCompare(b.name))
+      .map((model) => `<option value="${escapeHtml(model.id)}">${escapeHtml(model.name)} · ${escapeHtml(model.vendor)}</option>`).join("");
+    els.compareModelA.innerHTML = compareOptions;
+    els.compareModelB.innerHTML = compareOptions;
+    els.compareModelC.insertAdjacentHTML("beforeend", compareOptions);
+    [els.compareModelA.value, els.compareModelB.value, els.compareModelC.value] = state.compareModelIds;
   }
 
   function benchmarkGroups(pool) {
@@ -129,15 +142,24 @@
   }
 
   function renderBenchmarkNav() {
-    const pool = filteredObservations();
+    const fullPool = filteredObservations(true);
+    const categoryCounts = new Map();
+    fullPool.forEach((obs) => {
+      const category = benchesById.get(obs.benchmarkId).category;
+      if (!categoryCounts.has(category)) categoryCounts.set(category, new Set());
+      categoryCounts.get(category).add(obs.benchmarkId);
+    });
+    const categories = [...categoryCounts.keys()].sort();
+    els.categoryTabs.innerHTML = `<button class="category-tab ${state.category ? "" : "active"}" type="button" data-category-tab="">全部</button>${categories.map((category) => `<button class="category-tab ${state.category === category ? "active" : ""}" type="button" data-category-tab="${escapeHtml(category)}">${escapeHtml(category)} <span>${categoryCounts.get(category).size}</span></button>`).join("")}`;
+
+    const pool = state.category ? fullPool.filter((obs) => benchesById.get(obs.benchmarkId).category === state.category) : fullPool;
     const groups = benchmarkGroups(pool);
-    const available = [...groups.values()].flat().map((item) => item.bench.id);
+    const availableItems = [...groups.values()].flat();
+    const available = availableItems.map((item) => item.bench.id);
     if (!available.includes(state.selectedBenchmark)) state.selectedBenchmark = available[0] || "";
     els.benchCount.textContent = String(available.length);
-    els.benchmarkNav.innerHTML = [...groups.entries()].map(([category, items]) => `
-      <div class="bench-group-title">${escapeHtml(category)}</div>
-      ${items.map(({ bench, count }) => `<button class="bench-nav-item ${bench.id === state.selectedBenchmark ? "active" : ""}" type="button" data-benchmark="${escapeHtml(bench.id)}"><span>${escapeHtml(bench.name)}</span><small>${count}</small></button>`).join("")}
-    `).join("") || `<div class="empty">没有匹配的 Benchmark</div>`;
+    els.benchmarkSelect.innerHTML = availableItems.length ? availableItems.map(({ bench, count }) => `<option value="${escapeHtml(bench.id)}">${escapeHtml(state.category ? bench.name : `${bench.category} · ${bench.name}`)} (${count})</option>`).join("") : `<option value="">没有匹配结果</option>`;
+    els.benchmarkSelect.value = state.selectedBenchmark;
   }
 
   function renderLeaderboard() {
@@ -205,6 +227,38 @@
       const count = data.observations.filter((obs) => obs.sourceIds.includes(source.id)).length;
       return `<tr><td>${escapeHtml(source.date)}</td><td class="source-title"><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.title)} ↗</a></td><td>${escapeHtml(source.publisher)}</td><td><span class="modality">官方发布</span></td><td>${count} 条</td></tr>`;
     }).join("") : `<tr><td colspan="5" class="empty">没有匹配的来源。</td></tr>`}</tbody>`;
+  }
+
+  function representativeObservation(items, bench) {
+    return [...items].sort((a, b) => {
+      if (typeof a.value !== "number" || typeof b.value !== "number") return String(a.value).localeCompare(String(b.value));
+      return bench.direction === "lower" ? a.value - b.value : b.value - a.value;
+    })[0];
+  }
+
+  function renderCompare() {
+    const modelIds = unique(state.compareModelIds).filter((id) => id && modelsById.has(id));
+    const pool = filteredObservations();
+    const benchIds = unique(pool.filter((obs) => modelIds.includes(obs.modelId)).map((obs) => obs.benchmarkId))
+      .filter((benchmarkId) => !state.compareCommonOnly || modelIds.every((modelId) => pool.some((obs) => obs.modelId === modelId && obs.benchmarkId === benchmarkId)))
+      .sort((a, b) => {
+        const benchA = benchesById.get(a);
+        const benchB = benchesById.get(b);
+        return benchA.category.localeCompare(benchB.category) || benchA.name.localeCompare(benchB.name);
+      });
+
+    const names = modelIds.map((id) => modelsById.get(id).name);
+    els.compareSummary.innerHTML = `<span>${names.length} 个模型</span><span>${benchIds.length} 个${state.compareCommonOnly ? "共同" : "相关"} Benchmark</span>${state.category ? `<span>${escapeHtml(state.category)}</span>` : ""}`;
+    els.compareTable.innerHTML = `<thead><tr><th>Benchmark</th>${modelIds.map((id) => `<th>${escapeHtml(modelsById.get(id).name)}</th>`).join("")}</tr></thead><tbody>${benchIds.length ? benchIds.map((benchmarkId) => {
+      const bench = benchesById.get(benchmarkId);
+      return `<tr><td><strong>${escapeHtml(bench.name)}</strong><br><span class="muted">${escapeHtml(bench.category)}</span></td>${modelIds.map((modelId) => {
+        const entries = pool.filter((obs) => obs.benchmarkId === benchmarkId && obs.modelId === modelId);
+        if (!entries.length) return `<td class="matrix-empty">—</td>`;
+        const obs = representativeObservation(entries, bench);
+        const context = [obs.setting, obs.note].filter(Boolean).join(" · ") || "原发布未说明更多设置";
+        return `<td><span class="compare-value">${escapeHtml(obs.value)} <small>${escapeHtml(obs.unit)}</small></span><span class="compare-context">${escapeHtml(context)}</span><div class="source-cell">${sourceLinks(obs, modelsById.get(modelId))}</div></td>`;
+      }).join("")}</tr>`;
+    }).join("") : `<tr><td colspan="${modelIds.length + 1}" class="empty">当前筛选下没有共同 Benchmark。</td></tr>`}</tbody>`;
   }
 
   function renderModelDrawer(model) {
@@ -283,6 +337,7 @@
 
   function render() {
     renderLeaderboard();
+    renderCompare();
     renderMatrix();
     renderModels();
     renderSources();
@@ -295,7 +350,7 @@
       button.classList.toggle("active", active);
       button.setAttribute("aria-selected", String(active));
     });
-    ["leaderboard", "matrix", "models", "sources"].forEach((name) => {
+    ["leaderboard", "compare", "matrix", "models", "sources"].forEach((name) => {
       $(`#panel-${name}`).hidden = name !== tab;
     });
   }
@@ -328,6 +383,12 @@
       state.selectedBenchmark = benchmark.dataset.benchmark;
       renderLeaderboard();
     }
+    const categoryTab = event.target.closest("[data-category-tab]");
+    if (categoryTab) {
+      state.category = categoryTab.dataset.categoryTab;
+      els.category.value = state.category;
+      render();
+    }
     const modelTarget = event.target.closest("[data-model-id]");
     if (modelTarget && !event.target.closest("a")) openModelDrawer(modelTarget.dataset.modelId);
     if (event.target === els.drawerBackdrop || event.target.closest("#model-drawer-close")) closeModelDrawer();
@@ -340,6 +401,12 @@
   els.vendor.addEventListener("change", () => { state.vendor = els.vendor.value; render(); });
   els.modality.addEventListener("change", () => { state.modality = els.modality.value; render(); });
   els.category.addEventListener("change", () => { state.category = els.category.value; render(); });
+  els.benchmarkSelect.addEventListener("change", () => { state.selectedBenchmark = els.benchmarkSelect.value; renderLeaderboard(); });
+  [els.compareModelA, els.compareModelB, els.compareModelC].forEach((select) => select.addEventListener("change", () => {
+    state.compareModelIds = [els.compareModelA.value, els.compareModelB.value, els.compareModelC.value];
+    renderCompare();
+  }));
+  els.compareCommonOnly.addEventListener("change", () => { state.compareCommonOnly = els.compareCommonOnly.checked; renderCompare(); });
   els.conflicts.addEventListener("change", () => { state.conflictsOnly = els.conflicts.checked; render(); });
   els.download.addEventListener("click", exportCsv);
 
