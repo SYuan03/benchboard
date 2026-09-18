@@ -29,6 +29,8 @@ python3 -m http.server 8000
 
 改动数据后运行 `npm run check`。这个命令会检查 ID、引用关系和空分数，并把 README 的收录数量更新为 `data.js` 中的实际值。
 
+仓库保持私有期间，Pages 工作流只允许手动触发。GitHub 个人账户会把私有仓库的 Pages 站点公开发布，因此正式上线前需要先在 Settings > Pages 选择 GitHub Actions，再手动运行 `Deploy GitHub Pages`。
+
 页面有四个视图：
 
 - Leaderboards：选择一个 Benchmark，查看模型排名、模态、测评设置和来源。
