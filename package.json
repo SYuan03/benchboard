@@ -2,6 +2,10 @@
   "name": "frontier-ai-leaderboard",
   "version": "0.1.0",
   "private": true,
+  "description": "A source-linked leaderboard for frontier language, multimodal, and agent models.",
+  "license": "MIT",
+  "repository": "github:SYuan03/frontier-ai-leaderboard",
+  "homepage": "https://syuan03.github.io/frontier-ai-leaderboard/",
   "type": "module",
   "scripts": {
     "audit": "node scripts/audit-coverage.mjs",

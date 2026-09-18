@@ -12,3 +12,20 @@
 6. `npm` 或构建工具不是必需依赖。提交后应能直接打开 `index.html`。
 
 可以在 Pull Request 中附上原表截图，数据仍需链接到可访问的原始页面。
+
+## 修改流程
+
+1. 在 `data.js` 中登记或更新 `sources`、`models`、`benchmarks` 和 `observations`。
+2. 运行 `npm run check`，确认 ID、来源、单位和模型版本引用有效。
+3. 运行 `npm run sync-readme`，同步 README 中的收录数量。
+4. 运行 `npm run check-readme` 和 `node --check app.js`。
+5. 在 Pull Request 说明中附上原始来源，并指出新增或修正了哪些记录。
+
+如果只是报告错误，不必先改代码。请提交 Issue，写清模型、Benchmark、当前值、建议值和原始来源。
+
+## 不接受的改动
+
+- 没有可访问来源的榜单截图或转述。
+- 把日期快照、预览版、稳定别名或不同 Harness 的结果当作同一个分数。
+- 为填满表格而沿用相邻版本、同系列模型或推测值。
+- 把不同单位、指标方向或任务集版本合并排名。

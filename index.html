@@ -4,6 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="按 Benchmark 查询前沿模型公开成绩，保留版本、测评设置和原始来源。">
+  <meta name="theme-color" content="#f7f8fa">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FrontierBench">
+  <meta property="og:description" content="按 Benchmark 查询前沿模型公开成绩，保留版本、测评设置和原始来源。">
+  <meta property="og:url" content="https://syuan03.github.io/frontier-ai-leaderboard/">
+  <link rel="canonical" href="https://syuan03.github.io/frontier-ai-leaderboard/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <title>FrontierBench</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -57,13 +64,15 @@
       </div>
 
       <section id="panel-leaderboard" role="tabpanel" aria-labelledby="tab-leaderboard">
-        <div class="benchmark-toolbar">
-          <div class="category-tabs" id="category-tabs" aria-label="能力分类"></div>
-          <label class="benchmark-picker"><span>Benchmark</span><select id="benchmark-select"></select><small><b id="bench-count"></b> 个结果集</small></label>
-        </div>
-        <div class="leaderboard-main">
-          <div class="leaderboard-heading" id="leaderboard-heading"></div>
-          <div class="table-wrap leaderboard-wrap"><table class="data-table leaderboard-table" id="leaderboard-table"></table></div>
+        <div class="leaderboard-layout">
+          <aside class="bench-sidebar" aria-label="Benchmark 列表">
+            <div class="sidebar-heading"><span>Benchmarks</span><strong><b id="bench-count"></b> 个</strong></div>
+            <div id="benchmark-nav"></div>
+          </aside>
+          <div class="leaderboard-main">
+            <div class="leaderboard-heading" id="leaderboard-heading"></div>
+            <div class="table-wrap leaderboard-wrap"><table class="data-table leaderboard-table" id="leaderboard-table"></table></div>
+          </div>
         </div>
       </section>
 

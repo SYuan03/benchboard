@@ -1,0 +1,24 @@
+name: New model or benchmark results
+description: Suggest a primary source that is not yet represented.
+title: "[Add] "
+labels: [data]
+body:
+  - type: input
+    id: source
+    attributes:
+      label: Primary source
+      placeholder: https://...
+    validations:
+      required: true
+  - type: textarea
+    id: coverage
+    attributes:
+      label: Models and benchmarks covered
+      description: List exact model versions, benchmark versions, metrics, and reported values.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Evaluation details
+      description: Harness, tools, reasoning effort, task count, sampling, and any comparability caveats.

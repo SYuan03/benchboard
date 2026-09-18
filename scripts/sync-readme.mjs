@@ -8,7 +8,9 @@ const mergedObservationCount = new Set(data.observations.map((observation) => [
   observation.benchmarkId,
   observation.modelId,
   String(observation.value),
-  observation.unit
+  observation.unit,
+  observation.setting,
+  observation.note
 ].join("||"))).size;
 const summary = `<!-- DATA_SUMMARY_START -->
 - ${data.models.length} 个模型或版本

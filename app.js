@@ -23,7 +23,7 @@
     stats: $("#stats"), freshness: $("#freshness"), search: $("#search"),
     vendor: $("#vendor-filter"), modality: $("#modality-filter"), category: $("#category-filter"),
     conflicts: $("#conflicts-only"), download: $("#download-csv"),
-    benchCount: $("#bench-count"), categoryTabs: $("#category-tabs"), benchmarkSelect: $("#benchmark-select"),
+    benchCount: $("#bench-count"), benchmarkNav: $("#benchmark-nav"),
     leaderboardHeading: $("#leaderboard-heading"), leaderboardTable: $("#leaderboard-table"),
     compareModelA: $("#compare-model-a"), compareModelB: $("#compare-model-b"), compareModelC: $("#compare-model-c"),
     compareCommonOnly: $("#compare-common-only"), compareSummary: $("#compare-summary"), compareTable: $("#compare-table"),
@@ -46,7 +46,7 @@
   function coalesceObservations(observations) {
     const groups = new Map();
     observations.forEach((obs) => {
-      const key = [obs.benchmarkId, obs.modelId, String(obs.value), obs.unit].join("||");
+      const key = [obs.benchmarkId, obs.modelId, String(obs.value), obs.unit, obs.setting, obs.note].join("||");
       if (!groups.has(key)) groups.set(key, { ...obs, sourceIds: [], settings: [], notes: [] });
       const current = groups.get(key);
       current.sourceIds = unique([...current.sourceIds, ...obs.sourceIds]);
@@ -64,7 +64,7 @@
 
   function conflictFor(benchmarkId, modelId, pool = observations) {
     return unique(pool.filter((obs) => obs.benchmarkId === benchmarkId && obs.modelId === modelId)
-      .map((obs) => `${obs.value}|${obs.unit}`)).length > 1;
+      .map((obs) => `${obs.value}|${obs.unit}|${obs.setting}|${obs.note}`)).length > 1;
   }
 
   function matchesModel(model) {
@@ -142,24 +142,15 @@
   }
 
   function renderBenchmarkNav() {
-    const fullPool = filteredObservations(true);
-    const categoryCounts = new Map();
-    fullPool.forEach((obs) => {
-      const category = benchesById.get(obs.benchmarkId).category;
-      if (!categoryCounts.has(category)) categoryCounts.set(category, new Set());
-      categoryCounts.get(category).add(obs.benchmarkId);
-    });
-    const categories = [...categoryCounts.keys()].sort();
-    els.categoryTabs.innerHTML = `<button class="category-tab ${state.category ? "" : "active"}" type="button" data-category-tab="">全部</button>${categories.map((category) => `<button class="category-tab ${state.category === category ? "active" : ""}" type="button" data-category-tab="${escapeHtml(category)}">${escapeHtml(category)} <span>${categoryCounts.get(category).size}</span></button>`).join("")}`;
-
-    const pool = state.category ? fullPool.filter((obs) => benchesById.get(obs.benchmarkId).category === state.category) : fullPool;
+    const pool = filteredObservations();
     const groups = benchmarkGroups(pool);
-    const availableItems = [...groups.values()].flat();
-    const available = availableItems.map((item) => item.bench.id);
+    const available = [...groups.values()].flat().map((item) => item.bench.id);
     if (!available.includes(state.selectedBenchmark)) state.selectedBenchmark = available[0] || "";
     els.benchCount.textContent = String(available.length);
-    els.benchmarkSelect.innerHTML = availableItems.length ? availableItems.map(({ bench, count }) => `<option value="${escapeHtml(bench.id)}">${escapeHtml(state.category ? bench.name : `${bench.category} · ${bench.name}`)} (${count})</option>`).join("") : `<option value="">没有匹配结果</option>`;
-    els.benchmarkSelect.value = state.selectedBenchmark;
+    els.benchmarkNav.innerHTML = [...groups.entries()].map(([category, items]) => `
+      <div class="bench-group-title">${escapeHtml(category)}</div>
+      ${items.map(({ bench, count }) => `<button class="bench-nav-item ${bench.id === state.selectedBenchmark ? "active" : ""}" type="button" data-benchmark="${escapeHtml(bench.id)}"><span>${escapeHtml(bench.name)}</span><small>${count}</small></button>`).join("")}
+    `).join("") || `<div class="empty">没有匹配的 Benchmark</div>`;
   }
 
   function renderLeaderboard() {
@@ -189,8 +180,11 @@
     }).join("") : `<tr><td colspan="6" class="empty">当前筛选下没有成绩。</td></tr>`}</tbody>`;
   }
 
-  function bestObservation(items) {
-    return [...items].sort((a, b) => numericValue(b.value) - numericValue(a.value))[0];
+  function bestObservation(items, direction) {
+    return [...items].sort((a, b) => {
+      const delta = numericValue(b.value) - numericValue(a.value);
+      return direction === "lower" ? -delta : delta;
+    })[0];
   }
 
   function renderMatrix() {
@@ -202,7 +196,7 @@
     els.matrixTable.innerHTML = `<thead><tr><th>Benchmark</th>${models.map((model) => `<th>${escapeHtml(model.name)}</th>`).join("")}</tr></thead><tbody>${benches.map((bench) => `<tr><td><strong>${escapeHtml(bench.name)}</strong><br><span class="muted">${escapeHtml(bench.category)}</span></td>${models.map((model) => {
       const entries = pool.filter((obs) => obs.benchmarkId === bench.id && obs.modelId === model.id);
       if (!entries.length) return `<td class="matrix-empty">—</td>`;
-      const best = bestObservation(entries);
+      const best = bestObservation(entries, bench.direction);
       const conflict = conflictFor(bench.id, model.id, pool);
       const title = [best.setting, best.note].filter(Boolean).join(" · ");
       return `<td title="${escapeHtml(title)}"><span class="matrix-value">${escapeHtml(best.value)}</span> <span class="muted">${escapeHtml(best.unit)}</span>${conflict ? '<i class="conflict-mark" aria-label="存在多口径结果"></i>' : ""}</td>`;
@@ -383,12 +377,6 @@
       state.selectedBenchmark = benchmark.dataset.benchmark;
       renderLeaderboard();
     }
-    const categoryTab = event.target.closest("[data-category-tab]");
-    if (categoryTab) {
-      state.category = categoryTab.dataset.categoryTab;
-      els.category.value = state.category;
-      render();
-    }
     const modelTarget = event.target.closest("[data-model-id]");
     if (modelTarget && !event.target.closest("a")) openModelDrawer(modelTarget.dataset.modelId);
     if (event.target === els.drawerBackdrop || event.target.closest("#model-drawer-close")) closeModelDrawer();
@@ -401,7 +389,6 @@
   els.vendor.addEventListener("change", () => { state.vendor = els.vendor.value; render(); });
   els.modality.addEventListener("change", () => { state.modality = els.modality.value; render(); });
   els.category.addEventListener("change", () => { state.category = els.category.value; render(); });
-  els.benchmarkSelect.addEventListener("change", () => { state.selectedBenchmark = els.benchmarkSelect.value; renderLeaderboard(); });
   [els.compareModelA, els.compareModelB, els.compareModelC].forEach((select) => select.addEventListener("change", () => {
     state.compareModelIds = [els.compareModelA.value, els.compareModelB.value, els.compareModelC.value];
     renderCompare();

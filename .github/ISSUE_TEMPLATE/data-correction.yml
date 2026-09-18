@@ -1,0 +1,38 @@
+name: Data correction
+description: Report a wrong score, model version, benchmark mapping, or source.
+title: "[Data] "
+labels: [data]
+body:
+  - type: input
+    id: model
+    attributes:
+      label: Model
+      placeholder: Exact model name and version
+    validations:
+      required: true
+  - type: input
+    id: benchmark
+    attributes:
+      label: Benchmark
+      placeholder: Benchmark name, version, and metric
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What should change?
+      description: Include the current value and the proposed correction.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Primary source
+      placeholder: https://...
+    validations:
+      required: true
+  - type: textarea
+    id: setting
+    attributes:
+      label: Evaluation setting
+      description: Harness, tools, reasoning effort, task count, sampling, or other relevant details.

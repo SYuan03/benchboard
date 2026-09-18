@@ -1,6 +1,10 @@
 name: Check data
 
 on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -15,3 +19,5 @@ jobs:
         with:
           node-version: 22
       - run: npm run check
+      - run: npm run check-readme
+      - run: node --check app.js
