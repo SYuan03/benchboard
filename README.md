@@ -1,86 +1,91 @@
 # BenchBoard
 
-[在线榜单](https://syuan03.github.io/benchboard/) · [贡献数据](CONTRIBUTING.md) · [MIT License](LICENSE)
+[Live leaderboard](https://syuan03.github.io/benchboard/) · [Contribute data](CONTRIBUTING.md) · [MIT License](LICENSE)
 
-BenchBoard 汇总领先语言模型、多模态模型和 Agent 模型公开过的 Benchmark 成绩。这里不计算一个笼统的“总分”。不同 Benchmark 的任务、版本和测评环境差别很大，把它们加权成一个数字通常会掩盖问题。
+BenchBoard collects public benchmark results for current language, multimodal, and agent models. Results stay attached to the model version, evaluation setup, and original source that reported them. BenchBoard does not calculate a cross-benchmark composite score.
 
-网站默认按 Benchmark 展示排名。每条成绩保留测评设置和原始链接；同一结果被多处发布时合并来源，数值或 Harness 不一致时则并列保存。
+[![BenchBoard benchmark index](assets/benchboard-teaser.svg)](https://syuan03.github.io/benchboard/)
 
-[![BenchBoard 榜单页面](assets/benchboard-preview.png)](https://syuan03.github.io/benchboard/)
-
-## 当前收录
+## Coverage
 
 <!-- DATA_SUMMARY_START -->
-- 29 个模型或版本
-- 75 个已登记 Benchmark
-- 482 条去重公开成绩
-- 16 个官方来源
+- 29 model releases
+- 75 registered benchmarks
+- 482 deduplicated public results
+- 16 primary sources
 <!-- DATA_SUMMARY_END -->
 
-首版集中在 2026 年仍处于前沿位置的通用、编码、多模态和 Agent 模型，包括 GPT-6 Astra、GPT-5.6 Sol、Claude 5 系列、Gemini 3.8、DeepSeek V4.1、Qwen3.8、GLM-5.3、Seed2.1、Kimi K3 和 Hy4。
+The first release focuses on general, coding, multimodal, and agent models near the frontier in 2026. It includes GPT-6 Astra, GPT-5.6 Sol, Claude 5, Gemini 3.8, DeepSeek V4.1, Qwen3.8, GLM-5.3, Seed2.1, Kimi K3, and Hy4.
 
-Qwen3.8 官方模型卡的 Coding Agent、General Agent 和 General Capabilities 三张表已经逐行录入。Qwen3.8 Max 目前有 51 个不同 Benchmark 的公开结果。开放权重的 `Qwen3.8-2.4T-A95B` 是纯语言模型，Qwen3.8 Max 是支持视觉和官方工具的服务版；两者在模型目录中分开登记。
+All rows from the Coding Agent, General Agent, and General Capabilities tables in the official Qwen3.8 model card are recorded individually. Qwen3.8 Max currently has public results for 51 distinct benchmarks. The open-weight `Qwen3.8-2.4T-A95B` language model and the vision-and-tool-enabled Qwen3.8 Max service are listed separately.
 
-SkillsBench 1.1、PinchBench v2、WildClawBench 和 WildClawBench-MM 已收录。SkillsBench 保留 Agent Harness，PinchBench 分为 Best Success Rate 和 Average Success Rate，WildClawBench 分为 Overall、Elapsed Time 和 Total Cost。WildClawBench-MM 单独记录多模态 Agent 成绩，包括 Qwen3.8 Omni Flash 官方发布的 71.0 分。
+SkillsBench 1.1, PinchBench v2, WildClawBench, and WildClawBench-MM are included. Agent harnesses are kept for SkillsBench. PinchBench stores Best Success Rate and Average Success Rate separately. WildClawBench stores Overall, Elapsed Time, and Total Cost separately. WildClawBench-MM includes multimodal agent results such as the official 71.0 score reported for Qwen3.8 Omni Flash.
 
-这些数字描述当前仓库，不代表覆盖已经完成。模型厂商发布新表，或者 Benchmark 官方榜更新后，记录会继续补充。
+Coverage is still expanding as model providers and benchmark maintainers publish new tables.
 
-## 使用
+## Use the site
 
-这是一个没有构建步骤的静态站点。直接打开 `index.html` 即可，也可以运行本地服务器：
+The site has five views:
+
+- Leaderboard ranks models within each benchmark and shows modality, evaluation setup, and sources.
+- Compare places two or three models side by side across shared or model-specific benchmarks. It does not combine results into one score.
+- Coverage shows the benchmark-by-model matrix.
+- Models lists versions, aliases, context windows, native modalities, and access types. Opening a model shows all of its recorded results, settings, and sources.
+- Sources shows how many observations each publication supports.
+
+Use the benchmark list on the left to move between leaderboards. Browser search (`Ctrl+F` or `Cmd+F`) works on the visible list.
+
+## Run locally
+
+BenchBoard is a static site with no build step. Open `index.html`, or serve the directory locally:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-然后访问 `http://localhost:8000`。
+Then open `http://localhost:8000`.
 
-改动数据后先运行 `npm run check` 检查 ID、引用关系、空分数和混用单位，再运行 `npm run sync-readme` 更新 README 的收录数量。`npm run audit` 会列出低覆盖模型和只有少量模型参与的 Benchmark，便于安排下一轮补录。
+After changing `data.js`, run:
 
-`main` 分支更新后，GitHub Actions 会自动校验数据并部署 Pages。Pull Request 也会检查数据引用和 README 统计是否一致。
+```bash
+npm run check
+npm run sync-readme
+npm run audit
+```
 
-页面有五个视图：
+`check` validates IDs, references, missing scores, and mixed units. `sync-readme` refreshes the coverage counts above. `audit` lists models with sparse coverage and benchmarks with few reported participants.
 
-- 榜单：按能力域和 Benchmark 查看排名、模态、测评设置和来源。
-- 模型对比：选择两到三个模型，查看共同参与或各自参与的 Benchmark。页面不计算跨 Benchmark 总分。
-- 覆盖矩阵：横向查看 Benchmark 与模型的覆盖情况。
-- 模型：核对版本、别名、上下文、原生模态和开放方式。点击模型后会打开详情，列出全部成绩、设置和来源。
-- 来源：查看每个发布页支撑了多少条原始记录。
+Pushes to `main` are validated and deployed to GitHub Pages automatically. Pull requests run the same data and README checks.
 
-## 数据结构
+## Data model
 
-所有数据在 `data.js` 中：
+All records live in `data.js`:
 
-- `models` 保存模型归属、版本、别名、模态和开放方式。
-- `benchmarks` 保存统一后的名称、版本、能力域和指标方向。
-- `sources` 保存原始发布页。优先使用模型厂商、Benchmark 官方榜和技术报告。
-- `observations` 保存“模型 × Benchmark × 分数 × 口径”记录。
+- `models` stores provider, release, aliases, modality, and access type.
+- `benchmarks` stores normalized names, versions, capability areas, and metric direction.
+- `sources` stores original publication pages. Model-provider releases, official benchmark leaderboards, and technical reports are preferred.
+- `observations` stores each model, benchmark, score, and evaluation-setting combination.
 
-新增数据时，请先确认模型版本和 Benchmark 版本。相同数值会在页面上合并，来源和设置仍会全部显示。数值不同，或者指标单位不同，就分别建记录并写清 `setting`。新模型没有独立公开分数时可以先登记为 `scoreStatus: "pending"`，不要拿旧版本成绩代替。
+Confirm both the model release and benchmark version before adding a result. Identical values can share a displayed row while retaining every source and setting. Different values, metrics, units, or harnesses remain separate observations. A model without a published score may be registered with `scoreStatus: "pending"`; an older model's result must not be used in its place.
 
-模态使用三个值：
+Modalities use three values:
 
-- `language`：文本输入，文本输出。
-- `vision`：支持文本和视觉输入；是否支持视频或文件在 `modalityDetail` 中说明。
-- `omni`：原生支持文本、图像、音频、视频等多种输入。
+- `language`: text input and text output.
+- `vision`: text and visual input. Video or file support belongs in `modalityDetail`.
+- `omni`: native support for several input types, such as text, images, audio, and video.
 
-## 准确性
+## Source policy
 
-厂商表里的友商成绩可以入库，页面会把来源标为“他测”。SkillsBench、PinchBench 这类 Benchmark 自己发布的数据会标为“Benchmark 官方”。
+A provider's table may contain results for competing models. BenchBoard marks those rows as provider-reported. Data published by benchmark maintainers, including SkillsBench and PinchBench, is marked as benchmark-official.
 
-同名 Benchmark 如果包含不同指标，会拆成独立榜单。例如 Agents' Last Exam 分为 Pass Rate 和 Overall Score，OSWorld 分为 Binary、Partial 和 Strict，ExploitGym 分为 Success Rate 和 Solved Tasks。复合字符串或不同单位不会参与一个统一排名。
+One benchmark name may contain several metrics. Agents' Last Exam, for example, has Pass Rate and Overall Score; OSWorld has Binary, Partial, and Strict; ExploitGym has Success Rate and Solved Tasks. Each metric gets its own leaderboard. Composite strings and incompatible units are never forced into one ranking.
 
-跨来源排名需要结合设置阅读。即使 Benchmark 名称相同，任务集版本、Agent Harness、工具权限、推理强度和采样次数也可能改变结果。这个项目保存公开证据，不声称做过独立复测。
+Rankings from different sources still require context. Dataset versions, agent harnesses, tool permissions, reasoning settings, and sample counts can change a result even when the benchmark name matches. BenchBoard indexes published evidence and does not claim independent reproduction.
 
-发现错漏时，请按 [CONTRIBUTING.md](CONTRIBUTING.md) 提交修正。
+Found a missing or incorrect result? See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## 项目边界
+## Scope and license
 
-- 这是公开资料索引，不是独立复测，也不提供采购或模型选型结论。
-- 收录优先级是前沿模型、官方成绩表和可核对的 Benchmark 官方榜，不承诺覆盖所有模型。
-- 原始来源被修改或撤下时，历史记录可能需要重新核验；欢迎通过 Issue 提交证据。
-- 模型名、Benchmark 名和引用内容归各自权利人所有，MIT License 只覆盖本仓库的代码和数据整理结构。
+BenchBoard is an index of public results, not an independent evaluation or a model-buying recommendation. Coverage favors current models, primary result tables, and official benchmark leaderboards; it is not intended to include every model ever released. Records may need reverification when a source changes or disappears.
 
-## License
-
-代码使用 MIT License。各 Benchmark 名称、模型名称和引用内容归原权利人所有。
+The repository's code and data organization are available under the MIT License. Model names, benchmark names, and quoted source material remain the property of their respective owners.

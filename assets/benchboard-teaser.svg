@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="560" viewBox="0 0 1600 560" role="img" aria-labelledby="title desc">
+  <title id="title">BenchBoard</title>
+  <desc id="desc">Public benchmark results for frontier AI models, with model versions, evaluation settings, and primary sources.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfcff"/>
+      <stop offset="1" stop-color="#f1f5fb"/>
+    </linearGradient>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0V28" fill="none" stroke="#dfe6f0" stroke-width="1"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#22345a" flood-opacity=".12"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="560" rx="28" fill="url(#bg)"/>
+  <rect x="900" width="700" height="560" fill="url(#grid)" opacity=".56"/>
+  <path d="M0 0h11v560H0z" fill="#2f66e9"/>
+
+  <g transform="translate(92 92)">
+    <rect width="64" height="64" rx="16" fill="#235be1"/>
+    <path d="M18 13h18c10 0 15 4 15 11 0 5-3 8-7 9 6 1 9 5 9 11 0 9-6 13-17 13H18zm12 9v8h6c3 0 5-1 5-4s-2-4-5-4zm0 16v10h7c4 0 6-2 6-5s-2-5-6-5z" fill="#fff"/>
+    <circle cx="51" cy="51" r="7" fill="#39c38f"/>
+  </g>
+
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="92" y="213" fill="#172033" font-size="72" font-weight="760" letter-spacing="-3">BenchBoard</text>
+    <text x="94" y="264" fill="#526176" font-size="23" font-weight="520">Public benchmark results for frontier AI models</text>
+    <text x="94" y="304" fill="#718097" font-size="18">Model versions, evaluation settings, and primary sources</text>
+
+    <g transform="translate(92 355)">
+      <rect width="130" height="38" rx="19" fill="#eaf1ff" stroke="#cbdafa"/>
+      <circle cx="21" cy="19" r="5" fill="#2f66e9"/>
+      <text x="36" y="25" fill="#2858c5" font-size="14" font-weight="650">MODELS</text>
+      <rect x="142" width="172" height="38" rx="19" fill="#eaf7f2" stroke="#bfe4d6"/>
+      <circle cx="164" cy="19" r="5" fill="#28a978"/>
+      <text x="179" y="25" fill="#167457" font-size="14" font-weight="650">BENCHMARKS</text>
+      <rect x="326" width="140" height="38" rx="19" fill="#fff4e8" stroke="#f0cfb6"/>
+      <circle cx="348" cy="19" r="5" fill="#d57832"/>
+      <text x="363" y="25" fill="#a85318" font-size="14" font-weight="650">SOURCES</text>
+    </g>
+
+    <text x="94" y="470" fill="#8590a2" font-size="14" font-weight="650" letter-spacing="1.4">SOURCE-LINKED · VERSION-AWARE · NO COMPOSITE SCORE</text>
+  </g>
+
+  <g transform="translate(760 70)" filter="url(#shadow)" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <rect width="748" height="420" rx="20" fill="#fff" stroke="#dbe2ec"/>
+    <path d="M0 20C0 9 9 0 20 0h708c11 0 20 9 20 20v54H0z" fill="#172033"/>
+    <circle cx="31" cy="37" r="6" fill="#39c38f"/>
+    <text x="48" y="43" fill="#fff" font-size="15" font-weight="700" letter-spacing="1.2">BENCHMARK RESULTS</text>
+    <text x="623" y="43" fill="#aebbd0" font-size="12">PUBLIC DATA</text>
+
+    <g transform="translate(28 102)">
+      <text x="0" y="0" fill="#8490a3" font-size="11" font-weight="700" letter-spacing="1">MODEL</text>
+      <text x="370" y="0" fill="#8490a3" font-size="11" font-weight="700" letter-spacing="1">SCORE</text>
+      <text x="575" y="0" fill="#8490a3" font-size="11" font-weight="700" letter-spacing="1">SOURCE</text>
+
+      <g transform="translate(0 28)">
+        <rect width="692" height="70" rx="10" fill="#f7f9fc"/>
+        <rect x="15" y="17" width="36" height="36" rx="9" fill="#eaf1ff"/>
+        <path d="M25 29h16M25 36h11M25 43h14" stroke="#2f66e9" stroke-width="3" stroke-linecap="round"/>
+        <rect x="67" y="19" width="164" height="10" rx="5" fill="#26334b"/>
+        <rect x="67" y="39" width="104" height="7" rx="3.5" fill="#c5cedb"/>
+        <rect x="370" y="20" width="160" height="12" rx="6" fill="#dce7fb"/>
+        <rect x="370" y="20" width="139" height="12" rx="6" fill="#2f66e9"/>
+        <text x="538" y="32" fill="#172033" font-size="18" font-weight="760">86.6</text>
+        <circle cx="593" cy="35" r="6" fill="#39c38f"/>
+        <rect x="608" y="29" width="62" height="10" rx="5" fill="#b8c4d4"/>
+      </g>
+
+      <g transform="translate(0 108)">
+        <rect width="692" height="70" rx="10" fill="#fff" stroke="#edf0f4"/>
+        <rect x="15" y="17" width="36" height="36" rx="9" fill="#eaf7f2"/>
+        <path d="M26 42l7-13 6 9 5-6" fill="none" stroke="#28a978" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="67" y="19" width="138" height="10" rx="5" fill="#26334b"/>
+        <rect x="67" y="39" width="122" height="7" rx="3.5" fill="#c5cedb"/>
+        <rect x="370" y="20" width="160" height="12" rx="6" fill="#dce7fb"/>
+        <rect x="370" y="20" width="126" height="12" rx="6" fill="#2f66e9"/>
+        <text x="538" y="32" fill="#172033" font-size="18" font-weight="760">78.4</text>
+        <circle cx="593" cy="35" r="6" fill="#39c38f"/>
+        <rect x="608" y="29" width="50" height="10" rx="5" fill="#b8c4d4"/>
+      </g>
+
+      <g transform="translate(0 188)">
+        <rect width="692" height="70" rx="10" fill="#fff" stroke="#edf0f4"/>
+        <rect x="15" y="17" width="36" height="36" rx="9" fill="#fff4e8"/>
+        <circle cx="33" cy="35" r="10" fill="none" stroke="#d57832" stroke-width="3"/>
+        <path d="M33 27v8l6 4" fill="none" stroke="#d57832" stroke-width="3" stroke-linecap="round"/>
+        <rect x="67" y="19" width="178" height="10" rx="5" fill="#26334b"/>
+        <rect x="67" y="39" width="91" height="7" rx="3.5" fill="#c5cedb"/>
+        <rect x="370" y="20" width="160" height="12" rx="6" fill="#dce7fb"/>
+        <rect x="370" y="20" width="114" height="12" rx="6" fill="#2f66e9"/>
+        <text x="538" y="32" fill="#172033" font-size="18" font-weight="760">71.0</text>
+        <circle cx="593" cy="35" r="6" fill="#d57832"/>
+        <rect x="608" y="29" width="72" height="10" rx="5" fill="#b8c4d4"/>
+      </g>
+
+      <g transform="translate(0 286)">
+        <rect width="238" height="42" rx="9" fill="#eef4ff"/>
+        <text x="18" y="27" fill="#2858c5" font-size="13" font-weight="700">VERSION + HARNESS</text>
+        <path d="M258 21h60" stroke="#c7d1df" stroke-width="2" stroke-dasharray="5 5"/>
+        <rect x="337" width="162" height="42" rx="9" fill="#f3f6f9"/>
+        <text x="355" y="27" fill="#526176" font-size="13" font-weight="700">TRACEABLE</text>
+        <path d="M519 21h52" stroke="#c7d1df" stroke-width="2" stroke-dasharray="5 5"/>
+        <circle cx="596" cy="21" r="18" fill="#172033"/>
+        <path d="M588 21h16m-5-5 5 5-5 5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </g>
+  </g>
+</svg>
