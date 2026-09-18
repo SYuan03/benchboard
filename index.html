@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="领先 AI 模型 Benchmark 排行榜：统一名称、保留测评口径、逐条标注来源。">
+  <title>Frontier AI Leaderboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Frontier AI Leaderboard 首页">
+      <span class="brand-mark">F</span>
+      <span><strong>Frontier AI</strong><small>Leaderboard</small></span>
+    </a>
+    <nav class="header-nav" aria-label="站点链接">
+      <span id="freshness"></span>
+      <a href="https://github.com/SYuan03/frontier-ai-leaderboard" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="overview">
+      <div class="overview-copy">
+        <p class="eyebrow">SOURCE-FIRST · MODEL BENCHMARK DATABASE</p>
+        <h1>前沿 AI 模型，<br>一张表看清。</h1>
+        <p>汇总领先语言、多模态与 Agent 模型的公开成绩。相同结果合并出处；分数或口径冲突时并列保留，不做未经依据的平均。</p>
+      </div>
+      <div class="overview-stats" id="stats" aria-label="数据库概览"></div>
+    </section>
+
+    <section class="notice" aria-label="覆盖范围说明">
+      <strong>持续补全中</strong>
+      <span>当前是可核验数据集，不是“所有 Benchmark 已齐”的宣称。SkillsBench 1.1 已加入；新模型没有独立公开分数时会显示待补，不拿旧版代替。</span>
+    </section>
+
+    <section class="app-shell" aria-label="排行榜数据库">
+      <div class="tabs" role="tablist" aria-label="数据视图">
+        <button class="tab active" id="tab-leaderboard" type="button" role="tab" aria-selected="true" aria-controls="panel-leaderboard" data-tab="leaderboard">Leaderboards</button>
+        <button class="tab" id="tab-matrix" type="button" role="tab" aria-selected="false" aria-controls="panel-matrix" data-tab="matrix">Matrix</button>
+        <button class="tab" id="tab-models" type="button" role="tab" aria-selected="false" aria-controls="panel-models" data-tab="models">Models</button>
+        <button class="tab" id="tab-sources" type="button" role="tab" aria-selected="false" aria-controls="panel-sources" data-tab="sources">Sources</button>
+      </div>
+
+      <div class="filters" id="filters">
+        <label class="search-field">
+          <span>搜索</span>
+          <input id="search" type="search" placeholder="模型、Bench、厂商…" autocomplete="off">
+        </label>
+        <label><span>厂商</span><select id="vendor-filter"><option value="">全部厂商</option></select></label>
+        <label><span>模态</span><select id="modality-filter"><option value="">全部模态</option><option value="language">纯语言</option><option value="vision">视觉语言</option><option value="omni">全模态</option></select></label>
+        <label><span>能力域</span><select id="category-filter"><option value="">全部能力域</option></select></label>
+        <label class="check-field"><input id="conflicts-only" type="checkbox"><span>只看冲突</span></label>
+        <button class="export-button" id="download-csv" type="button">导出 CSV</button>
+      </div>
+
+      <section id="panel-leaderboard" role="tabpanel" aria-labelledby="tab-leaderboard">
+        <div class="leaderboard-layout">
+          <aside class="bench-sidebar">
+            <div class="sidebar-heading"><span>Benchmarks</span><strong id="bench-count"></strong></div>
+            <div id="benchmark-nav"></div>
+          </aside>
+          <div class="leaderboard-main">
+            <div class="leaderboard-heading" id="leaderboard-heading"></div>
+            <div class="table-wrap"><table class="data-table leaderboard-table" id="leaderboard-table"></table></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="panel-matrix" role="tabpanel" aria-labelledby="tab-matrix" hidden>
+        <div class="section-head">
+          <div><p class="eyebrow">BENCHMARK × MODEL</p><h2>成绩矩阵</h2></div>
+          <p>单元格显示该口径最高公开值；橙点表示同模型存在多条不同结果。悬停可查看设置。</p>
+        </div>
+        <div class="table-wrap matrix-wrap"><table class="data-table matrix-table" id="matrix-table"></table></div>
+      </section>
+
+      <section id="panel-models" role="tabpanel" aria-labelledby="tab-models" hidden>
+        <div class="section-head">
+          <div><p class="eyebrow">MODEL REGISTRY</p><h2>模型目录</h2></div>
+          <p>明确版本、别名、原生输入模态与开放方式；日期快照不会与稳定名称混在一起。</p>
+        </div>
+        <div class="table-wrap"><table class="data-table" id="models-table"></table></div>
+      </section>
+
+      <section id="panel-sources" role="tabpanel" aria-labelledby="tab-sources" hidden>
+        <div class="section-head">
+          <div><p class="eyebrow">PROVENANCE LEDGER</p><h2>来源登记</h2></div>
+          <p>优先模型厂商、Benchmark 官方榜与技术报告；厂商测友商的数据会保留发布方身份。</p>
+        </div>
+        <div class="table-wrap"><table class="data-table" id="sources-table"></table></div>
+      </section>
+    </section>
+
+    <section class="methodology">
+      <div><span>01</span><h3>同 Bench 合并</h3><p>统一名称和版本，避免同一榜单散落在不同发布页。</p></div>
+      <div><span>02</span><h3>口径不抹平</h3><p>Harness、工具、推理强度、任务版本不同就保留说明。</p></div>
+      <div><span>03</span><h3>冲突不平均</h3><p>同模型的不同公开结果并列展示，让读者自行判断。</p></div>
+      <div><span>04</span><h3>每分可追溯</h3><p>成绩直接链接到原始来源，不用搜索摘要充当证据。</p></div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>Frontier AI Leaderboard</strong><span>公开资料索引，不代表独立复测或商业推荐。</span></div>
+    <a href="README.md">维护说明</a>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
