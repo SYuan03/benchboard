@@ -28,6 +28,9 @@ for (const observation of data.observations) {
   for (const sourceId of observation.sourceIds) {
     if (!sourceIds.has(sourceId)) errors.push(`missing source: ${observation.id} -> ${sourceId}`);
   }
+  if (/未归入/.test(observation.setting) || /未归入/.test(observation.note)) {
+    errors.push(`score is attached to the wrong model version: ${observation.id}`);
+  }
 }
 
 

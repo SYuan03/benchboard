@@ -26,6 +26,7 @@ window.BENCH_DATA = (() => {
   const models = [
     { id: "gpt-6-astra", name: "GPT-6 Astra", vendorId: "openai", vendor: "OpenAI", releaseDate: "2026-09-01", modality: "vision", modalityDetail: "文本、图像、屏幕/计算机操作 → 文本", context: "未披露", access: "闭源 API", aliases: ["gpt-6-astra"], sourceId: "openai-astra", summary: "当前 OpenAI 前沿旗舰，突出计算机使用、科学、代码与网络安全。" },
     { id: "gpt-5-6-sol", name: "GPT-5.6 Sol", vendorId: "openai", vendor: "OpenAI", releaseDate: "2026-07-09", modality: "vision", modalityDetail: "文本、图像、屏幕/计算机操作 → 文本", context: "1M 档长上下文评测", access: "闭源 API", aliases: ["gpt-5.6-sol", "GPT-5.6 Sol"], sourceId: "openai-gpt56", summary: "GPT-5.6 家族旗舰，覆盖编码、知识工作、科研和多模态。" },
+    { id: "gpt-5-6-terra", name: "GPT-5.6 Terra", vendorId: "openai", vendor: "OpenAI", releaseDate: "2026", modality: "vision", modalityDetail: "多模态模型；当前仅收录 Z.ai 官方表中的精确版本名与对照成绩", context: "未核实", access: "闭源 API", aliases: ["gpt-5.6-terra", "GPT-5.6 Terra"], sourceId: "zai-glm53-flash", summary: "GLM-5.3 Flash 官方表使用的独立对照版本；不与 GPT-5.6 Sol 合并。" },
     { id: "gpt-5-6-luna", name: "GPT-5.6 Luna", vendorId: "openai", vendor: "OpenAI", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像、工具调用 → 文本", context: "未披露", access: "闭源 API", aliases: ["openai/gpt-5.6-luna"], sourceId: "openai-gpt56", summary: "GPT-5.6 家族的低延迟版本；PinchBench v2 当前榜单中的前沿模型。" },
     { id: "claude-fable-5-1", name: "Claude Fable 5.1", vendorId: "anthropic", vendor: "Anthropic", releaseDate: "2026-09-01", modality: "vision", modalityDetail: "文本、图像、屏幕/计算机操作 → 文本", context: "未披露", access: "闭源 API", aliases: ["claude-fable-5-1"], sourceId: "anthropic-fable51", summary: "面向编码、知识工作与长程任务的最新 Fable 模型。" },
     { id: "claude-mythos-5-1", name: "Claude Mythos 5.1", vendorId: "anthropic", vendor: "Anthropic", releaseDate: "2026-09-01", modality: "vision", modalityDetail: "与 Fable 5.1 同模型，安全策略更宽松", context: "未披露", access: "受限访问", aliases: ["claude-mythos-5-1"], sourceId: "anthropic-fable51", summary: "与 Fable 5.1 权重相同，面向经审核的网络安全与生命科学用户。" },
@@ -34,8 +35,10 @@ window.BENCH_DATA = (() => {
     { id: "claude-opus-4-8", name: "Claude Opus 4.8", vendorId: "anthropic", vendor: "Anthropic", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像、屏幕/计算机操作 → 文本", context: "未披露", access: "闭源 API", aliases: ["claude-opus-4-8"], sourceId: "anthropic-fable51", summary: "多份 2026 年中厂商表使用的强基线；与 Opus 5 分开保存。" },
     { id: "claude-opus-4-8-fast", name: "Claude Opus 4.8 Fast", vendorId: "anthropic", vendor: "Anthropic", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像、工具调用 → 文本", context: "未披露", access: "闭源 API 路由", aliases: ["anthropic/claude-opus-4.8-fast"], sourceId: "pinchbench-v2", summary: "PinchBench 单独列出的 Opus 4.8 快速路由；不与标准 Opus 4.8 合并。" },
     { id: "gemini-3-8-flash", name: "Gemini 3.8 Flash", vendorId: "google", vendor: "Google DeepMind", releaseDate: "2026-09-02", modality: "omni", modalityDetail: "文本、图像、音频、视频 → 文本", context: "1M", access: "闭源 API", aliases: ["gemini-3.8-flash"], sourceId: "deepmind-gemini38", summary: "原生全模态 Flash 模型，面向低成本 Agent、软件工程和知识工作。" },
+    { id: "gemini-3-7-flash", name: "Gemini 3.7 Flash", vendorId: "google", vendor: "Google DeepMind", releaseDate: "2026", modality: "omni", modalityDetail: "全模态模型；当前仅收录 Z.ai 官方表中的精确版本名与对照成绩", context: "未核实", access: "闭源 API", aliases: ["gemini-3.7-flash"], sourceId: "zai-glm53-flash", summary: "GLM-5.3 Flash 官方表使用的独立对照版本；不与 Gemini 3.8 Flash 合并。" },
     { id: "gemini-3-1-pro", name: "Gemini 3.1 Pro", vendorId: "google", vendor: "Google DeepMind", releaseDate: "2026-02", modality: "omni", modalityDetail: "文本、图像、音频、视频 → 文本", context: "1M", access: "闭源 API", aliases: ["gemini-3.1-pro"], sourceId: "deepmind-gemini38", summary: "Gemini 3 系列 Pro 模型，多份厂商表中的多模态对照基线。" },
     { id: "deepseek-v4-1-flash", name: "DeepSeek V4.1 Flash", vendorId: "deepseek", vendor: "DeepSeek", releaseDate: "2026-09-10", modality: "vision", modalityDetail: "文本、图像 → 文本", context: "1M", access: "开放权重 / API", aliases: ["deepseek-v4.1-flash", "deepseek-flash"], sourceId: "deepseek-v41", summary: "552B MoE、输入激活 8B/输出 16B，原生视觉理解。" },
+    { id: "deepseek-v4-vision-exp", name: "DeepSeek V4 Vision Exp", vendorId: "deepseek", vendor: "DeepSeek", releaseDate: "2026", modality: "vision", modalityDetail: "视觉语言实验版本；当前仅收录 Z.ai 官方表中的精确版本名与对照成绩", context: "未核实", access: "实验版本", aliases: ["DeepSeek V4 Vision Exp"], sourceId: "zai-glm53-flash", summary: "GLM-5.3 Flash 官方表使用的独立对照版本；不与 DeepSeek V4.1 Flash 合并。" },
     { id: "deepseek-v4-pro", name: "DeepSeek V4 Pro 0813", vendorId: "deepseek", vendor: "DeepSeek", releaseDate: "2026-08-13", modality: "language", modalityDetail: "文本 → 文本", context: "1M", access: "API（已进入迁移期）", aliases: ["deepseek-v4-pro-0813"], sourceId: "alibaba-lifecycle", summary: "1.6T MoE 旗舰快照；官方已宣布流量逐步迁移至 V4.1 Flash。" },
     { id: "qwen3-8-max", name: "Qwen3.8 Max", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-08-02", modality: "vision", modalityDetail: "服务版：文本、图像 → 文本；官方卡另列内置工具与非思考模式", context: "1M", access: "闭源 API（基于开放权重底座）", aliases: ["qwen3.8-max"], sourceId: "qwen38-hf", summary: "Qwen3.8 的官方托管服务版；模型卡 Benchmark 表中的 Qwen3.8-Max 均归到这里。" },
     { id: "qwen3-8-2-4t-a95b", name: "Qwen3.8-2.4T-A95B", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-08-13", modality: "language", modalityDetail: "文本 → 文本；仅思考模式，不支持多模态输入", context: "262K 原生 / 可扩展至 1.01M", access: "开放权重", aliases: ["Qwen/Qwen3.8-2.4T-A95B"], sourceId: "qwen38-hf", scoreStatus: "base-model", summary: "2.4T 总参数、95B 激活的纯语言开放权重底座；与支持视觉的 Qwen3.8-Max 服务版分开登记。" },
@@ -151,22 +154,22 @@ window.BENCH_DATA = (() => {
 
   batch(["openai-astra"], "automationbench", [["gpt-6-astra",41.4],["gpt-5-6-sol",18.1],["claude-fable-5-1",31.4],["claude-opus-5",26.9]]);
   batch(["zai-glm53"], "automationbench", [["glm-5-3",48.2],["kimi-k3",46.7],["deepseek-v4-pro",43.2],["gpt-5-6-sol",45.8,"v1.0.6 / Z.ai设置"],["claude-opus-4-8",41.0,"v1.0.6 / Z.ai设置"]]);
-  batch(["zai-glm53-flash"], "automationbench", [["glm-5-3-flash",48.8],["gpt-5-6-sol",37.2,"v1.0.6 / Z.ai Flash表"],["gemini-3-8-flash",52.3,"Gemini 3.7 Flash 对照；未归入 3.8"]]);
+  batch(["zai-glm53-flash"], "automationbench", [["glm-5-3-flash",48.8],["gpt-5-6-terra",37.2,"v1.0.6 / Z.ai Flash表"],["gemini-3-7-flash",52.3,"v1.0.6 / Z.ai Flash表"]]);
   add(["qwen38"], "automationbench", "qwen3-8-max", 27.3, "%", "600-task public subset / Pass@1");
   add(["deepseek-v41"], "automationbench", "deepseek-v4-1-flash", 54.8, "%", "官方 scaffold / Pass@1");
 
   batch(["deepmind-gemini38"], "gdpval-aa-v2", [["gemini-3-8-flash",1545],["claude-opus-5",1824],["gpt-5-6-sol",1710]], "Elo", "Google Model Card");
   batch(["zai-glm53"], "gdpval-aa-v2", [["glm-5-3",1769],["kimi-k3",1682],["deepseek-v4-pro",1590],["qwen3-8-max",1739],["claude-opus-4-8",1588],["gpt-5-6-sol",1730]], "Elo", "Artificial Analysis / Z.ai转载");
-  batch(["zai-glm53-flash"], "gdpval-aa-v2", [["glm-5-3-flash",1773],["gpt-5-6-sol",1571,"GPT-5.6 Terra 对照；未归入 Sol"],["gemini-3-8-flash",1527,"Gemini 3.7 Flash 对照；未归入 3.8"]], "Elo", "Artificial Analysis / Z.ai转载");
+  batch(["zai-glm53-flash"], "gdpval-aa-v2", [["glm-5-3-flash",1773],["gpt-5-6-terra",1571],["gemini-3-7-flash",1527]], "Elo", "Artificial Analysis / Z.ai转载");
 
   batch(["zai-glm53"], "toolathlon", [["glm-5-3",73.0],["kimi-k3",76.5],["deepseek-v4-pro",74.1],["qwen3-8-max",72.5],["claude-opus-4-8",76.2],["gpt-5-6-sol",74.9]], "%", "Verified / Pass@1");
-  batch(["zai-glm53-flash"], "toolathlon", [["glm-5-3-flash",78.4],["deepseek-v4-1-flash",75.9,"DeepSeek V4 Vision Exp 对照"],["claude-opus-4-8",76.2]], "%", "Verified / 三次运行均值");
+  batch(["zai-glm53-flash"], "toolathlon", [["glm-5-3-flash",78.4],["deepseek-v4-vision-exp",75.9],["claude-opus-4-8",76.2]], "%", "Verified / 三次运行均值");
   add(["hy4"], "toolathlon", "hy4-preview", 74.1, "%", "HF Eval Result / Verified");
 
   batch(["openai-gpt56","zai-glm53","deepseek-v41","deepmind-gemini38"], "terminal-bench-2-1", [["gpt-5-6-sol",88.8,"厂商公开表共同值"]]);
   batch(["deepmind-gemini38"], "terminal-bench-2-1", [["gemini-3-8-flash",89.4],["claude-opus-5",89.1],["gpt-5-6-sol",88.8]], "%", "Google Model Card");
   batch(["zai-glm53"], "terminal-bench-2-1", [["glm-5-3",88.2],["kimi-k3",88.3],["deepseek-v4-pro",87.9],["qwen3-8-max",86.6],["claude-opus-4-8",85.0,"Z.ai复现"]]);
-  batch(["zai-glm53-flash"], "terminal-bench-2-1", [["glm-5-3-flash",84.3],["deepseek-v4-1-flash",83.9,"DeepSeek V4 Vision Exp 对照"]]);
+  batch(["zai-glm53-flash"], "terminal-bench-2-1", [["glm-5-3-flash",84.3],["deepseek-v4-vision-exp",83.9]]);
   batch(["deepseek-v41"], "terminal-bench-2-1", [["deepseek-v4-1-flash",90.6]], "%", "DSH Minimal / max effort");
   add(["qwen38"], "terminal-bench-2-1", "qwen3-8-max", 86.6, "%", "Claude Code harness");
   add(["seed21"], "terminal-bench-2-1", "seed2-1-pro", 71.0, "%", "Seed model card");

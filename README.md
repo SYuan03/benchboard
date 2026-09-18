@@ -7,7 +7,7 @@ Frontier AI Leaderboard 收集领先语言模型、多模态模型和 Agent 模�
 ## 当前收录
 
 <!-- DATA_SUMMARY_START -->
-- 25 个模型或版本
+- 28 个模型或版本
 - 74 个已登记 Benchmark
 - 433 条去重公开成绩
 - 15 个官方来源
