@@ -158,7 +158,7 @@ window.BENCH_DATA = (() => {
     { id: "wildclawbench-cost", name: "WildClawBench · Total Cost", category: "Agent / 工作", direction: "lower", description: "OpenClaw 完整 60 题的总成本，单位为美元；数值越低越好。" },
     { id: "wildclawbench-mm", name: "WildClawBench-MM", category: "Agent / 工作", direction: "higher", description: "多模态 Agent 子榜，评估视觉与音视频任务。与 WildClawBench Overall 分开排名。" },
     { id: "pinchbench-v2-best", name: "PinchBench v2 · Best Success Rate", category: "Agent / 工作", direction: "higher", description: "OpenClaw 真实 Agent 任务的单次最佳成功率；与平均成功率分榜。" },
-    { id: "pinchbench-v2-average", name: "PinchBench v2 · Average Success Rate", category: "Agent / 工作", direction: "higher", description: "OpenClaw 真实 Agent 任务的平均成功率；官方榜当前含 147 tasks、620 runs。" }
+    { id: "pinchbench-v2-average", name: "PinchBench v2 · Average Success Rate", category: "Agent / 工作", direction: "higher", description: "OpenClaw 真实 Agent 任务的平均成功率；页面徽标显示 147 tasks、620 runs，v2.0.0 release notes 写 148 tasks，两个官方口径均保留。" }
   ];
 
   const observations = [];
