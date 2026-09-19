@@ -10,9 +10,9 @@ BenchBoard collects public benchmark results for current language, multimodal, a
 
 <!-- DATA_SUMMARY_START -->
 - 33 model releases
-- 87 registered benchmarks
-- 551 deduplicated public results
-- 17 primary sources
+- 96 registered benchmarks
+- 602 deduplicated public results
+- 18 primary sources
 <!-- DATA_SUMMARY_END -->
 
 The first release focuses on general, coding, multimodal, and agent models near the frontier in 2026. It includes GPT-6 Astra, GPT-5.6 Sol, Claude 5, Gemini 3.8, DeepSeek V4.1, Qwen3.8, GLM-5.3, Seed2.1, Kimi K3, and Hy4.

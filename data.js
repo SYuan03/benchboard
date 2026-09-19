@@ -1,12 +1,13 @@
 window.BENCH_DATA = (() => {
   const meta = {
     title: "BenchBoard",
-    updated: "2026-09-18",
-    scope: "截至 2026-09-18 的领先通用/Agent 模型公开成绩首版"
+    updated: "2026-09-19",
+    scope: "截至 2026-09-19 的领先通用/Agent 模型公开成绩"
   };
 
   const sources = [
     { id: "openai-astra", vendorId: "openai", publisher: "OpenAI", date: "2026-09-01", tier: "official", title: "GPT-6 Astra: A new generation of intelligence", url: "https://openai.com/index/gpt-6-astra/" },
+    { id: "openai-astra-work", vendorId: "openai", publisher: "OpenAI", date: "2026-09-09", tier: "official", title: "GPT-6 Astra: The next generation in intelligence for work", url: "https://openai.com/index/gpt-6-astra-next-generation-work/" },
     { id: "openai-gpt56", vendorId: "openai", publisher: "OpenAI", date: "2026-07-09", tier: "official", title: "GPT-5.6: Frontier intelligence that scales with your ambition", url: "https://openai.com/index/gpt-5-6/" },
     { id: "anthropic-fable51", vendorId: "anthropic", publisher: "Anthropic", date: "2026-09-01", tier: "official", title: "Introducing Claude Fable 5.1 and Claude Mythos 5.1", url: "https://www.anthropic.com/claude-fable-and-mythos-5-1" },
     { id: "deepmind-gemini38", vendorId: "google", publisher: "Google DeepMind", date: "2026-09-02", tier: "official", title: "Gemini 3.8 Flash — Model Card", url: "https://deepmind.google/models/model-cards/gemini-3-8-flash/" },
@@ -21,7 +22,7 @@ window.BENCH_DATA = (() => {
     { id: "seed21", vendorId: "bytedance", publisher: "ByteDance Seed", date: "2026-06-23", tier: "official", title: "Seed2.1 — Model Card", url: "https://seed.bytedance.com/en/seed2_1" },
     { id: "hy4", vendorId: "tencent", publisher: "Tencent Hy", date: "2026-08-28", tier: "official", title: "Hy4-preview — Official Model Card", url: "https://huggingface.co/tencent/Hy4-preview" },
     { id: "skillsbench-1-1", vendorId: "benchflow", kind: "benchmark", publisher: "SkillsBench / BenchFlow", date: "2026-07-16", tier: "official", title: "SkillsBench 1.1 Official Leaderboard", url: "https://www.skillsbench.ai/" },
-    { id: "pinchbench-v2", vendorId: "pinchbench", kind: "benchmark", publisher: "PinchBench", date: "2026-09-18", tier: "official", title: "PinchBench v2 — OpenClaw Benchmark Leaderboard", url: "https://pinchbench.com/" },
+    { id: "pinchbench-v2", vendorId: "pinchbench", kind: "benchmark", publisher: "PinchBench", date: "2026-08-18", tier: "official", title: "PinchBench v2 — OpenClaw Benchmark Leaderboard", url: "https://pinchbench.com/" },
     { id: "rngbench", vendorId: "rngbench", kind: "benchmark", publisher: "RNG-Bench / InternLM", date: "2026-07-07", tier: "official", title: "RNG-Bench Official Results", url: "https://internlm.github.io/RNGBench/" }
   ];
 
@@ -72,6 +73,7 @@ window.BENCH_DATA = (() => {
     { id: "terminal-bench-4-0", name: "Terminal-Bench 4.0", category: "编码", direction: "higher", description: "新一代通用终端 Agent 任务。" },
     { id: "terminal-bench-science", name: "Terminal-Bench Science 0.1", category: "科研", direction: "higher", description: "使用代码与终端完成科学研究工作流。" },
     { id: "deepswe-v1-1", name: "DeepSWE v1.1", category: "编码", direction: "higher", description: "长程软件工程；不同 Agent Scaffold 会产生不同结果。" },
+    { id: "frontiercode-1-1-extended", name: "FrontierCode 1.1 Extended", category: "编码", direction: "higher", description: "真实软件工程任务的扩展版；不同推理档位和成本点分别保留。" },
     { id: "swe-bench-pro", name: "SWE-Bench Pro", category: "编码", direction: "higher", description: "真实仓库软件工程。" },
     { id: "nl2repo", name: "NL2Repo-Bench", category: "编码", direction: "higher", description: "从自然语言需求构建仓库级实现。" },
     { id: "frontierswe", name: "FrontierSWE", category: "编码", direction: "higher", description: "前沿软件工程任务；Qwen 表报告 MEAN@5，并说明对照值来自官方榜。" },
@@ -96,6 +98,7 @@ window.BENCH_DATA = (() => {
     { id: "screenspot-pro", name: "ScreenSpot-Pro", category: "计算机操作", direction: "higher", description: "屏幕视觉定位。" },
     { id: "benchcad", name: "BenchCAD", category: "专业工作", direction: "higher", description: "从多视图重建 3D 对象并生成 CAD。" },
     { id: "artificial-intelligence-index", name: "Artificial Analysis Intelligence Index v4.1", category: "综合指数", direction: "higher", description: "第三方综合智能指数；厂商发布页转载。" },
+    { id: "artificial-intelligence-index-v4-3", name: "Artificial Analysis Intelligence Index v4.3", category: "综合指数", direction: "higher", description: "Artificial Analysis v4.3 综合指数；与 v4.1.1 分榜，推理档位分别保留。" },
     { id: "artificial-coding-index", name: "Artificial Analysis Coding Agent Index", category: "编码", direction: "higher", description: "第三方编码 Agent 综合指数，注意版本号。" },
     { id: "mmmu-pro", name: "MMMU-Pro", category: "多模态", direction: "higher", description: "多模态大学级理解；有无工具需分开。" },
     { id: "charxiv", name: "CharXiv Reasoning", category: "多模态", direction: "higher", description: "复杂图表与科学图形推理。" },
@@ -118,10 +121,13 @@ window.BENCH_DATA = (() => {
     { id: "rngbench-duel-score", name: "RNG-Bench · Duel Score", category: "多模态", direction: "higher", description: "Matching Pairs 双模型对战中的平均匹配得分比例。" },
     { id: "rngbench-duel-elo", name: "RNG-Bench · Duel Elo", category: "多模态", direction: "higher", description: "Matching Pairs 双模型对战 Elo；与胜率和得分分榜展示。" },
     { id: "exploitbench", name: "ExploitBench", category: "网络安全", direction: "higher", description: "真实漏洞利用；安全策略、时间预算和 Harness 影响很大。" },
+    { id: "exploitbench-2026-jun-aug", name: "ExploitBench · June–August 2026", category: "网络安全", direction: "higher", description: "OpenAI 使用 2026 年 6–8 月新漏洞构建的独立评测；不与历史 ExploitBench 混排。" },
     { id: "exploitgym-rate", name: "ExploitGym · Success Rate", category: "网络安全", direction: "higher", description: "漏洞利用成功率；不与完成任务数混排。" },
     { id: "exploitgym-tasks", name: "ExploitGym · Solved Tasks", category: "网络安全", direction: "higher", description: "在给定时间预算内完成的任务数；分母保留在设置中。" },
     { id: "cybergym", name: "CyberGym", category: "网络安全", direction: "higher", description: "白盒漏洞发现与验证。" },
     { id: "sec-bench-pro", name: "SEC-Bench Pro", category: "网络安全", direction: "higher", description: "复杂软件 PoC 生成。" },
+    { id: "sre-bench-1", name: "SRE-Bench · 1 Attempt", category: "网络安全", direction: "higher", description: "二进制逆向任务的单次尝试成功率；与四次尝试分榜。" },
+    { id: "sre-bench-4", name: "SRE-Bench · 4 Attempts", category: "网络安全", direction: "higher", description: "二进制逆向任务四次尝试内的累计成功率；与单次尝试分榜。" },
     { id: "mrcr-256k", name: "MRCR v2 · 256K", category: "长上下文", direction: "higher", description: "8-needle、256K 长上下文检索。" },
     { id: "mrcr-512k", name: "OpenAI MRCR v2 · 512K–1M", category: "长上下文", direction: "higher", description: "8-needle、512K–1M 长上下文检索；不与 256K 分数混排。" },
     { id: "longbench-v2", name: "LongBench v2", category: "长上下文", direction: "higher", description: "真实长上下文理解与推理任务。" },
@@ -140,6 +146,10 @@ window.BENCH_DATA = (() => {
     { id: "ifbench", name: "IFBench", category: "知识 / 推理", direction: "higher", description: "指令遵循能力评测。" },
     { id: "one-million-bench", name: "$OneMillion-Bench · Expert Score", category: "专业工作", direction: "higher", description: "高价值专家任务；Qwen 表使用 Gemini 3.1 Pro Preview 评判。" },
     { id: "healthbench", name: "HealthBench", category: "专业工作", direction: "higher", description: "医疗健康对话与专业能力评测。" },
+    { id: "healthbench-professional", name: "HealthBench Professional", category: "专业工作", direction: "higher", description: "专业医疗任务评测；与普通 HealthBench 分榜，代码与非代码模式保留在设置中。" },
+    { id: "lifescibench", name: "LifeSciBench", category: "科研", direction: "higher", description: "生命科学推理与研究任务；推理档位会影响结果。" },
+    { id: "genebench-pro", name: "GeneBench Pro", category: "科研", direction: "higher", description: "专业基因组学任务准确率。" },
+    { id: "medchembench", name: "MedChemBench", category: "科研", direction: "higher", description: "药物化学任务的加权得分。" },
     { id: "plawbench", name: "PLawBench", category: "专业工作", direction: "higher", description: "法律专业任务；Qwen 表使用 Gemini 3.1 Pro Preview 评判。" },
     { id: "prbench-legal", name: "PRBench-Legal", category: "专业工作", direction: "higher", description: "法律专业研究与交付任务。" },
     { id: "prbench-finance", name: "PRBench-Finance", category: "专业工作", direction: "higher", description: "金融专业研究与交付任务。" },
@@ -199,7 +209,8 @@ window.BENCH_DATA = (() => {
   batch(["zai-glm53"], "terminal-bench-3-0", [["glm-5-3",28.3],["kimi-k3",17.4],["claude-opus-4-8",21.1],["gpt-5-6-sol",34.6]]);
   batch(["deepseek-v41"], "terminal-bench-3-0", [["deepseek-v4-1-flash",30.0],["glm-5-3",28.3],["kimi-k3",17.7],["claude-opus-5",43.3],["gpt-5-6-sol",34.4]], "%", "DeepSeek Harness / max effort");
 
-  batch(["openai-astra"], "terminal-bench-4-0", [["gpt-6-astra",57.9],["gpt-5-6-sol",37.3],["claude-fable-5-1",55.8],["claude-opus-5",52.6]], "%", "OpenAI公开设置");
+  batch(["openai-astra", "openai-astra-work"], "terminal-bench-4-0", [["gpt-6-astra",57.9],["gpt-5-6-sol",37.3],["claude-fable-5-1",55.8]], "%", "OpenAI公开设置");
+  add(["openai-astra"], "terminal-bench-4-0", "claude-opus-5", 52.6, "%", "OpenAI公开设置");
   batch(["anthropic-fable51"], "terminal-bench-4-0", [["claude-fable-5-1",55.8],["claude-mythos-5-1",60.9],["claude-opus-5",52.3],["gpt-5-6-sol",37.3]], "%", "Anthropic公开设置");
   batch(["deepseek-v41"], "terminal-bench-4-0", [["deepseek-v4-1-flash",31.2],["glm-5-3",37.9],["kimi-k3",12.6],["claude-opus-5",51.8],["gpt-5-6-sol",39.9]], "%", "DeepSeek Harness / max effort");
   batch(["deepmind-gemini38"], "terminal-bench-4-0", [["gemini-3-8-flash",19.1],["claude-opus-5",51.8],["gpt-5-6-sol",37.3]], "%", "Google Model Card");
@@ -214,6 +225,11 @@ window.BENCH_DATA = (() => {
   add(["qwen38"], "deepswe-v1-1", "qwen3-8-max", 56.6, "%", "mini-SWE-Agent harness");
   add(["hy4"], "deepswe-v1-1", "hy4-preview", 64.3, "%", "HF Eval Result");
   add(["zai-glm53-flash"], "deepswe-v1-1", "glm-5-3-flash", 63.4, "%", "mini-swe-agent / 6h");
+
+  batch(["openai-astra"], "frontiercode-1-1-extended", [
+    ["gpt-6-astra", 64], ["gpt-5-6-sol", 61], ["claude-fable-5-1", 62],
+    ["claude-fable-5", 64], ["claude-opus-5", 59]
+  ], "%", "OpenAI图表 · 最高推理档位");
 
   batch(["openai-gpt56"], "swe-bench-pro", [["gpt-5-6-sol",64.6],["claude-fable-5",80.0],["claude-opus-4-8",69.2]], "%", "OpenAI GPT-5.6表");
   add(["qwen38"], "swe-bench-pro", "qwen3-8-max", 67.7, "%", "Claude Code harness");
@@ -234,6 +250,18 @@ window.BENCH_DATA = (() => {
   batch(["deepseek-v41"], "gpqa-diamond", [["deepseek-v4-1-flash",90.9],["glm-5-3",88.1],["kimi-k3",92.9],["deepseek-v4-pro",92.4],["claude-opus-5",93.4],["gpt-5-6-sol",94.1]], "%", "Pass@1 / max effort");
   add(["qwen38"], "gpqa-diamond", "qwen3-8-max", 92.6, "%", "Qwen官方表");
   add(["hy4"], "gpqa-diamond", "hy4-preview", 92.3, "%", "HF Eval Result");
+
+  batch(["openai-astra"], "healthbench-professional", [
+    ["gpt-6-astra", 63, "OpenAI图表 · 最高推理档位 · Code"],
+    ["gpt-5-6-sol", 61, "OpenAI图表 · 最高推理档位 · Non-code"],
+    ["claude-fable-5-1", 57, "OpenAI图表 · 最高推理档位 · Non-code"],
+    ["claude-fable-5", 61, "OpenAI图表 · 最高推理档位 · Non-code"],
+    ["claude-opus-5", 55, "OpenAI图表 · 最高推理档位 · Non-code"],
+    ["gemini-3-8-flash", 52, "OpenAI图表 · 单一公开档位 · Non-code"]
+  ]);
+  batch(["openai-astra"], "lifescibench", [["gpt-6-astra",60.3],["gpt-5-6-sol",59.9]], "%", "OpenAI图表 · 最高推理档位");
+  batch(["openai-astra"], "genebench-pro", [["gpt-6-astra",36.7],["gpt-5-6-sol",32.3]], "%", "OpenAI图表 · 最高推理档位 · Accuracy");
+  batch(["openai-astra"], "medchembench", [["gpt-6-astra",49.1],["gpt-5-6-sol",47.4]], "%", "OpenAI图表 · 最高推理档位 · Weighted score");
 
   batch(["qwen38"], "hle", [["qwen3-8-max",43.6],["gpt-5-6-sol",47.2],["claude-opus-4-8",45.7]], "%", "无工具 / Qwen表");
   batch(["anthropic-fable51"], "hle", [["claude-fable-5-1",60.9],["claude-opus-5",56.6]], "%", "无工具 / Anthropic设置");
@@ -261,6 +289,19 @@ window.BENCH_DATA = (() => {
 
   batch(["openai-astra"], "artificial-intelligence-index", [["gpt-6-astra",61.2],["gpt-5-6-sol",60.9],["claude-fable-5-1",65.7],["claude-opus-5",63.1],["gemini-3-8-flash",58.7]], "Index", "v4.1.1");
   add(["zai-glm53-flash"], "artificial-intelligence-index", "glm-5-3-flash", 57.0, "Index", "v4.1.1 / $0.045 per task（折后）");
+  batch(["openai-astra-work"], "artificial-intelligence-index-v4-3", [
+    ["gpt-6-astra", 46, "v4.3 · low effort"],
+    ["gpt-6-astra", 50, "v4.3 · medium effort"],
+    ["gpt-6-astra", 51, "v4.3 · high effort"],
+    ["gpt-6-astra", 53, "v4.3 · x-high effort"],
+    ["gpt-6-astra", 53, "v4.3 · max effort"],
+    ["gpt-5-6-sol", 47, "v4.3 · max effort"],
+    ["claude-fable-5-1", 53, "v4.3 · x-high effort"],
+    ["claude-fable-5-1", 53, "v4.3 · max effort"],
+    ["claude-fable-5", 50, "v4.3 · max effort"],
+    ["claude-opus-5", 51, "v4.3 · max effort"],
+    ["gemini-3-8-flash", 41, "v4.3 · max effort"]
+  ], "Index");
   batch(["openai-astra"], "artificial-coding-index", [["gpt-6-astra",67.0],["gpt-5-6-sol",65.1],["claude-opus-5",68.1],["gemini-3-8-flash",61.2]], "Index", "v1.4");
 
   batch(["openai-gpt56"], "mmmu-pro", [["gpt-5-6-sol",83.0],["gemini-3-1-pro",80.5]], "%", "no tools");
@@ -348,6 +389,7 @@ window.BENCH_DATA = (() => {
   batch(["openai-astra"], "exploitbench", [["gpt-6-astra",100.0],["gpt-5-6-sol",78.5],["claude-opus-5",70.0]], "%", "无生产安全策略");
   batch(["zai-glm53"], "exploitbench", [["glm-5-3",54.4],["kimi-k3",32.2],["qwen3-8-max",28.8],["claude-fable-5",78.0],["gpt-5-6-sol",76.5]], "%", "Z.ai设置");
   add(["deepseek-v41"], "exploitbench", "deepseek-v4-1-flash", 73.5, "%", "ExploitBench API harness / 5 seeds");
+  batch(["openai-astra"], "exploitbench-2026-jun-aug", [["gpt-6-astra",39.0],["gpt-5-6-sol",5.5]], "%", "2026年6–8月漏洞 · max effort · 无生产安全策略");
 
   batch(["openai-astra"], "exploitgym-rate", [["gpt-6-astra",42.4],["gpt-5-6-sol",30.3],["claude-fable-5-1",30.4],["claude-opus-5",22.0]], "%", "成功率 / 无生产安全策略");
   add(["zai-glm53"], "exploitgym-tasks", "glm-5-3", 105, "tasks", "105 / 130 · 2h / 6h 时间归一化任务数");
@@ -361,6 +403,8 @@ window.BENCH_DATA = (() => {
   add(["deepseek-v41"], "cybergym", "deepseek-v4-1-flash", 88.1, "%", "Pass@1");
   batch(["openai-astra"], "sec-bench-pro", [["gpt-6-astra",85.4],["gpt-5-6-sol",79.1]], "%", "OpenAI公开设置");
   add(["deepseek-v41"], "sec-bench-pro", "deepseek-v4-1-flash", 62.8, "%", "Claude Code harness");
+  batch(["openai-astra"], "sre-bench-1", [["gpt-6-astra",88.0],["gpt-5-6-sol",55.9]], "%", "max effort · 1 attempt");
+  batch(["openai-astra"], "sre-bench-4", [["gpt-6-astra",99.2],["gpt-5-6-sol",68.7]], "%", "max effort · within 4 attempts");
 
   batch(["openai-astra"], "mrcr-512k", [["gpt-6-astra",96.3],["gpt-5-6-sol",73.8]], "%", "8-needle / 512K–1M");
   add(["qwen38", "qwen38-hf"], "mrcr-256k", "qwen3-8-max", 92.9, "%", "MRCR v2 256K / 8-needle");
@@ -421,16 +465,19 @@ window.BENCH_DATA = (() => {
   add(["qwen38-hf"], "wildclawbench-time", "qwen3-8-max", 708, "min", "Hugging Face Eval Results");
   batch(["wildclawbench"], "wildclawbench-overall", [
     ["gpt-5-6-sol", 67.2], ["claude-opus-4-8", 64.7], ["claude-fable-5", 62.0],
-    ["qwen3-8-max", 56.2], ["kimi-k3", 54.5], ["deepseek-v4-pro", 43.7],
-    ["gemini-3-1-pro", 40.8, "OpenClaw · 60 tasks · low-effort"]
+    ["qwen3-8-max", 56.2], ["kimi-k3", 54.5], ["gpt-5-4", 50.3],
+    ["deepseek-v4-pro", 43.7], ["gemini-3-1-pro", 40.8, "OpenClaw · 60 tasks · low-effort"],
+    ["qwen3-5-397b", 34.5], ["kimi-k2-5", 30.8]
   ], "%", "OpenClaw · 完整60题");
   batch(["wildclawbench"], "wildclawbench-time", [
     ["gpt-5-6-sol", 222], ["claude-opus-4-8", 400], ["claude-fable-5", 324],
-    ["qwen3-8-max", 708], ["kimi-k3", 488], ["deepseek-v4-pro", 605], ["gemini-3-1-pro", 240]
+    ["qwen3-8-max", 708], ["kimi-k3", 488], ["gpt-5-4", 350],
+    ["deepseek-v4-pro", 605], ["gemini-3-1-pro", 240], ["qwen3-5-397b", 459], ["kimi-k2-5", 406]
   ], "min", "OpenClaw · 完整60题总用时");
   batch(["wildclawbench"], "wildclawbench-cost", [
     ["gpt-5-6-sol", 56.78], ["claude-opus-4-8", 95.95], ["claude-fable-5", 87.71],
-    ["qwen3-8-max", 24.70], ["kimi-k3", 40.08], ["deepseek-v4-pro", 12.00], ["gemini-3-1-pro", 18.00]
+    ["qwen3-8-max", 24.70], ["kimi-k3", 40.08], ["gpt-5-4", 19.80],
+    ["deepseek-v4-pro", 12.00], ["gemini-3-1-pro", 18.00], ["qwen3-5-397b", 22.20], ["kimi-k2-5", 6.60]
   ], "USD", "OpenClaw · 完整60题总成本");
 
   batch(["qwen38-omni"], "wildclawbench-mm", [
@@ -439,13 +486,15 @@ window.BENCH_DATA = (() => {
 
   batch(["pinchbench-v2"], "pinchbench-v2-best", [
     ["claude-opus-4-8-fast", 94.5], ["qwen3-7-max", 93.4], ["claude-opus-4-8", 91.8],
-    ["gpt-5-6-luna", 90.8], ["gpt-5-6-sol", 87.0], ["gemini-3-1-pro", 82.9],
-    ["deepseek-v4-pro", 81.6], ["claude-fable-5", 59.6]
+    ["gpt-5-6-luna", 90.8], ["seed2-0-lite", 89.7], ["gpt-5-4", 88.4],
+    ["gpt-5-6-sol", 87.0], ["gemini-3-1-pro", 82.9], ["kimi-k2-5", 81.9],
+    ["deepseek-v4-pro", 81.6], ["gpt-5-6-terra", 81.4], ["claude-fable-5", 59.6]
   ], "%", "PinchBench v2 官方榜 · Best % · 147 tasks");
   batch(["pinchbench-v2"], "pinchbench-v2-average", [
     ["claude-opus-4-8-fast", 93.5], ["qwen3-7-max", 92.5], ["claude-opus-4-8", 90.5],
-    ["gpt-5-6-luna", 88.7], ["gpt-5-6-sol", 84.2], ["gemini-3-1-pro", 81.0],
-    ["deepseek-v4-pro", 61.1], ["claude-fable-5", 54.8]
+    ["seed2-0-lite", 75.0], ["gpt-5-4", 75.7], ["gpt-5-6-luna", 88.7],
+    ["gpt-5-6-sol", 84.2], ["gemini-3-1-pro", 81.0], ["kimi-k2-5", 54.6],
+    ["deepseek-v4-pro", 61.1], ["gpt-5-6-terra", 75.9], ["claude-fable-5", 54.8]
   ], "%", "PinchBench v2 官方榜 · Avg % · 620 runs");
 
   add(["skillsbench-1-1"], "skillsbench-1-1", "claude-opus-4-8", 54.1, "%", "with Skills · OpenHands · 87 tasks · up to 3 trials", "without Skills: 45.7% · official v1.1 leaderboard");
