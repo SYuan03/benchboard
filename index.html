@@ -61,14 +61,14 @@
         <label><span>能力域</span><select id="category-filter"><option value="">全部能力域</option></select></label>
         <div class="collection-filter">
           <span>专题</span>
-          <button id="multimodal-harness-filter" type="button" aria-pressed="false">多模态模型 × Harness</button>
+          <button id="multimodal-harness-filter" type="button" aria-pressed="false">多模态输入 × Harness</button>
         </div>
         <label class="check-field"><input id="conflicts-only" type="checkbox"><span>只看冲突</span></label>
         <button class="export-button" id="download-csv" type="button">导出 CSV</button>
       </div>
 
       <div class="collection-strip" id="collection-strip" hidden>
-        <div><strong>多模态模型 × Harness</strong><span>汇集 QwenClawBench、ClawEval、ALE、Workspace-Bench、SkillsBench、WildClawBench 等厂商报分；要求使用 Claude Code、Codex、Pi、OpenClaw、OpenCode、OpenHands 等具名 Agent Harness，仅写 “with tools” 或裸 API 调用的不纳入。</span></div>
+        <div><strong>多模态输入 × Harness</strong><span>任务必须把图片、音频、视频、屏幕或其他非文本文件交给 Agent，并通过具名 Harness 运行。仅模型支持视觉、仅输出图片或仅用多模态裁判打分都不算；“混合任务集”展示的是整套总分，不是多模态子集分数。</span></div>
         <button id="clear-collection" type="button">清除专题</button>
       </div>
 

@@ -25,8 +25,9 @@ for (const source of data.sources) {
 for (const benchmark of data.benchmarks) {
   if (!new Set(["higher", "lower"]).has(benchmark.direction)) errors.push(`invalid benchmark direction: ${benchmark.id}`);
   if (benchmark.collections?.includes("multimodal-harness")) {
-    if (!new Set(["multimodal", "general", "workspace", "coding"]).has(benchmark.collectionScope)) errors.push(`invalid multimodal-harness scope: ${benchmark.id}`);
+    if (!new Set(["dedicated", "mixed"]).has(benchmark.collectionScope)) errors.push(`invalid multimodal-harness scope: ${benchmark.id}`);
     if (!Array.isArray(benchmark.harnesses) || benchmark.harnesses.length === 0) errors.push(`missing harness names: ${benchmark.id}`);
+    if (!Array.isArray(benchmark.inputModalities) || benchmark.inputModalities.length === 0) errors.push(`missing multimodal inputs: ${benchmark.id}`);
     if (benchmark.collectionMode && !new Set(["benchmark", "observation"]).has(benchmark.collectionMode)) errors.push(`invalid collection mode: ${benchmark.id}`);
   }
 }

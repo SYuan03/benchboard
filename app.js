@@ -6,13 +6,10 @@
   const sourcesById = byId(data.sources);
   const modalityLabels = { language: "纯语言", vision: "视觉语言", omni: "全模态" };
   const collectionScopeLabels = {
-    multimodal: "视觉 / 多模态交付",
-    general: "通用 Agent / Claw",
-    workspace: "工作区 / 专业交付",
-    coding: "编码 / 终端"
+    dedicated: "专门多模态输入",
+    mixed: "混合任务集（含多模态输入）"
   };
-  const collectionScopeOrder = { multimodal: 0, general: 1, workspace: 2, coding: 3 };
-  const namedHarnessPattern = /Claude Code|Codex|\bPi\b|OpenClaw|OpenCode|OpenHands|Gemini CLI|Qwen-Agent|ALE-CLI|ALE-Claw|Hermes|DeepAgent|Terminus|DSH Minimal|mini-SWE|ClawEval/i;
+  const collectionScopeOrder = { dedicated: 0, mixed: 1 };
   const state = {
     tab: "leaderboard",
     selectedBenchmark: "skillsbench-1-1",
@@ -114,7 +111,6 @@
     if (!ignoreCategory && state.category && bench.category !== state.category) return false;
     if (state.collection) {
       if (!(bench.collections || []).includes(state.collection)) return false;
-      if (bench.collectionMode === "observation" && !namedHarnessPattern.test(`${obs.setting} ${obs.note}`)) return false;
     }
     if (!state.search) return true;
     return matchesSearch([bench.name, bench.category, ...(bench.harnesses || []), model.name, model.vendor, obs.setting, obs.note].join(" "), state.search);
@@ -196,7 +192,7 @@
     els.benchCount.textContent = String(available.length);
     els.benchmarkNav.innerHTML = [...groups.entries()].map(([category, items]) => `
       <div class="bench-group-title">${escapeHtml(category)}</div>
-      ${items.map(({ bench, count }) => `<button class="bench-nav-item ${bench.id === state.selectedBenchmark ? "active" : ""}" type="button" data-benchmark="${escapeHtml(bench.id)}"><span class="bench-nav-copy"><span>${escapeHtml(bench.name)}</span>${state.collection ? `<em>${escapeHtml([collectionScopeLabels[bench.collectionScope], ...(bench.harnesses || [])].filter(Boolean).join(" · "))}</em>` : ""}</span><small>${count}</small></button>`).join("")}
+      ${items.map(({ bench, count }) => `<button class="bench-nav-item ${bench.id === state.selectedBenchmark ? "active" : ""}" type="button" data-benchmark="${escapeHtml(bench.id)}"><span class="bench-nav-copy"><span>${escapeHtml(bench.name)}</span>${state.collection ? `<em>${escapeHtml([`输入：${(bench.inputModalities || []).join(" / ")}`, `Harness：${(bench.harnesses || []).join(" / ")}`].join(" · "))}</em>` : ""}</span><small>${count}</small></button>`).join("")}
     `).join("") || `<div class="empty">没有匹配的 Benchmark</div>`;
   }
 
@@ -219,8 +215,9 @@
     const conflictModels = unique(rows.filter((obs) => conflictFor(bench.id, obs.modelId, pool)).map((obs) => obs.modelId));
     const sortLabel = comparable ? (bench.direction === "lower" ? "低分优先" : "高分优先") : "多口径，仅陈列";
     const harnessMeta = (bench.harnesses || []).length ? `<span class="chip harness">Harness · ${escapeHtml(bench.harnesses.join(" / "))}</span>` : "";
+    const inputMeta = (bench.inputModalities || []).length ? `<span class="chip input-modality">输入 · ${escapeHtml(bench.inputModalities.join(" / "))}</span>` : "";
     const scopeMeta = bench.collectionScope ? `<span class="chip collection-scope">${escapeHtml(collectionScopeLabels[bench.collectionScope])}</span>` : "";
-    els.leaderboardHeading.innerHTML = `<div><p class="eyebrow">${escapeHtml(bench.category)}</p><h2>${escapeHtml(bench.name)}</h2><p>${escapeHtml(bench.description)}</p></div><div class="leaderboard-meta">${scopeMeta}${harnessMeta}<span class="chip green">${rows.length} 条成绩</span>${conflictModels.length ? `<span class="chip orange">${conflictModels.length} 个模型多口径</span>` : ""}<span class="chip ${comparable ? "" : "orange"}">${sortLabel}</span></div>`;
+    els.leaderboardHeading.innerHTML = `<div><p class="eyebrow">${escapeHtml(bench.category)}</p><h2>${escapeHtml(bench.name)}</h2><p>${escapeHtml(bench.description)}</p></div><div class="leaderboard-meta">${scopeMeta}${inputMeta}${harnessMeta}<span class="chip green">${rows.length} 条成绩</span>${conflictModels.length ? `<span class="chip orange">${conflictModels.length} 个模型多口径</span>` : ""}<span class="chip ${comparable ? "" : "orange"}">${sortLabel}</span></div>`;
     els.leaderboardTable.innerHTML = `<thead><tr><th class="rank">排名</th><th>模型</th><th>成绩</th><th>模态</th><th>测评设置与备注</th><th>来源</th></tr></thead><tbody>${rows.length ? rows.map((obs, index) => {
       const model = modelsById.get(obs.modelId);
       const conflict = conflictFor(bench.id, model.id, pool);

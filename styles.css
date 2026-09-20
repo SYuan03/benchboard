@@ -95,6 +95,7 @@ input[type="search"]:focus, select:focus { border-color: var(--blue); box-shadow
 .chip.green { color: var(--green); background: var(--green-soft); border-color: #c3e3d7; }
 .chip.harness { color: #3e5577; background: #f1f5fa; border-color: #d5dfe9; }
 .chip.collection-scope { color: #174da8; background: var(--blue-soft); border-color: #c8d9f5; }
+.chip.input-modality { color: #7a4310; background: #fff7e8; border-color: #efd5ad; }
 
 .table-wrap { width: 100%; overflow-x: auto; }
 .leaderboard-wrap, .compare-wrap { max-height: 720px; overflow: auto; }

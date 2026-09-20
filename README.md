@@ -37,7 +37,7 @@ The site has five views:
 
 Use the benchmark list on the left to move between leaderboards. Browser search (`Ctrl+F` or `Cmd+F`) works on the visible list.
 
-The **Multimodal Models × Harness** collection filters that same list to provider-reported evaluations run through a named agent harness such as Claude Code, Codex, Pi, OpenClaw, OpenCode, or OpenHands. Results are grouped into multimodal delivery, general agent/Claw, workspace, and coding/terminal benchmarks. A benchmark can appear even when its tasks are not exclusively visual: the collection tracks how current multimodal models perform as agents, not only visual-question answering. A bare API result or an unspecified “with tools” result is not enough. The filtered view has a shareable URL.
+The **Multimodal Input × Harness** collection requires a named agent harness such as OpenClaw, Claude Code, Codex, OpenCode, or OpenHands and a task that gives the agent an image, audio clip, video, screen, or another non-text file as input. A model's advertised modalities do not determine inclusion. Text-only generation scored by a multimodal judge is excluded. Mixed suites are labeled separately from dedicated multimodal subsets, and the input modalities are shown in the benchmark list. A mixed-suite result is the published score for the full suite, not a score for its multimodal subset. The filtered view has a shareable URL.
 
 ## Run locally
 
