@@ -317,13 +317,16 @@
 
   function renderSources() {
     let sources = [...data.sources];
+    const auditsBySourceId = new Map((data.sourceAudits || []).map((audit) => [audit.sourceId, audit]));
     if (state.search) sources = sources.filter((source) => matchesSearch([source.title, source.publisher].join(" "), state.search));
     sources.sort((a, b) => String(b.date).localeCompare(String(a.date)));
-    els.sourcesTable.innerHTML = `<thead><tr><th>日期</th><th>来源</th><th>发布方</th><th>类型</th><th>引用记录</th></tr></thead><tbody>${sources.length ? sources.map((source) => {
+    els.sourcesTable.innerHTML = `<thead><tr><th>日期</th><th>来源</th><th>发布方</th><th>类型</th><th>覆盖审计</th><th>引用记录</th></tr></thead><tbody>${sources.length ? sources.map((source) => {
       const count = data.observations.filter((obs) => obs.sourceIds.includes(source.id)).length;
       const type = source.kind === "benchmark" ? "Benchmark 官方" : "模型厂商官方";
-      return `<tr><td>${escapeHtml(source.date)}</td><td class="source-title"><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.title)} ↗</a></td><td>${escapeHtml(source.publisher)}</td><td><span class="modality">${type}</span></td><td>${count} 条</td></tr>`;
-    }).join("") : `<tr><td colspan="5" class="empty">没有匹配的来源。</td></tr>`}</tbody>`;
+      const audit = auditsBySourceId.get(source.id);
+      const auditCell = audit?.status === "complete" ? `<span class="audit-complete" title="${escapeHtml(audit.note || "")}">整表已核 · ${audit.benchmarkIds.length} 项 / ${audit.expectedObservationCount} 条</span>` : `<span class="muted">待整表核对</span>`;
+      return `<tr><td>${escapeHtml(source.date)}</td><td class="source-title"><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.title)} ↗</a></td><td>${escapeHtml(source.publisher)}</td><td><span class="modality">${type}</span></td><td>${auditCell}</td><td>${count} 条</td></tr>`;
+    }).join("") : `<tr><td colspan="6" class="empty">没有匹配的来源。</td></tr>`}</tbody>`;
   }
 
   function representativeObservation(items, bench) {

@@ -39,7 +39,7 @@
 
     <section class="notice" aria-label="覆盖范围说明">
       <strong>收录状态</strong>
-      <span>数据仍在补录。已收录 Qwen3.8 / Qwen3.7 Plus 官方表，以及 SkillsBench、PinchBench、RNG-Bench、WildClawBench、QwenClawBench、ClawEval、ALE 和 Workspace-Bench。待补模型会明确标记，不沿用相邻版本成绩。</span>
+      <span>数据仍在补录。Qwen3.8 Omni Flash 的四个结果区块已完成整表核对；其他来源的审计状态可在“来源”页查看。待补模型会明确标记，不沿用相邻版本成绩。</span>
     </section>
 
     <section class="app-shell" aria-label="排行榜数据库">
@@ -59,12 +59,15 @@
         <label><span>厂商</span><select id="vendor-filter"><option value="">全部厂商</option></select></label>
         <label><span>模态</span><select id="modality-filter"><option value="">全部模态</option><option value="language">纯语言</option><option value="vision">视觉语言</option><option value="omni">全模态</option></select></label>
         <label><span>能力域</span><select id="category-filter"><option value="">全部能力域</option></select></label>
-        <div class="collection-filter">
-          <span>专题</span>
-          <button id="multimodal-harness-filter" type="button" aria-pressed="false">多模态输入 × Harness</button>
-        </div>
         <label class="check-field"><input id="conflicts-only" type="checkbox"><span>只看冲突</span></label>
         <button class="export-button" id="download-csv" type="button">导出 CSV</button>
+      </div>
+
+      <div class="topic-bar" aria-label="专题榜单">
+        <span class="topic-label">专题</span>
+        <div class="topic-list">
+          <button id="multimodal-harness-filter" type="button" aria-pressed="false">多模态输入 × Harness</button>
+        </div>
       </div>
 
       <div class="collection-strip" id="collection-strip" hidden>

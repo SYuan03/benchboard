@@ -9,16 +9,18 @@ BenchBoard collects public benchmark results for current language, multimodal, a
 ## Coverage
 
 <!-- DATA_SUMMARY_START -->
-- 34 model releases
-- 68 benchmark families
-- 99 separately ranked metrics and versions
-- 613 deduplicated public results
+- 38 model releases
+- 103 benchmark families
+- 149 separately ranked metrics and versions
+- 912 deduplicated public results
 - 23 primary sources
 <!-- DATA_SUMMARY_END -->
 
 The first release focuses on general, coding, multimodal, and agent models near the frontier in 2026. It includes GPT-6 Astra, GPT-5.6 Sol, Claude 5, Gemini 3.8, DeepSeek V4.1, Qwen3.8, Qwen3.7 Plus, GLM-5.3, Seed2.1, Kimi K3, and Hy4.
 
 All rows from the Coding Agent, General Agent, and General Capabilities tables in the official Qwen3.8 model card are recorded individually. Qwen3.8 Max currently has public results across 45 benchmark families and 51 separately ranked metric or version views. The open-weight `Qwen3.8-2.4T-A95B` language model and the vision-and-tool-enabled Qwen3.8 Max service are listed separately.
+
+The Qwen3.8 Omni Flash release has also been checked table by table. Its Omni, agentic-understanding, Text, and Vision sections account for 302 recorded values across 61 metric or setting views. Blank cells stay blank. The Sources view marks this publication as fully audited and leaves every source that still needs a complete pass clearly labeled.
 
 SkillsBench 1.1, PinchBench v2, WildClawBench, WildClawBench-MM, QwenClawBench, ClawEval, Agents' Last Exam, and Workspace-Bench 1.0 are included. Agent harnesses and settings stay attached to each result when the publisher reports them. Benchmarks appear once in navigation; their versions, subsets, and metrics are switchable inside the benchmark view. PinchBench, for example, keeps Best Success Rate and Average Success Rate as separate rankings under one entry. WildClawBench similarly groups Overall, MM, Elapsed Time, and Total Cost without mixing their units or rankings. WildClawBench-MM includes multimodal agent results such as the official 71.0 score reported for Qwen3.8 Omni Flash.
 
@@ -34,7 +36,7 @@ The site has five views:
 - Compare places two or three models side by side across shared or model-specific benchmarks. It does not combine results into one score.
 - Coverage shows the benchmark-by-model matrix.
 - Models lists versions, aliases, context windows, native modalities, and access types. Opening a model shows all of its recorded results, settings, and sources.
-- Sources shows how many observations each publication supports.
+- Sources shows how many observations each publication supports and whether its full result tables have been checked.
 
 Use the benchmark list on the left to move between leaderboards. Browser search (`Ctrl+F` or `Cmd+F`) works on the visible list.
 
@@ -58,7 +60,7 @@ npm run sync-readme
 npm run audit
 ```
 
-`check` validates IDs, references, missing scores, and mixed units. `sync-readme` refreshes the coverage counts above. `audit` lists models with sparse coverage and benchmarks with few reported participants.
+`check` validates IDs, references, missing scores, mixed units, and completed source audits. `sync-readme` refreshes the coverage counts above. `audit` lists models with sparse coverage and benchmarks with few reported participants.
 
 Pushes to `main` are validated and deployed to GitHub Pages automatically. Pull requests run the same data and README checks.
 
@@ -70,6 +72,7 @@ All records live in `data.js`:
 - `benchmarks` stores normalized names, versions, capability areas, metric direction, and optional collection metadata such as harness and collection scope.
 - `benchmarkFamilies` groups related versions, subsets, and metrics under one navigation entry while preserving separate rankings.
 - `sources` stores original publication pages. Model-provider releases, official benchmark leaderboards, and technical reports are preferred.
+- `sourceAudits` records which source tables have received a complete pass and the exact observation count expected from them.
 - `observations` stores each model, benchmark, score, and evaluation-setting combination.
 
 Confirm both the model release and benchmark version before adding a result. Identical values can share a displayed row while retaining every source and setting. Different values, metrics, units, or harnesses remain separate observations. A model without a published score may be registered with `scoreStatus: "pending"`; an older model's result must not be used in its place.

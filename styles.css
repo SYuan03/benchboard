@@ -55,16 +55,18 @@ h1 { margin: 0; font-size: clamp(28px, 3vw, 38px); line-height: 1.1; letter-spac
 .tab { min-height: 46px; padding: 0 14px; color: var(--muted); background: transparent; border: 0; border-bottom: 2px solid transparent; font-size: 13px; font-weight: 650; white-space: nowrap; }
 .tab:hover { color: var(--text); }
 .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
-.filters { display: grid; grid-template-columns: minmax(230px, 1fr) repeat(3, minmax(120px, .43fr)) minmax(145px, auto) auto auto; gap: 8px; align-items: end; padding: 10px 14px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+.filters { display: grid; grid-template-columns: minmax(230px, 1fr) repeat(3, minmax(120px, .43fr)) auto auto; gap: 8px; align-items: end; padding: 10px 14px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
 .filters label:not(.check-field) > span, .compare-controls label:not(.check-field) > span { display: block; margin-bottom: 4px; color: var(--quiet); font-size: 10px; font-weight: 700; letter-spacing: .04em; }
 input[type="search"], select { width: 100%; height: 34px; padding: 0 9px; color: var(--text); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 6px; outline: none; font-size: 12px; }
 input[type="search"]:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(36,99,235,.1); }
 .check-field { display: flex; min-height: 34px; align-items: center; gap: 7px; color: var(--muted); font-size: 11px; white-space: nowrap; }
 .check-field input { accent-color: var(--blue); }
-.collection-filter > span { display: block; margin-bottom: 4px; color: var(--quiet); font-size: 10px; font-weight: 700; letter-spacing: .04em; }
-.collection-filter button { width: 100%; height: 34px; padding: 0 10px; color: #40536e; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 6px; font-size: 11px; font-weight: 700; white-space: nowrap; }
-.collection-filter button:hover { color: var(--blue); border-color: #aac7ef; }
-.collection-filter button.active { color: #174da8; background: var(--blue-soft); border-color: #9dbcf1; box-shadow: inset 0 0 0 1px rgba(36,99,235,.08); }
+.topic-bar { min-height: 43px; display: flex; align-items: center; gap: 10px; padding: 6px 14px; overflow-x: auto; background: #fbfcfe; border-bottom: 1px solid var(--line); }
+.topic-label { flex: 0 0 auto; color: var(--quiet); font-size: 10px; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+.topic-list { display: flex; gap: 6px; min-width: max-content; }
+.topic-list button { height: 29px; padding: 0 10px; color: #40536e; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.topic-list button:hover { color: var(--blue); border-color: #aac7ef; }
+.topic-list button.active { color: #174da8; background: var(--blue-soft); border-color: #9dbcf1; box-shadow: inset 0 0 0 1px rgba(36,99,235,.08); }
 .export-button { height: 34px; padding: 0 13px; color: #fff; background: var(--blue); border: 0; border-radius: 6px; font-size: 12px; font-weight: 700; }
 .export-button:hover { background: #184fc9; }
 .collection-strip { min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 8px 14px; color: #40536e; background: #f4f8ff; border-bottom: 1px solid #cfddf2; font-size: 10px; }
@@ -152,6 +154,7 @@ input[type="search"]:focus, select:focus { border-color: var(--blue); box-shadow
 .source-title { min-width: 300px; }
 .source-title a { color: var(--text); font-weight: 650; text-decoration: none; }
 .source-title a:hover { color: var(--blue); }
+.audit-complete { display: inline-flex; padding: 3px 7px; color: var(--green); background: var(--green-soft); border: 1px solid #c3e3d7; border-radius: 999px; font-size: 10px; font-weight: 700; white-space: nowrap; }
 
 .compare-controls { display: grid; grid-template-columns: repeat(3, minmax(180px, 1fr)) auto; gap: 10px; align-items: end; padding: 14px 18px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
 .compare-summary { display: flex; flex-wrap: wrap; gap: 8px; min-height: 49px; align-items: center; padding: 9px 18px; border-bottom: 1px solid var(--line); }

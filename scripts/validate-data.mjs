@@ -23,6 +23,22 @@ for (const source of data.sources) {
   if (source.tier !== "official") errors.push(`unexpected source tier: ${source.id} -> ${source.tier}`);
 }
 
+for (const audit of data.sourceAudits || []) {
+  if (!sourceIds.has(audit.sourceId)) errors.push(`audit has missing source: ${audit.sourceId}`);
+  if (audit.status !== "complete") continue;
+  const sourceObservations = data.observations.filter((observation) => observation.sourceIds.includes(audit.sourceId));
+  if (sourceObservations.length !== audit.expectedObservationCount) {
+    errors.push(`source audit count mismatch: ${audit.sourceId} -> expected ${audit.expectedObservationCount}, got ${sourceObservations.length}`);
+  }
+  const observedBenchmarks = new Set(sourceObservations.map((observation) => observation.benchmarkId));
+  for (const benchmarkId of audit.benchmarkIds || []) {
+    if (!observedBenchmarks.has(benchmarkId)) errors.push(`source audit missing benchmark: ${audit.sourceId} -> ${benchmarkId}`);
+  }
+  if (observedBenchmarks.size !== (audit.benchmarkIds || []).length) {
+    errors.push(`source audit benchmark count mismatch: ${audit.sourceId} -> expected ${(audit.benchmarkIds || []).length}, got ${observedBenchmarks.size}`);
+  }
+}
+
 for (const benchmark of data.benchmarks) {
   if (!new Set(["higher", "lower"]).has(benchmark.direction)) errors.push(`invalid benchmark direction: ${benchmark.id}`);
   if (benchmark.collections?.includes("multimodal-harness")) {

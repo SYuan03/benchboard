@@ -31,6 +31,17 @@ window.BENCH_DATA = (() => {
     { id: "claweval", vendorId: "claweval", kind: "benchmark", publisher: "Claw-Eval", date: "2026", tier: "official", title: "Claw-Eval Official Benchmark", url: "https://github.com/claw-eval/claw-eval" }
   ];
 
+  const sourceAudits = [
+    {
+      sourceId: "qwen38-omni",
+      status: "complete",
+      auditedAt: "2026-09-20",
+      expectedObservationCount: 302,
+      benchmarkIds: ["wildclawbench-mm", "uniclawbench", "agenticvbench", "omnigaia", "dailyomni", "worldsense", "avut", "joinavbench", "omnivideobench", "video-mme-v2", "lvomnibench", "omnicloze", "omnicap-if-csr", "omnicap-if-isr", "qivd", "streamingbench", "alimeeting-der", "alimeeting-cpwer", "aishell4-der", "aishell4-cpwer", "magicdata-ramc-der", "magicdata-ramc-cpwer", "mlc-slm-en-der", "mlc-slm-en-cpwer", "wenetspeech-net-wer", "wenetspeech-meeting-wer", "fleurs-asr-wer", "fleurs-s2tt-bleu", "spotsoundbench", "mmau", "mmar", "mmsu", "longaudiospan-accuracy", "longaudiospan-rubric", "longaudiospan-chain", "muchomusic-rul", "hummusqa", "mustbench", "audio-multichallenge", "wildspeech", "voicebench", "deepswe-v1-1", "swe-bench-pro", "swe-multilingual", "nl2repo", "coworkbench", "ifbench", "gpqa-diamond", "hle", "livecodebench-v6", "claweval-mm-pass3", "claweval-mm-average", "androidworld", "vision2web", "erqa", "lvbench", "realworldqa", "mathvision-without-ci", "mathvision-with-ci", "charxiv-rq-without-ci", "charxiv-rq-with-ci"],
+      note: "Omni、Agentic Omni Understanding、Text、Vision 四个结果区块的全部公开数值单元格已录入；空白/-- 不伪造为零。"
+    }
+  ];
+
   const models = [
     { id: "gpt-6-astra", name: "GPT-6 Astra", vendorId: "openai", vendor: "OpenAI", releaseDate: "2026-09-01", modality: "vision", modalityDetail: "文本、图像、屏幕/计算机操作 → 文本", context: "未披露", access: "闭源 API", aliases: ["gpt-6-astra"], sourceId: "openai-astra", summary: "当前 OpenAI 前沿旗舰，突出计算机使用、科学、代码与网络安全。" },
     { id: "gpt-5-6-sol", name: "GPT-5.6 Sol", vendorId: "openai", vendor: "OpenAI", releaseDate: "2026-07-09", modality: "vision", modalityDetail: "文本、图像、屏幕/计算机操作 → 文本", context: "1M 档长上下文评测", access: "闭源 API", aliases: ["gpt-5.6-sol", "GPT-5.6 Sol"], sourceId: "openai-gpt56", summary: "GPT-5.6 家族旗舰，覆盖编码、知识工作、科研和多模态。" },
@@ -54,13 +65,17 @@ window.BENCH_DATA = (() => {
     { id: "qwen3-7-max", name: "Qwen3.7 Max", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-05-21", modality: "vision", modalityDetail: "文本、图像 → 文本；支持主流 Agent Harness", context: "未披露", access: "闭源 API", aliases: ["qwen3.7-max"], sourceId: "qwen37", summary: "Qwen3.7 旗舰 Agent 模型；官方报告了 OpenClaw、Claude Code 与 Hermes 跨 Harness 成绩。" },
     { id: "qwen3-7-plus", name: "Qwen3.7 Plus", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-06-03", modality: "vision", modalityDetail: "文本、图像、视频、屏幕/GUI → 文本与工具调用", context: "未披露", access: "闭源 API", aliases: ["qwen3.7-plus"], sourceId: "qwen37-plus", summary: "面向 GUI、CLI 与多模态交互的 Agent 模型，官方报告 QwenClawBench、ClawEval 与 SkillsBench 等成绩。" },
     { id: "qwen3-8-max-0902", name: "Qwen3.8 Max 0902", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-09-02", modality: "vision", modalityDetail: "文本、图像、长视频 → 文本", context: "1M", access: "API 快照", aliases: ["qwen3.8-max-0902", "qwen3.8-max-2026-09-02"], sourceId: "alibaba-lifecycle", scoreStatus: "pending", summary: "9 月 2 日升级快照；官方尚未披露独立完整 Benchmark 表。" },
-    { id: "qwen3-8-flash", name: "Qwen3.8 Flash", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-08-26", modality: "vision", modalityDetail: "文本、图像、长视频 → 文本", context: "1M", access: "API", aliases: ["qwen3.8-flash"], sourceId: "alibaba-lifecycle", scoreStatus: "pending", summary: "多模态高并发版本，面向编程、Agent 与长上下文。" },
+    { id: "qwen3-8-flash", name: "Qwen3.8 Flash", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-08-26", modality: "vision", modalityDetail: "文本、图像、长视频 → 文本", context: "1M", access: "API", aliases: ["qwen3.8-flash"], sourceId: "qwen38-omni", summary: "多模态高并发版本；Qwen3.8 Omni Flash 发布页提供了完整对照成绩。" },
     { id: "qwen3-8-omni-flash", name: "Qwen3.8 Omni Flash", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-09-18", modality: "omni", modalityDetail: "文本、图像、音频、视频 → 文本", context: "1M", access: "闭源 API", aliases: ["qwen3.8-omni-flash"], sourceId: "qwen38-omni", summary: "Qwen3.8 的原生全模态版本，面向音视频 Agent、编码和长程任务。" },
     { id: "qwen3-5-omni-plus", name: "Qwen3.5 Omni Plus", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026", modality: "omni", modalityDetail: "文本、图像、音频、视频 → 文本", context: "未核实", access: "闭源 API", aliases: ["qwen3.5-omni-plus"], sourceId: "qwen38-omni", summary: "Qwen3.8 Omni Flash 官方发布表中的上一代全模态对照模型。" },
+    { id: "qwen3-8-27b", name: "Qwen3.8 27B", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像、视频 → 文本；以 Qwen 官方表原始标签登记", context: "未核实", access: "未核实", aliases: ["Qwen3.8-27B", "qwen3.8-27b"], sourceId: "qwen38-omni", summary: "Qwen3.8 Omni Flash 官方 Text 与 Vision 表中的 27B 对照模型。" },
+    { id: "deepseek-v4-flash-0731", name: "DeepSeek V4 Flash 0731", vendorId: "deepseek", vendor: "DeepSeek", releaseDate: "2026-07-31", modality: "vision", modalityDetail: "以 Qwen 官方表原始版本标签登记；输入模态待 DeepSeek 一手资料补证", context: "未核实", access: "未核实", aliases: ["DeepSeek-V4-Flash-0731"], sourceId: "qwen38-omni", summary: "Qwen3.8 Omni Flash 官方 Text 表中的 DeepSeek 对照快照；不与 V4.1 Flash 合并。" },
+    { id: "claude-opus-4-6-max", name: "Claude Opus 4.6 Max", vendorId: "anthropic", vendor: "Anthropic", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像 → 文本；以 Qwen 官方表原始 Max 标签登记", context: "未核实", access: "闭源 API", aliases: ["Claude-Opus-4.6 (Max)"], sourceId: "qwen38-omni", summary: "Qwen3.8 Omni Flash 官方 Text 与 Vision 表中的 Max-effort 对照。" },
+    { id: "muse-spark-1-2", name: "Muse Spark 1.2", vendorId: "muse", vendor: "Muse", releaseDate: "2026", modality: "omni", modalityDetail: "官方对照表覆盖音频和音视频输入；发布方待补一手模型卡", context: "未核实", access: "未核实", aliases: ["Muse Spark 1.2"], sourceId: "qwen38-omni", summary: "Qwen3.8 Omni Flash 官方 Omni 表中的对照模型；厂商归属暂不推断。" },
     { id: "qwen3-5-397b", name: "Qwen3.5-397B", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像 → 文本；RNGBench 官方主榜使用的精确模型名", context: "未核实", access: "具体快照未核实", aliases: ["Qwen3.5-397B", "qwen3.5-397b"], sourceId: "rngbench", summary: "RNG-Bench 官方主榜中的多模态对照模型；保留其原始版本标签。" },
     { id: "glm-5-3", name: "GLM-5.3", vendorId: "zai", vendor: "Z.ai", releaseDate: "2026-08-14", modality: "language", modalityDetail: "文本 → 文本", context: "1M", access: "开放权重 / API", aliases: ["glm-5.3"], sourceId: "zai-glm53", summary: "纯语言长程 Agent 旗舰，突出编码与网络安全。" },
     { id: "glm-5-3-flash", name: "GLM-5.3 Flash", vendorId: "zai", vendor: "Z.ai", releaseDate: "2026-08-26", modality: "vision", modalityDetail: "文本、图像、视频、文件 → 文本", context: "1M", access: "开放权重 / API", aliases: ["glm-5.3-flash", "ox-alpha"], sourceId: "zai-glm53-flash", summary: "GLM-5 系列首个原生多模态模型，320B/18B active。" },
-    { id: "seed2-0-lite", name: "Seed-2.0-Lite", vendorId: "bytedance", vendor: "ByteDance Seed", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像 → 文本；RNGBench 官方主榜使用的精确模型名", context: "未核实", access: "API", aliases: ["Seed-2.0-Lite", "seed-2.0-lite"], sourceId: "rngbench", summary: "RNG-Bench 官方主榜中的多模态对照模型；与 Seed2.1 系列分开保存。" },
+    { id: "seed2-0-lite", name: "Seed-2.0-Lite", vendorId: "bytedance", vendor: "ByteDance Seed", releaseDate: "2026", modality: "omni", modalityDetail: "文本、图像、音频、视频 → 文本；Qwen 对照表直接报告音频与音视频输入结果", context: "未核实", access: "API", aliases: ["Seed-2.0-Lite", "seed-2.0-lite"], sourceId: "rngbench", summary: "RNG-Bench 与 Qwen3.8 Omni 官方表中的全模态对照模型；与 Seed2.1 系列分开保存。" },
     { id: "seed2-1-pro", name: "Seed2.1 Pro", vendorId: "bytedance", vendor: "ByteDance Seed", releaseDate: "2026-06-23", modality: "vision", modalityDetail: "文本、图像、视频 → 文本", context: "128K+ 多模态长上下文评测", access: "闭源 API", aliases: ["seed2.1-pro", "Doubao Seed 2.1 Pro"], sourceId: "seed21", summary: "面向现实生产力、编码交付和视觉/视频理解的 Pro 版本。" },
     { id: "seed2-1-turbo", name: "Seed2.1 Turbo", vendorId: "bytedance", vendor: "ByteDance Seed", releaseDate: "2026-06-23", modality: "vision", modalityDetail: "文本、图像、视频 → 文本", context: "128K+ 多模态长上下文评测", access: "闭源 API", aliases: ["seed2.1-turbo", "Doubao Seed 2.1 Turbo"], sourceId: "seed21", summary: "Seed2.1 家族效率版本，保留 Agent、编码和多模态能力。" },
     { id: "kimi-k2-5", name: "Kimi-K2.5", vendorId: "moonshot", vendor: "Moonshot AI", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像 → 文本；RNGBench 官方主榜使用的精确模型名", context: "未核实", access: "具体快照未核实", aliases: ["Kimi-K2.5", "kimi-k2.5"], sourceId: "rngbench", summary: "RNG-Bench 官方主榜中的多模态对照模型；与 Kimi K3 分开保存。" },
@@ -69,8 +84,8 @@ window.BENCH_DATA = (() => {
   ];
 
   const benchmarks = [
-    { id: "agents-last-exam-pass", name: "Agents' Last Exam · Pass Rate", category: "Agent / 工作", direction: "higher", description: "跨专业长程工作流的任务通过率；完整 Agent 在沙箱中执行。当前公开报分未证明输入侧包含非文本模态，因此不进入多模态输入专题。" },
-    { id: "agents-last-exam-score", name: "Agents' Last Exam · Overall Score", category: "Agent / 工作", direction: "higher", description: "跨专业长程工作流的总体得分；与 Pass Rate 分榜展示。当前公开报分未证明输入侧包含非文本模态。" },
+    { id: "agents-last-exam-pass", name: "Agents' Last Exam · Pass Rate", category: "Agent / 工作", direction: "higher", description: "混合任务集。ALE 官方公开任务包含视频+DOCX、MP3、荧光 TIFF 等输入，并通过 Claude Code、Codex、OpenClaw 或 ALE-Claw 执行。", collections: ["multimodal-harness"], collectionScope: "mixed", collectionMode: "benchmark", harnesses: ["Claude Code", "Codex", "OpenClaw", "ALE-Claw"], inputModalities: ["图片", "音频", "视频", "文档", "屏幕"] },
+    { id: "agents-last-exam-score", name: "Agents' Last Exam · Overall Score", category: "Agent / 工作", direction: "higher", description: "ALE 总体得分；与 Pass Rate 分榜。官方公开任务证实任务输入含图片、音频、视频与文档。", collections: ["multimodal-harness"], collectionScope: "mixed", collectionMode: "benchmark", harnesses: ["Claude Code", "Codex", "OpenClaw", "ALE-Claw"], inputModalities: ["图片", "音频", "视频", "文档", "屏幕"] },
     { id: "automationbench", name: "AutomationBench", category: "Agent / 工作", direction: "higher", description: "真实自动化工作流；版本与 Harness 差异会显著影响分数。" },
     { id: "gdpval-aa-v2", name: "GDPval-AA v2", category: "Agent / 工作", direction: "higher", description: "高经济价值知识工作，常报告 Elo。" },
     { id: "toolathlon", name: "Toolathlon Verified", category: "Agent / 工作", direction: "higher", description: "工具调用与长程 Agent 能力。" },
@@ -115,6 +130,56 @@ window.BENCH_DATA = (() => {
     { id: "worldvqa", name: "WorldVQA", category: "多模态", direction: "higher", description: "视觉世界知识。" },
     { id: "erqa", name: "ERQA", category: "多模态", direction: "higher", description: "空间推理。" },
     { id: "mathvision", name: "MathVision", category: "多模态", direction: "higher", description: "视觉数学推理；工具设置需注明。" },
+    { id: "mathvision-without-ci", name: "MathVision · Without CI", category: "多模态", direction: "higher", description: "Qwen3.8 Omni 官方视觉表的无 Code Interpreter 口径。" },
+    { id: "mathvision-with-ci", name: "MathVision · With CI", category: "多模态", direction: "higher", description: "Qwen3.8 Omni 官方视觉表的 Code Interpreter 口径。" },
+    { id: "charxiv-rq-without-ci", name: "CharXiv (RQ) · Without CI", category: "多模态", direction: "higher", description: "科学图表推理；无 Code Interpreter。" },
+    { id: "charxiv-rq-with-ci", name: "CharXiv (RQ) · With CI", category: "多模态", direction: "higher", description: "科学图表推理；使用 Code Interpreter。" },
+    { id: "uniclawbench", name: "UniClawBench", category: "Agent / 工作", direction: "higher", description: "专门的多模态 Agent 基准；官方含 80 个中英文多模态任务，Qwen 表使用 OpenClaw。", collections: ["multimodal-harness"], collectionScope: "dedicated", collectionMode: "benchmark", harnesses: ["OpenClaw"], inputModalities: ["图片", "音频", "视频", "文件", "屏幕"] },
+    { id: "agenticvbench", name: "AgenticVBench", category: "Agent / 工作", direction: "higher", description: "多模态工具使用基准；Qwen 官方表明确使用 Claude Code。", collections: ["multimodal-harness"], collectionScope: "dedicated", collectionMode: "benchmark", harnesses: ["Claude Code"], inputModalities: ["视频", "音频", "图片"] },
+    { id: "omnigaia", name: "OmniGAIA", category: "Agent / 工作", direction: "higher", description: "音视频 Web Search Agent 评测；Qwen 官方明确注明不使用 Harness，因此不进入多模态输入 × Harness 专题。" },
+    { id: "dailyomni", name: "DailyOmni", category: "多模态", direction: "higher", description: "日常场景音视频理解。" },
+    { id: "worldsense", name: "WorldSense", category: "多模态", direction: "higher", description: "音视频世界理解。" },
+    { id: "avut", name: "AVUT", category: "多模态", direction: "higher", description: "音视频理解。" },
+    { id: "joinavbench", name: "JoinAVBench", category: "多模态", direction: "higher", description: "联合音视频理解；名称按 Qwen 官方表原文保存。" },
+    { id: "omnivideobench", name: "OmniVideoBench", category: "多模态", direction: "higher", description: "音视频推理；Static 与 Qwen Code Agent 设置分别保留。" },
+    { id: "video-mme-v2", name: "Video-MME-v2", category: "多模态", direction: "higher", description: "音视频推理；Static 与 Qwen Code Agent 设置分别保留。" },
+    { id: "lvomnibench", name: "LVOmniBench", category: "多模态", direction: "higher", description: "长视频推理；Static 与 Qwen Code Agent 设置分别保留。" },
+    { id: "omnicloze", name: "OmniCloze", category: "多模态", direction: "higher", description: "音视频描述与完形能力。" },
+    { id: "omnicap-if-csr", name: "OmniCap-IF · CSR", category: "多模态", direction: "higher", description: "音视频指令描述的 CSR 口径。" },
+    { id: "omnicap-if-isr", name: "OmniCap-IF · ISR", category: "多模态", direction: "higher", description: "音视频指令描述的 ISR 口径。" },
+    { id: "qivd", name: "QIVD", category: "多模态", direction: "higher", description: "音视频交互。" },
+    { id: "streamingbench", name: "StreamingBench", category: "多模态", direction: "higher", description: "流式音视频交互。" },
+    { id: "alimeeting-der", name: "AliMeeting Test · DER", category: "音频", direction: "lower", description: "多说话人 ASR 的 diarization error rate；越低越好。" },
+    { id: "alimeeting-cpwer", name: "AliMeeting Test · cpWER", category: "音频", direction: "lower", description: "多说话人 ASR 的 cpWER；越低越好。" },
+    { id: "aishell4-der", name: "AISHELL-4 · DER", category: "音频", direction: "lower", description: "多说话人 ASR 的 DER；越低越好。" },
+    { id: "aishell4-cpwer", name: "AISHELL-4 · cpWER", category: "音频", direction: "lower", description: "多说话人 ASR 的 cpWER；越低越好。" },
+    { id: "magicdata-ramc-der", name: "MagicData-RAMC · DER", category: "音频", direction: "lower", description: "多说话人 ASR 的 DER；越低越好。" },
+    { id: "magicdata-ramc-cpwer", name: "MagicData-RAMC · cpWER", category: "音频", direction: "lower", description: "多说话人 ASR 的 cpWER；越低越好。" },
+    { id: "mlc-slm-en-der", name: "MLC-SLM (en) · DER", category: "音频", direction: "lower", description: "英文多说话人 ASR 的 DER；越低越好。" },
+    { id: "mlc-slm-en-cpwer", name: "MLC-SLM (en) · cpWER", category: "音频", direction: "lower", description: "英文多说话人 ASR 的 cpWER；越低越好。" },
+    { id: "wenetspeech-net-wer", name: "WenetSpeech · Net WER", category: "音频", direction: "lower", description: "网络语音识别 WER；越低越好。" },
+    { id: "wenetspeech-meeting-wer", name: "WenetSpeech · Meeting WER", category: "音频", direction: "lower", description: "会议语音识别 WER；越低越好。" },
+    { id: "fleurs-asr-wer", name: "FLEURS-60 · ASR WER", category: "音频", direction: "lower", description: "60 语种 ASR WER；越低越好。" },
+    { id: "fleurs-s2tt-bleu", name: "FLEURS-60 · S2TT BLEU", category: "音频", direction: "higher", description: "60 语种语音到文本翻译 BLEU。" },
+    { id: "spotsoundbench", name: "SpotSoundBench", category: "音频", direction: "higher", description: "音频定位。" },
+    { id: "mmau", name: "MMAU", category: "音频", direction: "higher", description: "音频理解。" },
+    { id: "mmar", name: "MMAR", category: "音频", direction: "higher", description: "音频理解。" },
+    { id: "mmsu", name: "MMSU", category: "音频", direction: "higher", description: "音频理解。" },
+    { id: "longaudiospan-accuracy", name: "LongAudioSpan · Accuracy", category: "音频", direction: "higher", description: "长音频推理准确率。" },
+    { id: "longaudiospan-rubric", name: "LongAudioSpan · Rubric", category: "音频", direction: "higher", description: "长音频推理 rubric 得分。" },
+    { id: "longaudiospan-chain", name: "LongAudioSpan · Chain", category: "音频", direction: "higher", description: "长音频推理 chain 得分。" },
+    { id: "muchomusic-rul", name: "MuchoMusic-RUL", category: "音频", direction: "higher", description: "音乐理解。" },
+    { id: "hummusqa", name: "HumMusQA", category: "音频", direction: "higher", description: "音乐理解问答。" },
+    { id: "mustbench", name: "MusTBench", category: "音频", direction: "higher", description: "音乐理解。" },
+    { id: "audio-multichallenge", name: "Audio MultiChallenge", category: "音频", direction: "higher", description: "音频交互。" },
+    { id: "wildspeech", name: "WildSpeech", category: "音频", direction: "higher", description: "开放场景语音交互。" },
+    { id: "voicebench", name: "VoiceBench", category: "音频", direction: "higher", description: "语音交互。" },
+    { id: "livecodebench-v6", name: "LiveCodeBench v6", category: "编码", direction: "higher", description: "竞争性编程。" },
+    { id: "claweval-mm-pass3", name: "ClawEval-MM · Pass@3", category: "Agent / 工作", direction: "higher", description: "ClawEval 独立 multimodal split；101 个任务含网页生成、视频问答和文档抽取，官方将 Claw-Eval 定义为 evaluation harness。", collections: ["multimodal-harness"], collectionScope: "dedicated", collectionMode: "benchmark", harnesses: ["Claw-Eval"], inputModalities: ["图片", "视频", "文档", "网页"] },
+    { id: "claweval-mm-average", name: "ClawEval-MM · Average", category: "Agent / 工作", direction: "higher", description: "ClawEval multimodal split 三次运行的平均分；与 Pass@3 分榜。", collections: ["multimodal-harness"], collectionScope: "dedicated", collectionMode: "benchmark", harnesses: ["Claw-Eval"], inputModalities: ["图片", "视频", "文档", "网页"] },
+    { id: "androidworld", name: "AndroidWorld", category: "计算机操作", direction: "higher", description: "移动设备操作。" },
+    { id: "vision2web", name: "Vision2Web", category: "计算机操作", direction: "higher", description: "视觉网页开发；Qwen 表使用 Claude Code，并由 gpt-5.4-2026-03-05 评判。" },
+    { id: "realworldqa", name: "RealWorldQA", category: "多模态", direction: "higher", description: "真实世界视觉感知。" },
     { id: "rngbench-matching-pf", name: "RNG-Bench · Matching Pairs Parse Failure", category: "多模态", direction: "lower", description: "10×10 图像棋盘、noise theme 的解析失败率；数值越低越好。" },
     { id: "rngbench-matching-ia", name: "RNG-Bench · Matching Pairs Invalid Action", category: "多模态", direction: "lower", description: "10×10 图像棋盘、noise theme 的无效动作率；数值越低越好。" },
     { id: "rngbench-matching-responses", name: "RNG-Bench · Matching Pairs Responses per Score", category: "多模态", direction: "lower", description: "10×10 图像棋盘、noise theme 中每成功匹配一对卡牌所需的响应数；数值越低越好。" },
@@ -161,11 +226,11 @@ window.BENCH_DATA = (() => {
     { id: "prbench-legal", name: "PRBench-Legal", category: "专业工作", direction: "higher", description: "法律专业研究与交付任务。" },
     { id: "prbench-finance", name: "PRBench-Finance", category: "专业工作", direction: "higher", description: "金融专业研究与交付任务。" },
     { id: "qwenclawbench", name: "QwenClawBench · Qwen3.7 Snapshot", category: "Agent / 工作", direction: "higher", description: "Qwen 官方发布时的 Claw Agent 快照未写明多模态输入；后续开源 v1.1 的任务元数据标注为 text-only，因此不推断该快照属于多模态输入测试。" },
-    { id: "claweval", name: "ClawEval", category: "Agent / 工作", direction: "higher", description: "Qwen3.7 Plus 官方表报告该项成绩，但将其列在 Text Benchmarks 中；在无法确认该成绩对应含多模态输入的 v1.1 版本前，不进入专题。" },
+    { id: "claweval", name: "ClawEval · General/Unspecified", category: "Agent / 工作", direction: "higher", description: "Qwen3.7 Plus 的旧分数未注明 general 或 multimodal split，暂不与 ClawEval-MM 混排。" },
     { id: "wildclawbench-overall", name: "WildClawBench · Overall", category: "Agent / 工作", direction: "higher", description: "混合任务集。完整 60 题包含要求处理视频、音频与图像素材的输入任务；与纯文本和 MM 子榜并列发布。", collections: ["multimodal-harness"], collectionScope: "mixed", collectionMode: "benchmark", harnesses: ["OpenClaw"], inputModalities: ["图片", "音频", "视频"] },
     { id: "wildclawbench-time", name: "WildClawBench · Elapsed Time", category: "Agent / 工作", direction: "lower", description: "OpenClaw 完整 60 题的总用时，单位为分钟；数值越低越好。" },
     { id: "wildclawbench-cost", name: "WildClawBench · Total Cost", category: "Agent / 工作", direction: "lower", description: "OpenClaw 完整 60 题的总成本，单位为美元；数值越低越好。" },
-    { id: "wildclawbench-mm", name: "WildClawBench-MM", category: "Agent / 工作", direction: "higher", description: "专门多模态输入子榜，通过 OpenClaw 评估要求处理图像、音频与视频素材的任务。与 Overall 分开排名。", collections: ["multimodal-harness"], collectionScope: "dedicated", collectionMode: "benchmark", harnesses: ["OpenClaw"], inputModalities: ["图片", "音频", "视频"] },
+    { id: "wildclawbench-mm", name: "WildClawBench-MM", category: "Agent / 工作", direction: "higher", description: "专门多模态输入子榜；官方榜使用 OpenClaw，Qwen3.8 Omni 发布表明确使用 Claude Code。", collections: ["multimodal-harness"], collectionScope: "dedicated", collectionMode: "benchmark", harnesses: ["OpenClaw", "Claude Code"], inputModalities: ["图片", "音频", "视频"] },
     { id: "pinchbench-v2-best", name: "PinchBench v2 · Best Success Rate", category: "Agent / 工作", direction: "higher", description: "混合任务集。官方任务清单含直接读取三个 JPG 文件并分类的输入任务，也含视频处理任务；与平均成功率分榜。", collections: ["multimodal-harness"], collectionScope: "mixed", collectionMode: "benchmark", harnesses: ["OpenClaw"], inputModalities: ["图片", "视频任务"] },
     { id: "pinchbench-v2-average", name: "PinchBench v2 · Average Success Rate", category: "Agent / 工作", direction: "higher", description: "混合任务集。官方任务清单含图片识别和视频处理输入；页面徽标显示 147 tasks、620 runs，v2.0.0 release notes 写 148 tasks，两个官方口径均保留。", collections: ["multimodal-harness"], collectionScope: "mixed", collectionMode: "benchmark", harnesses: ["OpenClaw"], inputModalities: ["图片", "视频任务"] }
   ];
@@ -238,6 +303,54 @@ window.BENCH_DATA = (() => {
     { id: "prbench", name: "PRBench", variants: [
       { benchmarkId: "prbench-legal", label: "Legal" },
       { benchmarkId: "prbench-finance", label: "Finance" }
+    ] },
+    { id: "claweval-family", name: "ClawEval", variants: [
+      { benchmarkId: "claweval", label: "General / Unspecified" },
+      { benchmarkId: "claweval-mm-pass3", label: "MM · Pass@3" },
+      { benchmarkId: "claweval-mm-average", label: "MM · Average" }
+    ] },
+    { id: "omnicap-if", name: "OmniCap-IF", variants: [
+      { benchmarkId: "omnicap-if-csr", label: "CSR" },
+      { benchmarkId: "omnicap-if-isr", label: "ISR" }
+    ] },
+    { id: "alimeeting", name: "AliMeeting Test", variants: [
+      { benchmarkId: "alimeeting-der", label: "DER" },
+      { benchmarkId: "alimeeting-cpwer", label: "cpWER" }
+    ] },
+    { id: "aishell4", name: "AISHELL-4", variants: [
+      { benchmarkId: "aishell4-der", label: "DER" },
+      { benchmarkId: "aishell4-cpwer", label: "cpWER" }
+    ] },
+    { id: "magicdata-ramc", name: "MagicData-RAMC", variants: [
+      { benchmarkId: "magicdata-ramc-der", label: "DER" },
+      { benchmarkId: "magicdata-ramc-cpwer", label: "cpWER" }
+    ] },
+    { id: "mlc-slm-en", name: "MLC-SLM (en)", variants: [
+      { benchmarkId: "mlc-slm-en-der", label: "DER" },
+      { benchmarkId: "mlc-slm-en-cpwer", label: "cpWER" }
+    ] },
+    { id: "wenetspeech", name: "WenetSpeech", variants: [
+      { benchmarkId: "wenetspeech-net-wer", label: "Net · WER" },
+      { benchmarkId: "wenetspeech-meeting-wer", label: "Meeting · WER" }
+    ] },
+    { id: "fleurs", name: "FLEURS-60", variants: [
+      { benchmarkId: "fleurs-asr-wer", label: "ASR · WER" },
+      { benchmarkId: "fleurs-s2tt-bleu", label: "S2TT · BLEU" }
+    ] },
+    { id: "longaudiospan", name: "LongAudioSpan", variants: [
+      { benchmarkId: "longaudiospan-accuracy", label: "Accuracy" },
+      { benchmarkId: "longaudiospan-rubric", label: "Rubric" },
+      { benchmarkId: "longaudiospan-chain", label: "Chain" }
+    ] },
+    { id: "mathvision-family", name: "MathVision", variants: [
+      { benchmarkId: "mathvision", label: "Earlier / Composite" },
+      { benchmarkId: "mathvision-without-ci", label: "Without CI" },
+      { benchmarkId: "mathvision-with-ci", label: "With CI" }
+    ] },
+    { id: "charxiv-family", name: "CharXiv", variants: [
+      { benchmarkId: "charxiv", label: "Earlier / Reasoning" },
+      { benchmarkId: "charxiv-rq-without-ci", label: "RQ · Without CI" },
+      { benchmarkId: "charxiv-rq-with-ci", label: "RQ · With CI" }
     ] },
     { id: "wildclawbench", name: "WildClawBench", variants: [
       { benchmarkId: "wildclawbench-overall", label: "Overall" },
@@ -589,9 +702,84 @@ window.BENCH_DATA = (() => {
     ["deepseek-v4-pro", 12.00], ["gemini-3-1-pro", 18.00], ["qwen3-5-397b", 22.20], ["kimi-k2-5", 6.60]
   ], "USD", "OpenClaw · 完整60题总成本");
 
-  batch(["qwen38-omni"], "wildclawbench-mm", [
-    ["qwen3-8-omni-flash", 71.0], ["gemini-3-8-flash", 58.9], ["qwen3-5-omni-plus", 34.5]
-  ], "%", "Qwen3.8 Omni Flash 官方发布表");
+  // Qwen3.8 Omni Flash official release: every reported numeric cell from
+  // the Omni, agentic-understanding, Text, and Vision result tables.
+  const omniModels = ["qwen3-8-omni-flash", "qwen3-5-omni-plus", "gemini-3-8-flash", "seed2-0-lite", "muse-spark-1-2"];
+  const textModels = ["qwen3-8-omni-flash", "qwen3-8-flash", "qwen3-8-27b", "qwen3-7-plus", "deepseek-v4-flash-0731", "claude-opus-4-6-max"];
+  const visionModels = ["qwen3-8-omni-flash", "qwen3-8-flash", "qwen3-8-27b", "qwen3-7-plus", "claude-opus-4-6-max"];
+  const sourceTable = (benchmarkId, modelIds, values, unit = "%", setting = "Qwen3.8 Omni Flash 官方发布表") => {
+    values.forEach((value, index) => {
+      if (value !== null) add(["qwen38-omni"], benchmarkId, modelIds[index], value, unit, setting);
+    });
+  };
+
+  sourceTable("wildclawbench-mm", omniModels, [71.0, 34.5, 58.9, 41.9, null], "%", "多模态任务子集 · Claude Code");
+  sourceTable("uniclawbench", omniModels, [69.6, 67.1, 69.0, 61.2, null], "%", "多模态工具使用 · OpenClaw");
+  sourceTable("agenticvbench", omniModels, [36.8, 14.5, 45.0, 10.0, null], "%", "多模态工具使用 · Claude Code");
+  sourceTable("omnigaia", omniModels, [74.0, 57.2, 78.6, 64.4, null], "%", "Web Search · 无 Harness");
+  sourceTable("dailyomni", omniModels, [85.1, 85.1, 84.0, 81.4, 79.6]);
+  sourceTable("worldsense", omniModels, [68.5, 63.9, 69.6, 67.3, 65.0]);
+  sourceTable("avut", omniModels, [86.6, 85.9, 88.0, 81.5, 82.4]);
+  sourceTable("joinavbench", omniModels, [75.9, 74.1, 70.4, 70.6, 71.8]);
+  sourceTable("omnivideobench", omniModels, [63.4, 53.8, 65.2, 58.5, 62.2], "%", "Static");
+  sourceTable("video-mme-v2", omniModels, [65.0, 47.9, 71.0, 64.9, null], "%", "Static");
+  sourceTable("lvomnibench", omniModels, [63.3, 53.2, 70.7, null, null], "%", "Static");
+  sourceTable("omnicloze", omniModels, [63.2, 64.2, 60.9, 56.3, 65.3]);
+  sourceTable("omnicap-if-csr", omniModels, [80.6, 72.1, 81.9, 74.6, 77.9]);
+  sourceTable("omnicap-if-isr", omniModels, [28.2, 14.1, 28.3, 18.1, 26.8]);
+  sourceTable("qivd", omniModels, [69.6, 65.6, 69.1, 62.0, 62.0]);
+  sourceTable("streamingbench", omniModels, [80.8, 57.1, 79.9, 77.2, 77.8]);
+  sourceTable("alimeeting-der", omniModels, [3.4, 88.1, 72.6, 75.1, 93.7]);
+  sourceTable("alimeeting-cpwer", omniModels, [17.2, 89.6, 53.1, 76.1, 92.7]);
+  sourceTable("aishell4-der", omniModels, [2.8, 100.0, 66.4, 64.8, 91.3]);
+  sourceTable("aishell4-cpwer", omniModels, [11.2, 100.0, 56.9, 64.2, 86.0]);
+  sourceTable("magicdata-ramc-der", omniModels, [5.7, 98.4, 67.9, 43.4, 82.1]);
+  sourceTable("magicdata-ramc-cpwer", omniModels, [14.1, 97.1, 33.8, 35.1, 75.3]);
+  sourceTable("mlc-slm-en-der", omniModels, [4.0, 68.6, 60.8, 40.4, 74.3]);
+  sourceTable("mlc-slm-en-cpwer", omniModels, [14.2, 63.9, 26.6, 45.5, 52.9]);
+  sourceTable("wenetspeech-net-wer", omniModels, [4.8, 3.7, 14.2, 4.3, 68.2]);
+  sourceTable("wenetspeech-meeting-wer", omniModels, [4.6, 4.8, 16.7, 4.7, 42.6]);
+  sourceTable("fleurs-asr-wer", omniModels, [9.3, 7.2, 7.9, 32.1, 23.6]);
+  sourceTable("fleurs-s2tt-bleu", omniModels, [31.8, 32.2, 33.0, 24.8, 28.8]);
+  sourceTable("spotsoundbench", omniModels, [67.2, 64.2, 39.7, 59.6, 16.9]);
+  sourceTable("mmau", omniModels, [81.8, 81.9, 76.9, 77.2, 63.5]);
+  sourceTable("mmar", omniModels, [79.8, 79.8, 78.5, 77.7, 67.3]);
+  sourceTable("mmsu", omniModels, [82.1, 83.0, 83.3, 80.2, 59.9]);
+  sourceTable("longaudiospan-accuracy", omniModels, [82.7, 74.4, 79.3, null, null]);
+  sourceTable("longaudiospan-rubric", omniModels, [71.8, 49.8, 65.5, null, null]);
+  sourceTable("longaudiospan-chain", omniModels, [48.2, 45.1, 64.6, null, null]);
+  sourceTable("muchomusic-rul", omniModels, [72.6, 71.6, 53.7, 61.7, 40.1]);
+  sourceTable("hummusqa", omniModels, [75.8, 75.5, 71.2, 66.0, 63.3]);
+  sourceTable("mustbench", omniModels, [50.6, 49.1, 40.3, 44.0, 29.4]);
+  sourceTable("audio-multichallenge", omniModels, [71.5, 57.6, 71.9, 63.4, 57.9]);
+  sourceTable("wildspeech", omniModels, [74.3, 75.7, 76.4, 74.5, 73.4]);
+  sourceTable("voicebench", omniModels, [91.6, 92.9, 92.3, 84.1, 79.8]);
+
+  sourceTable("omnivideobench", ["qwen3-8-omni-flash", "gemini-3-8-flash"], [67.8, 70.1], "%", "Agent mode · Qwen Code");
+  sourceTable("video-mme-v2", ["qwen3-8-omni-flash", "gemini-3-8-flash"], [71.3, 72.7], "%", "Agent mode · Qwen Code");
+  sourceTable("lvomnibench", ["qwen3-8-omni-flash", "gemini-3-8-flash"], [73.6, 70.7], "%", "Agent mode · Qwen Code");
+
+  sourceTable("deepswe-v1-1", textModels, [57.8, 58.7, 42.2, 16.5, 54.4, null], "%", "Claude Code / mini-SWE-agent 取较高值 · temp 1.0 · top_p 0.95 · 256K");
+  sourceTable("swe-bench-pro", textModels, [63.3, 62.5, 61.7, 55.8, 56.0, 53.4], "%", "Claude Code · temp 1.0 · top_p 0.95 · 256K · refined tasks；Claude 对照为官方值");
+  sourceTable("swe-multilingual", textModels, [80.5, 81.0, 73.8, 75.8, null, 77.5], "%", "mini-SWE-agent · temp 1.0 · top_p 0.95 · 256K");
+  sourceTable("nl2repo", textModels, [48.9, 48.1, 42.3, 41.1, 54.2, 47.6], "%", "Claude Code · 禁止访问目标仓库的 Bash 命令");
+  sourceTable("coworkbench", textModels, [75.3, 73.9, 70.7, 65.1, 45.1, 68.2], "%", "Qwen 内部长程办公与生产力任务");
+  sourceTable("ifbench", textModels, [81.5, 81.3, 79.5, 79.1, 79.2, 62.5]);
+  sourceTable("gpqa-diamond", textModels, [91.0, 91.7, 89.2, 90.3, 90.8, 91.3]);
+  sourceTable("hle", textModels, [36.5, 35.9, 30.8, 34.7, 33.8, 40.0], "%", "GPT-4o judge");
+  sourceTable("livecodebench-v6", textModels, [92.6, 91.9, 90.3, 89.6, 90.6, 88.8]);
+
+  sourceTable("claweval-mm-pass3", visionModels, [60.4, 64.4, 57.4, 57.4, 52.5], "%", "ClawEval multimodal split · 三次运行中至少一次通过");
+  sourceTable("claweval-mm-average", visionModels, [61.9, 60.4, 56.9, 60.1, 54.7], "%", "ClawEval multimodal split · 三次运行平均分");
+  sourceTable("androidworld", visionModels, [87.1, 84.5, 81.9, 81.0, 62.0]);
+  sourceTable("vision2web", visionModels, [62.9, 64.0, 62.9, 42.1, null], "%", "Frontend/Webpage/Website 平均 · Claude Code · gpt-5.4-2026-03-05 judge");
+  sourceTable("erqa", visionModels, [71.0, 72.3, 65.5, 69.8, 40.8]);
+  sourceTable("lvbench", visionModels, [76.9, 76.6, 72.4, 76.2, 63.0]);
+  sourceTable("realworldqa", visionModels, [87.7, 88.5, 85.9, 86.9, 73.9]);
+  sourceTable("mathvision-without-ci", visionModels, [91.8, 90.6, 90.0, 90.3, 65.5], "%", "Without Code Interpreter · Qwen 固定 boxed prompt；其他模型取有/无 boxed 较高值");
+  sourceTable("mathvision-with-ci", visionModels, [96.2, 95.7, 94.6, 88.4, null], "%", "With Code Interpreter");
+  sourceTable("charxiv-rq-without-ci", visionModels, [83.5, 84.6, 83.7, 85.8, 66.0], "%", "RQ · Without Code Interpreter");
+  sourceTable("charxiv-rq-with-ci", visionModels, [91.4, 90.6, 90.2, 85.9, null], "%", "RQ · With Code Interpreter");
 
   batch(["pinchbench-v2"], "pinchbench-v2-best", [
     ["claude-opus-4-8-fast", 94.5], ["qwen3-7-max", 93.4], ["claude-opus-4-8", 91.8],
@@ -611,5 +799,5 @@ window.BENCH_DATA = (() => {
   add(["skillsbench-1-1"], "skillsbench-1-1", "gemini-3-1-pro", 60.8, "%", "with Skills · Gemini CLI · 87 tasks · up to 3 trials", "without Skills: 36.0% · official v1.1 leaderboard");
   add(["skillsbench-1-1"], "skillsbench-1-1", "deepseek-v4-pro", 50.1, "%", "with Skills · OpenHands · 87 tasks · up to 3 trials", "official row label: DeepSeek V4 Pro · without Skills: 26.9%");
 
-  return { meta, sources, models, benchmarks, benchmarkFamilies, observations };
+  return { meta, sources, sourceAudits, models, benchmarks, benchmarkFamilies, observations };
 })();
