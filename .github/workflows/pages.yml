@@ -27,6 +27,7 @@ jobs:
           node-version: 22
       - run: npm run check
       - run: npm run check-readme
+      - run: npm run check-source-matrix
       - run: node --check app.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

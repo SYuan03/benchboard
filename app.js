@@ -4,6 +4,7 @@
   const modelsById = byId(data.models);
   const benchesById = byId(data.benchmarks);
   const sourcesById = byId(data.sources);
+  const sourceAuditsById = new Map((data.sourceAudits || []).map((audit) => [audit.sourceId, audit]));
   const declaredFamilies = data.benchmarkFamilies || [];
   const familyByBenchmarkId = new Map();
   declaredFamilies.forEach((family) => family.variants.forEach((variant) => familyByBenchmarkId.set(variant.benchmarkId, family)));
@@ -151,6 +152,21 @@
       const label = own ? `${source.publisher} · 厂商官方` : `${source.publisher} · ${benchmarkOfficial ? "Benchmark 官方" : "他测"}`;
       return `<a class="${own ? "" : "cross"}" href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(label)} ↗</a>`;
     }).join("");
+  }
+
+  function modelReferenceSources(model) {
+    return unique([model.sourceId, ...(model.referenceSourceIds || [])])
+      .map((sourceId) => sourcesById.get(sourceId))
+      .filter(Boolean);
+  }
+
+  function sourceAuditLabel(sourceId) {
+    const audit = sourceAuditsById.get(sourceId);
+    if (audit?.status === "complete") return { label: audit.scopeLabel || "整表已核", className: "complete" };
+    if (audit?.status === "target-complete") return { label: audit.scopeLabel || "目标列已核", className: "target" };
+    if (audit?.status === "metadata-only") return { label: "非成绩页", className: "metadata" };
+    if (audit?.status === "partial") return { label: "部分录入", className: "partial" };
+    return { label: "待核", className: "pending" };
   }
 
   function init() {
@@ -310,21 +326,38 @@
     els.modelsTable.innerHTML = `<thead><tr><th>模型</th><th>厂商</th><th>模态</th><th>输入 / 输出</th><th>上下文</th><th>发布日期</th><th>开放方式</th><th>成绩</th></tr></thead><tbody>${models.length ? models.map((model) => {
       const source = sourcesById.get(model.sourceId);
       const count = observations.filter((obs) => obs.modelId === model.id).length;
-      const status = model.scoreStatus === "pending" ? '<span class="status-pending">待补</span>' : model.scoreStatus === "base-model" ? '<span class="status-base">底座模型</span>' : `${count} 条`;
+      const status = model.scoreStatus === "pending"
+        ? '<span class="status-pending">待补</span>'
+        : model.scoreStatus === "base-model"
+          ? `<span class="status-base">底座模型</span><br>${count} 条`
+          : model.scoreStatus === "comparison-only"
+            ? `<span class="status-comparison">对照记录</span><br>${count} 条`
+            : `${count} 条`;
       return `<tr class="model-row" data-model-id="${escapeHtml(model.id)}"><td class="model-title"><button class="model-row-button" type="button" data-model-id="${escapeHtml(model.id)}" aria-label="查看 ${escapeHtml(model.name)} 的全部 Benchmark"><strong>${escapeHtml(model.name)}</strong><span class="muted">${escapeHtml((model.aliases || []).join(" · "))}</span></button></td><td>${escapeHtml(model.vendor)}</td><td><span class="modality">${escapeHtml(modalityLabels[model.modality])}</span></td><td>${escapeHtml(model.modalityDetail)}</td><td>${escapeHtml(model.context)}</td><td>${escapeHtml(model.releaseDate)}</td><td>${escapeHtml(model.access)}</td><td>${status}<br><span class="detail-hint">查看详情 →</span>${source ? `<br><a class="muted" href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">模型出处 ↗</a>` : ""}</td></tr>`;
     }).join("") : `<tr><td colspan="8" class="empty">没有匹配的模型。</td></tr>`}</tbody>`;
   }
 
   function renderSources() {
     let sources = [...data.sources];
-    const auditsBySourceId = new Map((data.sourceAudits || []).map((audit) => [audit.sourceId, audit]));
     if (state.search) sources = sources.filter((source) => matchesSearch([source.title, source.publisher].join(" "), state.search));
     sources.sort((a, b) => String(b.date).localeCompare(String(a.date)));
     els.sourcesTable.innerHTML = `<thead><tr><th>日期</th><th>来源</th><th>发布方</th><th>类型</th><th>覆盖审计</th><th>引用记录</th></tr></thead><tbody>${sources.length ? sources.map((source) => {
       const count = data.observations.filter((obs) => obs.sourceIds.includes(source.id)).length;
       const type = source.kind === "benchmark" ? "Benchmark 官方" : "模型厂商官方";
-      const audit = auditsBySourceId.get(source.id);
-      const auditCell = audit?.status === "complete" ? `<span class="audit-complete" title="${escapeHtml(audit.note || "")}">整表已核 · ${audit.benchmarkIds.length} 项 / ${audit.expectedObservationCount} 条</span>` : `<span class="muted">待整表核对</span>`;
+      const audit = sourceAuditsById.get(source.id);
+      const targetAuditCount = audit?.targetModels?.length || (audit?.targetModelId ? 1 : 0);
+      const targetObservationCount = audit?.targetModels
+        ? audit.targetModels.reduce((sum, target) => sum + (target.expectedObservationCount || 0), 0)
+        : audit?.expectedTargetObservationCount || 0;
+      const auditCell = audit?.status === "complete"
+        ? `<span class="audit-complete" title="${escapeHtml(audit.note || "")}">${escapeHtml(audit.scopeLabel || "公开成绩表已核")} · ${(audit.benchmarkIds || []).length} 项 / ${audit.expectedObservationCount ?? 0} 条</span>`
+        : audit?.status === "target-complete"
+          ? `<span class="audit-target" title="${escapeHtml(audit.note || "")}">${escapeHtml(audit.scopeLabel || "目标模型列已核")} · ${targetAuditCount} 个模型 / ${targetObservationCount} 条</span>`
+        : audit?.status === "partial"
+          ? `<span class="audit-partial" title="${escapeHtml(audit.note || "")}">部分录入</span>`
+          : audit?.status === "metadata-only"
+            ? `<span class="audit-metadata" title="${escapeHtml(audit.note || "")}">非成绩页</span>`
+            : `<span class="muted" title="${escapeHtml(audit?.note || "")}">待整表核对</span>`;
       return `<tr><td>${escapeHtml(source.date)}</td><td class="source-title"><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.title)} ↗</a></td><td>${escapeHtml(source.publisher)}</td><td><span class="modality">${type}</span></td><td>${auditCell}</td><td>${count} 条</td></tr>`;
     }).join("") : `<tr><td colspan="6" class="empty">没有匹配的来源。</td></tr>`}</tbody>`;
   }
@@ -386,7 +419,7 @@
       result.get(category).push(familyResult);
       return result;
     }, new Map());
-    const modelSource = sourcesById.get(model.sourceId);
+    const modelSources = modelReferenceSources(model);
     els.drawerContent.innerHTML = `
       <header class="drawer-hero">
         <p class="eyebrow">${escapeHtml(model.vendor)} · ${escapeHtml(modalityLabels[model.modality])}</p>
@@ -400,7 +433,10 @@
         <div><dt>发布日期</dt><dd>${escapeHtml(model.releaseDate)}</dd></div>
         <div><dt>别名 / API 名</dt><dd>${escapeHtml((model.aliases || []).join(" · ") || "—")}</dd></div>
       </dl>
-      ${modelSource ? `<a class="primary-source" href="${escapeHtml(modelSource.url)}" target="_blank" rel="noreferrer">${modelSource.kind === "benchmark" ? "打开收录依据" : "打开模型官方出处"} ↗</a>` : ""}
+      ${modelSources.length ? `<div class="model-reference-list"><strong>模型资料与核对状态</strong>${modelSources.map((source) => {
+        const audit = sourceAuditLabel(source.id);
+        return `<a class="primary-source" href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer"><span>${escapeHtml(source.title)} ↗</span><small class="source-audit-pill ${escapeHtml(audit.className)}">${escapeHtml(audit.label)}</small></a>`;
+      }).join("")}</div>` : ""}
       <div class="drawer-results">
         ${rows.length ? [...groups.entries()].map(([category, families]) => `
           <section class="result-group">

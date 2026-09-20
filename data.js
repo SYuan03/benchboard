@@ -1,8 +1,8 @@
 window.BENCH_DATA = (() => {
   const meta = {
     title: "BenchBoard",
-    updated: "2026-09-20",
-    scope: "截至 2026-09-20 的领先通用/Agent 模型公开成绩"
+    updated: "2026-09-21",
+    scope: "截至 2026-09-21 的领先通用/Agent 模型公开成绩"
   };
 
   const sources = [
@@ -19,6 +19,8 @@ window.BENCH_DATA = (() => {
     { id: "qwen38-omni", vendorId: "alibaba", publisher: "Qwen", date: "2026-09-18", tier: "official", title: "Qwen3.8-Omni-Flash: Omni Senses. Agentic Delivery.", url: "https://qwen.ai/blog?id=qwen3.8-omni-flash" },
     { id: "qwen37", vendorId: "alibaba", publisher: "Qwen / Alibaba Cloud", date: "2026-05-21", tier: "official", title: "Qwen3.7: The Agent Frontier", url: "https://www.alibabacloud.com/blog/qwen3-7-the-agent-frontier_603154" },
     { id: "qwen37-plus", vendorId: "alibaba", publisher: "Qwen / Alibaba Cloud", date: "2026-06-03", tier: "official", title: "Qwen3.7-Plus: Multimodal Agent Intelligence", url: "https://www.alibabacloud.com/blog/qwen3-7-plus-multimodal-agent-intelligence_603206" },
+    { id: "meta-muse-spark12", vendorId: "meta", publisher: "Meta", date: "2026-08-05", tier: "official", title: "Meet Muse Spark 1.2 and Muse Code, the first coding agent from Meta", url: "https://developer.meta.com/ai/resources/blog/build-with-muse-code/" },
+    { id: "xai-grok45", vendorId: "xai", publisher: "SpaceXAI", date: "2026-07-16", tier: "official", title: "Introducing Grok 4.5", url: "https://x.ai/news/grok-4-5" },
     { id: "wildclawbench", vendorId: "wildclawbench", kind: "benchmark", publisher: "WildClawBench / InternLM", date: "2026-07-20", tier: "official", title: "WildClawBench Official Leaderboard", url: "https://internlm.github.io/WildClawBench/" },
     { id: "alibaba-lifecycle", vendorId: "alibaba", publisher: "Alibaba Cloud Model Studio", date: "2026-09-18", tier: "official", title: "模型上下架与更新", url: "https://help.aliyun.com/zh/model-studio/newly-released-models" },
     { id: "seed21", vendorId: "bytedance", publisher: "ByteDance Seed", date: "2026-06-23", tier: "official", title: "Seed2.1 — Model Card", url: "https://seed.bytedance.com/en/seed2_1" },
@@ -39,6 +41,25 @@ window.BENCH_DATA = (() => {
       expectedObservationCount: 302,
       benchmarkIds: ["wildclawbench-mm", "uniclawbench", "agenticvbench", "omnigaia", "dailyomni", "worldsense", "avut", "joinavbench", "omnivideobench", "video-mme-v2", "lvomnibench", "omnicloze", "omnicap-if-csr", "omnicap-if-isr", "qivd", "streamingbench", "alimeeting-der", "alimeeting-cpwer", "aishell4-der", "aishell4-cpwer", "magicdata-ramc-der", "magicdata-ramc-cpwer", "mlc-slm-en-der", "mlc-slm-en-cpwer", "wenetspeech-net-wer", "wenetspeech-meeting-wer", "fleurs-asr-wer", "fleurs-s2tt-bleu", "spotsoundbench", "mmau", "mmar", "mmsu", "longaudiospan-accuracy", "longaudiospan-rubric", "longaudiospan-chain", "muchomusic-rul", "hummusqa", "mustbench", "audio-multichallenge", "wildspeech", "voicebench", "deepswe-v1-1", "swe-bench-pro", "swe-multilingual", "nl2repo", "coworkbench", "ifbench", "gpqa-diamond", "hle", "livecodebench-v6", "claweval-mm-pass3", "claweval-mm-average", "androidworld", "vision2web", "erqa", "lvbench", "realworldqa", "mathvision-without-ci", "mathvision-with-ci", "charxiv-rq-without-ci", "charxiv-rq-with-ci"],
       note: "Omni、Agentic Omni Understanding、Text、Vision 四个结果区块的全部公开数值单元格已录入；空白/-- 不伪造为零。"
+    },
+    {
+      sourceId: "meta-muse-spark12",
+      status: "complete",
+      auditedAt: "2026-09-20",
+      expectedObservationCount: 23,
+      benchmarkIds: ["terminal-bench-2-1", "deepswe-v1-1", "meta-internal-coding-bench", "gdpval-aa-v2"],
+      note: "Meta 官方模型页和同日博客中的四张 Benchmark 图已逐图核对；共 23 个公开数值单元格，Harness 标签按图保留。"
+    },
+    ...["openai-astra", "openai-astra-work", "openai-gpt56", "anthropic-fable51", "deepmind-gemini38", "deepseek-v41", "zai-glm53", "zai-glm53-flash", "qwen38", "qwen38-hf", "qwen37", "qwen37-plus", "xai-grok45", "seed21", "hy4", "skillsbench-1-1", "pinchbench-v2", "rngbench", "qwenclawbench", "workspacebench", "claweval", "wildclawbench"].map((sourceId) => ({
+      sourceId,
+      status: "pending",
+      note: "已引用其中部分成绩；尚未完成逐表、逐单元格覆盖核对。"
+    })),
+    {
+      sourceId: "alibaba-lifecycle",
+      status: "metadata-only",
+      auditedAt: "2026-09-20",
+      note: "模型版本上架、升级与下架信息页，不是 Benchmark 成绩表。"
     }
   ];
 
@@ -55,6 +76,7 @@ window.BENCH_DATA = (() => {
     { id: "claude-opus-4-8", name: "Claude Opus 4.8", vendorId: "anthropic", vendor: "Anthropic", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像、屏幕/计算机操作 → 文本", context: "未披露", access: "闭源 API", aliases: ["claude-opus-4-8"], sourceId: "anthropic-fable51", summary: "多份 2026 年中厂商表使用的强基线；与 Opus 5 分开保存。" },
     { id: "claude-opus-4-8-fast", name: "Claude Opus 4.8 Fast", vendorId: "anthropic", vendor: "Anthropic", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像、工具调用 → 文本", context: "未披露", access: "闭源 API 路由", aliases: ["anthropic/claude-opus-4.8-fast"], sourceId: "pinchbench-v2", summary: "PinchBench 单独列出的 Opus 4.8 快速路由；不与标准 Opus 4.8 合并。" },
     { id: "gemini-3-8-flash", name: "Gemini 3.8 Flash", vendorId: "google", vendor: "Google DeepMind", releaseDate: "2026-09-02", modality: "omni", modalityDetail: "文本、图像、音频、视频 → 文本", context: "1M", access: "闭源 API", aliases: ["gemini-3.8-flash"], sourceId: "deepmind-gemini38", summary: "原生全模态 Flash 模型，面向低成本 Agent、软件工程和知识工作。" },
+    { id: "gemini-3-6-flash", name: "Gemini 3.6 Flash", vendorId: "google", vendor: "Google DeepMind", releaseDate: "2026", modality: "omni", modalityDetail: "文本、图像、音频、视频 → 文本；Meta 官方表使用 high 设置", context: "未核实", access: "闭源 API", aliases: ["gemini-3.6-flash", "Gemini 3.6 Flash (high)"], sourceId: "meta-muse-spark12", summary: "Meta Muse Spark 1.2 官方发布表中的全模态对照模型；保留 high 推理设置。" },
     { id: "gemini-3-7-flash", name: "Gemini 3.7 Flash", vendorId: "google", vendor: "Google DeepMind", releaseDate: "2026", modality: "omni", modalityDetail: "全模态模型；当前仅收录 Z.ai 官方表中的精确版本名与对照成绩", context: "未核实", access: "闭源 API", aliases: ["gemini-3.7-flash"], sourceId: "zai-glm53-flash", summary: "GLM-5.3 Flash 官方表使用的独立对照版本；不与 Gemini 3.8 Flash 合并。" },
     { id: "gemini-3-1-pro", name: "Gemini 3.1 Pro", vendorId: "google", vendor: "Google DeepMind", releaseDate: "2026-02", modality: "omni", modalityDetail: "文本、图像、音频、视频 → 文本", context: "1M", access: "闭源 API", aliases: ["gemini-3.1-pro"], sourceId: "deepmind-gemini38", summary: "Gemini 3 系列 Pro 模型，多份厂商表中的多模态对照基线。" },
     { id: "deepseek-v4-1-flash", name: "DeepSeek V4.1 Flash", vendorId: "deepseek", vendor: "DeepSeek", releaseDate: "2026-09-10", modality: "vision", modalityDetail: "文本、图像 → 文本", context: "1M", access: "开放权重 / API", aliases: ["deepseek-v4.1-flash", "deepseek-flash"], sourceId: "deepseek-v41", summary: "552B MoE、输入激活 8B/输出 16B，原生视觉理解。" },
@@ -71,7 +93,9 @@ window.BENCH_DATA = (() => {
     { id: "qwen3-8-27b", name: "Qwen3.8 27B", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像、视频 → 文本；以 Qwen 官方表原始标签登记", context: "未核实", access: "未核实", aliases: ["Qwen3.8-27B", "qwen3.8-27b"], sourceId: "qwen38-omni", summary: "Qwen3.8 Omni Flash 官方 Text 与 Vision 表中的 27B 对照模型。" },
     { id: "deepseek-v4-flash-0731", name: "DeepSeek V4 Flash 0731", vendorId: "deepseek", vendor: "DeepSeek", releaseDate: "2026-07-31", modality: "vision", modalityDetail: "以 Qwen 官方表原始版本标签登记；输入模态待 DeepSeek 一手资料补证", context: "未核实", access: "未核实", aliases: ["DeepSeek-V4-Flash-0731"], sourceId: "qwen38-omni", summary: "Qwen3.8 Omni Flash 官方 Text 表中的 DeepSeek 对照快照；不与 V4.1 Flash 合并。" },
     { id: "claude-opus-4-6-max", name: "Claude Opus 4.6 Max", vendorId: "anthropic", vendor: "Anthropic", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像 → 文本；以 Qwen 官方表原始 Max 标签登记", context: "未核实", access: "闭源 API", aliases: ["Claude-Opus-4.6 (Max)"], sourceId: "qwen38-omni", summary: "Qwen3.8 Omni Flash 官方 Text 与 Vision 表中的 Max-effort 对照。" },
-    { id: "muse-spark-1-2", name: "Muse Spark 1.2", vendorId: "muse", vendor: "Muse", releaseDate: "2026", modality: "omni", modalityDetail: "官方对照表覆盖音频和音视频输入；发布方待补一手模型卡", context: "未核实", access: "未核实", aliases: ["Muse Spark 1.2"], sourceId: "qwen38-omni", summary: "Qwen3.8 Omni Flash 官方 Omni 表中的对照模型；厂商归属暂不推断。" },
+    { id: "muse-spark-1-2", name: "Muse Spark 1.2", vendorId: "meta", vendor: "Meta", releaseDate: "2026-08-05", modality: "omni", modalityDetail: "文本、图像、音频、视频、PDF → 文本", context: "1M", access: "闭源 API", aliases: ["muse-spark-1.2", "muse-spark-1.2-contributor"], sourceId: "meta-muse-spark12", summary: "Meta 的全模态编码与长程 Agent 模型，与 Muse Code 协同训练。" },
+    { id: "muse-spark-1-1", name: "Muse Spark 1.1", vendorId: "meta", vendor: "Meta", releaseDate: "2026", modality: "omni", modalityDetail: "文本、图像、音频、视频、PDF → 文本", context: "1M", access: "闭源 API", aliases: ["muse-spark-1.1"], sourceId: "meta-muse-spark12", summary: "Muse Spark 1.2 官方发布表中的上一代全模态对照模型。" },
+    { id: "grok-4-5", name: "Grok 4.5", vendorId: "xai", vendor: "SpaceXAI", releaseDate: "2026-07-16", modality: "vision", modalityDetail: "文本、图像 → 文本", context: "500K", access: "闭源 API", aliases: ["grok-4.5", "grok-4.5-latest", "grok-build-latest"], sourceId: "xai-grok45", summary: "面向编码、Agent 软件工程和知识工作的视觉语言模型。" },
     { id: "qwen3-5-397b", name: "Qwen3.5-397B", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像 → 文本；RNGBench 官方主榜使用的精确模型名", context: "未核实", access: "具体快照未核实", aliases: ["Qwen3.5-397B", "qwen3.5-397b"], sourceId: "rngbench", summary: "RNG-Bench 官方主榜中的多模态对照模型；保留其原始版本标签。" },
     { id: "glm-5-3", name: "GLM-5.3", vendorId: "zai", vendor: "Z.ai", releaseDate: "2026-08-14", modality: "language", modalityDetail: "文本 → 文本", context: "1M", access: "开放权重 / API", aliases: ["glm-5.3"], sourceId: "zai-glm53", summary: "纯语言长程 Agent 旗舰，突出编码与网络安全。" },
     { id: "glm-5-3-flash", name: "GLM-5.3 Flash", vendorId: "zai", vendor: "Z.ai", releaseDate: "2026-08-26", modality: "vision", modalityDetail: "文本、图像、视频、文件 → 文本", context: "1M", access: "开放权重 / API", aliases: ["glm-5.3-flash", "ox-alpha"], sourceId: "zai-glm53-flash", summary: "GLM-5 系列首个原生多模态模型，320B/18B active。" },
@@ -94,6 +118,7 @@ window.BENCH_DATA = (() => {
     { id: "terminal-bench-3-0", name: "Terminal-Bench 3.0", category: "编码", direction: "higher", description: "更高难度终端任务。" },
     { id: "terminal-bench-4-0", name: "Terminal-Bench 4.0", category: "编码", direction: "higher", description: "新一代通用终端 Agent 任务。" },
     { id: "terminal-bench-science", name: "Terminal-Bench Science 0.1", category: "科研", direction: "higher", description: "使用代码与终端完成科学研究工作流；Anthropic 官方表明确使用 Claude Code Harness。" },
+    { id: "meta-internal-coding-bench", name: "Meta Internal Coding Bench", category: "编码", direction: "higher", description: "Meta 在 Muse Spark 1.2 发布页报告的内部编码基准；仅在相同发布设置下横向比较。" },
     { id: "deepswe-v1-1", name: "DeepSWE v1.1", category: "编码", direction: "higher", description: "长程软件工程；不同 Agent Scaffold 会产生不同结果。" },
     { id: "frontiercode-1-1-extended", name: "FrontierCode 1.1 Extended", category: "编码", direction: "higher", description: "真实软件工程任务的扩展版；不同推理档位和成本点分别保留。" },
     { id: "swe-bench-pro", name: "SWE-Bench Pro", category: "编码", direction: "higher", description: "真实仓库软件工程；Harness 与修订版本必须随成绩保留。" },
@@ -140,7 +165,7 @@ window.BENCH_DATA = (() => {
     { id: "dailyomni", name: "DailyOmni", category: "多模态", direction: "higher", description: "日常场景音视频理解。" },
     { id: "worldsense", name: "WorldSense", category: "多模态", direction: "higher", description: "音视频世界理解。" },
     { id: "avut", name: "AVUT", category: "多模态", direction: "higher", description: "音视频理解。" },
-    { id: "joinavbench", name: "JoinAVBench", category: "多模态", direction: "higher", description: "联合音视频理解；名称按 Qwen 官方表原文保存。" },
+    { id: "joinavbench", name: "JoinAVBench", category: "多模态", direction: "higher", description: "联合音视频理解；结果表写作 JoinAVBench，同页总览图与脚注写作 JointAVBench，75.9 等数值一致，因此合并为同一 Benchmark。" },
     { id: "omnivideobench", name: "OmniVideoBench", category: "多模态", direction: "higher", description: "音视频推理；Static 与 Qwen Code Agent 设置分别保留。" },
     { id: "video-mme-v2", name: "Video-MME-v2", category: "多模态", direction: "higher", description: "音视频推理；Static 与 Qwen Code Agent 设置分别保留。" },
     { id: "lvomnibench", name: "LVOmniBench", category: "多模态", direction: "higher", description: "长视频推理；Static 与 Qwen Code Agent 设置分别保留。" },
@@ -377,6 +402,40 @@ window.BENCH_DATA = (() => {
       if (value !== null) add(sourceIds, benchmarkId, qwenComparisonModels[index], value, unit, setting, note);
     });
   };
+
+  // Meta Muse Spark 1.2 official model page and launch blog: all four
+  // published benchmark charts, including every displayed comparison bar.
+  batch(["meta-muse-spark12"], "terminal-bench-2-1", [
+    ["claude-opus-5", 86.7, "Claude Code · max"],
+    ["muse-spark-1-2", 82.9, "Muse Code"],
+    ["gpt-5-6-terra", 81.8, "Codex · max"],
+    ["grok-4-5", 81.6, "Grok Build"],
+    ["gemini-3-6-flash", 78.9, "Antigravity CLI · high"],
+    ["muse-spark-1-1", 76.2, "mini-swe-agent"]
+  ], "%", "Meta 官方发布图");
+  batch(["meta-muse-spark12"], "deepswe-v1-1", [
+    ["claude-opus-5", 65.0, "Claude Code · max"],
+    ["gpt-5-6-terra", 64.8, "Codex · max"],
+    ["muse-spark-1-2", 59.3, "Muse Code"],
+    ["grok-4-5", 56.6, "Grok Build"],
+    ["muse-spark-1-1", 53.0, "mini-swe-agent"],
+    ["gemini-3-6-flash", 40.0, "Antigravity CLI · high"]
+  ], "%", "Meta 官方发布图");
+  batch(["meta-muse-spark12"], "meta-internal-coding-bench", [
+    ["claude-opus-5", 79.4, "max"],
+    ["muse-spark-1-2", 70.6],
+    ["muse-spark-1-1", 68.3],
+    ["gpt-5-6-terra", 65.4, "max"],
+    ["gemini-3-6-flash", 63.9, "high"]
+  ], "%", "Meta 官方发布图");
+  batch(["meta-muse-spark12"], "gdpval-aa-v2", [
+    ["claude-opus-5", 1852, "max"],
+    ["muse-spark-1-2", 1631],
+    ["gpt-5-6-terra", 1577, "max"],
+    ["grok-4-5", 1526, "high"],
+    ["gemini-3-6-flash", 1423, "high"],
+    ["muse-spark-1-1", 1371]
+  ], "Elo", "Meta 官方发布图");
 
   batch(["openai-astra"], "agents-last-exam-score", [["gpt-6-astra",59.3,"最高 effort"],["gpt-5-6-sol",53.6,"最高 effort"],["claude-opus-5",55.5,"最高 effort"]], "Score");
   add(["qwen38", "qwen38-hf"], "agents-last-exam-pass", "qwen3-8-max", 27.0, "%", "Qwen 官方表 / Pass Rate");
@@ -729,8 +788,8 @@ window.BENCH_DATA = (() => {
   sourceTable("omnicap-if-isr", omniModels, [28.2, 14.1, 28.3, 18.1, 26.8]);
   sourceTable("qivd", omniModels, [69.6, 65.6, 69.1, 62.0, 62.0]);
   sourceTable("streamingbench", omniModels, [80.8, 57.1, 79.9, 77.2, 77.8]);
-  sourceTable("alimeeting-der", omniModels, [3.4, 88.1, 72.6, 75.1, 93.7]);
-  sourceTable("alimeeting-cpwer", omniModels, [17.2, 89.6, 53.1, 76.1, 92.7]);
+  sourceTable("alimeeting-der", omniModels, [3.35, 88.11, 72.6, 75.1, 93.7], "%", "Qwen3.8 Omni Flash 官方发布页 · Qwen 两列采用正文精确值，表格四舍五入为 3.4 / 88.1");
+  sourceTable("alimeeting-cpwer", omniModels, [17.18, 89.61, 53.1, 76.1, 92.7], "%", "Qwen3.8 Omni Flash 官方发布页 · Qwen 两列采用正文精确值，表格四舍五入为 17.2 / 89.6");
   sourceTable("aishell4-der", omniModels, [2.8, 100.0, 66.4, 64.8, 91.3]);
   sourceTable("aishell4-cpwer", omniModels, [11.2, 100.0, 56.9, 64.2, 86.0]);
   sourceTable("magicdata-ramc-der", omniModels, [5.7, 98.4, 67.9, 43.4, 82.1]);
@@ -740,7 +799,7 @@ window.BENCH_DATA = (() => {
   sourceTable("wenetspeech-net-wer", omniModels, [4.8, 3.7, 14.2, 4.3, 68.2]);
   sourceTable("wenetspeech-meeting-wer", omniModels, [4.6, 4.8, 16.7, 4.7, 42.6]);
   sourceTable("fleurs-asr-wer", omniModels, [9.3, 7.2, 7.9, 32.1, 23.6]);
-  sourceTable("fleurs-s2tt-bleu", omniModels, [31.8, 32.2, 33.0, 24.8, 28.8]);
+  sourceTable("fleurs-s2tt-bleu", omniModels, [31.8, 32.2, 33.0, 24.8, 28.8], "BLEU");
   sourceTable("spotsoundbench", omniModels, [67.2, 64.2, 39.7, 59.6, 16.9]);
   sourceTable("mmau", omniModels, [81.8, 81.9, 76.9, 77.2, 63.5]);
   sourceTable("mmar", omniModels, [79.8, 79.8, 78.5, 77.7, 67.3]);
@@ -769,7 +828,7 @@ window.BENCH_DATA = (() => {
   sourceTable("hle", textModels, [36.5, 35.9, 30.8, 34.7, 33.8, 40.0], "%", "GPT-4o judge");
   sourceTable("livecodebench-v6", textModels, [92.6, 91.9, 90.3, 89.6, 90.6, 88.8]);
 
-  sourceTable("claweval-mm-pass3", visionModels, [60.4, 64.4, 57.4, 57.4, 52.5], "%", "ClawEval multimodal split · 三次运行中至少一次通过");
+  sourceTable("claweval-mm-passat3", visionModels, [60.4, 64.4, 57.4, 57.4, 52.5], "%", "ClawEval multimodal split · 三次运行中至少一次通过");
   sourceTable("claweval-mm-average", visionModels, [61.9, 60.4, 56.9, 60.1, 54.7], "%", "ClawEval multimodal split · 三次运行平均分");
   sourceTable("androidworld", visionModels, [87.1, 84.5, 81.9, 81.0, 62.0]);
   sourceTable("vision2web", visionModels, [62.9, 64.0, 62.9, 42.1, null], "%", "Frontend/Webpage/Website 平均 · Claude Code · gpt-5.4-2026-03-05 judge");

@@ -14,8 +14,11 @@ const mergedObservationCount = new Set(data.observations.map((observation) => [
 ].join("||"))).size;
 const groupedBenchmarkIds = new Set((data.benchmarkFamilies || []).flatMap((family) => family.variants.map((variant) => variant.benchmarkId)));
 const benchmarkFamilyCount = data.benchmarks.length - groupedBenchmarkIds.size + (data.benchmarkFamilies || []).length;
+const comparisonModelCount = data.models.filter((model) => model.scoreStatus === "comparison-only").length;
+const curatedModelCount = data.models.length - comparisonModelCount;
 const summary = `<!-- DATA_SUMMARY_START -->
-- ${data.models.length} model releases
+- ${curatedModelCount} curated model releases
+- ${comparisonModelCount} benchmark-only comparison models
 - ${benchmarkFamilyCount} benchmark families
 - ${data.benchmarks.length} separately ranked metrics and versions
 - ${mergedObservationCount} deduplicated public results

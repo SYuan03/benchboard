@@ -12,6 +12,8 @@
     "check": "node scripts/validate-data.mjs",
     "check-readme": "node scripts/sync-readme.mjs --check",
     "sync-readme": "node scripts/sync-readme.mjs",
+    "check-source-matrix": "node scripts/sync-source-matrix.mjs --check",
+    "sync-source-matrix": "node scripts/sync-source-matrix.mjs",
     "serve": "python3 -m http.server 8000"
   }
 }

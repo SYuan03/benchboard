@@ -39,7 +39,7 @@
 
     <section class="notice" aria-label="覆盖范围说明">
       <strong>收录状态</strong>
-      <span>数据仍在补录。Qwen3.8 Omni Flash 的四个结果区块已完成整表核对；其他来源的审计状态可在“来源”页查看。待补模型会明确标记，不沿用相邻版本成绩。</span>
+      <span>“来源”页区分整表已核、目标模型列已核、部分录入和非成绩页。冲突值会并列保留，空白项不当作零，也不借用相邻版本成绩。</span>
     </section>
 
     <section class="app-shell" aria-label="排行榜数据库">
@@ -145,6 +145,26 @@
   </aside>
 
   <script src="data.js"></script>
+  <script src="data-packs/openai-anthropic.js"></script>
+  <script src="data-packs/xai.js"></script>
+  <script src="data-packs/qwen.js"></script>
+  <script src="data-packs/google-deepseek-others.js"></script>
+  <script src="data-packs/google-history.js"></script>
+  <script src="data-packs/families.js"></script>
+  <script src="data-packs/official-benchmarks.js"></script>
+  <script src="data-packs/missing-firstparty.js"></script>
+  <script src="data-packs/source-surfaces.js"></script>
+  <script src="data-packs/source-audit-followups.js"></script>
+  <script src="data-packs/anthropic-history.js"></script>
+  <script src="data-packs/anthropic-claude4.js"></script>
+  <script src="data-packs/sensetime.js"></script>
+  <script src="data-packs/xiaomi.js"></script>
+  <script src="data-packs/xiaomi-v2.js"></script>
+  <script src="data-packs/comparison-west.js"></script>
+  <script src="data-packs/minimax.js"></script>
+  <script src="data-packs/frontier-firstparty-followups.js"></script>
+  <script src="data-packs/deepseek-v32-audit.js"></script>
+  <script src="data-packs/normalize.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
