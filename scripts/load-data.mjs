@@ -5,7 +5,7 @@ import path from "node:path";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const context = { window: {} };
-for (const filename of [
+const dataPackFiles = [
   "data.js",
   "data-packs/openai-anthropic.js",
   "data-packs/xai.js",
@@ -26,11 +26,17 @@ for (const filename of [
   "data-packs/minimax.js",
   "data-packs/frontier-firstparty-followups.js",
   "data-packs/deepseek-v32-audit.js",
+  "data-packs/remaining-east.js",
+  "data-packs/remaining-west.js",
+  "data-packs/remaining-misc-firstparty.js",
+  "data-packs/pending-source-audit.js",
   "data-packs/normalize.js"
-]) {
+];
+for (const filename of dataPackFiles) {
   const source = fs.readFileSync(path.join(root, filename), "utf8");
   vm.runInNewContext(source, context, { filename });
 }
 
 export { root };
+export { dataPackFiles };
 export const data = context.window.BENCH_DATA;

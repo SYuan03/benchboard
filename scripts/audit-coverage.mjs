@@ -69,7 +69,7 @@ for (const model of data.models.filter((model) => {
   if (["comparison-only", "metadata-only", "pending"].includes(model.scoreStatus)) return false;
   const statuses = firstPartyAuditStatus(model);
   if (statuses.some((status) => status === "complete" || status === "target-complete")) return false;
-  return statuses.length === 0 || statuses.some((status) => ["missing", "pending", "partial", "target-unchecked"].includes(status));
+  return true;
 }).sort((a, b) => a.vendor.localeCompare(b.vendor) || a.name.localeCompare(b.name))) {
   console.log(`${model.name}  [${model.vendor}]  audits: ${firstPartyAuditStatus(model).join(", ") || "none"}`);
 }

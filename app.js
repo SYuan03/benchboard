@@ -165,6 +165,7 @@
     if (audit?.status === "complete") return { label: audit.scopeLabel || "整表已核", className: "complete" };
     if (audit?.status === "target-complete") return { label: audit.scopeLabel || "目标列已核", className: "target" };
     if (audit?.status === "metadata-only") return { label: "非成绩页", className: "metadata" };
+    if (audit?.status === "inaccessible") return { label: "当前不可访问", className: "inaccessible" };
     if (audit?.status === "partial") return { label: "部分录入", className: "partial" };
     return { label: "待核", className: "pending" };
   }
@@ -328,6 +329,8 @@
       const count = observations.filter((obs) => obs.modelId === model.id).length;
       const status = model.scoreStatus === "pending"
         ? '<span class="status-pending">待补</span>'
+        : model.scoreStatus === "metadata-only"
+          ? `<span class="status-metadata">官方未报分</span><br>${count} 条`
         : model.scoreStatus === "base-model"
           ? `<span class="status-base">底座模型</span><br>${count} 条`
           : model.scoreStatus === "comparison-only"
@@ -357,6 +360,8 @@
           ? `<span class="audit-partial" title="${escapeHtml(audit.note || "")}">部分录入</span>`
           : audit?.status === "metadata-only"
             ? `<span class="audit-metadata" title="${escapeHtml(audit.note || "")}">非成绩页</span>`
+            : audit?.status === "inaccessible"
+              ? `<span class="audit-inaccessible" title="${escapeHtml(audit.note || "")}">当前不可访问</span>`
             : `<span class="muted" title="${escapeHtml(audit?.note || "")}">待整表核对</span>`;
       return `<tr><td>${escapeHtml(source.date)}</td><td class="source-title"><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.title)} ↗</a></td><td>${escapeHtml(source.publisher)}</td><td><span class="modality">${type}</span></td><td>${auditCell}</td><td>${count} 条</td></tr>`;
     }).join("") : `<tr><td colspan="6" class="empty">没有匹配的来源。</td></tr>`}</tbody>`;
@@ -545,7 +550,10 @@
   els.category.addEventListener("change", () => { state.category = els.category.value; render(); });
   els.multimodalHarness.addEventListener("click", () => {
     state.collection = state.collection === "multimodal-harness" ? "" : "multimodal-harness";
-    if (state.collection) state.selectedBenchmark = "wildclawbench-mm";
+    if (state.collection) {
+      state.selectedBenchmark = "wildclawbench-mm";
+      switchTab("leaderboard");
+    }
     els.multimodalHarness.classList.toggle("active", Boolean(state.collection));
     els.multimodalHarness.setAttribute("aria-pressed", String(Boolean(state.collection)));
     els.collectionStrip.hidden = !state.collection;

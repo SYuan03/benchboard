@@ -2,13 +2,25 @@
   const data = window.BENCH_DATA;
   const groups = new Map();
   const benchmarkAliases = new Map([
+    ["arena-text", "lmarena-elo"],
     ["imo-answerbench", "imoanswerbench"],
+    ["infovqa-val", "infographicvqa"],
+    ["mcpmark", "mcp-mark"],
+    ["program-bench", "programbench"],
+    ["vals-finance-agent-v2", "financeagent-v2"],
+    ["aa-lcr-ratio", "aa-lcr"],
+    ["aa-briefcase-elo", "aa-briefcase"],
     ["vlmsarebiased", "vlms-are-biased"],
     ["tool-decathlon", "toolathlon"]
   ]);
 
   for (const observation of data.observations) {
     observation.benchmarkId = benchmarkAliases.get(observation.benchmarkId) || observation.benchmarkId;
+    if (observation.benchmarkId === "aa-lcr" && observation.unit === "ratio") {
+      observation.value = Number((observation.value * 100).toFixed(10));
+      observation.unit = "%";
+    }
+    if (observation.benchmarkId === "aa-briefcase") observation.unit = "Elo";
   }
   for (const family of data.benchmarkFamilies || []) {
     for (const variant of family.variants) {
@@ -18,6 +30,7 @@
       variants.findIndex((candidate) => candidate.benchmarkId === variant.benchmarkId) === index
     ));
   }
+  data.benchmarkFamilies = (data.benchmarkFamilies || []).filter((family) => family.variants.length >= 2);
   for (const audit of data.sourceAudits || []) {
     if (audit.benchmarkIds) audit.benchmarkIds = [...new Set(audit.benchmarkIds.map((id) => benchmarkAliases.get(id) || id))];
     if (audit.targetBenchmarkIds) audit.targetBenchmarkIds = [...new Set(audit.targetBenchmarkIds.map((id) => benchmarkAliases.get(id) || id))];

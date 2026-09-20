@@ -158,7 +158,7 @@
     { id: "mmmlu", name: "MMMLU", category: "知识 / 推理", direction: "higher", description: "多语言大规模知识评测。" }
   ]);
   
-  // The existing `mrcr-256k` and `mrcr-512k` records are legacy display variants.
+  // The existing `mrcr-256k` record is a legacy display variant.
   // New official rows below use one canonical benchmark plus an explicit context-range setting.
   
   // ---------------------------------------------------------------------------
@@ -248,7 +248,7 @@
   batch(oaAstra, "frontiermath-t4", [
     ["gpt-6-astra", 97.6], ["gpt-5-6-sol", 83.0], ["claude-fable-5-1", 87.8],
     ["claude-fable-5", 90.2], ["claude-opus-5", 73.2]
-  ], "%", "v2");
+  ], "%", "v2 · GPT-6 Astra launch snapshot · 2026-09-01");
   batch(oaAstra, "gpqa-diamond", [
     ["gpt-6-astra", 96.0, "highest effort"], ["gpt-5-6-sol", 94.6], ["claude-fable-5-1", 93.7],
     ["claude-fable-5", 92.6], ["claude-opus-5", 93.7], ["gemini-3-8-flash", 95.3]
@@ -276,6 +276,7 @@
   batch(oaAstra, "exploitbench-2026-jun-aug", [["gpt-6-astra", 39.0], ["gpt-5-6-sol", 5.5]], "%", "June-August 2026 · 300-turn limit");
   add(oaAstra, "exploitbench-2026-jun-aug", "gpt-5-6-sol", 11.5, "%", "similar settings · fewer 300-turn-limit hits", "Prose/footnote result; do not overwrite 5.5");
   batch(oaAstra, "sre-bench-1", [["gpt-6-astra", 88.0], ["gpt-5-6-sol", 55.9], ["claude-opus-5", 12.5]], "%", "1 attempt");
+  batch(oaAstra, "sre-bench-4", [["gpt-6-astra", 99.2], ["gpt-5-6-sol", 68.7]], "%", "within 4 attempts");
   batch(oaAstra, "sec-bench-pro", [["gpt-6-astra", 85.4], ["gpt-5-6-sol", 79.1]], "%", "OpenAI launch table");
   
   batch(oaAstra, "mrcr-v2-8needle", [["gpt-6-astra", 100.0], ["gpt-5-6-sol", 91.5]], "%", "256K-512K");
@@ -407,7 +408,7 @@
   batch(oa56, "frontiermath-t4", [
     ["gpt-5-6-sol", 83.0], ["gpt-5-6-terra", 68.3], ["gpt-5-6-luna", 58.5], ["gpt-5-5", 72.5],
     ["claude-fable-5", 87.8], ["claude-opus-4-8", 56.1]
-  ], "%", "v2");
+  ], "%", "v2 · GPT-5.6 launch snapshot · 2026-07-09");
   
   batch(oa56, "automationbench", [
     ["gpt-5-6-sol", 18.1], ["gpt-5-6-terra", 15.2], ["gpt-5-6-luna", 14.9], ["gpt-5-5", 12.9],
@@ -762,7 +763,7 @@
       note
     });
   };
-  capabilityComplete("openai-astra", 138, ["agents-last-exam-score","osworld-2-partial","screenspot-pro","automationbench","benchcad","browsecomp","openscore-string-quartets","internal-design-tasks","internal-data-science-tasks","artificial-intelligence-index","terminal-bench-4-0","deepswe-v1-1","frontiercode-1-1-extended","frontiercode-1-1-main","internal-database-migration","artificial-coding-index","terminal-bench-science","frontiermath-t4","gpqa-diamond","hle-tools","genebench-pro","medchembench","lifescibench","healthbench-professional","exploitbench","exploitgym-rate","exploitbench-2026-jun-aug","sre-bench-1","sec-bench-pro","mrcr-v2-8needle","arc-agi-3","arc-agi-2","arc-agi-1"], "发布页的公开能力成绩表已逐格录入；安全、对齐与部署风险数据保留在 System Card 审计范围，不混入能力榜。");
+  capabilityComplete("openai-astra", 140, ["agents-last-exam-score","osworld-2-partial","screenspot-pro","automationbench","benchcad","browsecomp","openscore-string-quartets","internal-design-tasks","internal-data-science-tasks","artificial-intelligence-index","terminal-bench-4-0","deepswe-v1-1","frontiercode-1-1-extended","frontiercode-1-1-main","internal-database-migration","artificial-coding-index","terminal-bench-science","frontiermath-t4","gpqa-diamond","hle-tools","genebench-pro","medchembench","lifescibench","healthbench-professional","exploitbench","exploitgym-rate","exploitbench-2026-jun-aug","sre-bench-1","sre-bench-4","sec-bench-pro","mrcr-v2-8needle","arc-agi-3","arc-agi-2","arc-agi-1"], "发布页的公开能力成绩表及 SRE-Bench 正文中的四次尝试结果已录入；安全、对齐与部署风险数据保留在 System Card 审计范围，不混入能力榜。");
   capabilityComplete("openai-gpt56", 239, ["frontiermath-t4","mrcr-v2-8needle","agents-last-exam-score","gdpval-aa-v2","management-consulting-tasks","big-finance-bench","artificial-intelligence-index","artificial-coding-index","swe-bench-pro","deepswe-v1-1","terminal-bench-2-1","genebench-pro","lifescibench","medchembench","healthbench-professional","osworld-2","browsecomp","benchcad","capture-the-flag","sec-bench-pro","exploitbench","exploitgym-rate","internal-research-debugging","kernelgen-1p","nanogpt","posttrainbench-lite","rsi-index","mmmu-pro","gdp-pdf","gpqa-diamond","frontiermath-t1-3","automationbench","toolathlon","graphwalks-bfs","arc-agi-3"], "发布页 11 组公开能力表的非空数值已逐格录入；安全、对齐与部署风险数据不混入能力榜。");
   capabilityComplete("openai-gpt54", 101, ["gdpval","financeagent-v1-1","investment-banking-modeling","officeqa","swe-bench-pro","terminal-bench-2-0","osworld-verified","mmmu-pro","browsecomp","mcp-atlas","toolathlon","tau2-telecom","frontier-science-research","frontiermath-t1-3","frontiermath-t4","gpqa-diamond","hle","hle-tools","graphwalks-bfs","graphwalks-parents","mrcr-v2-8needle","arc-agi-1","arc-agi-2","omnidocbench","webarena-verified","online-mind2web","biglaw-bench"], "发布页公开能力矩阵已逐格录入；安全、对齐与部署风险数据不混入能力榜。");
   capabilityComplete("anthropic-fable51", 33, ["hle-tools","terminal-bench-4-0","terminal-bench-science","gdpval-aa-v2","osworld-2-partial","osworld-2-strict","hle","automationbench","cursorbench-3-2"], "发布页公开能力表已逐格录入；安全、对齐与行为评估留在 System Card 范围。");

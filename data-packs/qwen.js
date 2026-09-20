@@ -69,7 +69,8 @@
   });
   patchModel("qwen3-8-flash", {
     releaseDate: "2026-08-26", modality: "vision", modalityDetail: "文本、图像、视频 → 文本；托管 API 名，基于 Flash-Next",
-    context: "1M", referenceSourceIds: ["qwen38-flash-next", "qwen38-flash-next-hf"]
+    context: "1M", referenceSourceIds: ["qwen38-flash-next", "qwen38-flash-next-hf"],
+    summary: "托管 qwen3.8-flash API 名；官方材料未明确宣告它与开放权重 Qwen3.8-Flash-Next 是同一 checkpoint，因此暂按独立部署实体保存。"
   });
   patchModel("qwen3-8-omni-flash", {
     modality: "omni", modalityDetail: "文本、图像、音频、视频 → 文本；Realtime 变体还可输出音频",
@@ -95,7 +96,7 @@
 
   appendUnique(models, [
     { id: "qwen3-7-max-0608", name: "Qwen3.7 Max 0608", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-06-08", modality: "vision", modalityDetail: "文本、图像 → 文本；与 5 月纯文本首发版本分开登记", context: "1M", access: "API 快照", aliases: ["qwen3.7-max-2026-06-08"], sourceId: "alibaba-lifecycle", scoreStatus: "metadata-only", summary: "2026-06-08 增加视觉输入的日期快照；当前未发现独立成绩表。" },
-    { id: "qwen3-8-flash-next", name: "Qwen3.8-Flash-Next", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-08-26", modality: "vision", modalityDetail: "文本、图像、视频 → 文本", context: "262,144 原生 / 可扩展至 1M", access: "开放权重", aliases: ["Qwen/Qwen3.8-Flash-Next"], sourceId: "qwen38-flash-next", referenceSourceIds: ["qwen38-flash-next-hf", "qwen38-flash-next-report"], summary: "125B 总参数、6B 激活的原生视觉语言 MoE；与托管 qwen3.8-flash API 名分开。" },
+    { id: "qwen3-8-flash-next", name: "Qwen3.8-Flash-Next", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-08-26", modality: "vision", modalityDetail: "文本、图像、视频 → 文本", context: "262,144 原生 / 可扩展至 1M", access: "开放权重", aliases: ["Qwen/Qwen3.8-Flash-Next"], sourceId: "qwen38-flash-next", referenceSourceIds: ["qwen38-flash-next-hf", "qwen38-flash-next-report"], summary: "125B 总参数、6B 激活的原生视觉语言 MoE；官方材料未明确宣告它与托管 qwen3.8-flash API 名是同一 checkpoint，因此暂分开保存。" },
     { id: "qwen3-8-flash-next-base", name: "Qwen3.8-Flash-Next-Base", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-08-26", modality: "vision", modalityDetail: "文本、图像、视频 → 文本；Base checkpoint", context: "262,144 原生 / 可扩展至 1M", access: "开放权重", aliases: ["Qwen/Qwen3.8-Flash-Next-Base"], sourceId: "qwen38-flash-next", referenceSourceIds: ["qwen38-flash-next-hf", "qwen38-flash-next-report"], scoreStatus: "base-model", summary: "Flash-Next 的预训练 Base checkpoint；成绩不与后训练模型混合。" },
     { id: "qwen3-8-27b-base", name: "Qwen3.8-27B-Base", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-08-17", modality: "vision", modalityDetail: "文本、图像、视频 → 文本；Base checkpoint", context: "262,144 原生 / 可扩展至 1M", access: "开放权重", aliases: ["Qwen3.8-27B-Base"], sourceId: "qwen38-flash-next", referenceSourceIds: ["qwen38-flash-next-hf", "qwen38-flash-next-report"], scoreStatus: "base-model", summary: "Qwen3.8-27B 的 Base checkpoint；仅承接 Base 模型评测表。" },
     { id: "qwen3-7-plus-base", name: "Qwen3.7-Plus-Base", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像、视频 → 文本；Base checkpoint", context: "1M", access: "未公开独立权重", aliases: ["Qwen3.7-Plus-Base"], sourceId: "qwen38-flash-next", referenceSourceIds: ["qwen38-flash-next-hf", "qwen38-flash-next-report"], scoreStatus: "base-model", summary: "Flash-Next 发布表中的 Base 对照检查点。" },
@@ -624,10 +625,10 @@
   },
   {
     "id": "mcp-mark",
-    "name": "MCP-Mark",
+    "name": "MCPMark · Version Unspecified",
     "category": "Agent / 工作",
     "direction": "higher",
-    "description": "Qwen 第一方发布表公开指标；具体 harness、工具、版本和评测设置见每条成绩。"
+    "description": "MCPMark 原始或未注明 Verified 版本的结果；具体 harness、工具和版本见每条成绩。"
   },
   {
     "id": "mcp-atlas",
@@ -8208,8 +8209,8 @@
   // Preserve the publisher's own disagreement. The release article states
   // 45.7%, which agrees with 145,736 -> 79,117; the official launch post says
   // 51.8%. Keeping both makes the conflict visible instead of normalizing it.
-  add(["qwen38-omni"], "omnivideobench-token-reduction", "qwen3-8-omni-flash", 45.7, "%", "Static → Agent mode · Qwen Code", "Official release article; reproducible from 145,736 → 79,117 tokens/query.");
-  add(["qwen38-omni-x"], "omnivideobench-token-reduction", "qwen3-8-omni-flash", 51.8, "%", "Static → Agent mode · Qwen Code", "Official Qwen launch post; conflicts with the release article and its raw token counts.");
+  add(["qwen38-omni"], "omnivideobench-token-reduction", "qwen3-8-omni-flash", 45.7, "%", "Static → Agent mode · Qwen Code · release article · 2026-09-18", "Official release article; reproducible from 145,736 → 79,117 tokens/query.");
+  add(["qwen38-omni-x"], "omnivideobench-token-reduction", "qwen3-8-omni-flash", 51.8, "%", "Static → Agent mode · Qwen Code · official X post · 2026-09-18", "Official Qwen launch post; conflicts with the release article and its raw token counts.");
 
   setAudit("qwen38-hf", {
     status: "complete", auditedAt: "2026-09-20", expectedObservationCount: 151,

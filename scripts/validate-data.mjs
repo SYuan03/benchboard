@@ -1,4 +1,6 @@
-import { data } from "./load-data.mjs";
+import fs from "node:fs";
+import path from "node:path";
+import { data, dataPackFiles, root } from "./load-data.mjs";
 
 const errors = [];
 const duplicateIds = (items) => items.map((item) => item.id).filter((id, index, ids) => ids.indexOf(id) !== index);
@@ -9,6 +11,16 @@ const sourceAuditIds = new Set((data.sourceAudits || []).map((item) => item.sour
 const benchmarkFamilyIds = new Set((data.benchmarkFamilies || []).map((item) => item.id));
 const validUrl = /^https:\/\//;
 const semanticObservationKeys = new Set();
+const observationValuesByContext = new Map();
+const benchmarkDisplayKeys = new Map();
+
+const indexHtml = fs.readFileSync(path.join(root, "index.html"), "utf8");
+const indexDataPackFiles = [...indexHtml.matchAll(/<script src="([^"]+\.js)"><\/script>/g)]
+  .map((match) => match[1])
+  .filter((filename) => filename === "data.js" || filename.startsWith("data-packs/"));
+if (JSON.stringify(indexDataPackFiles) !== JSON.stringify(dataPackFiles)) {
+  errors.push("index.html and scripts/load-data.mjs load different data packs or use a different order");
+}
 
 for (const [label, items] of [["model", data.models], ["benchmark", data.benchmarks], ["source", data.sources]]) {
   for (const id of duplicateIds(items)) errors.push(`duplicate ${label} id: ${id}`);
@@ -35,7 +47,7 @@ for (const sourceId of sourceIds) {
 }
 for (const audit of data.sourceAudits || []) {
   if (!sourceIds.has(audit.sourceId)) errors.push(`audit has missing source: ${audit.sourceId}`);
-  if (!new Set(["complete", "target-complete", "partial", "pending", "metadata-only"]).has(audit.status)) errors.push(`invalid source audit status: ${audit.sourceId} -> ${audit.status}`);
+  if (!new Set(["complete", "target-complete", "partial", "pending", "metadata-only", "inaccessible"]).has(audit.status)) errors.push(`invalid source audit status: ${audit.sourceId} -> ${audit.status}`);
   if (!audit.note) errors.push(`source audit has no note: ${audit.sourceId}`);
   const sourceObservations = data.observations.filter((observation) => observation.sourceIds.includes(audit.sourceId));
   if (audit.status === "complete") {
@@ -82,6 +94,13 @@ for (const audit of data.sourceAudits || []) {
 
 for (const benchmark of data.benchmarks) {
   if (!new Set(["higher", "lower"]).has(benchmark.direction)) errors.push(`invalid benchmark direction: ${benchmark.id}`);
+  if (!data.observations.some((observation) => observation.benchmarkId === benchmark.id)) errors.push(`benchmark has no observations: ${benchmark.id}`);
+  const displayKey = [benchmark.name, benchmark.metric || "", benchmark.direction].join("||").toLowerCase();
+  if (benchmarkDisplayKeys.has(displayKey)) {
+    errors.push(`duplicate benchmark display signature: ${benchmarkDisplayKeys.get(displayKey)} / ${benchmark.id}`);
+  } else {
+    benchmarkDisplayKeys.set(displayKey, benchmark.id);
+  }
   if (benchmark.collections?.includes("multimodal-harness")) {
     if (!new Set(["dedicated", "mixed"]).has(benchmark.collectionScope)) errors.push(`invalid multimodal-harness scope: ${benchmark.id}`);
     if (!Array.isArray(benchmark.harnesses) || benchmark.harnesses.length === 0) errors.push(`missing harness names: ${benchmark.id}`);
@@ -129,6 +148,19 @@ for (const observation of data.observations) {
   ].join("||");
   if (semanticObservationKeys.has(semanticKey)) errors.push(`semantic duplicate observation: ${observation.id}`);
   semanticObservationKeys.add(semanticKey);
+
+  const contextKey = [
+    observation.modelId,
+    observation.benchmarkId,
+    observation.unit,
+    observation.setting || ""
+  ].join("||");
+  const priorContext = observationValuesByContext.get(contextKey);
+  if (priorContext && priorContext.value !== observation.value) {
+    errors.push(`conflicting scores without distinct settings: ${priorContext.id} / ${observation.id}`);
+  } else if (!priorContext) {
+    observationValuesByContext.set(contextKey, { id: observation.id, value: observation.value });
+  }
 }
 
 

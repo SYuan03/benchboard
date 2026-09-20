@@ -32,6 +32,7 @@ const auditState = (model, references) => {
   if (audits.some((audit) => auditCoversModel(audit, model.id))) return "Target/full result scope checked";
   if (audits.some((audit) => audit.status === "partial")) return "Partial";
   if (audits.some((audit) => audit.status === "metadata-only")) return "Metadata only";
+  if (audits.some((audit) => audit.status === "inaccessible")) return "Official source currently inaccessible";
   return "Pending";
 };
 const sourceLinks = (references) => references.length
@@ -79,7 +80,7 @@ const lines = [
   `- ${checkedCount} records with a completed full-source or target-column result audit`,
   `- ${data.sources.length} primary sources in the registry`,
   "",
-  "Audit states describe the linked source scope, not independent reproduction. `target-complete` means every public numeric cell for the named model column in that scope was checked; comparison columns may still be incomplete. `complete` means the declared public result-table scope was checked. `metadata-only` means the surface contains no independent score table.",
+  "Audit states describe the linked source scope, not independent reproduction. `target-complete` means every public numeric cell for the named model column in that scope was checked; comparison columns may still be incomplete. `complete` means the declared public result-table scope was checked. `metadata-only` means the surface contains no independent score table. `inaccessible` records an official endpoint that was checked but could not be read reliably.",
   ""
 ];
 

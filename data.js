@@ -132,7 +132,6 @@ window.BENCH_DATA = (() => {
     { id: "qwen-react-bench", name: "QwenReactBench", category: "编码", direction: "higher", description: "Claude Code 驱动的双语 React 项目构建；任务输入为文本，自动渲染和多模态评判只发生在输出侧，因此不属于多模态输入专题。" },
     { id: "qwen-svg-bench", name: "QwenSVGBench", category: "编码", direction: "higher", description: "双语 SVG 代码生成基准；自动渲染与多模态评判，报告 Elo。" },
     { id: "programbench-almost", name: "ProgramBench · Almost Solved", category: "编码", direction: "higher", description: "从零完成系统级工程任务的 Almost Solved 口径。" },
-    { id: "programbench-tiers", name: "ProgramBench · Solved Tiers", category: "编码", direction: "higher", description: "Seed 官方报告的多级 Solved 复合指标，仅陈列原值。" },
     { id: "gpqa-diamond", name: "GPQA Diamond", category: "知识 / 推理", direction: "higher", description: "研究生级科学推理。" },
     { id: "hle", name: "Humanity's Last Exam", category: "知识 / 推理", direction: "higher", description: "跨学科专家级推理；有无工具不可直接混比。" },
     { id: "hle-tools", name: "Humanity's Last Exam (with tools)", category: "知识 / 推理", direction: "higher", description: "允许使用工具的 HLE。" },
@@ -226,7 +225,6 @@ window.BENCH_DATA = (() => {
     { id: "sre-bench-1", name: "SRE-Bench · 1 Attempt", category: "网络安全", direction: "higher", description: "二进制逆向任务的单次尝试成功率；与四次尝试分榜。" },
     { id: "sre-bench-4", name: "SRE-Bench · 4 Attempts", category: "网络安全", direction: "higher", description: "二进制逆向任务四次尝试内的累计成功率；与单次尝试分榜。" },
     { id: "mrcr-256k", name: "MRCR v2 · 256K", category: "长上下文", direction: "higher", description: "8-needle、256K 长上下文检索。" },
-    { id: "mrcr-512k", name: "OpenAI MRCR v2 · 512K–1M", category: "长上下文", direction: "higher", description: "8-needle、512K–1M 长上下文检索；不与 256K 分数混排。" },
     { id: "longbench-v2", name: "LongBench v2", category: "长上下文", direction: "higher", description: "真实长上下文理解与推理任务。" },
     { id: "mmlongbench", name: "MMLongBench-128K", category: "长上下文", direction: "higher", description: "128K 多模态长上下文。" },
     { id: "coworkbench", name: "CoWorkBench", category: "专业工作", direction: "higher", description: "覆盖计算机、金融、法律、医疗等领域的长程协作任务；Qwen3.7 官方提供跨 Harness 对照，但未证明输入侧包含非文本模态。" },
@@ -276,7 +274,6 @@ window.BENCH_DATA = (() => {
     ] },
     { id: "programbench", name: "ProgramBench", variants: [
       { benchmarkId: "programbench-almost", label: "Almost Solved" },
-      { benchmarkId: "programbench-tiers", label: "Solved Tiers" }
     ] },
     { id: "hle", name: "Humanity's Last Exam", variants: [
       { benchmarkId: "hle", label: "No Tools" },
@@ -319,7 +316,6 @@ window.BENCH_DATA = (() => {
     ] },
     { id: "mrcr-v2", name: "MRCR v2", variants: [
       { benchmarkId: "mrcr-256k", label: "256K" },
-      { benchmarkId: "mrcr-512k", label: "512K–1M" }
     ] },
     { id: "healthbench", name: "HealthBench", variants: [
       { benchmarkId: "healthbench", label: "Standard" },
@@ -458,7 +454,7 @@ window.BENCH_DATA = (() => {
   batch(["zai-glm53-flash"], "toolathlon", [["glm-5-3-flash",78.4],["deepseek-v4-vision-exp",75.9],["claude-opus-4-8",76.2]], "%", "Verified / 三次运行均值");
   add(["hy4"], "toolathlon", "hy4-preview", 74.1, "%", "HF Eval Result / Verified");
 
-  batch(["openai-gpt56","zai-glm53","deepseek-v41","deepmind-gemini38"], "terminal-bench-2-1", [["gpt-5-6-sol",88.8,"厂商公开表共同值"]]);
+  batch(["openai-gpt56","zai-glm53","deepseek-v41"], "terminal-bench-2-1", [["gpt-5-6-sol",88.8,"厂商公开表共同值"]]);
   batch(["deepmind-gemini38"], "terminal-bench-2-1", [["gemini-3-8-flash",89.4],["claude-opus-5",89.1],["gpt-5-6-sol",88.8]], "%", "Google Model Card");
   batch(["zai-glm53"], "terminal-bench-2-1", [["glm-5-3",88.2],["kimi-k3",88.3],["deepseek-v4-pro",87.9],["qwen3-8-max",86.6],["claude-opus-4-8",85.0,"Z.ai复现"]]);
   batch(["zai-glm53-flash"], "terminal-bench-2-1", [["glm-5-3-flash",84.3],["deepseek-v4-vision-exp",83.9]]);
@@ -507,8 +503,6 @@ window.BENCH_DATA = (() => {
 
   batch(["zai-glm53"], "programbench-almost", [["glm-5-3",19.0],["kimi-k3",17.5],["qwen3-8-max",10.5],["claude-opus-4-8",15.5],["gpt-5-6-sol",23.0]], "%", "Almost Solved");
   add(["deepseek-v41"], "programbench-almost", "deepseek-v4-1-flash", 20.3, "%", "Almost@1");
-  add(["seed21"], "programbench-tiers", "seed2-1-pro", "0 / 1 / 50.3", "Solved tiers", "Seed官方复合指标");
-  add(["seed21"], "programbench-tiers", "seed2-1-turbo", "0 / 0 / 49.4", "Solved tiers", "Seed官方复合指标");
 
   batch(["openai-astra"], "gpqa-diamond", [["gpt-6-astra",96.0],["gpt-5-6-sol",94.6],["claude-fable-5-1",93.7],["claude-opus-5",93.7],["gemini-3-8-flash",95.3]], "%", "最高 effort");
   batch(["deepseek-v41"], "gpqa-diamond", [["deepseek-v4-1-flash",90.9],["glm-5-3",88.1],["kimi-k3",92.9],["deepseek-v4-pro",92.4],["claude-opus-5",93.4],["gpt-5-6-sol",94.1]], "%", "Pass@1 / max effort");
@@ -670,7 +664,6 @@ window.BENCH_DATA = (() => {
   batch(["openai-astra"], "sre-bench-1", [["gpt-6-astra",88.0],["gpt-5-6-sol",55.9]], "%", "max effort · 1 attempt");
   batch(["openai-astra"], "sre-bench-4", [["gpt-6-astra",99.2],["gpt-5-6-sol",68.7]], "%", "max effort · within 4 attempts");
 
-  batch(["openai-astra"], "mrcr-512k", [["gpt-6-astra",96.3],["gpt-5-6-sol",73.8]], "%", "8-needle / 512K–1M");
   add(["qwen38", "qwen38-hf"], "mrcr-256k", "qwen3-8-max", 92.9, "%", "MRCR v2 256K / 8-needle");
   add(["seed21"], "mmlongbench", "seed2-1-pro", 78.3, "%", "128K");
   add(["seed21"], "mmlongbench", "seed2-1-turbo", 76.9, "%", "128K");

@@ -150,16 +150,18 @@ input[type="search"]:focus, select:focus { border-color: var(--blue); box-shadow
 .model-row-button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
 .detail-hint { font-size: 10px; font-weight: 700; }
 .status-pending { color: var(--orange); }
+.status-metadata { color: var(--muted); }
 .status-base { color: var(--green); }
 .status-comparison { color: var(--muted); }
 .source-title { min-width: 300px; }
 .source-title a { color: var(--text); font-weight: 650; text-decoration: none; }
 .source-title a:hover { color: var(--blue); }
 .audit-complete { display: inline-flex; padding: 3px 7px; color: var(--green); background: var(--green-soft); border: 1px solid #c3e3d7; border-radius: 999px; font-size: 10px; font-weight: 700; white-space: nowrap; }
-.audit-partial, .audit-target, .audit-metadata { display: inline-flex; padding: 3px 7px; border-radius: 999px; font-size: 10px; font-weight: 700; white-space: nowrap; }
+.audit-partial, .audit-target, .audit-metadata, .audit-inaccessible { display: inline-flex; padding: 3px 7px; border-radius: 999px; font-size: 10px; font-weight: 700; white-space: nowrap; }
 .audit-partial { color: var(--orange); background: var(--orange-soft); border: 1px solid #f0cfb6; }
 .audit-target { color: #2864a7; background: #eef6ff; border: 1px solid #bed8f6; }
 .audit-metadata { color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); }
+.audit-inaccessible { color: #8b4c22; background: #fff7ed; border: 1px solid #fed7aa; }
 
 .compare-controls { display: grid; grid-template-columns: repeat(3, minmax(180px, 1fr)) auto; gap: 10px; align-items: end; padding: 14px 18px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
 .compare-summary { display: flex; flex-wrap: wrap; gap: 8px; min-height: 49px; align-items: center; padding: 9px 18px; border-bottom: 1px solid var(--line); }
@@ -199,6 +201,7 @@ footer a { color: var(--blue); text-decoration: none; }
 .source-audit-pill.complete { color: var(--green); background: var(--green-soft); border-color: #c3e3d7; }
 .source-audit-pill.target { color: #2864a7; background: #eef6ff; border-color: #bed8f6; }
 .source-audit-pill.partial { color: var(--orange); background: var(--orange-soft); border-color: #f0cfb6; }
+.source-audit-pill.inaccessible { color: #8b4c22; background: #fff7ed; border-color: #fed7aa; }
 .drawer-results { border-top: 1px solid var(--line); }
 .result-group { padding: 20px 28px 4px; }
 .result-group + .result-group { border-top: 1px solid var(--line); }

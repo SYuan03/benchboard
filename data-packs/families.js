@@ -106,8 +106,7 @@
     { benchmarkId: "programbench", label: "Main score" },
     { benchmarkId: "programbench-resolved", label: "Resolved" },
     { benchmarkId: "programbench-almost", label: "Almost resolved" },
-    { benchmarkId: "programbench-average-pass", label: "Average pass rate" },
-    { benchmarkId: "programbench-tiers", label: "Solved tiers" }
+    { benchmarkId: "programbench-average-pass", label: "Average pass rate" }
   ]);
   mergeFamily("hle", "Humanity's Last Exam", [
     { benchmarkId: "hle", label: "No tools" },

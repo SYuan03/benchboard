@@ -1,6 +1,8 @@
 # BenchBoard
 
-[Live leaderboard](https://syuan03.github.io/benchboard/) · [Contribute data](CONTRIBUTING.md) · [MIT License](LICENSE)
+[**Open the live BenchBoard →**](https://syuan03.github.io/benchboard/)
+
+[Contribute data](CONTRIBUTING.md) · [MIT License](LICENSE)
 
 BenchBoard collects published benchmark results for current language, multimodal, and agent models. Every result stays attached to the exact model version, evaluation setup, and source that reported it. The site does not calculate a cross-benchmark composite score.
 
@@ -8,24 +10,24 @@ BenchBoard collects published benchmark results for current language, multimodal
 
 ## News
 
-- 2026-09-21: Expanded first-party release audits for Qwen3.8 Omni Flash, Claude 4, DeepSeek V3.2, and MiMo V2. The [source coverage matrix](docs/audits/model-source-coverage.md) tracks what has been checked for each model.
+- 2026-09-21: Completed a broad first-party sweep across release pages, model cards, repositories, and technical or system reports. Public result tables now carry full-table or target-column audits where possible; metadata-only and inaccessible surfaces are labeled explicitly in the [source coverage matrix](docs/audits/model-source-coverage.md).
 - 2026-09-20: Added the [Multimodal Input × Harness collection](https://syuan03.github.io/benchboard/?collection=multimodal-harness), covering published results where an agent harness receives images, audio, video, screens, or other non-text files as task input.
 - 2026-09-18: Launched BenchBoard with results for representative releases from GPT, Claude, Gemini, DeepSeek, Qwen, GLM, Seed, Kimi, and Hy.
 
 ## Coverage
 
 <!-- DATA_SUMMARY_START -->
-- 97 curated model releases
-- 35 benchmark-only comparison models
-- 462 benchmark families
-- 1069 separately ranked metrics and versions
-- 5810 deduplicated public results
-- 199 primary sources
+- 116 curated model releases
+- 15 benchmark-only comparison models
+- 531 benchmark families
+- 1150 separately ranked metrics and versions
+- 6426 deduplicated public results
+- 258 primary sources
 <!-- DATA_SUMMARY_END -->
 
 Coverage focuses on general, coding, multimodal, and agent models near the frontier in 2026. Core entries include GPT-6 Astra, GPT-5.6 Sol, Claude 5, Gemini 3.8, DeepSeek V4.1, Qwen3.8, GLM-5.3, Seed2.1, Kimi K3, and Hy4. Older or secondary models reported by an official leaderboard remain available as clearly labeled comparison records.
 
-All rows from the Coding Agent, General Agent, and General Capabilities tables in the official Qwen3.8 model card are recorded individually. Qwen3.8 Max currently has public results across 45 benchmark families and 51 separately ranked metric or version views. The open-weight `Qwen3.8-2.4T-A95B` language model and the vision-and-tool-enabled Qwen3.8 Max service are listed separately.
+All rows from the Coding Agent, General Agent, and General Capabilities tables in the official Qwen3.8 model card are recorded individually. Across its attached official sources, Qwen3.8 Max currently has 110 observations spanning 85 benchmark families and 103 separately ranked metric or version views. The open-weight `Qwen3.8-2.4T-A95B` language model and the vision-and-tool-enabled Qwen3.8 Max service are listed separately.
 
 The Qwen3.8 Omni Flash release has been checked against every published table, summary chart, and numeric claim. The page contributes 310 distinct observations. The model has 68 release-page results plus one conflicting value from the official Qwen X account, spanning 68 benchmark-and-setting views, 64 benchmark variants, and 48 benchmark families. Blank cells stay blank, rounded chart values do not replace more precise prose values, and conflicting first-party claims remain separate. The [source audit](docs/audits/qwen3.8-omni-flash.md) lists every first-party surface checked and every deliberate exclusion.
 
@@ -99,7 +101,7 @@ Modalities use three values:
 
 A provider's table may contain results for competing models. BenchBoard marks those rows as provider-reported. Data published by benchmark maintainers, including SkillsBench and PinchBench, is marked as benchmark-official. Models introduced only by one of those comparison tables carry a `comparison-only` status until a first-party model source is added.
 
-Source audits use five practical states. "Public result tables checked" covers every numeric observation in the stated source scope. "Target model column checked" covers the named model columns but may omit comparison columns. "Metadata only" means the page was checked and contains no independent benchmark table. "Partial" means some relevant result tables remain, while "Pending" means the surface has been registered but not yet checked. Safety evaluations, deployment tests, latency, throughput, and pricing are not mixed into the capability leaderboards unless they are the benchmark's stated metric.
+Source audits use six states. `complete` covers every numeric observation in the declared public result-table scope. `target-complete` covers every public numeric cell for the named model columns but may omit comparison columns. `metadata-only` means the surface was checked and contains no independent score table. `partial` means relevant result rows remain to be recorded, while `pending` means the source is registered but has not yet been checked. `inaccessible` records an official endpoint that could not be read reliably. Safety evaluations, deployment tests, latency, throughput, and pricing are not mixed into the capability leaderboards unless they are the benchmark's stated metric.
 
 One benchmark may contain several metrics or settings. Agents' Last Exam, for example, has Pass Rate and Overall Score; OSWorld has Binary, Partial, and Strict; ExploitGym has Success Rate and Solved Tasks. The site shows one benchmark entry with direct metric buttons inside it. Each metric still gets its own ranking and stable URL; composite strings and incompatible units are never forced into one table.
 

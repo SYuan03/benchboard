@@ -197,7 +197,7 @@
     { id: "posttrainbench", name: "PostTrainBench", category: "科研", direction: "higher", description: "后训练研究与实现；版本、硬件与 Harness 写入 setting。" },
     { id: "mvbench", name: "MVBench", category: "多模态", direction: "higher", description: "视频理解评测。", inputModalities: ["文本", "视频"] },
     { id: "mmvu", name: "MMVU", category: "多模态", direction: "higher", description: "多学科视频理解评测。", inputModalities: ["文本", "视频"] },
-    { id: "programbench", name: "ProgramBench", category: "编码", direction: "higher", description: "ProgramBench 主分；resolved、almost-resolved、average-pass 等口径不得混合。" },
+    { id: "programbench", name: "ProgramBench · Metric Unspecified", category: "编码", direction: "higher", description: "来源只写 ProgramBench 单项分、没有声明 resolved、almost-resolved 或 average-pass 口径时使用。" },
     { id: "swe-atlas-codebase-qa", name: "SWE-Atlas · Codebase Q&A", category: "编码", direction: "higher", description: "SWE-Atlas 代码库问答子项。" },
     { id: "swe-atlas-test-writing", name: "SWE-Atlas · Test Writing", category: "编码", direction: "higher", description: "SWE-Atlas 测试编写子项。" },
     { id: "swe-atlas-refactoring", name: "SWE-Atlas · Refactoring", category: "编码", direction: "higher", description: "SWE-Atlas 重构子项。" },
@@ -447,10 +447,8 @@
   batch(g31, "mcp-atlas", [["gemini-3-1-pro", 69.2, "public"]]);
   batch(g31, "browsecomp", [["gemini-3-1-pro", 85.9, "Search + Python + Browse"]]);
   batch(g31, "mmmlu", [["gemini-3-1-pro", 92.6]]);
-  batch(g31, "mrcr-v2-8needle", [
-    ["gemini-3-1-pro", 84.9, "128K cumulative average"],
-    ["gemini-3-1-pro", 26.3, "1M pointwise"]
-  ]);
+  batch(g31, "mrcr-v2-8needle", [["gemini-3-1-pro", 84.9, "128K cumulative average"]]);
+  batch(g31, "mrcr-v2-8needle-1m", [["gemini-3-1-pro", 26.3, "1M pointwise"]]);
   batch(g31, "mmmu-pro", [["gemini-3-1-pro", 80.5, "no tools · average of Standard (10 options) and Vision"]]);
 
   const ds41 = ["deepseek-v41", "deepseek-v41-report"];
@@ -719,7 +717,7 @@
   add(k25, "zerobench-main", "kimi-k2-5", 11, "%", "with tools");
   add(k25, "ocrbench", "kimi-k2-5", 92.3);
   add(k25, "omnidocbench-score", "kimi-k2-5", 88.8, "%", "OmniDocBench 1.5");
-  add(k25, "infovqa-val", "kimi-k2-5", 92.6);
+  add(k25, "infovqa-val", "kimi-k2-5", 92.6, "%", "Kimi K2.5 Technical Report · test split");
   add(k25, "simplevqa", "kimi-k2-5", 71.2);
   add(k25, "worldvqa", "kimi-k2-5", 46.3);
   add(k25, "videommmu", "kimi-k2-5", 86.6);

@@ -12,7 +12,7 @@
     if (patch.referenceSourceIds) {
       model.referenceSourceIds = [...new Set([...(model.referenceSourceIds || []), ...patch.referenceSourceIds])];
     }
-    delete model.scoreStatus;
+    if (patch.scoreStatus === undefined) delete model.scoreStatus;
   };
   const ensureBenchmark = (row) => {
     const existing = benchmarks.find((item) => item.id === row.id);
@@ -179,11 +179,13 @@
   patchModel("glm-5-turbo", {
     releaseDate: "2026", modality: "language", modalityDetail: "文本 → 文本与工具调用",
     context: "200K", access: "闭源 API", sourceId: "zai-glm5-turbo-docs",
+    scoreStatus: "comparison-only",
     summary: "为 OpenClaw 长链任务优化的纯文本模型；官方页面公开 ZClawBench 图，但没有 HTML 数值表。"
   });
   patchModel("glm-5v-turbo", {
     releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像、视频、文件 → 文本与工具调用",
     context: "200K", access: "闭源 API", sourceId: "zai-glm5v-turbo-docs",
+    scoreStatus: "comparison-only",
     summary: "Z.ai 首个多模态编码基础模型，面向 Claude Code 与 OpenClaw 工作流。"
   });
 
@@ -205,18 +207,21 @@
     releaseDate: "2026-03-10", modality: "vision", modalityDetail: "文本、图像 → 文本与工具调用",
     context: "1,000,000", access: "闭源 API", sourceId: "xai-grok420-docs",
     referenceSourceIds: ["xai-release-notes"],
+    scoreStatus: "comparison-only",
     summary: "SpaceXAI 的 1M 上下文视觉语言模型，支持 reasoning、函数调用与结构化输出。"
   });
   patchModel("grok-4-20-beta", {
     releaseDate: "2026-03", modality: "vision", modalityDetail: "文本、图像 → 文本与工具调用",
     context: "1,000,000", access: "闭源 API beta alias", sourceId: "xai-grok420-docs",
     referenceSourceIds: ["xai-release-notes"],
+    scoreStatus: "comparison-only",
     summary: "Grok 4.20 官方文档仍列出的 beta alias；与正式 Grok 4.20 的第三方榜单结果分开保存。"
   });
   patchModel("grok-4-3", {
     modality: "vision", modalityDetail: "文本、图像 → 文本与工具调用",
     context: "1,000,000", access: "闭源 API", sourceId: "xai-grok43-docs",
     referenceSourceIds: ["xai-release-notes"],
+    scoreStatus: "comparison-only",
     summary: "支持 none/low/medium/high/xhigh reasoning effort、函数调用与结构化输出的视觉语言模型。"
   });
 
