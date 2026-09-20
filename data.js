@@ -1,8 +1,8 @@
 window.BENCH_DATA = (() => {
   const meta = {
     title: "BenchBoard",
-    updated: "2026-09-19",
-    scope: "截至 2026-09-19 的领先通用/Agent 模型公开成绩"
+    updated: "2026-09-20",
+    scope: "截至 2026-09-20 的领先通用/Agent 模型公开成绩"
   };
 
   const sources = [
@@ -17,13 +17,18 @@ window.BENCH_DATA = (() => {
     { id: "qwen38", vendorId: "alibaba", publisher: "Qwen / Alibaba Cloud", date: "2026-08-03", tier: "official", title: "Qwen3.8-Max: A New Bar for Coding and Cowork", url: "https://qwen.ai/blog?id=qwen3.8" },
     { id: "qwen38-hf", vendorId: "alibaba", publisher: "Qwen", date: "2026-08-13", tier: "official", title: "Qwen3.8-2.4T-A95B — Official Model Card", url: "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B" },
     { id: "qwen38-omni", vendorId: "alibaba", publisher: "Qwen", date: "2026-09-18", tier: "official", title: "Qwen3.8-Omni-Flash: Omni Senses. Agentic Delivery.", url: "https://qwen.ai/blog?id=qwen3.8-omni-flash" },
+    { id: "qwen37", vendorId: "alibaba", publisher: "Qwen / Alibaba Cloud", date: "2026-05-21", tier: "official", title: "Qwen3.7: The Agent Frontier", url: "https://www.alibabacloud.com/blog/qwen3-7-the-agent-frontier_603154" },
+    { id: "qwen37-plus", vendorId: "alibaba", publisher: "Qwen / Alibaba Cloud", date: "2026-06-03", tier: "official", title: "Qwen3.7-Plus: Multimodal Agent Intelligence", url: "https://www.alibabacloud.com/blog/qwen3-7-plus-multimodal-agent-intelligence_603206" },
     { id: "wildclawbench", vendorId: "wildclawbench", kind: "benchmark", publisher: "WildClawBench / InternLM", date: "2026-07-20", tier: "official", title: "WildClawBench Official Leaderboard", url: "https://internlm.github.io/WildClawBench/" },
     { id: "alibaba-lifecycle", vendorId: "alibaba", publisher: "Alibaba Cloud Model Studio", date: "2026-09-18", tier: "official", title: "模型上下架与更新", url: "https://help.aliyun.com/zh/model-studio/newly-released-models" },
     { id: "seed21", vendorId: "bytedance", publisher: "ByteDance Seed", date: "2026-06-23", tier: "official", title: "Seed2.1 — Model Card", url: "https://seed.bytedance.com/en/seed2_1" },
     { id: "hy4", vendorId: "tencent", publisher: "Tencent Hy", date: "2026-08-28", tier: "official", title: "Hy4-preview — Official Model Card", url: "https://huggingface.co/tencent/Hy4-preview" },
     { id: "skillsbench-1-1", vendorId: "benchflow", kind: "benchmark", publisher: "SkillsBench / BenchFlow", date: "2026-07-16", tier: "official", title: "SkillsBench 1.1 Official Leaderboard", url: "https://www.skillsbench.ai/" },
     { id: "pinchbench-v2", vendorId: "pinchbench", kind: "benchmark", publisher: "PinchBench", date: "2026-08-18", tier: "official", title: "PinchBench v2 — OpenClaw Benchmark Leaderboard", url: "https://pinchbench.com/" },
-    { id: "rngbench", vendorId: "rngbench", kind: "benchmark", publisher: "RNG-Bench / InternLM", date: "2026-07-07", tier: "official", title: "RNG-Bench Official Results", url: "https://internlm.github.io/RNGBench/" }
+    { id: "rngbench", vendorId: "rngbench", kind: "benchmark", publisher: "RNG-Bench / InternLM", date: "2026-07-07", tier: "official", title: "RNG-Bench Official Results", url: "https://internlm.github.io/RNGBench/" },
+    { id: "qwenclawbench", vendorId: "qwenclawbench", kind: "benchmark", publisher: "QwenClawBench / Qwen Team", date: "2026-04", tier: "official", title: "QwenClawBench v1.1", url: "https://github.com/SKYLENAGE-AI/QwenClawBench" },
+    { id: "workspacebench", vendorId: "workspacebench", kind: "benchmark", publisher: "Workspace-Bench", date: "2026-05-05", tier: "official", title: "Workspace-Bench 1.0", url: "https://github.com/OpenDataBox/Workspace-Bench" },
+    { id: "claweval", vendorId: "claweval", kind: "benchmark", publisher: "Claw-Eval", date: "2026", tier: "official", title: "Claw-Eval Official Benchmark", url: "https://github.com/claw-eval/claw-eval" }
   ];
 
   const models = [
@@ -46,7 +51,8 @@ window.BENCH_DATA = (() => {
     { id: "deepseek-v4-pro", name: "DeepSeek V4 Pro 0813", vendorId: "deepseek", vendor: "DeepSeek", releaseDate: "2026-08-13", modality: "language", modalityDetail: "文本 → 文本", context: "1M", access: "API（已进入迁移期）", aliases: ["deepseek-v4-pro-0813"], sourceId: "alibaba-lifecycle", summary: "1.6T MoE 旗舰快照；官方已宣布流量逐步迁移至 V4.1 Flash。" },
     { id: "qwen3-8-max", name: "Qwen3.8 Max", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-08-02", modality: "vision", modalityDetail: "服务版：文本、图像 → 文本；官方卡另列内置工具与非思考模式", context: "1M", access: "闭源 API（基于开放权重底座）", aliases: ["qwen3.8-max"], sourceId: "qwen38-hf", summary: "Qwen3.8 的官方托管服务版；模型卡 Benchmark 表中的 Qwen3.8-Max 均归到这里。" },
     { id: "qwen3-8-2-4t-a95b", name: "Qwen3.8-2.4T-A95B", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-08-13", modality: "language", modalityDetail: "文本 → 文本；仅思考模式，不支持多模态输入", context: "262K 原生 / 可扩展至 1.01M", access: "开放权重", aliases: ["Qwen/Qwen3.8-2.4T-A95B"], sourceId: "qwen38-hf", scoreStatus: "base-model", summary: "2.4T 总参数、95B 激活的纯语言开放权重底座；与支持视觉的 Qwen3.8-Max 服务版分开登记。" },
-    { id: "qwen3-7-max", name: "Qwen3.7 Max", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026", modality: "vision", modalityDetail: "文本、图像 → 文本", context: "未披露", access: "闭源 API", aliases: ["qwen3.7-max"], sourceId: "qwen38-hf", summary: "Qwen3.8 官方模型卡中的上一代对照模型。" },
+    { id: "qwen3-7-max", name: "Qwen3.7 Max", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-05-21", modality: "vision", modalityDetail: "文本、图像 → 文本；支持主流 Agent Harness", context: "未披露", access: "闭源 API", aliases: ["qwen3.7-max"], sourceId: "qwen37", summary: "Qwen3.7 旗舰 Agent 模型；官方报告了 OpenClaw、Claude Code 与 Hermes 跨 Harness 成绩。" },
+    { id: "qwen3-7-plus", name: "Qwen3.7 Plus", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-06-03", modality: "vision", modalityDetail: "文本、图像、视频、屏幕/GUI → 文本与工具调用", context: "未披露", access: "闭源 API", aliases: ["qwen3.7-plus"], sourceId: "qwen37-plus", summary: "面向 GUI、CLI 与多模态交互的 Agent 模型，官方报告 QwenClawBench、ClawEval 与 SkillsBench 等成绩。" },
     { id: "qwen3-8-max-0902", name: "Qwen3.8 Max 0902", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-09-02", modality: "vision", modalityDetail: "文本、图像、长视频 → 文本", context: "1M", access: "API 快照", aliases: ["qwen3.8-max-0902", "qwen3.8-max-2026-09-02"], sourceId: "alibaba-lifecycle", scoreStatus: "pending", summary: "9 月 2 日升级快照；官方尚未披露独立完整 Benchmark 表。" },
     { id: "qwen3-8-flash", name: "Qwen3.8 Flash", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-08-26", modality: "vision", modalityDetail: "文本、图像、长视频 → 文本", context: "1M", access: "API", aliases: ["qwen3.8-flash"], sourceId: "alibaba-lifecycle", scoreStatus: "pending", summary: "多模态高并发版本，面向编程、Agent 与长上下文。" },
     { id: "qwen3-8-omni-flash", name: "Qwen3.8 Omni Flash", vendorId: "alibaba", vendor: "Alibaba Qwen", releaseDate: "2026-09-18", modality: "omni", modalityDetail: "文本、图像、音频、视频 → 文本", context: "1M", access: "闭源 API", aliases: ["qwen3.8-omni-flash"], sourceId: "qwen38-omni", summary: "Qwen3.8 的原生全模态版本，面向音视频 Agent、编码和长程任务。" },
@@ -63,26 +69,27 @@ window.BENCH_DATA = (() => {
   ];
 
   const benchmarks = [
-    { id: "agents-last-exam-pass", name: "Agents' Last Exam · Pass Rate", category: "Agent / 工作", direction: "higher", description: "跨专业长程工作流的任务通过率；与 Overall Score 分榜展示。" },
-    { id: "agents-last-exam-score", name: "Agents' Last Exam · Overall Score", category: "Agent / 工作", direction: "higher", description: "跨专业长程工作流的总体得分；与 Pass Rate 分榜展示。" },
+    { id: "agents-last-exam-pass", name: "Agents' Last Exam · Pass Rate", category: "Agent / 工作", direction: "higher", description: "跨专业长程工作流的任务通过率；完整 Agent 在沙箱中通过 Claude Code、Codex、Cursor、ALE-CLI / ALE-Claw 等 Harness 执行。", collections: ["multimodal-harness"], collectionScope: "general", collectionMode: "benchmark", harnesses: ["Claude Code", "Codex", "Cursor", "ALE-CLI / ALE-Claw"] },
+    { id: "agents-last-exam-score", name: "Agents' Last Exam · Overall Score", category: "Agent / 工作", direction: "higher", description: "跨专业长程工作流的总体得分；完整 Agent 在沙箱中执行，与 Pass Rate 分榜展示。", collections: ["multimodal-harness"], collectionScope: "general", collectionMode: "benchmark", harnesses: ["Claude Code", "Codex", "Cursor", "ALE-CLI / ALE-Claw"] },
     { id: "automationbench", name: "AutomationBench", category: "Agent / 工作", direction: "higher", description: "真实自动化工作流；版本与 Harness 差异会显著影响分数。" },
     { id: "gdpval-aa-v2", name: "GDPval-AA v2", category: "Agent / 工作", direction: "higher", description: "高经济价值知识工作，常报告 Elo。" },
     { id: "toolathlon", name: "Toolathlon Verified", category: "Agent / 工作", direction: "higher", description: "工具调用与长程 Agent 能力。" },
-    { id: "terminal-bench-2-1", name: "Terminal-Bench 2.1", category: "编码", direction: "higher", description: "终端环境 Agent 编码；Harness、超时、联网策略很重要。" },
+    { id: "terminal-bench-2-0", name: "Terminal-Bench 2.0 · Terminus-2", category: "编码", direction: "higher", description: "Qwen3.7 Plus 官方表使用 Harbor / Terminus-2 Harness；与 2.1、3.0、4.0 分榜。", collections: ["multimodal-harness"], collectionScope: "coding", collectionMode: "observation", harnesses: ["Harbor / Terminus-2"] },
+    { id: "terminal-bench-2-1", name: "Terminal-Bench 2.1", category: "编码", direction: "higher", description: "终端环境 Agent 编码；专题仅显示来源明确写出 Claude Code、Codex 等 Harness 的记录。", collections: ["multimodal-harness"], collectionScope: "coding", collectionMode: "observation", harnesses: ["Claude Code", "Codex", "Terminus-2"] },
     { id: "terminal-bench-3-0", name: "Terminal-Bench 3.0", category: "编码", direction: "higher", description: "更高难度终端任务。" },
     { id: "terminal-bench-4-0", name: "Terminal-Bench 4.0", category: "编码", direction: "higher", description: "新一代通用终端 Agent 任务。" },
-    { id: "terminal-bench-science", name: "Terminal-Bench Science 0.1", category: "科研", direction: "higher", description: "使用代码与终端完成科学研究工作流。" },
-    { id: "deepswe-v1-1", name: "DeepSWE v1.1", category: "编码", direction: "higher", description: "长程软件工程；不同 Agent Scaffold 会产生不同结果。" },
+    { id: "terminal-bench-science", name: "Terminal-Bench Science 0.1", category: "科研", direction: "higher", description: "使用代码与终端完成科学研究工作流；Anthropic 官方表明确使用 Claude Code Harness。", collections: ["multimodal-harness"], collectionScope: "coding", collectionMode: "observation", harnesses: ["Claude Code"] },
+    { id: "deepswe-v1-1", name: "DeepSWE v1.1", category: "编码", direction: "higher", description: "长程软件工程；不同 Agent Scaffold 会产生不同结果。专题保留 Claude Code / mini-SWE-agent 口径。", collections: ["multimodal-harness"], collectionScope: "coding", collectionMode: "observation", harnesses: ["Claude Code", "mini-SWE-agent"] },
     { id: "frontiercode-1-1-extended", name: "FrontierCode 1.1 Extended", category: "编码", direction: "higher", description: "真实软件工程任务的扩展版；不同推理档位和成本点分别保留。" },
-    { id: "swe-bench-pro", name: "SWE-Bench Pro", category: "编码", direction: "higher", description: "真实仓库软件工程。" },
-    { id: "nl2repo", name: "NL2Repo-Bench", category: "编码", direction: "higher", description: "从自然语言需求构建仓库级实现。" },
-    { id: "frontierswe", name: "FrontierSWE", category: "编码", direction: "higher", description: "前沿软件工程任务；Qwen 表报告 MEAN@5，并说明对照值来自官方榜。" },
-    { id: "mls-bench-lite", name: "MLS-Bench-Lite", category: "编码", direction: "higher", description: "机器学习工程 Agent 任务；Harness 与超时设置会影响结果。" },
+    { id: "swe-bench-pro", name: "SWE-Bench Pro", category: "编码", direction: "higher", description: "真实仓库软件工程；专题仅显示模型厂商明确通过 Claude Code 等 Harness 报告的记录。", collections: ["multimodal-harness"], collectionScope: "coding", collectionMode: "observation", harnesses: ["Claude Code"] },
+    { id: "nl2repo", name: "NL2Repo-Bench", category: "编码", direction: "higher", description: "从自然语言需求构建仓库级实现；Qwen 官方表明确使用 Claude Code。", collections: ["multimodal-harness"], collectionScope: "coding", collectionMode: "observation", harnesses: ["Claude Code"] },
+    { id: "frontierswe", name: "FrontierSWE", category: "编码", direction: "higher", description: "前沿软件工程任务；Qwen 通过 Claude Code 报告 MEAN@5，并说明对照值来自官方榜。", collections: ["multimodal-harness"], collectionScope: "coding", collectionMode: "observation", harnesses: ["Claude Code"] },
+    { id: "mls-bench-lite", name: "MLS-Bench-Lite", category: "编码", direction: "higher", description: "机器学习工程 Agent 任务；Qwen 官方表使用 Claude Code、5 小时超时。", collections: ["multimodal-harness"], collectionScope: "coding", collectionMode: "observation", harnesses: ["Claude Code"] },
     { id: "paperbench", name: "PaperBench", category: "科研", direction: "higher", description: "复现论文与科研工程交付；需注明 Agent、评判模型和运行预算。" },
     { id: "androidbench", name: "AndroidBench", category: "编码", direction: "higher", description: "Android 工程任务；Qwen 表使用 95 题公开子集并报告 avg@3。" },
-    { id: "qwen-swe-bench", name: "QwenSWEBench", category: "编码", direction: "higher", description: "Qwen 内部软件工程基准；Claude Code harness，avg@3。" },
-    { id: "qwen-qoder-bench", name: "QwenQoderBench", category: "编码", direction: "higher", description: "Qwen 内部 Qoder 用户体验基准；Claude Code harness，avg@5。" },
-    { id: "qwen-react-bench", name: "QwenReactBench", category: "编码", direction: "higher", description: "双语 React 项目构建基准；自动渲染与多模态评判，报告 Elo。" },
+    { id: "qwen-swe-bench", name: "QwenSWEBench", category: "编码", direction: "higher", description: "Qwen 内部软件工程基准；Claude Code harness，avg@3。", collections: ["multimodal-harness"], collectionScope: "coding", collectionMode: "observation", harnesses: ["Claude Code"] },
+    { id: "qwen-qoder-bench", name: "QwenQoderBench", category: "编码", direction: "higher", description: "Qwen 内部 Qoder 用户体验基准；Claude Code harness，avg@5。", collections: ["multimodal-harness"], collectionScope: "coding", collectionMode: "observation", harnesses: ["Claude Code"] },
+    { id: "qwen-react-bench", name: "QwenReactBench", category: "编码", direction: "higher", description: "Claude Code 驱动的双语 React 项目构建；自动渲染与多模态评判，报告 Elo。", collections: ["multimodal-harness"], collectionScope: "multimodal", collectionMode: "observation", harnesses: ["Claude Code"] },
     { id: "qwen-svg-bench", name: "QwenSVGBench", category: "编码", direction: "higher", description: "双语 SVG 代码生成基准；自动渲染与多模态评判，报告 Elo。" },
     { id: "programbench-almost", name: "ProgramBench · Almost Solved", category: "编码", direction: "higher", description: "从零完成系统级工程任务的 Almost Solved 口径。" },
     { id: "programbench-tiers", name: "ProgramBench · Solved Tiers", category: "编码", direction: "higher", description: "Seed 官方报告的多级 Solved 复合指标，仅陈列原值。" },
@@ -124,25 +131,25 @@ window.BENCH_DATA = (() => {
     { id: "exploitbench-2026-jun-aug", name: "ExploitBench · June–August 2026", category: "网络安全", direction: "higher", description: "OpenAI 使用 2026 年 6–8 月新漏洞构建的独立评测；不与历史 ExploitBench 混排。" },
     { id: "exploitgym-rate", name: "ExploitGym · Success Rate", category: "网络安全", direction: "higher", description: "漏洞利用成功率；不与完成任务数混排。" },
     { id: "exploitgym-tasks", name: "ExploitGym · Solved Tasks", category: "网络安全", direction: "higher", description: "在给定时间预算内完成的任务数；分母保留在设置中。" },
-    { id: "cybergym", name: "CyberGym", category: "网络安全", direction: "higher", description: "白盒漏洞发现与验证。" },
-    { id: "sec-bench-pro", name: "SEC-Bench Pro", category: "网络安全", direction: "higher", description: "复杂软件 PoC 生成。" },
+    { id: "cybergym", name: "CyberGym", category: "网络安全", direction: "higher", description: "白盒漏洞发现与验证；Z.ai 官方表使用 Claude Code 且关闭 Web 工具。", collections: ["multimodal-harness"], collectionScope: "coding", collectionMode: "observation", harnesses: ["Claude Code"] },
+    { id: "sec-bench-pro", name: "SEC-Bench Pro", category: "网络安全", direction: "higher", description: "复杂软件 PoC 生成；专题显示 DeepSeek 官方 Claude Code Harness 记录。", collections: ["multimodal-harness"], collectionScope: "coding", collectionMode: "observation", harnesses: ["Claude Code"] },
     { id: "sre-bench-1", name: "SRE-Bench · 1 Attempt", category: "网络安全", direction: "higher", description: "二进制逆向任务的单次尝试成功率；与四次尝试分榜。" },
     { id: "sre-bench-4", name: "SRE-Bench · 4 Attempts", category: "网络安全", direction: "higher", description: "二进制逆向任务四次尝试内的累计成功率；与单次尝试分榜。" },
     { id: "mrcr-256k", name: "MRCR v2 · 256K", category: "长上下文", direction: "higher", description: "8-needle、256K 长上下文检索。" },
     { id: "mrcr-512k", name: "OpenAI MRCR v2 · 512K–1M", category: "长上下文", direction: "higher", description: "8-needle、512K–1M 长上下文检索；不与 256K 分数混排。" },
     { id: "longbench-v2", name: "LongBench v2", category: "长上下文", direction: "higher", description: "真实长上下文理解与推理任务。" },
     { id: "mmlongbench", name: "MMLongBench-128K", category: "长上下文", direction: "higher", description: "128K 多模态长上下文。" },
-    { id: "coworkbench", name: "CoWorkBench", category: "专业工作", direction: "higher", description: "覆盖计算机、金融、法律、医疗等领域的长程协作任务。" },
-    { id: "workspace-bench", name: "WorkSpaceBench", category: "专业工作", direction: "higher", description: "高经济价值文档与工作区任务。" },
+    { id: "coworkbench", name: "CoWorkBench", category: "专业工作", direction: "higher", description: "覆盖计算机、金融、法律、医疗等领域的长程协作任务；Qwen3.7 官方提供跨 Harness 对照。", collections: ["multimodal-harness"], collectionScope: "workspace", collectionMode: "observation", harnesses: ["OpenClaw", "Claude Code", "Hermes"] },
+    { id: "workspace-bench", name: "Workspace-Bench 1.0", category: "专业工作", direction: "higher", description: "20,476 个文件、74 种文件类型的真实工作区任务；Benchmark 使用 ClaudeCode、DeepAgent、Hermes 与 OpenClaw，厂商表未逐行披露具体 Harness。", collections: ["multimodal-harness"], collectionScope: "workspace", collectionMode: "benchmark", harnesses: ["Claude Code", "DeepAgent", "Hermes", "OpenClaw"] },
     { id: "jobbench", name: "JobBench", category: "专业工作", direction: "higher", description: "真实职业任务与交付质量评测。" },
-    { id: "wide-search", name: "WideSearch", category: "Agent / 工作", direction: "higher", description: "宽域检索 Agent；Qwen 表报告四次运行的平均 item-F1。" },
+    { id: "wide-search", name: "WideSearch", category: "Agent / 工作", direction: "higher", description: "宽域检索 Agent；Qwen 表报告 Claude Code / Qwen-Agent 四次运行的平均 item-F1。", collections: ["multimodal-harness"], collectionScope: "general", collectionMode: "observation", harnesses: ["Claude Code", "Qwen-Agent"] },
     { id: "agent-startup-bench", name: "Agent Startup Bench", category: "专业工作", direction: "higher", description: "AI 原生创业公司真实工作流。" },
     { id: "officeqa-pro", name: "OfficeQA Pro", category: "专业工作", direction: "higher", description: "复杂办公文档问答与检索。" },
     { id: "supergpqa", name: "SuperGPQA", category: "知识 / 推理", direction: "higher", description: "广覆盖专业知识问答。" },
     { id: "beyondaime", name: "BeyondAIME", category: "知识 / 推理", direction: "higher", description: "高难数学推理。" },
     { id: "swe-multilingual", name: "SWE-bench Multilingual", category: "编码", direction: "higher", description: "多语言仓库问题修复。" },
     { id: "apex-agents", name: "Apex Agents", category: "Agent / 工作", direction: "higher", description: "Agent 综合任务。" },
-    { id: "skillsbench-1-1", name: "SkillsBench 1.1", category: "Agent / 工作", direction: "higher", description: "87 个跨 8 个专业域的真实任务；with Skills 与 without Skills、Agent Harness 必须分开看。" },
+    { id: "skillsbench-1-1", name: "SkillsBench 1.1", category: "Agent / 工作", direction: "higher", description: "87 个跨 8 个专业域的真实任务，其中包含视频、图像与 3D 等多模态任务；with Skills 与 without Skills、Agent Harness 必须分开看。", collections: ["multimodal-harness"], collectionScope: "general", collectionMode: "benchmark", harnesses: ["OpenHands", "Claude Code", "Codex", "OpenCode", "Gemini CLI"] },
     { id: "ifbench", name: "IFBench", category: "知识 / 推理", direction: "higher", description: "指令遵循能力评测。" },
     { id: "one-million-bench", name: "$OneMillion-Bench · Expert Score", category: "专业工作", direction: "higher", description: "高价值专家任务；Qwen 表使用 Gemini 3.1 Pro Preview 评判。" },
     { id: "healthbench", name: "HealthBench", category: "专业工作", direction: "higher", description: "医疗健康对话与专业能力评测。" },
@@ -153,12 +160,14 @@ window.BENCH_DATA = (() => {
     { id: "plawbench", name: "PLawBench", category: "专业工作", direction: "higher", description: "法律专业任务；Qwen 表使用 Gemini 3.1 Pro Preview 评判。" },
     { id: "prbench-legal", name: "PRBench-Legal", category: "专业工作", direction: "higher", description: "法律专业研究与交付任务。" },
     { id: "prbench-finance", name: "PRBench-Finance", category: "专业工作", direction: "higher", description: "金融专业研究与交付任务。" },
-    { id: "wildclawbench-overall", name: "WildClawBench · Overall", category: "Agent / 工作", direction: "higher", description: "开放环境通用 Agent 总体成绩。" },
+    { id: "qwenclawbench", name: "QwenClawBench · Qwen3.7 Snapshot", category: "Agent / 工作", direction: "higher", description: "Qwen 官方发布时的真实用户分布 Claw Agent 快照；跨 OpenClaw、Claude Code 与 Hermes 报分，不与后来开源的 v1.1 自动混合。", collections: ["multimodal-harness"], collectionScope: "general", collectionMode: "benchmark", harnesses: ["OpenClaw", "Claude Code", "Hermes"] },
+    { id: "claweval", name: "ClawEval", category: "Agent / 工作", direction: "higher", description: "面向真实 Agent 任务的 Claw-Eval 评测；Qwen3.7 Plus 官方表报告该项成绩。", collections: ["multimodal-harness"], collectionScope: "general", collectionMode: "benchmark", harnesses: ["Claw-Eval"] },
+    { id: "wildclawbench-overall", name: "WildClawBench · Overall", category: "Agent / 工作", direction: "higher", description: "OpenClaw 完整 60 题总体成绩；混合题集包含视频剪辑、配音与跨模态创作等任务。", collections: ["multimodal-harness"], collectionScope: "general", collectionMode: "benchmark", harnesses: ["OpenClaw"] },
     { id: "wildclawbench-time", name: "WildClawBench · Elapsed Time", category: "Agent / 工作", direction: "lower", description: "OpenClaw 完整 60 题的总用时，单位为分钟；数值越低越好。" },
     { id: "wildclawbench-cost", name: "WildClawBench · Total Cost", category: "Agent / 工作", direction: "lower", description: "OpenClaw 完整 60 题的总成本，单位为美元；数值越低越好。" },
-    { id: "wildclawbench-mm", name: "WildClawBench-MM", category: "Agent / 工作", direction: "higher", description: "多模态 Agent 子榜，评估视觉与音视频任务。与 WildClawBench Overall 分开排名。" },
-    { id: "pinchbench-v2-best", name: "PinchBench v2 · Best Success Rate", category: "Agent / 工作", direction: "higher", description: "OpenClaw 真实 Agent 任务的单次最佳成功率；与平均成功率分榜。" },
-    { id: "pinchbench-v2-average", name: "PinchBench v2 · Average Success Rate", category: "Agent / 工作", direction: "higher", description: "OpenClaw 真实 Agent 任务的平均成功率；页面徽标显示 147 tasks、620 runs，v2.0.0 release notes 写 148 tasks，两个官方口径均保留。" }
+    { id: "wildclawbench-mm", name: "WildClawBench-MM", category: "Agent / 工作", direction: "higher", description: "专门多模态 Agent 子榜，通过 OpenClaw 评估视觉、音频与视频任务。与 WildClawBench Overall 分开排名。", collections: ["multimodal-harness"], collectionScope: "multimodal", collectionMode: "benchmark", harnesses: ["OpenClaw"] },
+    { id: "pinchbench-v2-best", name: "PinchBench v2 · Best Success Rate", category: "Agent / 工作", direction: "higher", description: "OpenClaw 真实 Agent 混合题集的单次最佳成功率；包含图像生成、图像识别与创作任务，与平均成功率分榜。", collections: ["multimodal-harness"], collectionScope: "general", collectionMode: "benchmark", harnesses: ["OpenClaw"] },
+    { id: "pinchbench-v2-average", name: "PinchBench v2 · Average Success Rate", category: "Agent / 工作", direction: "higher", description: "OpenClaw 真实 Agent 混合题集的平均成功率；包含图像生成、图像识别与创作任务。页面徽标显示 147 tasks、620 runs，v2.0.0 release notes 写 148 tasks，两个官方口径均保留。", collections: ["multimodal-harness"], collectionScope: "general", collectionMode: "benchmark", harnesses: ["OpenClaw"] }
   ];
 
   const observations = [];
@@ -169,9 +178,9 @@ window.BENCH_DATA = (() => {
     rows.forEach(([modelId, value, rowSetting = setting, note = ""]) => add(sourceIds, benchmarkId, modelId, value, unit, rowSetting, note));
   };
   const qwenComparisonModels = ["claude-opus-4-8", "claude-fable-5", "gpt-5-6-sol", "qwen3-7-max", "qwen3-8-max"];
-  const qwenCompare = (benchmarkId, values, unit = "%", setting = "Qwen3.8 官方模型卡对照表", note = "") => {
+  const qwenCompare = (benchmarkId, values, unit = "%", setting = "Qwen3.8 官方模型卡对照表", note = "", sourceIds = ["qwen38-hf"]) => {
     values.forEach((value, index) => {
-      if (value !== null) add(["qwen38-hf"], benchmarkId, qwenComparisonModels[index], value, unit, setting, note);
+      if (value !== null) add(sourceIds, benchmarkId, qwenComparisonModels[index], value, unit, setting, note);
     });
   };
 
@@ -205,6 +214,8 @@ window.BENCH_DATA = (() => {
   add(["seed21"], "terminal-bench-2-1", "seed2-1-pro", 71.0, "%", "Seed model card");
   add(["seed21"], "terminal-bench-2-1", "seed2-1-turbo", 67.6, "%", "Seed model card");
   add(["hy4"], "terminal-bench-2-1", "hy4-preview", 85.4, "%", "HF Eval Result");
+
+  add(["qwen37-plus"], "terminal-bench-2-0", "qwen3-7-plus", 70.3, "%", "Qwen3.7 Plus 官方表 · Harbor / Terminus-2 · 5h · 5次平均");
 
   batch(["zai-glm53"], "terminal-bench-3-0", [["glm-5-3",28.3],["kimi-k3",17.4],["claude-opus-4-8",21.1],["gpt-5-6-sol",34.6]]);
   batch(["deepseek-v41"], "terminal-bench-3-0", [["deepseek-v4-1-flash",30.0],["glm-5-3",28.3],["kimi-k3",17.7],["claude-opus-5",43.3],["gpt-5-6-sol",34.4]], "%", "DeepSeek Harness / max effort");
@@ -411,9 +422,9 @@ window.BENCH_DATA = (() => {
   add(["seed21"], "mmlongbench", "seed2-1-pro", 78.3, "%", "128K");
   add(["seed21"], "mmlongbench", "seed2-1-turbo", 76.9, "%", "128K");
 
-  add(["seed21"], "workspace-bench", "seed2-1-pro", 53.0, "%", "High-Economic-Value");
-  add(["seed21"], "workspace-bench", "seed2-1-turbo", 54.7, "%", "High-Economic-Value");
-  add(["qwen38"], "workspace-bench", "qwen3-8-max", 67.7, "%", "Qwen官方表");
+  add(["seed21", "workspacebench"], "workspace-bench", "seed2-1-pro", 53.0, "%", "High-Economic-Value");
+  add(["seed21", "workspacebench"], "workspace-bench", "seed2-1-turbo", 54.7, "%", "High-Economic-Value");
+  add(["qwen38", "workspacebench"], "workspace-bench", "qwen3-8-max", 67.7, "%", "Qwen官方表");
   add(["seed21"], "agent-startup-bench", "seed2-1-pro", 68.8, "%", "High-Economic-Value");
   add(["seed21"], "agent-startup-bench", "seed2-1-turbo", 54.0, "%", "High-Economic-Value");
   add(["zai-glm53-flash"], "officeqa-pro", "glm-5-3-flash", 62.4, "%", "Treasury Bulletin / 无嵌入文本");
@@ -437,11 +448,11 @@ window.BENCH_DATA = (() => {
   qwenCompare("androidbench", [69.8, 84.5, 74.0, 56.5, 75.1], "%", "Qwen表：95题公开子集 · avg@3");
   qwenCompare("qwen-swe-bench", [84.0, 86.3, 73.5, 63.4, 80.7], "%", "Qwen内部基准：Claude Code · avg@3 · 8h · 256K");
   qwenCompare("qwen-qoder-bench", [62.7, 63.1, 53.8, 36.8, 58.4], "%", "Qwen内部基准：Claude Code · avg@5 · 6h · 256K");
-  qwenCompare("qwen-react-bench", [1694, 1770, 1564, 1538, 1724], "Elo", "Qwen内部双语 React 基准 · 自动渲染 + 多模态评判 · BT/Elo");
+  qwenCompare("qwen-react-bench", [1694, 1770, 1564, 1538, 1724], "Elo", "Qwen内部双语 React 基准 · Claude Code harness · 自动渲染 + 多模态评判 · BT/Elo");
   qwenCompare("qwen-svg-bench", [1648, 1690, 1758, 1499, 1713], "Elo", "Qwen内部双语 SVG 基准 · 自动渲染 + 多模态评判 · BT/Elo");
 
   qwenCompare("coworkbench", [72.3, 75.9, 71.5, 64.6, 74.8], "%", "Qwen内部 CoWorkBench");
-  qwenCompare("workspace-bench", [66.8, 68.7, 65.6, 61.4, 67.7]);
+  qwenCompare("workspace-bench", [66.8, 68.7, 65.6, 61.4, 67.7], "%", "Qwen3.8 官方模型卡对照表 · Workspace-Bench 1.0", "Benchmark 使用 ClaudeCode、DeepAgent、Hermes 与 OpenClaw；厂商表未逐行披露 Harness", ["qwen38-hf", "workspacebench"]);
   qwenCompare("jobbench", [48.4, 57.4, 45.4, 31.3, 53.4]);
   qwenCompare("skillsbench-1-1", [65.1, 70.9, 73.5, 61.2, 70.2], "%", "Qwen他测：v1.1 · 87 tasks · 每题3次均值；Opus/Fable=Claude Code，GPT=Codex，Qwen=OpenCode");
   qwenCompare("agents-last-exam-pass", [27.0, null, 30.6, 11.8, 27.0], "%", "Qwen表：Pass Rate");
@@ -461,6 +472,23 @@ window.BENCH_DATA = (() => {
   qwenCompare("prbench-finance", [51.9, 55.8, 55.5, 46.8, 58.3]);
   qwenCompare("mrcr-256k", [83.2, null, 93.8, 86.7, 92.9], "%", "Qwen表：MRCR v2 · 256K · 8-needle");
   qwenCompare("longbench-v2", [69.1, null, 67.1, 65.3, 66.3]);
+
+  batch(["qwen37", "qwenclawbench"], "qwenclawbench", [
+    ["qwen3-7-max", 64.3, "Qwen3.7 官方跨 Harness 图表 · OpenClaw · launch snapshot"],
+    ["qwen3-7-max", 68.5, "Qwen3.7 官方跨 Harness 图表 · Claude Code (CC) · launch snapshot"],
+    ["qwen3-7-max", 70.7, "Qwen3.7 官方跨 Harness 图表 · Hermes · launch snapshot"]
+  ]);
+  add(["qwen37-plus", "qwenclawbench"], "qwenclawbench", "qwen3-7-plus", 61.8, "%", "Qwen3.7 Plus 官方表 · OpenClaw benchmark · exact harness row not separately disclosed");
+
+  batch(["qwen37"], "coworkbench", [
+    ["qwen3-7-max", 67.2, "Qwen3.7 官方跨 Harness 图表 · OpenClaw"],
+    ["qwen3-7-max", 66.0, "Qwen3.7 官方跨 Harness 图表 · Claude Code (CC)"],
+    ["qwen3-7-max", 68.3, "Qwen3.7 官方跨 Harness 图表 · Hermes"]
+  ]);
+  add(["qwen37-plus"], "coworkbench", "qwen3-7-plus", 65.1, "%", "Qwen3.7 Plus 官方表 · Harness 未逐行披露");
+  add(["qwen37-plus", "claweval"], "claweval", "qwen3-7-plus", 62.7, "%", "Qwen3.7 Plus 官方表 · ClawEval");
+  add(["qwen37-plus"], "skillsbench-1-1", "qwen3-7-plus", 54.9, "%", "OpenCode · 78 tasks（排除9个外部 API 任务）· 5次平均");
+
   add(["qwen38-hf"], "wildclawbench-overall", "qwen3-8-max", 56.2, "%", "Hugging Face Eval Results");
   add(["qwen38-hf"], "wildclawbench-time", "qwen3-8-max", 708, "min", "Hugging Face Eval Results");
   batch(["wildclawbench"], "wildclawbench-overall", [

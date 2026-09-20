@@ -5,6 +5,14 @@
   const benchesById = byId(data.benchmarks);
   const sourcesById = byId(data.sources);
   const modalityLabels = { language: "纯语言", vision: "视觉语言", omni: "全模态" };
+  const collectionScopeLabels = {
+    multimodal: "视觉 / 多模态交付",
+    general: "通用 Agent / Claw",
+    workspace: "工作区 / 专业交付",
+    coding: "编码 / 终端"
+  };
+  const collectionScopeOrder = { multimodal: 0, general: 1, workspace: 2, coding: 3 };
+  const namedHarnessPattern = /Claude Code|Codex|\bPi\b|OpenClaw|OpenCode|OpenHands|Gemini CLI|Qwen-Agent|ALE-CLI|ALE-Claw|Hermes|DeepAgent|Terminus|DSH Minimal|mini-SWE|ClawEval/i;
   const state = {
     tab: "leaderboard",
     selectedBenchmark: "skillsbench-1-1",
@@ -12,6 +20,7 @@
     vendor: "",
     modality: "",
     category: "",
+    collection: "",
     conflictsOnly: false,
     compareModelIds: ["qwen3-8-max", "gpt-5-6-sol", "claude-opus-5"],
     compareCommonOnly: true,
@@ -22,6 +31,7 @@
   const els = {
     stats: $("#stats"), freshness: $("#freshness"), search: $("#search"),
     vendor: $("#vendor-filter"), modality: $("#modality-filter"), category: $("#category-filter"),
+    multimodalHarness: $("#multimodal-harness-filter"), collectionStrip: $("#collection-strip"), clearCollection: $("#clear-collection"),
     conflicts: $("#conflicts-only"), download: $("#download-csv"),
     benchCount: $("#bench-count"), benchmarkNav: $("#benchmark-nav"),
     leaderboardHeading: $("#leaderboard-heading"), leaderboardTable: $("#leaderboard-table"),
@@ -48,6 +58,23 @@
     return match ? Number(match[0]) : Number.NEGATIVE_INFINITY;
   };
   let drawerReturnFocus = null;
+
+  function readUrlState() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("collection") === "multimodal-harness") {
+      state.collection = "multimodal-harness";
+      state.selectedBenchmark = "wildclawbench-mm";
+    }
+    if (benchesById.has(params.get("benchmark"))) state.selectedBenchmark = params.get("benchmark");
+  }
+
+  function syncUrlState() {
+    const params = new URLSearchParams();
+    if (state.collection) params.set("collection", state.collection);
+    if (state.selectedBenchmark) params.set("benchmark", state.selectedBenchmark);
+    const query = params.toString();
+    window.history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`);
+  }
 
   function coalesceObservations(observations) {
     const groups = new Map();
@@ -85,8 +112,12 @@
     const bench = benchesById.get(obs.benchmarkId);
     if (!model || !bench || !matchesModelWithoutSearch(model)) return false;
     if (!ignoreCategory && state.category && bench.category !== state.category) return false;
+    if (state.collection) {
+      if (!(bench.collections || []).includes(state.collection)) return false;
+      if (bench.collectionMode === "observation" && !namedHarnessPattern.test(`${obs.setting} ${obs.note}`)) return false;
+    }
     if (!state.search) return true;
-    return matchesSearch([bench.name, bench.category, model.name, model.vendor, obs.setting, obs.note].join(" "), state.search);
+    return matchesSearch([bench.name, bench.category, ...(bench.harnesses || []), model.name, model.vendor, obs.setting, obs.note].join(" "), state.search);
   }
 
   function matchesModelWithoutSearch(model) {
@@ -109,6 +140,7 @@
   }
 
   function init() {
+    readUrlState();
     const vendors = [...new Map(data.models.map((model) => [model.vendorId, model.vendor])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
     els.vendor.insertAdjacentHTML("beforeend", vendors.map(([id, name]) => `<option value="${escapeHtml(id)}">${escapeHtml(name)}</option>`).join(""));
     unique(data.benchmarks.map((bench) => bench.category)).sort().forEach((category) => {
@@ -123,6 +155,9 @@
     ];
     els.stats.innerHTML = stats.map(([value, label]) => `<div class="stat"><strong>${value}</strong><span>${label}</span></div>`).join("");
     els.freshness.textContent = `更新于 ${data.meta.updated}`;
+    els.multimodalHarness.classList.toggle("active", state.collection === "multimodal-harness");
+    els.multimodalHarness.setAttribute("aria-pressed", String(state.collection === "multimodal-harness"));
+    els.collectionStrip.hidden = state.collection !== "multimodal-harness";
 
     const compareOptions = data.models
       .filter((model) => observations.some((obs) => obs.modelId === model.id))
@@ -139,10 +174,16 @@
     pool.forEach((obs) => counts.set(obs.benchmarkId, (counts.get(obs.benchmarkId) || 0) + 1));
     return data.benchmarks
       .filter((bench) => counts.has(bench.id))
-      .sort((a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name))
+      .sort((a, b) => {
+        if (state.collection) {
+          return (collectionScopeOrder[a.collectionScope] ?? 9) - (collectionScopeOrder[b.collectionScope] ?? 9) || a.name.localeCompare(b.name);
+        }
+        return a.category.localeCompare(b.category) || a.name.localeCompare(b.name);
+      })
       .reduce((groups, bench) => {
-        if (!groups.has(bench.category)) groups.set(bench.category, []);
-        groups.get(bench.category).push({ bench, count: counts.get(bench.id) });
+        const groupName = state.collection ? (collectionScopeLabels[bench.collectionScope] || "其他") : bench.category;
+        if (!groups.has(groupName)) groups.set(groupName, []);
+        groups.get(groupName).push({ bench, count: counts.get(bench.id) });
         return groups;
       }, new Map());
   }
@@ -155,7 +196,7 @@
     els.benchCount.textContent = String(available.length);
     els.benchmarkNav.innerHTML = [...groups.entries()].map(([category, items]) => `
       <div class="bench-group-title">${escapeHtml(category)}</div>
-      ${items.map(({ bench, count }) => `<button class="bench-nav-item ${bench.id === state.selectedBenchmark ? "active" : ""}" type="button" data-benchmark="${escapeHtml(bench.id)}"><span>${escapeHtml(bench.name)}</span><small>${count}</small></button>`).join("")}
+      ${items.map(({ bench, count }) => `<button class="bench-nav-item ${bench.id === state.selectedBenchmark ? "active" : ""}" type="button" data-benchmark="${escapeHtml(bench.id)}"><span class="bench-nav-copy"><span>${escapeHtml(bench.name)}</span>${state.collection ? `<em>${escapeHtml([collectionScopeLabels[bench.collectionScope], ...(bench.harnesses || [])].filter(Boolean).join(" · "))}</em>` : ""}</span><small>${count}</small></button>`).join("")}
     `).join("") || `<div class="empty">没有匹配的 Benchmark</div>`;
   }
 
@@ -177,7 +218,9 @@
     });
     const conflictModels = unique(rows.filter((obs) => conflictFor(bench.id, obs.modelId, pool)).map((obs) => obs.modelId));
     const sortLabel = comparable ? (bench.direction === "lower" ? "低分优先" : "高分优先") : "多口径，仅陈列";
-    els.leaderboardHeading.innerHTML = `<div><p class="eyebrow">${escapeHtml(bench.category)}</p><h2>${escapeHtml(bench.name)}</h2><p>${escapeHtml(bench.description)}</p></div><div class="leaderboard-meta"><span class="chip green">${rows.length} 条成绩</span>${conflictModels.length ? `<span class="chip orange">${conflictModels.length} 个模型多口径</span>` : ""}<span class="chip ${comparable ? "" : "orange"}">${sortLabel}</span></div>`;
+    const harnessMeta = (bench.harnesses || []).length ? `<span class="chip harness">Harness · ${escapeHtml(bench.harnesses.join(" / "))}</span>` : "";
+    const scopeMeta = bench.collectionScope ? `<span class="chip collection-scope">${escapeHtml(collectionScopeLabels[bench.collectionScope])}</span>` : "";
+    els.leaderboardHeading.innerHTML = `<div><p class="eyebrow">${escapeHtml(bench.category)}</p><h2>${escapeHtml(bench.name)}</h2><p>${escapeHtml(bench.description)}</p></div><div class="leaderboard-meta">${scopeMeta}${harnessMeta}<span class="chip green">${rows.length} 条成绩</span>${conflictModels.length ? `<span class="chip orange">${conflictModels.length} 个模型多口径</span>` : ""}<span class="chip ${comparable ? "" : "orange"}">${sortLabel}</span></div>`;
     els.leaderboardTable.innerHTML = `<thead><tr><th class="rank">排名</th><th>模型</th><th>成绩</th><th>模态</th><th>测评设置与备注</th><th>来源</th></tr></thead><tbody>${rows.length ? rows.map((obs, index) => {
       const model = modelsById.get(obs.modelId);
       const conflict = conflictFor(bench.id, model.id, pool);
@@ -382,6 +425,7 @@
     const benchmark = event.target.closest("[data-benchmark]");
     if (benchmark) {
       state.selectedBenchmark = benchmark.dataset.benchmark;
+      syncUrlState();
       renderLeaderboard();
     }
     const modelTarget = event.target.closest("[data-model-id]");
@@ -396,6 +440,23 @@
   els.vendor.addEventListener("change", () => { state.vendor = els.vendor.value; render(); });
   els.modality.addEventListener("change", () => { state.modality = els.modality.value; render(); });
   els.category.addEventListener("change", () => { state.category = els.category.value; render(); });
+  els.multimodalHarness.addEventListener("click", () => {
+    state.collection = state.collection === "multimodal-harness" ? "" : "multimodal-harness";
+    if (state.collection) state.selectedBenchmark = "wildclawbench-mm";
+    els.multimodalHarness.classList.toggle("active", Boolean(state.collection));
+    els.multimodalHarness.setAttribute("aria-pressed", String(Boolean(state.collection)));
+    els.collectionStrip.hidden = !state.collection;
+    render();
+    syncUrlState();
+  });
+  els.clearCollection.addEventListener("click", () => {
+    state.collection = "";
+    els.multimodalHarness.classList.remove("active");
+    els.multimodalHarness.setAttribute("aria-pressed", "false");
+    els.collectionStrip.hidden = true;
+    render();
+    syncUrlState();
+  });
   [els.compareModelA, els.compareModelB, els.compareModelC].forEach((select) => select.addEventListener("change", () => {
     state.compareModelIds = [els.compareModelA.value, els.compareModelB.value, els.compareModelC.value];
     renderCompare();

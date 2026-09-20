@@ -9,17 +9,17 @@ BenchBoard collects public benchmark results for current language, multimodal, a
 ## Coverage
 
 <!-- DATA_SUMMARY_START -->
-- 33 model releases
-- 96 registered benchmarks
-- 602 deduplicated public results
-- 18 primary sources
+- 34 model releases
+- 99 registered benchmarks
+- 613 deduplicated public results
+- 23 primary sources
 <!-- DATA_SUMMARY_END -->
 
-The first release focuses on general, coding, multimodal, and agent models near the frontier in 2026. It includes GPT-6 Astra, GPT-5.6 Sol, Claude 5, Gemini 3.8, DeepSeek V4.1, Qwen3.8, GLM-5.3, Seed2.1, Kimi K3, and Hy4.
+The first release focuses on general, coding, multimodal, and agent models near the frontier in 2026. It includes GPT-6 Astra, GPT-5.6 Sol, Claude 5, Gemini 3.8, DeepSeek V4.1, Qwen3.8, Qwen3.7 Plus, GLM-5.3, Seed2.1, Kimi K3, and Hy4.
 
 All rows from the Coding Agent, General Agent, and General Capabilities tables in the official Qwen3.8 model card are recorded individually. Qwen3.8 Max currently has public results for 51 distinct benchmarks. The open-weight `Qwen3.8-2.4T-A95B` language model and the vision-and-tool-enabled Qwen3.8 Max service are listed separately.
 
-SkillsBench 1.1, PinchBench v2, WildClawBench, and WildClawBench-MM are included. Agent harnesses are kept for SkillsBench. PinchBench stores Best Success Rate and Average Success Rate separately. WildClawBench stores Overall, Elapsed Time, and Total Cost separately. WildClawBench-MM includes multimodal agent results such as the official 71.0 score reported for Qwen3.8 Omni Flash.
+SkillsBench 1.1, PinchBench v2, WildClawBench, WildClawBench-MM, QwenClawBench, ClawEval, Agents' Last Exam, and Workspace-Bench 1.0 are included. Agent harnesses and settings stay attached to each result when the publisher reports them. PinchBench stores Best Success Rate and Average Success Rate separately. WildClawBench stores Overall, Elapsed Time, and Total Cost separately. WildClawBench-MM includes multimodal agent results such as the official 71.0 score reported for Qwen3.8 Omni Flash.
 
 [RNG-Bench](https://internlm.github.io/RNGBench/) is split into 12 leaderboards for the comparable rates, scores, efficiency measures, error rates, and Elo in its official main-results tables. The records cover the 10×10 Matching Pairs setting, the 13×13 Maze, and the 16-game-per-model Duel protocol. Raw win, tie, and loss counts remain on the source page.
 
@@ -36,6 +36,8 @@ The site has five views:
 - Sources shows how many observations each publication supports.
 
 Use the benchmark list on the left to move between leaderboards. Browser search (`Ctrl+F` or `Cmd+F`) works on the visible list.
+
+The **Multimodal Models × Harness** collection filters that same list to provider-reported evaluations run through a named agent harness such as Claude Code, Codex, Pi, OpenClaw, OpenCode, or OpenHands. Results are grouped into multimodal delivery, general agent/Claw, workspace, and coding/terminal benchmarks. A benchmark can appear even when its tasks are not exclusively visual: the collection tracks how current multimodal models perform as agents, not only visual-question answering. A bare API result or an unspecified “with tools” result is not enough. The filtered view has a shareable URL.
 
 ## Run locally
 
@@ -64,7 +66,7 @@ Pushes to `main` are validated and deployed to GitHub Pages automatically. Pull 
 All records live in `data.js`:
 
 - `models` stores provider, release, aliases, modality, and access type.
-- `benchmarks` stores normalized names, versions, capability areas, and metric direction.
+- `benchmarks` stores normalized names, versions, capability areas, metric direction, and optional collection metadata such as harness and collection scope.
 - `sources` stores original publication pages. Model-provider releases, official benchmark leaderboards, and technical reports are preferred.
 - `observations` stores each model, benchmark, score, and evaluation-setting combination.
 
