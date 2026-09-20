@@ -12,9 +12,12 @@ const mergedObservationCount = new Set(data.observations.map((observation) => [
   observation.setting,
   observation.note
 ].join("||"))).size;
+const groupedBenchmarkIds = new Set((data.benchmarkFamilies || []).flatMap((family) => family.variants.map((variant) => variant.benchmarkId)));
+const benchmarkFamilyCount = data.benchmarks.length - groupedBenchmarkIds.size + (data.benchmarkFamilies || []).length;
 const summary = `<!-- DATA_SUMMARY_START -->
 - ${data.models.length} model releases
-- ${data.benchmarks.length} registered benchmarks
+- ${benchmarkFamilyCount} benchmark families
+- ${data.benchmarks.length} separately ranked metrics and versions
 - ${mergedObservationCount} deduplicated public results
 - ${data.sources.length} primary sources
 <!-- DATA_SUMMARY_END -->`;

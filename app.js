@@ -4,6 +4,22 @@
   const modelsById = byId(data.models);
   const benchesById = byId(data.benchmarks);
   const sourcesById = byId(data.sources);
+  const declaredFamilies = data.benchmarkFamilies || [];
+  const familyByBenchmarkId = new Map();
+  declaredFamilies.forEach((family) => family.variants.forEach((variant) => familyByBenchmarkId.set(variant.benchmarkId, family)));
+  const familyForBenchmark = (benchmarkId) => {
+    const bench = benchesById.get(benchmarkId);
+    return familyByBenchmarkId.get(benchmarkId) || {
+      id: benchmarkId,
+      name: bench?.name || benchmarkId,
+      variants: [{ benchmarkId, label: "Overall" }]
+    };
+  };
+  const variantForBenchmark = (benchmarkId) => familyForBenchmark(benchmarkId).variants.find((variant) => variant.benchmarkId === benchmarkId);
+  const allBenchmarkFamilies = [
+    ...declaredFamilies,
+    ...data.benchmarks.filter((bench) => !familyByBenchmarkId.has(bench.id)).map((bench) => familyForBenchmark(bench.id))
+  ];
   const modalityLabels = { language: "纯语言", vision: "视觉语言", omni: "全模态" };
   const collectionScopeLabels = {
     dedicated: "专门多模态输入",
@@ -107,13 +123,15 @@
   function matchesObservation(obs, ignoreCategory = false) {
     const model = modelsById.get(obs.modelId);
     const bench = benchesById.get(obs.benchmarkId);
+    const family = familyForBenchmark(obs.benchmarkId);
+    const variant = variantForBenchmark(obs.benchmarkId);
     if (!model || !bench || !matchesModelWithoutSearch(model)) return false;
     if (!ignoreCategory && state.category && bench.category !== state.category) return false;
     if (state.collection) {
       if (!(bench.collections || []).includes(state.collection)) return false;
     }
     if (!state.search) return true;
-    return matchesSearch([bench.name, bench.category, ...(bench.harnesses || []), model.name, model.vendor, obs.setting, obs.note].join(" "), state.search);
+    return matchesSearch([family.name, variant?.label, bench.name, bench.category, ...(bench.harnesses || []), model.name, model.vendor, obs.setting, obs.note].join(" "), state.search);
   }
 
   function matchesModelWithoutSearch(model) {
@@ -145,7 +163,7 @@
     const mergedCount = observations.length;
     const stats = [
       [data.models.length, "模型与版本"],
-      [data.benchmarks.length, "已登记 Benchmark"],
+      [allBenchmarkFamilies.length, "已登记 Benchmark"],
       [mergedCount, "去重公开成绩"],
       [data.sources.length, "官方来源"]
     ];
@@ -165,21 +183,41 @@
     [els.compareModelA.value, els.compareModelB.value, els.compareModelC.value] = state.compareModelIds;
   }
 
-  function benchmarkGroups(pool) {
+  function visibleFamilyItems(pool) {
     const counts = new Map();
     pool.forEach((obs) => counts.set(obs.benchmarkId, (counts.get(obs.benchmarkId) || 0) + 1));
-    return data.benchmarks
-      .filter((bench) => counts.has(bench.id))
+    return allBenchmarkFamilies.map((family) => {
+      const variants = family.variants.filter((variant) => counts.has(variant.benchmarkId));
+      if (!variants.length) return null;
+      const benches = variants.map((variant) => benchesById.get(variant.benchmarkId)).filter(Boolean);
+      const scopes = unique(benches.map((bench) => bench.collectionScope));
+      const category = benches[0]?.category || "其他";
+      const groupName = state.collection
+        ? (scopes.length > 1 ? "同时提供专项与混合榜" : (collectionScopeLabels[scopes[0]] || "其他"))
+        : category;
+      return {
+        family,
+        variants,
+        benches,
+        groupName,
+        count: variants.reduce((sum, variant) => sum + counts.get(variant.benchmarkId), 0)
+      };
+    }).filter(Boolean);
+  }
+
+  function benchmarkGroups(pool) {
+    return visibleFamilyItems(pool)
       .sort((a, b) => {
         if (state.collection) {
-          return (collectionScopeOrder[a.collectionScope] ?? 9) - (collectionScopeOrder[b.collectionScope] ?? 9) || a.name.localeCompare(b.name);
+          const aScope = Math.min(...a.benches.map((bench) => collectionScopeOrder[bench.collectionScope] ?? 9));
+          const bScope = Math.min(...b.benches.map((bench) => collectionScopeOrder[bench.collectionScope] ?? 9));
+          return aScope - bScope || a.family.name.localeCompare(b.family.name);
         }
-        return a.category.localeCompare(b.category) || a.name.localeCompare(b.name);
+        return a.groupName.localeCompare(b.groupName) || a.family.name.localeCompare(b.family.name);
       })
-      .reduce((groups, bench) => {
-        const groupName = state.collection ? (collectionScopeLabels[bench.collectionScope] || "其他") : bench.category;
-        if (!groups.has(groupName)) groups.set(groupName, []);
-        groups.get(groupName).push({ bench, count: counts.get(bench.id) });
+      .reduce((groups, item) => {
+        if (!groups.has(item.groupName)) groups.set(item.groupName, []);
+        groups.get(item.groupName).push(item);
         return groups;
       }, new Map());
   }
@@ -187,12 +225,20 @@
   function renderBenchmarkNav() {
     const pool = filteredObservations();
     const groups = benchmarkGroups(pool);
-    const available = [...groups.values()].flat().map((item) => item.bench.id);
+    const available = [...groups.values()].flat().flatMap((item) => item.variants.map((variant) => variant.benchmarkId));
     if (!available.includes(state.selectedBenchmark)) state.selectedBenchmark = available[0] || "";
-    els.benchCount.textContent = String(available.length);
+    els.benchCount.textContent = String([...groups.values()].flat().length);
     els.benchmarkNav.innerHTML = [...groups.entries()].map(([category, items]) => `
       <div class="bench-group-title">${escapeHtml(category)}</div>
-      ${items.map(({ bench, count }) => `<button class="bench-nav-item ${bench.id === state.selectedBenchmark ? "active" : ""}" type="button" data-benchmark="${escapeHtml(bench.id)}"><span class="bench-nav-copy"><span>${escapeHtml(bench.name)}</span>${state.collection ? `<em>${escapeHtml([`输入：${(bench.inputModalities || []).join(" / ")}`, `Harness：${(bench.harnesses || []).join(" / ")}`].join(" · "))}</em>` : ""}</span><small>${count}</small></button>`).join("")}
+      ${items.map(({ family, variants, benches, count }) => {
+        const active = variants.some((variant) => variant.benchmarkId === state.selectedBenchmark);
+        const target = active ? state.selectedBenchmark : variants[0].benchmarkId;
+        const inputs = unique(benches.flatMap((bench) => bench.inputModalities || []));
+        const harnesses = unique(benches.flatMap((bench) => bench.harnesses || []));
+        const detail = state.collection ? [`输入：${inputs.join(" / ")}`, `Harness：${harnesses.join(" / ")}`].join(" · ") : "";
+        const countLabel = variants.length > 1 ? `${variants.length} 指标` : `${count} 条`;
+        return `<button class="bench-nav-item ${active ? "active" : ""}" type="button" data-benchmark="${escapeHtml(target)}"><span class="bench-nav-copy"><span>${escapeHtml(family.name)}</span>${detail ? `<em>${escapeHtml(detail)}</em>` : ""}</span><small>${escapeHtml(countLabel)}</small></button>`;
+      }).join("")}
     `).join("") || `<div class="empty">没有匹配的 Benchmark</div>`;
   }
 
@@ -205,6 +251,9 @@
       els.leaderboardTable.innerHTML = "";
       return;
     }
+    const family = familyForBenchmark(bench.id);
+    const visibleVariants = family.variants.filter((variant) => pool.some((obs) => obs.benchmarkId === variant.benchmarkId));
+    const selectedVariant = variantForBenchmark(bench.id);
     const rows = pool.filter((obs) => obs.benchmarkId === bench.id);
     const comparable = rows.length > 0 && rows.every((obs) => typeof obs.value === "number") && unique(rows.map((obs) => obs.unit)).length === 1;
     rows.sort((a, b) => {
@@ -217,7 +266,11 @@
     const harnessMeta = (bench.harnesses || []).length ? `<span class="chip harness">Harness · ${escapeHtml(bench.harnesses.join(" / "))}</span>` : "";
     const inputMeta = (bench.inputModalities || []).length ? `<span class="chip input-modality">输入 · ${escapeHtml(bench.inputModalities.join(" / "))}</span>` : "";
     const scopeMeta = bench.collectionScope ? `<span class="chip collection-scope">${escapeHtml(collectionScopeLabels[bench.collectionScope])}</span>` : "";
-    els.leaderboardHeading.innerHTML = `<div><p class="eyebrow">${escapeHtml(bench.category)}</p><h2>${escapeHtml(bench.name)}</h2><p>${escapeHtml(bench.description)}</p></div><div class="leaderboard-meta">${scopeMeta}${inputMeta}${harnessMeta}<span class="chip green">${rows.length} 条成绩</span>${conflictModels.length ? `<span class="chip orange">${conflictModels.length} 个模型多口径</span>` : ""}<span class="chip ${comparable ? "" : "orange"}">${sortLabel}</span></div>`;
+    const variantNav = visibleVariants.length > 1 ? `<div class="benchmark-variants" aria-label="${escapeHtml(family.name)} 指标切换">${visibleVariants.map((variant) => {
+      const count = pool.filter((obs) => obs.benchmarkId === variant.benchmarkId).length;
+      return `<button class="benchmark-variant ${variant.benchmarkId === bench.id ? "active" : ""}" type="button" data-benchmark="${escapeHtml(variant.benchmarkId)}">${escapeHtml(variant.label)}<small>${count}</small></button>`;
+    }).join("")}</div>` : "";
+    els.leaderboardHeading.innerHTML = `<div class="leaderboard-title"><p class="eyebrow">${escapeHtml(bench.category)}</p><h2>${escapeHtml(family.name)}</h2>${variantNav}<p><strong class="selected-variant">${escapeHtml(selectedVariant?.label || "Overall")}</strong>${escapeHtml(bench.description)}</p></div><div class="leaderboard-meta">${scopeMeta}${inputMeta}${harnessMeta}<span class="chip green">${rows.length} 条成绩</span>${conflictModels.length ? `<span class="chip orange">${conflictModels.length} 个模型多口径</span>` : ""}<span class="chip ${comparable ? "" : "orange"}">${sortLabel}</span></div>`;
     els.leaderboardTable.innerHTML = `<thead><tr><th class="rank">排名</th><th>模型</th><th>成绩</th><th>模态</th><th>测评设置与备注</th><th>来源</th></tr></thead><tbody>${rows.length ? rows.map((obs, index) => {
       const model = modelsById.get(obs.modelId);
       const conflict = conflictFor(bench.id, model.id, pool);
@@ -236,16 +289,19 @@
   function renderMatrix() {
     const pool = filteredObservations();
     const modelIds = unique(pool.map((obs) => obs.modelId));
-    const benchIds = unique(pool.map((obs) => obs.benchmarkId));
     const models = data.models.filter((model) => modelIds.includes(model.id)).sort((a, b) => a.vendor.localeCompare(b.vendor) || a.name.localeCompare(b.name));
-    const benches = data.benchmarks.filter((bench) => benchIds.includes(bench.id)).sort((a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name));
-    els.matrixTable.innerHTML = `<thead><tr><th>Benchmark</th>${models.map((model) => `<th>${escapeHtml(model.name)}</th>`).join("")}</tr></thead><tbody>${benches.map((bench) => `<tr><td><strong>${escapeHtml(bench.name)}</strong><br><span class="muted">${escapeHtml(bench.category)}</span></td>${models.map((model) => {
-      const entries = pool.filter((obs) => obs.benchmarkId === bench.id && obs.modelId === model.id);
-      if (!entries.length) return `<td class="matrix-empty">—</td>`;
-      const best = bestObservation(entries, bench.direction);
-      const conflict = conflictFor(bench.id, model.id, pool);
-      const title = [best.setting, best.note].filter(Boolean).join(" · ");
-      return `<td title="${escapeHtml(title)}"><span class="matrix-value">${escapeHtml(best.value)}</span> <span class="muted">${escapeHtml(best.unit)}</span>${conflict ? '<i class="conflict-mark" aria-label="存在多口径结果"></i>' : ""}</td>`;
+    const families = visibleFamilyItems(pool).sort((a, b) => a.groupName.localeCompare(b.groupName) || a.family.name.localeCompare(b.family.name));
+    els.matrixTable.innerHTML = `<thead><tr><th>Benchmark</th>${models.map((model) => `<th>${escapeHtml(model.name)}</th>`).join("")}</tr></thead><tbody>${families.map(({ family, variants, benches }) => `<tr><td><strong>${escapeHtml(family.name)}</strong><br><span class="muted">${escapeHtml(unique(benches.map((bench) => bench.category)).join(" / "))}${variants.length > 1 ? ` · ${variants.length} 指标` : ""}</span></td>${models.map((model) => {
+      const metrics = variants.map((variant) => {
+        const bench = benchesById.get(variant.benchmarkId);
+        const entries = pool.filter((obs) => obs.benchmarkId === bench.id && obs.modelId === model.id);
+        if (!entries.length) return "";
+        const best = bestObservation(entries, bench.direction);
+        const conflict = conflictFor(bench.id, model.id, pool);
+        const title = [best.setting, best.note].filter(Boolean).join(" · ");
+        return `<div class="matrix-metric" title="${escapeHtml(title)}">${variants.length > 1 ? `<span class="metric-label">${escapeHtml(variant.label)}</span>` : ""}<span class="matrix-value">${escapeHtml(best.value)}</span> <span class="muted">${escapeHtml(best.unit)}</span>${conflict ? '<i class="conflict-mark" aria-label="存在多口径结果"></i>' : ""}</div>`;
+      }).filter(Boolean);
+      return metrics.length ? `<td>${metrics.join("")}</td>` : `<td class="matrix-empty">—</td>`;
     }).join("")}</tr>`).join("") || `<tr><td class="empty">没有匹配的数据。</td></tr>`}</tbody>`;
   }
 
@@ -282,24 +338,27 @@
     const pool = filteredObservations();
     const benchIds = unique(pool.filter((obs) => modelIds.includes(obs.modelId)).map((obs) => obs.benchmarkId))
       .filter((benchmarkId) => !state.compareCommonOnly || modelIds.every((modelId) => pool.some((obs) => obs.modelId === modelId && obs.benchmarkId === benchmarkId)))
-      .sort((a, b) => {
-        const benchA = benchesById.get(a);
-        const benchB = benchesById.get(b);
-        return benchA.category.localeCompare(benchB.category) || benchA.name.localeCompare(benchB.name);
-      });
+    const benchIdSet = new Set(benchIds);
+    const families = allBenchmarkFamilies.map((family) => {
+      const variants = family.variants.filter((variant) => benchIdSet.has(variant.benchmarkId));
+      if (!variants.length) return null;
+      const benches = variants.map((variant) => benchesById.get(variant.benchmarkId));
+      return { family, variants, benches };
+    }).filter(Boolean).sort((a, b) => a.benches[0].category.localeCompare(b.benches[0].category) || a.family.name.localeCompare(b.family.name));
 
     const names = modelIds.map((id) => modelsById.get(id).name);
-    els.compareSummary.innerHTML = `<span>${names.length} 个模型</span><span>${benchIds.length} 个${state.compareCommonOnly ? "共同" : "相关"} Benchmark</span>${state.category ? `<span>${escapeHtml(state.category)}</span>` : ""}`;
-    els.compareTable.innerHTML = `<thead><tr><th>Benchmark</th>${modelIds.map((id) => `<th>${escapeHtml(modelsById.get(id).name)}</th>`).join("")}</tr></thead><tbody>${benchIds.length ? benchIds.map((benchmarkId) => {
-      const bench = benchesById.get(benchmarkId);
-      return `<tr><td><strong>${escapeHtml(bench.name)}</strong><br><span class="muted">${escapeHtml(bench.category)}</span></td>${modelIds.map((modelId) => {
-        const entries = pool.filter((obs) => obs.benchmarkId === benchmarkId && obs.modelId === modelId);
-        if (!entries.length) return `<td class="matrix-empty">—</td>`;
+    els.compareSummary.innerHTML = `<span>${names.length} 个模型</span><span>${families.length} 个${state.compareCommonOnly ? "共同" : "相关"} Benchmark</span>${state.category ? `<span>${escapeHtml(state.category)}</span>` : ""}`;
+    els.compareTable.innerHTML = `<thead><tr><th>Benchmark</th>${modelIds.map((id) => `<th>${escapeHtml(modelsById.get(id).name)}</th>`).join("")}</tr></thead><tbody>${families.length ? families.map(({ family, variants, benches }) => `<tr><td><strong>${escapeHtml(family.name)}</strong><br><span class="muted">${escapeHtml(unique(benches.map((bench) => bench.category)).join(" / "))}${variants.length > 1 ? ` · ${variants.length} 指标` : ""}</span></td>${modelIds.map((modelId) => {
+      const metrics = variants.map((variant) => {
+        const bench = benchesById.get(variant.benchmarkId);
+        const entries = pool.filter((obs) => obs.benchmarkId === bench.id && obs.modelId === modelId);
+        if (!entries.length) return "";
         const obs = representativeObservation(entries, bench);
         const context = [obs.setting, obs.note].filter(Boolean).join(" · ") || "原发布未说明更多设置";
-        return `<td><span class="compare-value">${escapeHtml(obs.value)} <small>${escapeHtml(obs.unit)}</small></span><span class="compare-context">${escapeHtml(context)}</span><div class="source-cell">${sourceLinks(obs, modelsById.get(modelId))}</div></td>`;
-      }).join("")}</tr>`;
-    }).join("") : `<tr><td colspan="${modelIds.length + 1}" class="empty">当前筛选下没有共同 Benchmark。</td></tr>`}</tbody>`;
+        return `<div class="compare-metric">${variants.length > 1 ? `<span class="metric-label">${escapeHtml(variant.label)}</span>` : ""}<span class="compare-value">${escapeHtml(obs.value)} <small>${escapeHtml(obs.unit)}</small></span><span class="compare-context">${escapeHtml(context)}</span><div class="source-cell">${sourceLinks(obs, modelsById.get(modelId))}</div></div>`;
+      }).filter(Boolean);
+      return metrics.length ? `<td>${metrics.join("")}</td>` : `<td class="matrix-empty">—</td>`;
+    }).join("")}</tr>`).join("") : `<tr><td colspan="${modelIds.length + 1}" class="empty">当前筛选下没有共同 Benchmark。</td></tr>`}</tbody>`;
   }
 
   function renderModelDrawer(model) {
@@ -310,10 +369,18 @@
         const benchB = benchesById.get(b.benchmarkId);
         return benchA.category.localeCompare(benchB.category) || benchA.name.localeCompare(benchB.name) || String(a.setting).localeCompare(String(b.setting));
       });
-    const groups = rows.reduce((result, obs) => {
+    const familyResults = rows.reduce((result, obs) => {
       const bench = benchesById.get(obs.benchmarkId);
-      if (!result.has(bench.category)) result.set(bench.category, []);
-      result.get(bench.category).push({ obs, bench });
+      const family = familyForBenchmark(bench.id);
+      if (!result.has(family.id)) result.set(family.id, { family, items: [] });
+      result.get(family.id).items.push({ obs, bench, variant: variantForBenchmark(bench.id) });
+      return result;
+    }, new Map());
+    const groups = [...familyResults.values()].sort((a, b) => a.family.name.localeCompare(b.family.name)).reduce((result, familyResult) => {
+      const categories = unique(familyResult.family.variants.map((variant) => benchesById.get(variant.benchmarkId)?.category));
+      const category = categories.join(" / ");
+      if (!result.has(category)) result.set(category, []);
+      result.get(category).push(familyResult);
       return result;
     }, new Map());
     const modelSource = sourcesById.get(model.sourceId);
@@ -322,7 +389,7 @@
         <p class="eyebrow">${escapeHtml(model.vendor)} · ${escapeHtml(modalityLabels[model.modality])}</p>
         <h2 id="model-drawer-title">${escapeHtml(model.name)}</h2>
         <p>${escapeHtml(model.summary)}</p>
-        <div class="drawer-badges"><span>${rows.length} 条公开记录</span><span>${unique(rows.map((row) => row.benchmarkId)).length} 个 Benchmark</span><span>${escapeHtml(model.access)}</span></div>
+        <div class="drawer-badges"><span>${rows.length} 条公开记录</span><span>${familyResults.size} 个 Benchmark</span><span>${escapeHtml(model.access)}</span></div>
       </header>
       <dl class="model-meta">
         <div><dt>原生模态</dt><dd>${escapeHtml(model.modalityDetail)}</dd></div>
@@ -332,13 +399,13 @@
       </dl>
       ${modelSource ? `<a class="primary-source" href="${escapeHtml(modelSource.url)}" target="_blank" rel="noreferrer">${modelSource.kind === "benchmark" ? "打开收录依据" : "打开模型官方出处"} ↗</a>` : ""}
       <div class="drawer-results">
-        ${rows.length ? [...groups.entries()].map(([category, items]) => `
+        ${rows.length ? [...groups.entries()].map(([category, families]) => `
           <section class="result-group">
-            <div class="result-group-head"><h3>${escapeHtml(category)}</h3><span>${items.length}</span></div>
-            ${items.map(({ obs, bench }) => {
+            <div class="result-group-head"><h3>${escapeHtml(category)}</h3><span>${families.length} Benchmark</span></div>
+            ${families.map(({ family, items }) => `<div class="result-family"><div class="result-family-head"><h4>${escapeHtml(family.name)}</h4>${family.variants.length > 1 ? `<span>${items.length} 记录 · ${unique(items.map((item) => item.bench.id)).length} 指标</span>` : ""}</div>${items.map(({ obs, variant }) => {
               const context = [obs.setting, obs.note].filter(Boolean).join(" · ") || "原发布未说明更多设置";
-              return `<article class="result-card"><div class="result-score"><strong>${escapeHtml(obs.value)}</strong><span>${escapeHtml(obs.unit)}</span></div><div class="result-copy"><h4>${escapeHtml(bench.name)}</h4><p>${escapeHtml(context)}</p><div class="source-cell">${sourceLinks(obs, model)}</div></div></article>`;
-            }).join("")}
+              return `<article class="result-card"><div class="result-score"><strong>${escapeHtml(obs.value)}</strong><span>${escapeHtml(obs.unit)}</span></div><div class="result-copy">${family.variants.length > 1 ? `<h5>${escapeHtml(variant?.label || "Overall")}</h5>` : ""}<p>${escapeHtml(context)}</p><div class="source-cell">${sourceLinks(obs, model)}</div></div></article>`;
+            }).join("")}</div>`).join("")}
           </section>
         `).join("") : `<div class="drawer-empty"><strong>尚无独立公开成绩</strong><p>模型已登记，但不会拿其他版本或服务版的成绩代替。</p></div>`}
       </div>`;

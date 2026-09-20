@@ -170,6 +170,87 @@ window.BENCH_DATA = (() => {
     { id: "pinchbench-v2-average", name: "PinchBench v2 · Average Success Rate", category: "Agent / 工作", direction: "higher", description: "混合任务集。官方任务清单含图片识别和视频处理输入；页面徽标显示 147 tasks、620 runs，v2.0.0 release notes 写 148 tasks，两个官方口径均保留。", collections: ["multimodal-harness"], collectionScope: "mixed", collectionMode: "benchmark", harnesses: ["OpenClaw"], inputModalities: ["图片", "视频任务"] }
   ];
 
+  // One benchmark can publish several versions, subsets, or metrics. They stay
+  // separate above for ranking and export, but share one user-facing family.
+  const benchmarkFamilies = [
+    { id: "agents-last-exam", name: "Agents' Last Exam", variants: [
+      { benchmarkId: "agents-last-exam-pass", label: "Pass Rate" },
+      { benchmarkId: "agents-last-exam-score", label: "Overall Score" }
+    ] },
+    { id: "terminal-bench", name: "Terminal-Bench", variants: [
+      { benchmarkId: "terminal-bench-2-0", label: "2.0 · Terminus-2" },
+      { benchmarkId: "terminal-bench-2-1", label: "2.1" },
+      { benchmarkId: "terminal-bench-3-0", label: "3.0" },
+      { benchmarkId: "terminal-bench-4-0", label: "4.0" },
+      { benchmarkId: "terminal-bench-science", label: "Science 0.1" }
+    ] },
+    { id: "programbench", name: "ProgramBench", variants: [
+      { benchmarkId: "programbench-almost", label: "Almost Solved" },
+      { benchmarkId: "programbench-tiers", label: "Solved Tiers" }
+    ] },
+    { id: "hle", name: "Humanity's Last Exam", variants: [
+      { benchmarkId: "hle", label: "No Tools" },
+      { benchmarkId: "hle-tools", label: "With Tools" }
+    ] },
+    { id: "osworld-2", name: "OSWorld 2.0", variants: [
+      { benchmarkId: "osworld-2-partial", label: "Partial" },
+      { benchmarkId: "osworld-2-strict", label: "Strict" },
+      { benchmarkId: "osworld-2-binary", label: "Binary" }
+    ] },
+    { id: "artificial-analysis-intelligence-index", name: "Artificial Analysis Intelligence Index", variants: [
+      { benchmarkId: "artificial-intelligence-index", label: "v4.1" },
+      { benchmarkId: "artificial-intelligence-index-v4-3", label: "v4.3" }
+    ] },
+    { id: "rng-bench", name: "RNG-Bench", variants: [
+      { benchmarkId: "rngbench-matching-pairs", label: "Matching Pairs · Score" },
+      { benchmarkId: "rngbench-matching-pf", label: "Matching Pairs · Parse Failure" },
+      { benchmarkId: "rngbench-matching-ia", label: "Matching Pairs · Invalid Action" },
+      { benchmarkId: "rngbench-matching-responses", label: "Matching Pairs · Responses / Score" },
+      { benchmarkId: "rngbench-maze", label: "3D Maze · Game Score" },
+      { benchmarkId: "rngbench-maze-sr", label: "3D Maze · Success Rate" },
+      { benchmarkId: "rngbench-maze-explore", label: "3D Maze · Explore Rate" },
+      { benchmarkId: "rngbench-maze-walls", label: "3D Maze · Wall Collisions" },
+      { benchmarkId: "rngbench-maze-efficiency", label: "3D Maze · Efficiency" },
+      { benchmarkId: "rngbench-duel-win", label: "Duel · Win Rate" },
+      { benchmarkId: "rngbench-duel-score", label: "Duel · Score" },
+      { benchmarkId: "rngbench-duel-elo", label: "Duel · Elo" }
+    ] },
+    { id: "exploitbench", name: "ExploitBench", variants: [
+      { benchmarkId: "exploitbench", label: "Main Set" },
+      { benchmarkId: "exploitbench-2026-jun-aug", label: "June–August 2026" }
+    ] },
+    { id: "exploitgym", name: "ExploitGym", variants: [
+      { benchmarkId: "exploitgym-rate", label: "Success Rate" },
+      { benchmarkId: "exploitgym-tasks", label: "Solved Tasks" }
+    ] },
+    { id: "sre-bench", name: "SRE-Bench", variants: [
+      { benchmarkId: "sre-bench-1", label: "1 Attempt" },
+      { benchmarkId: "sre-bench-4", label: "4 Attempts" }
+    ] },
+    { id: "mrcr-v2", name: "MRCR v2", variants: [
+      { benchmarkId: "mrcr-256k", label: "256K" },
+      { benchmarkId: "mrcr-512k", label: "512K–1M" }
+    ] },
+    { id: "healthbench", name: "HealthBench", variants: [
+      { benchmarkId: "healthbench", label: "Standard" },
+      { benchmarkId: "healthbench-professional", label: "Professional" }
+    ] },
+    { id: "prbench", name: "PRBench", variants: [
+      { benchmarkId: "prbench-legal", label: "Legal" },
+      { benchmarkId: "prbench-finance", label: "Finance" }
+    ] },
+    { id: "wildclawbench", name: "WildClawBench", variants: [
+      { benchmarkId: "wildclawbench-overall", label: "Overall" },
+      { benchmarkId: "wildclawbench-mm", label: "MM" },
+      { benchmarkId: "wildclawbench-time", label: "Elapsed Time" },
+      { benchmarkId: "wildclawbench-cost", label: "Total Cost" }
+    ] },
+    { id: "pinchbench-v2", name: "PinchBench v2", variants: [
+      { benchmarkId: "pinchbench-v2-best", label: "Best Success Rate" },
+      { benchmarkId: "pinchbench-v2-average", label: "Average Success Rate" }
+    ] }
+  ];
+
   const observations = [];
   const add = (sourceIds, benchmarkId, modelId, value, unit = "%", setting = "", note = "") => {
     observations.push({ id: `o${observations.length + 1}`, sourceIds, benchmarkId, modelId, value, unit, setting, note });
@@ -530,5 +611,5 @@ window.BENCH_DATA = (() => {
   add(["skillsbench-1-1"], "skillsbench-1-1", "gemini-3-1-pro", 60.8, "%", "with Skills · Gemini CLI · 87 tasks · up to 3 trials", "without Skills: 36.0% · official v1.1 leaderboard");
   add(["skillsbench-1-1"], "skillsbench-1-1", "deepseek-v4-pro", 50.1, "%", "with Skills · OpenHands · 87 tasks · up to 3 trials", "official row label: DeepSeek V4 Pro · without Skills: 26.9%");
 
-  return { meta, sources, models, benchmarks, observations };
+  return { meta, sources, models, benchmarks, benchmarkFamilies, observations };
 })();

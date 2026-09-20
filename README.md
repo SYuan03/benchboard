@@ -10,18 +10,19 @@ BenchBoard collects public benchmark results for current language, multimodal, a
 
 <!-- DATA_SUMMARY_START -->
 - 34 model releases
-- 99 registered benchmarks
+- 68 benchmark families
+- 99 separately ranked metrics and versions
 - 613 deduplicated public results
 - 23 primary sources
 <!-- DATA_SUMMARY_END -->
 
 The first release focuses on general, coding, multimodal, and agent models near the frontier in 2026. It includes GPT-6 Astra, GPT-5.6 Sol, Claude 5, Gemini 3.8, DeepSeek V4.1, Qwen3.8, Qwen3.7 Plus, GLM-5.3, Seed2.1, Kimi K3, and Hy4.
 
-All rows from the Coding Agent, General Agent, and General Capabilities tables in the official Qwen3.8 model card are recorded individually. Qwen3.8 Max currently has public results for 51 distinct benchmarks. The open-weight `Qwen3.8-2.4T-A95B` language model and the vision-and-tool-enabled Qwen3.8 Max service are listed separately.
+All rows from the Coding Agent, General Agent, and General Capabilities tables in the official Qwen3.8 model card are recorded individually. Qwen3.8 Max currently has public results across 45 benchmark families and 51 separately ranked metric or version views. The open-weight `Qwen3.8-2.4T-A95B` language model and the vision-and-tool-enabled Qwen3.8 Max service are listed separately.
 
-SkillsBench 1.1, PinchBench v2, WildClawBench, WildClawBench-MM, QwenClawBench, ClawEval, Agents' Last Exam, and Workspace-Bench 1.0 are included. Agent harnesses and settings stay attached to each result when the publisher reports them. PinchBench stores Best Success Rate and Average Success Rate separately. WildClawBench stores Overall, Elapsed Time, and Total Cost separately. WildClawBench-MM includes multimodal agent results such as the official 71.0 score reported for Qwen3.8 Omni Flash.
+SkillsBench 1.1, PinchBench v2, WildClawBench, WildClawBench-MM, QwenClawBench, ClawEval, Agents' Last Exam, and Workspace-Bench 1.0 are included. Agent harnesses and settings stay attached to each result when the publisher reports them. Benchmarks appear once in navigation; their versions, subsets, and metrics are switchable inside the benchmark view. PinchBench, for example, keeps Best Success Rate and Average Success Rate as separate rankings under one entry. WildClawBench similarly groups Overall, MM, Elapsed Time, and Total Cost without mixing their units or rankings. WildClawBench-MM includes multimodal agent results such as the official 71.0 score reported for Qwen3.8 Omni Flash.
 
-[RNG-Bench](https://internlm.github.io/RNGBench/) is split into 12 leaderboards for the comparable rates, scores, efficiency measures, error rates, and Elo in its official main-results tables. The records cover the 10×10 Matching Pairs setting, the 13×13 Maze, and the 16-game-per-model Duel protocol. Raw win, tie, and loss counts remain on the source page.
+[RNG-Bench](https://internlm.github.io/RNGBench/) appears once with 12 switchable metric views for the comparable rates, scores, efficiency measures, error rates, and Elo in its official main-results tables. The records cover the 10×10 Matching Pairs setting, the 13×13 Maze, and the 16-game-per-model Duel protocol. Raw win, tie, and loss counts remain on the source page.
 
 Coverage is still expanding as model providers and benchmark maintainers publish new tables.
 
@@ -67,6 +68,7 @@ All records live in `data.js`:
 
 - `models` stores provider, release, aliases, modality, and access type.
 - `benchmarks` stores normalized names, versions, capability areas, metric direction, and optional collection metadata such as harness and collection scope.
+- `benchmarkFamilies` groups related versions, subsets, and metrics under one navigation entry while preserving separate rankings.
 - `sources` stores original publication pages. Model-provider releases, official benchmark leaderboards, and technical reports are preferred.
 - `observations` stores each model, benchmark, score, and evaluation-setting combination.
 
@@ -82,7 +84,7 @@ Modalities use three values:
 
 A provider's table may contain results for competing models. BenchBoard marks those rows as provider-reported. Data published by benchmark maintainers, including SkillsBench and PinchBench, is marked as benchmark-official.
 
-One benchmark name may contain several metrics. Agents' Last Exam, for example, has Pass Rate and Overall Score; OSWorld has Binary, Partial, and Strict; ExploitGym has Success Rate and Solved Tasks. Each metric gets its own leaderboard. Composite strings and incompatible units are never forced into one ranking.
+One benchmark may contain several metrics or settings. Agents' Last Exam, for example, has Pass Rate and Overall Score; OSWorld has Binary, Partial, and Strict; ExploitGym has Success Rate and Solved Tasks. The site shows one benchmark entry with direct metric buttons inside it. Each metric still gets its own ranking and stable URL; composite strings and incompatible units are never forced into one table.
 
 Rankings from different sources still require context. Dataset versions, agent harnesses, tool permissions, reasoning settings, and sample counts can change a result even when the benchmark name matches. BenchBoard indexes published evidence and does not claim independent reproduction.
 

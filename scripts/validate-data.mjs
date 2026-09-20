@@ -5,6 +5,7 @@ const duplicateIds = (items) => items.map((item) => item.id).filter((id, index, 
 const modelIds = new Set(data.models.map((item) => item.id));
 const benchmarkIds = new Set(data.benchmarks.map((item) => item.id));
 const sourceIds = new Set(data.sources.map((item) => item.id));
+const benchmarkFamilyIds = new Set((data.benchmarkFamilies || []).map((item) => item.id));
 const validUrl = /^https:\/\//;
 
 for (const [label, items] of [["model", data.models], ["benchmark", data.benchmarks], ["source", data.sources]]) {
@@ -29,6 +30,21 @@ for (const benchmark of data.benchmarks) {
     if (!Array.isArray(benchmark.harnesses) || benchmark.harnesses.length === 0) errors.push(`missing harness names: ${benchmark.id}`);
     if (!Array.isArray(benchmark.inputModalities) || benchmark.inputModalities.length === 0) errors.push(`missing multimodal inputs: ${benchmark.id}`);
     if (benchmark.collectionMode && !new Set(["benchmark", "observation"]).has(benchmark.collectionMode)) errors.push(`invalid collection mode: ${benchmark.id}`);
+  }
+}
+
+const familyBenchmarkIds = new Set();
+if (benchmarkFamilyIds.size !== (data.benchmarkFamilies || []).length) errors.push("duplicate benchmark family id");
+for (const family of data.benchmarkFamilies || []) {
+  if (!family.id || !family.name || !Array.isArray(family.variants) || family.variants.length < 2) {
+    errors.push(`invalid benchmark family: ${family.id || "(missing id)"}`);
+    continue;
+  }
+  for (const variant of family.variants) {
+    if (!benchmarkIds.has(variant.benchmarkId)) errors.push(`missing family benchmark: ${family.id} -> ${variant.benchmarkId}`);
+    if (!variant.label) errors.push(`missing family variant label: ${family.id} -> ${variant.benchmarkId}`);
+    if (familyBenchmarkIds.has(variant.benchmarkId)) errors.push(`benchmark belongs to multiple families: ${variant.benchmarkId}`);
+    familyBenchmarkIds.add(variant.benchmarkId);
   }
 }
 
