@@ -18,14 +18,8 @@ const comparisonModelCount = data.models.filter((model) => model.scoreStatus ===
 const curatedModelCount = data.models.length - comparisonModelCount;
 const format = (value) => new Intl.NumberFormat("en-US").format(value);
 const summary = `<!-- DATA_SUMMARY_START -->
-<table width="100%">
-  <tr>
-    <td align="center" width="25%"><strong>${format(data.models.length)}</strong><br><sub>models &amp; versions</sub></td>
-    <td align="center" width="25%"><strong>${format(benchmarkFamilyCount)}</strong><br><sub>benchmark families</sub></td>
-    <td align="center" width="25%"><strong>${format(mergedObservationCount)}</strong><br><sub>public results</sub></td>
-    <td align="center" width="25%"><strong>${format(data.sources.length)}</strong><br><sub>primary sources</sub></td>
-  </tr>
-</table>
+| **${format(data.models.length)}**<br><sub>models & versions</sub> | **${format(benchmarkFamilyCount)}**<br><sub>benchmark families</sub> | **${format(mergedObservationCount)}**<br><sub>public results</sub> | **${format(data.sources.length)}**<br><sub>primary sources</sub> |
+| :---: | :---: | :---: | :---: |
 <p align="center"><sub>${format(curatedModelCount)} curated releases + ${format(comparisonModelCount)} comparison-only models · ${format(data.benchmarks.length)} separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->`;
 const next = current.replace(/<!-- DATA_SUMMARY_START -->[\s\S]*?<!-- DATA_SUMMARY_END -->/, summary);
