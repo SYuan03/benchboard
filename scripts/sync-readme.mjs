@@ -16,19 +16,17 @@ const groupedBenchmarkIds = new Set((data.benchmarkFamilies || []).flatMap((fami
 const benchmarkFamilyCount = data.benchmarks.length - groupedBenchmarkIds.size + (data.benchmarkFamilies || []).length;
 const comparisonModelCount = data.models.filter((model) => model.scoreStatus === "comparison-only").length;
 const curatedModelCount = data.models.length - comparisonModelCount;
+const format = (value) => new Intl.NumberFormat("en-US").format(value);
 const summary = `<!-- DATA_SUMMARY_START -->
-<table>
+<table width="100%">
   <tr>
-    <td align="center"><strong>${curatedModelCount}</strong><br><sub>curated releases</sub></td>
-    <td align="center"><strong>${benchmarkFamilyCount}</strong><br><sub>benchmark families</sub></td>
-    <td align="center"><strong>${mergedObservationCount}</strong><br><sub>public results</sub></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>${comparisonModelCount}</strong><br><sub>comparison-only models</sub></td>
-    <td align="center"><strong>${data.benchmarks.length}</strong><br><sub>ranked metric views</sub></td>
-    <td align="center"><strong>${data.sources.length}</strong><br><sub>primary sources</sub></td>
+    <td align="center" width="25%"><strong>${format(data.models.length)}</strong><br><sub>models &amp; versions</sub></td>
+    <td align="center" width="25%"><strong>${format(benchmarkFamilyCount)}</strong><br><sub>benchmark families</sub></td>
+    <td align="center" width="25%"><strong>${format(mergedObservationCount)}</strong><br><sub>public results</sub></td>
+    <td align="center" width="25%"><strong>${format(data.sources.length)}</strong><br><sub>primary sources</sub></td>
   </tr>
 </table>
+<p align="center"><sub>${format(curatedModelCount)} curated releases + ${format(comparisonModelCount)} comparison-only models · ${format(data.benchmarks.length)} separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->`;
 const next = current.replace(/<!-- DATA_SUMMARY_START -->[\s\S]*?<!-- DATA_SUMMARY_END -->/, summary);
 

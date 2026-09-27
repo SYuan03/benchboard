@@ -1,41 +1,34 @@
 <div align="center">
-  <img src="assets/benchboard-teaser.svg" alt="BenchBoard preview" width="100%">
-
-  <h1>BenchBoard</h1>
-
-  <p>A searchable index of published benchmark results for current AI models.</p>
+  <a href="https://syuan03.github.io/benchboard/"><img src="assets/benchboard-teaser.svg" alt="BenchBoard: published benchmark results for current AI models" width="100%"></a>
 
   <p>
-    <a href="https://syuan03.github.io/benchboard/"><img alt="Open the live site" src="https://img.shields.io/badge/Open_the_live_site-245FDB?style=for-the-badge"></a>
-    <a href="CONTRIBUTING.md"><img alt="Contribute data" src="https://img.shields.io/badge/Contribute_data-16845B?style=for-the-badge"></a>
-    <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/License-MIT-202938?style=for-the-badge"></a>
+    <a href="https://syuan03.github.io/benchboard/"><img alt="Open BenchBoard" src="https://img.shields.io/badge/Open_BenchBoard-245FDB?style=for-the-badge"></a>
   </p>
+
+  <p><a href="https://syuan03.github.io/benchboard/">Leaderboard</a> · <a href="docs/audits/model-source-coverage.md">Source coverage</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
 </div>
 
-BenchBoard keeps the model version, benchmark variant, evaluation setting, and source together. Scores from different harnesses or versions remain separate. There is no cross-benchmark composite score.
+BenchBoard indexes published benchmark results for current AI models. Every score keeps its model release, benchmark variant, evaluation setting, and original source attached. Results from different harnesses or versions remain separate, and the site does not invent a cross-benchmark composite score.
 
 <!-- DATA_SUMMARY_START -->
-<table>
+<table width="100%">
   <tr>
-    <td align="center"><strong>120</strong><br><sub>curated releases</sub></td>
-    <td align="center"><strong>543</strong><br><sub>benchmark families</sub></td>
-    <td align="center"><strong>7165</strong><br><sub>public results</sub></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>23</strong><br><sub>comparison-only models</sub></td>
-    <td align="center"><strong>1188</strong><br><sub>ranked metric views</sub></td>
-    <td align="center"><strong>265</strong><br><sub>primary sources</sub></td>
+    <td align="center" width="25%"><strong>143</strong><br><sub>models &amp; versions</sub></td>
+    <td align="center" width="25%"><strong>543</strong><br><sub>benchmark families</sub></td>
+    <td align="center" width="25%"><strong>7,165</strong><br><sub>public results</sub></td>
+    <td align="center" width="25%"><strong>265</strong><br><sub>primary sources</sub></td>
   </tr>
 </table>
+<p align="center"><sub>120 curated releases + 23 comparison-only models · 1,188 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
-## What you can do
+## Use the data
 
-| Browse | Compare | Verify |
-| --- | --- | --- |
-| Open a benchmark from the left-side index or find it with `Ctrl+F` / `Cmd+F`. | Place up to three models side by side across shared or model-specific results. | Open the exact release page, model card, paper, or official leaderboard behind every score. |
+| Find a result | Compare models | Check the source | Take it with you |
+| --- | --- | --- | --- |
+| Browse the full benchmark index or use `Ctrl+F` / `Cmd+F`. | Place up to three releases side by side. | Open the release page, model card, paper, or official leaderboard behind a score. | Export the filtered table as CSV or share its URL. |
 
-The site also includes a coverage matrix, a model directory, CSV export, conflict filtering, and shareable benchmark URLs. Opening a model shows every recorded result and setting for that release.
+Opening a model shows every recorded result and setting for that release. The coverage matrix records how completely each source has been checked, and conflicting published values remain visible.
 
 ## News
 
