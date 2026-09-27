@@ -32,7 +32,7 @@ const statsSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1
     const start = index * 400;
     const center = start + 200;
     const divider = index ? `<path d="M${start} 28V122" stroke="#dce3ed" stroke-width="2"/>` : "";
-    return `${divider}<circle cx="${center - 78}" cy="102" r="5" fill="${color}"/><text x="${center}" y="69" text-anchor="middle" fill="#172033" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="46" font-weight="760">${value}</text><text x="${center + 9}" y="108" text-anchor="middle" fill="#66758a" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="17" font-weight="650" letter-spacing="1">${label}</text>`;
+    return `${divider}<text x="${center}" y="69" text-anchor="middle" fill="#172033" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="46" font-weight="760">${value}</text><text x="${center}" y="108" text-anchor="middle" fill="${color}" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="17" font-weight="700" letter-spacing="1">${label}</text>`;
   }).join("")}
 </svg>
 `;
