@@ -17,12 +17,18 @@ const benchmarkFamilyCount = data.benchmarks.length - groupedBenchmarkIds.size +
 const comparisonModelCount = data.models.filter((model) => model.scoreStatus === "comparison-only").length;
 const curatedModelCount = data.models.length - comparisonModelCount;
 const summary = `<!-- DATA_SUMMARY_START -->
-- ${curatedModelCount} curated model releases
-- ${comparisonModelCount} benchmark-only comparison models
-- ${benchmarkFamilyCount} benchmark families
-- ${data.benchmarks.length} separately ranked metrics and versions
-- ${mergedObservationCount} deduplicated public results
-- ${data.sources.length} primary sources
+<table>
+  <tr>
+    <td align="center"><strong>${curatedModelCount}</strong><br><sub>curated releases</sub></td>
+    <td align="center"><strong>${benchmarkFamilyCount}</strong><br><sub>benchmark families</sub></td>
+    <td align="center"><strong>${mergedObservationCount}</strong><br><sub>public results</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>${comparisonModelCount}</strong><br><sub>comparison-only models</sub></td>
+    <td align="center"><strong>${data.benchmarks.length}</strong><br><sub>ranked metric views</sub></td>
+    <td align="center"><strong>${data.sources.length}</strong><br><sub>primary sources</sub></td>
+  </tr>
+</table>
 <!-- DATA_SUMMARY_END -->`;
 const next = current.replace(/<!-- DATA_SUMMARY_START -->[\s\S]*?<!-- DATA_SUMMARY_END -->/, summary);
 

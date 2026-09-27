@@ -30,6 +30,7 @@ const dataPackFiles = [
   "data-packs/remaining-west.js",
   "data-packs/remaining-misc-firstparty.js",
   "data-packs/pending-source-audit.js",
+  "data-packs/releases-2026-09-28.js",
   "data-packs/normalize.js"
 ];
 for (const filename of dataPackFiles) {

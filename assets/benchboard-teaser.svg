@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="560" viewBox="0 0 1600 560" role="img" aria-labelledby="title desc">
   <title id="title">BenchBoard</title>
-  <desc id="desc">Public benchmark results for frontier AI models, with model versions, evaluation settings, and primary sources.</desc>
+  <desc id="desc">Published benchmark results for current AI models, with model versions, evaluation settings, and primary sources.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#fbfcff"/>
@@ -26,7 +26,7 @@
 
   <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
     <text x="92" y="213" fill="#172033" font-size="72" font-weight="760" letter-spacing="-3">BenchBoard</text>
-    <text x="94" y="264" fill="#526176" font-size="23" font-weight="520">Public benchmark results for frontier AI models</text>
+    <text x="94" y="264" fill="#526176" font-size="23" font-weight="520">Published benchmark results for current AI models</text>
     <text x="94" y="304" fill="#718097" font-size="18">Model versions, evaluation settings, and primary sources</text>
 
     <g transform="translate(92 355)">
