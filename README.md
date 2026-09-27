@@ -11,7 +11,7 @@
 BenchBoard indexes published benchmark results for current AI models. Every score keeps its model release, benchmark variant, evaluation setting, and original source attached. Results from different harnesses or versions remain separate, and the site does not invent a cross-benchmark composite score.
 
 <!-- DATA_SUMMARY_START -->
-<p align="center"><img src="assets/benchboard-stats.svg" width="100%" alt="143 models and versions, 543 benchmark families, 7,165 public results, 265 primary sources"></p>
+<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="143 models and versions, 543 benchmark families, 7,165 public results, 265 primary sources"></p>
 <p align="center"><sub>120 curated releases + 23 comparison-only models · 1,188 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 

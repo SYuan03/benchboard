@@ -37,7 +37,7 @@ const statsSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1
 </svg>
 `;
 const summary = `<!-- DATA_SUMMARY_START -->
-<p align="center"><img src="assets/benchboard-stats.svg" width="100%" alt="${format(data.models.length)} models and versions, ${format(benchmarkFamilyCount)} benchmark families, ${format(mergedObservationCount)} public results, ${format(data.sources.length)} primary sources"></p>
+<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="${format(data.models.length)} models and versions, ${format(benchmarkFamilyCount)} benchmark families, ${format(mergedObservationCount)} public results, ${format(data.sources.length)} primary sources"></p>
 <p align="center"><sub>${format(curatedModelCount)} curated releases + ${format(comparisonModelCount)} comparison-only models · ${format(data.benchmarks.length)} separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->`;
 const next = current.replace(/<!-- DATA_SUMMARY_START -->[\s\S]*?<!-- DATA_SUMMARY_END -->/, summary);
