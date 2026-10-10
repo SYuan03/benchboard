@@ -32,6 +32,7 @@ const dataPackFiles = [
   "data-packs/pending-source-audit.js",
   "data-packs/releases-2026-09-28.js",
   "data-packs/releases-2026-10-10.js",
+  "data-packs/releases-2026-10-11.js",
   "data-packs/normalize.js"
 ];
 for (const filename of dataPackFiles) {

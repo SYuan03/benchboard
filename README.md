@@ -11,13 +11,18 @@
 BenchBoard indexes published benchmark results for current AI models. Every score keeps its model release, benchmark variant, evaluation setting, and original source attached. Results from different harnesses or versions remain separate, and the site does not invent a cross-benchmark composite score.
 
 <!-- DATA_SUMMARY_START -->
-<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="149 models and versions, 548 benchmark families, 7,333 public results, 272 primary sources"></p>
+<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="149 models and versions, 548 benchmark families, 7,356 public results, 273 primary sources"></p>
 <p align="center"><sub>124 curated releases + 25 comparison-only models · 1,194 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
 <h2><img src="assets/readme-icon-news.svg" width="28" alt=""> News</h2>
 
 <table>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Leaderboard audit"></td>
+    <td width="132"><strong>2026-10-11</strong><br><sub>LEADERBOARD AUDIT</sub></td>
+    <td>Added the complete 23-row <a href="https://www.tbench.ai/">Terminal-Bench 4.0 official leaderboard</a>. Maintainer-run scores keep their agent harness, effort, confidence interval, token total, and cost setting separate from provider-reported runs.</td>
+  </tr>
   <tr>
     <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Model releases"></td>
     <td width="132"><strong>2026-10-10</strong><br><sub>MODEL RELEASES</sub></td>
