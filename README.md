@@ -15,12 +15,6 @@ BenchBoard indexes published benchmark results for current AI models. Every scor
 <p align="center"><sub>124 curated releases + 25 comparison-only models · 1,194 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
-<h2><img src="assets/readme-icon-data.svg" width="28" alt=""> Use the data</h2>
-
-<p align="center"><a href="https://syuan03.github.io/benchboard/"><img src="assets/benchboard-features.svg" width="100%" alt="Find results, compare model releases, trace every score to its source, and export filtered data"></a></p>
-
-Search or scan the complete benchmark index, compare up to three releases, and export the current view as CSV. Opening a model shows every recorded result and setting for that release. The coverage matrix records how completely each source has been checked, and conflicting published values remain visible.
-
 <h2><img src="assets/readme-icon-news.svg" width="28" alt=""> News</h2>
 
 <table>
@@ -50,6 +44,12 @@ Search or scan the complete benchmark index, compare up to three releases, and e
     <td>Published the first BenchBoard dataset with representative GPT, Claude, Gemini, DeepSeek, Qwen, GLM, Seed, Kimi, and Hy releases.</td>
   </tr>
 </table>
+
+<h2><img src="assets/readme-icon-data.svg" width="28" alt=""> Use the data</h2>
+
+<p align="center"><a href="https://syuan03.github.io/benchboard/"><img src="assets/benchboard-features.svg" width="100%" alt="Find results, compare model releases, trace every score to its source, and export filtered data"></a></p>
+
+Search or scan the complete benchmark index, compare up to three releases, and export the current view as CSV. Opening a model shows every recorded result and setting for that release. The coverage matrix records how completely each source has been checked, and conflicting published values remain visible.
 
 <h2><img src="assets/readme-icon-coverage.svg" width="28" alt=""> Coverage</h2>
 
