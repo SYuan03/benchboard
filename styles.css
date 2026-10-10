@@ -107,7 +107,16 @@ input[type="search"]:focus, select:focus { border-color: var(--blue); box-shadow
 .sidebar-heading b { color: var(--text); }
 .sidebar-heading > span { display: inline-flex; align-items: center; gap: 5px; }
 .sidebar-heading .ui-icon { width: 12px; height: 12px; }
-.bench-group-title { padding: 14px 13px 5px; color: var(--quiet); font-size: 9px; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
+.bench-group { border-bottom: 1px solid #e9edf2; }
+.bench-group-title { min-height: 37px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 12px 0 14px; color: #68778e; font-size: 9px; font-weight: 780; letter-spacing: .07em; text-transform: uppercase; cursor: pointer; list-style: none; user-select: none; }
+.bench-group-title::-webkit-details-marker { display: none; }
+.bench-group-title:hover { color: var(--text); background: #f1f4f8; }
+.bench-group-meta { display: inline-flex; align-items: center; gap: 7px; color: var(--quiet); }
+.bench-group-meta small { min-width: 18px; text-align: right; font-size: 9px; font-weight: 650; letter-spacing: 0; }
+.bench-group-chevron { width: 12px; height: 12px; transition: transform .16s ease; }
+.bench-group[open] .bench-group-chevron { transform: rotate(180deg); }
+.bench-group[open] .bench-group-title { position: sticky; top: 44px; z-index: 2; color: #43536c; background: #f4f6f9; box-shadow: 0 1px 0 #e2e7ee; }
+.bench-group-items { padding: 4px 0 7px; }
 .bench-nav-item { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 7px 12px; color: var(--muted); background: transparent; border: 0; border-left: 3px solid transparent; text-align: left; font-size: 11px; }
 .bench-nav-copy { min-width: 0; display: grid; }
 .bench-nav-copy > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -282,7 +291,10 @@ footer a { color: var(--blue); text-decoration: none; }
   .bench-sidebar { max-height: none; overflow: hidden; border-right: 0; border-bottom: 1px solid var(--line); }
   .sidebar-heading { position: static; }
   #benchmark-nav { display: flex; overflow-x: auto; padding: 7px; scrollbar-width: thin; }
+  .bench-group { display: contents; }
   .bench-group-title { display: none; }
+  .bench-group[open] .bench-group-title { position: static; box-shadow: none; }
+  .bench-group-items, .bench-group:not([open]) > .bench-group-items { display: contents !important; }
   .bench-nav-item { width: auto; flex: 0 0 auto; border-left: 0; border-bottom: 2px solid transparent; border-radius: 6px; }
   .bench-nav-item.active { border-left-color: transparent; border-bottom-color: var(--blue); }
   .leaderboard-heading, .section-head { display: block; }

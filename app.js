@@ -246,9 +246,11 @@
     const available = [...groups.values()].flat().flatMap((item) => item.variants.map((variant) => variant.benchmarkId));
     if (!available.includes(state.selectedBenchmark)) state.selectedBenchmark = available[0] || "";
     els.benchCount.textContent = String([...groups.values()].flat().length);
-    els.benchmarkNav.innerHTML = [...groups.entries()].map(([category, items]) => `
-      <div class="bench-group-title">${escapeHtml(category)}</div>
-      ${items.map(({ family, variants, benches, count }) => {
+    els.benchmarkNav.innerHTML = [...groups.entries()].map(([category, items]) => {
+      const groupActive = items.some(({ variants }) => variants.some((variant) => variant.benchmarkId === state.selectedBenchmark));
+      return `<details class="bench-group" ${groupActive ? "open" : ""}>
+        <summary class="bench-group-title"><span>${escapeHtml(category)}</span><span class="bench-group-meta"><small>${items.length}</small>${icon("chevron", "bench-group-chevron")}</span></summary>
+        <div class="bench-group-items">${items.map(({ family, variants, benches, count }) => {
         const active = variants.some((variant) => variant.benchmarkId === state.selectedBenchmark);
         const target = active ? state.selectedBenchmark : variants[0].benchmarkId;
         const inputs = unique(benches.flatMap((bench) => bench.inputModalities || []));
@@ -256,8 +258,21 @@
         const detail = state.collection ? [`输入：${inputs.join(" / ")}`, `Harness：${harnesses.join(" / ")}`].join(" · ") : "";
         const countLabel = variants.length > 1 ? `${variants.length} 指标` : `${count} 条`;
         return `<button class="bench-nav-item ${active ? "active" : ""}" type="button" data-benchmark="${escapeHtml(target)}"><span class="bench-nav-copy"><span>${escapeHtml(family.name)}</span>${detail ? `<em>${escapeHtml(detail)}</em>` : ""}</span><small>${escapeHtml(countLabel)}</small></button>`;
-      }).join("")}
-    `).join("") || `<div class="empty">没有匹配的 Benchmark</div>`;
+      }).join("")}</div>
+      </details>`;
+    }).join("") || `<div class="empty">没有匹配的 Benchmark</div>`;
+    requestAnimationFrame(() => {
+      const activeItem = els.benchmarkNav.querySelector(".bench-nav-item.active");
+      const sidebar = activeItem?.closest(".bench-sidebar");
+      if (!activeItem || !sidebar || window.matchMedia("(max-width: 720px)").matches) return;
+      const itemRect = activeItem.getBoundingClientRect();
+      const sidebarRect = sidebar.getBoundingClientRect();
+      const visibleTop = sidebarRect.top + 44;
+      const visibleBottom = Math.min(sidebarRect.bottom, window.innerHeight);
+      if (itemRect.top < visibleTop || itemRect.bottom > visibleBottom) {
+        sidebar.scrollTop += (itemRect.top + itemRect.bottom - visibleTop - visibleBottom) / 2;
+      }
+    });
   }
 
   function renderLeaderboard() {
