@@ -11,8 +11,8 @@
 BenchBoard indexes published benchmark results for current AI models. Every score keeps its model release, benchmark variant, evaluation setting, and original source attached. Results from different harnesses or versions remain separate, and the site does not invent a cross-benchmark composite score.
 
 <!-- DATA_SUMMARY_START -->
-<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="143 models and versions, 543 benchmark families, 7,165 public results, 265 primary sources"></p>
-<p align="center"><sub>120 curated releases + 23 comparison-only models · 1,188 separately ranked metric and version views</sub></p>
+<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="149 models and versions, 548 benchmark families, 7,333 public results, 272 primary sources"></p>
+<p align="center"><sub>124 curated releases + 25 comparison-only models · 1,194 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
 ## Use the data
@@ -27,6 +27,7 @@ Opening a model shows every recorded result and setting for that release. The co
 
 | Date | Update |
 | --- | --- |
+| 2026-10-10 | Added Claude Sonnet 5.5, Claude Haiku 5.5, Gemini 4 Argon, and Mistral Large 4 Preview. Imported the capability results that their official release pages and system cards report as exact values. |
 | 2026-09-28 | Added Claude Opus 5.5, Grok 4.7, GPT-6 Sol, and GPT-6 Luna. Added the full MentalHealthBench views and the complete CursorBench 4.0 table. |
 | 2026-09-21 | Completed a broad first-party sweep across release pages, model cards, repositories, and technical reports. Added a generated [source coverage matrix](docs/audits/model-source-coverage.md). |
 | 2026-09-20 | Added the [Multimodal Input × Harness collection](https://syuan03.github.io/benchboard/?collection=multimodal-harness) for tasks that give an agent images, audio, video, screens, or other non-text files. |
