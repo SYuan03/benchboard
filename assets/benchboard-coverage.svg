@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="232" viewBox="0 0 1200 232" role="img" aria-labelledby="title desc">
+  <title id="title">How BenchBoard organizes model benchmark coverage</title>
+  <desc id="desc">BenchBoard focuses on current models, groups related benchmark variants, and keeps evaluation settings attached to every result.</desc>
+  <defs><filter id="shadow" x="-10%" y="-15%" width="120%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#1d3154" flood-opacity=".06"/></filter></defs>
+  <rect width="1200" height="232" rx="18" fill="#f5f7fb"/>
+  <g filter="url(#shadow)">
+    <rect x="18" y="18" width="374" height="196" rx="14" fill="#fff" stroke="#dfe5ee"/>
+    <rect x="413" y="18" width="374" height="196" rx="14" fill="#fff" stroke="#dfe5ee"/>
+    <rect x="808" y="18" width="374" height="196" rx="14" fill="#fff" stroke="#dfe5ee"/>
+  </g>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <rect x="40" y="40" width="42" height="42" rx="10" fill="#edf4ff"/>
+    <g fill="none" stroke="#245fda" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m61 47 9 5-9 5-9-5 9-5Z"/><path d="m52 58 9 5 9-5m-18 5 9 5 9-5"/></g>
+    <text x="98" y="58" fill="#172033" font-size="18" font-weight="700">Current model coverage</text>
+    <text x="98" y="78" fill="#718096" font-size="11.5">RECENT RELEASES + USEFUL BASELINES</text>
+    <text x="40" y="116" fill="#66758b" font-size="13">General, coding, multimodal, and agent</text>
+    <text x="40" y="137" fill="#66758b" font-size="13">models, with older releases kept when an</text>
+    <text x="40" y="158" fill="#66758b" font-size="13">official comparison table still uses them.</text>
+    <rect x="40" y="178" width="68" height="22" rx="6" fill="#edf4ff"/><text x="52" y="193" fill="#245fda" font-size="10" font-weight="700">MODELS</text>
+    <rect x="114" y="178" width="76" height="22" rx="6" fill="#eaf7f2"/><text x="126" y="193" fill="#167457" font-size="10" font-weight="700">BASELINES</text>
+
+    <rect x="435" y="40" width="42" height="42" rx="10" fill="#f1efff"/>
+    <g fill="none" stroke="#6854ca" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="444" y="49" width="24" height="24" rx="3"/><path d="M444 57h24m-16-8v24"/></g>
+    <text x="493" y="58" fill="#172033" font-size="18" font-weight="700">One family, clear variants</text>
+    <text x="493" y="78" fill="#718096" font-size="11.5">NO DUPLICATE NAVIGATION ENTRIES</text>
+    <rect x="435" y="106" width="82" height="30" rx="7" fill="#f1efff"/><text x="452" y="125" fill="#6854ca" font-size="10.5" font-weight="700">FAMILY</text>
+    <path d="M522 121h26" stroke="#a79be0" stroke-width="1.7" stroke-linecap="round"/><path d="m543 117 5 4-5 4" fill="none" stroke="#a79be0" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="553" y="106" width="91" height="30" rx="7" fill="#f7f5ff" stroke="#ded8fb"/><text x="568" y="125" fill="#655b8d" font-size="10.5" font-weight="700">VERSION</text>
+    <rect x="435" y="148" width="91" height="30" rx="7" fill="#f8f9fb" stroke="#e1e5ec"/><text x="451" y="167" fill="#66758b" font-size="10.5" font-weight="700">SUBSET</text>
+    <rect x="536" y="148" width="91" height="30" rx="7" fill="#f8f9fb" stroke="#e1e5ec"/><text x="551" y="167" fill="#66758b" font-size="10.5" font-weight="700">METRIC</text>
+    <rect x="637" y="148" width="124" height="30" rx="7" fill="#f8f9fb" stroke="#e1e5ec"/><text x="651" y="167" fill="#66758b" font-size="10.5" font-weight="700">SNAPSHOT</text>
+
+    <rect x="830" y="40" width="42" height="42" rx="10" fill="#fff2e8"/>
+    <g fill="none" stroke="#b65b1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M840 51h22m-22 10h22m-22 10h22"/><circle cx="847" cy="51" r="3" fill="#fff2e8"/><circle cx="856" cy="61" r="3" fill="#fff2e8"/><circle cx="850" cy="71" r="3" fill="#fff2e8"/></g>
+    <text x="888" y="58" fill="#172033" font-size="18" font-weight="700">Settings stay attached</text>
+    <text x="888" y="78" fill="#718096" font-size="11.5">CONTEXT BEFORE COMPARISON</text>
+    <g font-size="10.5" font-weight="700">
+      <rect x="830" y="106" width="91" height="28" rx="7" fill="#fff2e8"/><text x="846" y="124" fill="#b65b1f">HARNESS</text>
+      <rect x="931" y="106" width="104" height="28" rx="7" fill="#edf4ff"/><text x="947" y="124" fill="#245fda">TOOL ACCESS</text>
+      <rect x="1045" y="106" width="111" height="28" rx="7" fill="#eaf7f2"/><text x="1061" y="124" fill="#167457">TASK COUNT</text>
+      <rect x="830" y="146" width="128" height="28" rx="7" fill="#f1efff"/><text x="846" y="164" fill="#6854ca">REASONING</text>
+      <rect x="968" y="146" width="118" height="28" rx="7" fill="#f8f9fb" stroke="#e1e5ec"/><text x="984" y="164" fill="#66758b">SNAPSHOT</text>
+    </g>
+    <text x="830" y="198" fill="#66758b" font-size="11.5">Every published value keeps its original context.</text>
+  </g>
+</svg>

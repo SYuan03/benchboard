@@ -15,30 +15,52 @@ BenchBoard indexes published benchmark results for current AI models. Every scor
 <p align="center"><sub>124 curated releases + 25 comparison-only models · 1,194 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
-## Use the data
+<h2><img src="assets/readme-icon-data.svg" width="28" alt=""> Use the data</h2>
 
 <p align="center"><a href="https://syuan03.github.io/benchboard/"><img src="assets/benchboard-features.svg" width="100%" alt="Find results, compare model releases, trace every score to its source, and export filtered data"></a></p>
 
 Search or scan the complete benchmark index, compare up to three releases, and export the current view as CSV. Opening a model shows every recorded result and setting for that release. The coverage matrix records how completely each source has been checked, and conflicting published values remain visible.
 
-## News
+<h2><img src="assets/readme-icon-news.svg" width="28" alt=""> News</h2>
 
-| Date | Update |
-| --- | --- |
-| 2026-10-10 | Added Claude Sonnet 5.5, Claude Haiku 5.5, Gemini 4 Argon, and Mistral Large 4 Preview. Imported the capability results that their official release pages and system cards report as exact values. |
-| 2026-09-28 | Added Claude Opus 5.5, Grok 4.7, GPT-6 Sol, and GPT-6 Luna. Added the full MentalHealthBench views and the complete CursorBench 4.0 table. |
-| 2026-09-21 | Completed a broad first-party sweep across release pages, model cards, repositories, and technical reports. Added a generated [source coverage matrix](docs/audits/model-source-coverage.md). |
-| 2026-09-20 | Added the [Multimodal Input × Harness collection](https://syuan03.github.io/benchboard/?collection=multimodal-harness) for tasks that give an agent images, audio, video, screens, or other non-text files. |
-| 2026-09-18 | Published the first BenchBoard dataset with representative GPT, Claude, Gemini, DeepSeek, Qwen, GLM, Seed, Kimi, and Hy releases. |
+<table>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Model releases"></td>
+    <td width="132"><strong>2026-10-10</strong><br><sub>MODEL RELEASES</sub></td>
+    <td>Added Claude Sonnet 5.5, Claude Haiku 5.5, Gemini 4 Argon, and Mistral Large 4 Preview. Imported the exact capability results reported by their official release pages and system cards.</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="assets/news-release.svg" width="32" alt="Model releases"></td>
+    <td><strong>2026-09-28</strong><br><sub>MODEL RELEASES</sub></td>
+    <td>Added Claude Opus 5.5, Grok 4.7, GPT-6 Sol, and GPT-6 Luna, plus the full MentalHealthBench views and complete CursorBench 4.0 table.</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="assets/news-audit.svg" width="32" alt="Source audit"></td>
+    <td><strong>2026-09-21</strong><br><sub>SOURCE AUDIT</sub></td>
+    <td>Completed a broad first-party sweep across release pages, model cards, repositories, and technical reports. Added a generated <a href="docs/audits/model-source-coverage.md">source coverage matrix</a>.</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="assets/news-collection.svg" width="32" alt="Special collection"></td>
+    <td><strong>2026-09-20</strong><br><sub>COLLECTION</sub></td>
+    <td>Added the <a href="https://syuan03.github.io/benchboard/?collection=multimodal-harness">Multimodal Input × Harness collection</a> for tasks that give an agent images, audio, video, screens, or other non-text files.</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="assets/news-launch.svg" width="32" alt="Project launch"></td>
+    <td><strong>2026-09-18</strong><br><sub>PROJECT LAUNCH</sub></td>
+    <td>Published the first BenchBoard dataset with representative GPT, Claude, Gemini, DeepSeek, Qwen, GLM, Seed, Kimi, and Hy releases.</td>
+  </tr>
+</table>
 
-## Coverage
+<h2><img src="assets/readme-icon-coverage.svg" width="28" alt=""> Coverage</h2>
+
+<p align="center"><img src="assets/benchboard-coverage.svg" width="100%" alt="Current model coverage, grouped benchmark variants, and evaluation settings that stay attached to every result"></p>
 
 The index focuses on recent general, coding, multimodal, and agent models. Older models remain when an official result table uses them as comparisons. Current coverage includes GPT-6, Claude 5.5, Gemini 3.8, DeepSeek V4.1, Qwen3.8, GLM-5.3, Seed2.1, Kimi K3, Hy4, Grok 4.7, and many related releases.
 
 Benchmark families appear once in navigation. Versions, subsets, and metrics are selectable inside that entry. Settings such as reasoning effort, harness, tool access, task count, and snapshot date remain attached to each result.
 
 <details>
-<summary><strong>Source and comparison policy</strong></summary>
+<summary><img src="assets/news-audit.svg" width="20" alt=""> <strong>Source and comparison policy</strong></summary>
 
 Model providers, benchmark maintainers, model cards, technical reports, and official repositories are preferred. A provider can report results for competing models; those rows retain the reporting source. Conflicting first-party values stay separate until the settings or data can be reconciled.
 
@@ -48,14 +70,14 @@ BenchBoard is an evidence index. It does not claim independent reproduction or r
 </details>
 
 <details>
-<summary><strong>Multimodal Input × Harness criteria</strong></summary>
+<summary><img src="assets/news-collection.svg" width="20" alt=""> <strong>Multimodal Input × Harness criteria</strong></summary>
 
 This collection requires both a named agent harness, such as OpenClaw, Claude Code, Codex, OpenCode, or OpenHands, and a task that supplies non-text input. Advertising a model as multimodal is not enough. Text-only generation judged by a vision model is also excluded.
 
 Mixed suites are labeled separately from dedicated multimodal subsets. The input modalities and harness remain visible in the benchmark entry.
 </details>
 
-## Contribute
+<h2><img src="assets/readme-icon-contribute.svg" width="28" alt=""> Contribute</h2>
 
 Missing result or incorrect setting? Read [CONTRIBUTING.md](CONTRIBUTING.md), then open an issue or pull request with the original source.
 
