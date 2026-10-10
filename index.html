@@ -15,22 +15,46 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="icon-mark" viewBox="0 0 24 24"><path d="M4 19V9m6 10V5m6 14v-7m4 7H2"/></symbol>
+    <symbol id="icon-calendar" viewBox="0 0 24 24"><path d="M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2Z"/></symbol>
+    <symbol id="icon-book" viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H11v18H6.5A2.5 2.5 0 0 0 4 22Zm16 0A2.5 2.5 0 0 0 17.5 2H13v18h4.5A2.5 2.5 0 0 1 20 22Z"/></symbol>
+    <symbol id="icon-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.9a13.4 13.4 0 0 0-6 0C5.8.1 4.7.5 4.7.5A5 5 0 0 0 4.6 4a5.4 5.4 0 0 0-1.4 3.5c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 9 18v4m0-3c-3 .9-3-1.5-4.2-2"/></symbol>
+    <symbol id="icon-leaderboard" viewBox="0 0 24 24"><path d="M4 20V10h4v10m4 0V4h4v16m4 0v-7h-4M2 20h20"/></symbol>
+    <symbol id="icon-compare" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h4m6-18h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M8 8h8m-3-3 3 3-3 3m3 5H8m3-3-3 3 3 3"/></symbol>
+    <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18m6-18v18"/></symbol>
+    <symbol id="icon-model" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></symbol>
+    <symbol id="icon-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.1 1.1M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1.1-1.1"/></symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="icon-building" viewBox="0 0 24 24"><path d="M3 21h18M6 21V5l6-3 6 3v16M9 8h.01M15 8h.01M9 12h.01M15 12h.01M9 16h.01M15 16h.01"/></symbol>
+    <symbol id="icon-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="icon-tag" viewBox="0 0 24 24"><path d="M20 13 13 20l-9-9V4h7l9 9Z"/><circle cx="8.5" cy="8.5" r="1"/></symbol>
+    <symbol id="icon-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6m0 4h.01"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 19h16"/></symbol>
+    <symbol id="icon-spark" viewBox="0 0 24 24"><path d="m12 3 1.3 4.2L17 9l-3.7 1.8L12 15l-1.3-4.2L7 9l3.7-1.8L12 3ZM5 15l.7 2.3L8 18l-2.3.7L5 21l-.7-2.3L2 18l2.3-.7L5 15Zm14-2 .7 2.3 2.3.7-2.3.7L19 19l-.7-2.3L16 16l2.3-.7L19 13Z"/></symbol>
+    <symbol id="icon-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5m-16 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="icon-external" viewBox="0 0 24 24"><path d="M15 4h5v5m0-5-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></symbol>
+    <symbol id="icon-checks" viewBox="0 0 24 24"><path d="m3 12 3 3 5-6m2 3 3 3 5-6"/></symbol>
+  </svg>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="BenchBoard 首页">
-      <span class="brand-mark">B</span>
+      <span class="brand-mark"><svg class="ui-icon" aria-hidden="true"><use href="#icon-mark"></use></svg></span>
       <span><strong>BenchBoard</strong><small>AI 模型公开成绩汇总</small></span>
     </a>
     <nav class="header-nav" aria-label="站点链接">
-      <span id="freshness"></span>
-      <a href="README.md">数据说明</a>
-      <a href="https://github.com/SYuan03/benchboard" target="_blank" rel="noreferrer">GitHub</a>
+      <span class="nav-item" id="freshness"></span>
+      <a class="nav-item" href="README.md"><svg class="ui-icon" aria-hidden="true"><use href="#icon-book"></use></svg>数据说明</a>
+      <a class="nav-item" href="https://github.com/SYuan03/benchboard" target="_blank" rel="noreferrer"><svg class="ui-icon" aria-hidden="true"><use href="#icon-github"></use></svg>GitHub</a>
     </nav>
   </header>
 
   <main id="top">
     <section class="overview" aria-labelledby="page-title">
       <div class="overview-copy">
-        <p class="eyebrow">公开成绩索引</p>
+        <p class="eyebrow icon-label"><svg class="ui-icon" aria-hidden="true"><use href="#icon-database"></use></svg>公开成绩索引</p>
         <h1 id="page-title">模型与 Benchmark</h1>
         <p>按 Benchmark 查成绩，点模型看完整记录。每条数据都保留版本、测评设置和原始来源。</p>
       </div>
@@ -38,47 +62,47 @@
     </section>
 
     <section class="notice" aria-label="覆盖范围说明">
-      <strong>收录状态</strong>
+      <svg class="ui-icon notice-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><strong>收录状态</strong>
       <span>“来源”页区分整表已核、目标模型列已核、部分录入和非成绩页。冲突值会并列保留，空白项不当作零，也不借用相邻版本成绩。</span>
     </section>
 
     <section class="app-shell" aria-label="排行榜数据库">
       <div class="tabs" role="tablist" aria-label="数据视图">
-        <button class="tab active" id="tab-leaderboard" type="button" role="tab" aria-selected="true" aria-controls="panel-leaderboard" data-tab="leaderboard">榜单</button>
-        <button class="tab" id="tab-compare" type="button" role="tab" aria-selected="false" aria-controls="panel-compare" data-tab="compare">模型对比</button>
-        <button class="tab" id="tab-matrix" type="button" role="tab" aria-selected="false" aria-controls="panel-matrix" data-tab="matrix">覆盖矩阵</button>
-        <button class="tab" id="tab-models" type="button" role="tab" aria-selected="false" aria-controls="panel-models" data-tab="models">模型</button>
-        <button class="tab" id="tab-sources" type="button" role="tab" aria-selected="false" aria-controls="panel-sources" data-tab="sources">来源</button>
+        <button class="tab active" id="tab-leaderboard" type="button" role="tab" aria-selected="true" aria-controls="panel-leaderboard" data-tab="leaderboard"><svg class="ui-icon" aria-hidden="true"><use href="#icon-leaderboard"></use></svg>榜单</button>
+        <button class="tab" id="tab-compare" type="button" role="tab" aria-selected="false" aria-controls="panel-compare" data-tab="compare"><svg class="ui-icon" aria-hidden="true"><use href="#icon-compare"></use></svg>模型对比</button>
+        <button class="tab" id="tab-matrix" type="button" role="tab" aria-selected="false" aria-controls="panel-matrix" data-tab="matrix"><svg class="ui-icon" aria-hidden="true"><use href="#icon-grid"></use></svg>覆盖矩阵</button>
+        <button class="tab" id="tab-models" type="button" role="tab" aria-selected="false" aria-controls="panel-models" data-tab="models"><svg class="ui-icon" aria-hidden="true"><use href="#icon-model"></use></svg>模型</button>
+        <button class="tab" id="tab-sources" type="button" role="tab" aria-selected="false" aria-controls="panel-sources" data-tab="sources"><svg class="ui-icon" aria-hidden="true"><use href="#icon-link"></use></svg>来源</button>
       </div>
 
       <div class="filters" id="filters">
         <label class="search-field">
-          <span>搜索</span>
+          <span><svg class="ui-icon" aria-hidden="true"><use href="#icon-search"></use></svg>搜索</span>
           <input id="search" type="search" placeholder="搜索模型或 Benchmark" autocomplete="off">
         </label>
-        <label><span>厂商</span><select id="vendor-filter"><option value="">全部厂商</option></select></label>
-        <label><span>模态</span><select id="modality-filter"><option value="">全部模态</option><option value="language">纯语言</option><option value="vision">视觉语言</option><option value="omni">全模态</option></select></label>
-        <label><span>能力域</span><select id="category-filter"><option value="">全部能力域</option></select></label>
-        <label class="check-field"><input id="conflicts-only" type="checkbox"><span>只看冲突</span></label>
-        <button class="export-button" id="download-csv" type="button">导出 CSV</button>
+        <label><span><svg class="ui-icon" aria-hidden="true"><use href="#icon-building"></use></svg>厂商</span><select id="vendor-filter"><option value="">全部厂商</option></select></label>
+        <label><span><svg class="ui-icon" aria-hidden="true"><use href="#icon-eye"></use></svg>模态</span><select id="modality-filter"><option value="">全部模态</option><option value="language">纯语言</option><option value="vision">视觉语言</option><option value="omni">全模态</option></select></label>
+        <label><span><svg class="ui-icon" aria-hidden="true"><use href="#icon-tag"></use></svg>能力域</span><select id="category-filter"><option value="">全部能力域</option></select></label>
+        <label class="check-field"><input id="conflicts-only" type="checkbox"><svg class="ui-icon" aria-hidden="true"><use href="#icon-alert"></use></svg><span>只看冲突</span></label>
+        <button class="export-button" id="download-csv" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#icon-download"></use></svg>导出 CSV</button>
       </div>
 
       <div class="topic-bar" aria-label="专题榜单">
-        <span class="topic-label">专题</span>
+        <span class="topic-label"><svg class="ui-icon" aria-hidden="true"><use href="#icon-spark"></use></svg>专题</span>
         <div class="topic-list">
-          <button id="multimodal-harness-filter" type="button" aria-pressed="false">多模态输入 × Harness</button>
+          <button id="multimodal-harness-filter" type="button" aria-pressed="false"><svg class="ui-icon" aria-hidden="true"><use href="#icon-eye"></use></svg>多模态输入 × Harness</button>
         </div>
       </div>
 
       <div class="collection-strip" id="collection-strip" hidden>
-        <div><strong>多模态输入 × Harness</strong><span>任务必须把图片、音频、视频、屏幕或其他非文本文件交给 Agent，并通过具名 Harness 运行。仅模型支持视觉、仅输出图片或仅用多模态裁判打分都不算；“混合任务集”展示的是整套总分，不是多模态子集分数。</span></div>
-        <button id="clear-collection" type="button">清除专题</button>
+        <div><svg class="ui-icon collection-icon" aria-hidden="true"><use href="#icon-spark"></use></svg><strong>多模态输入 × Harness</strong><span>任务必须把图片、音频、视频、屏幕或其他非文本文件交给 Agent，并通过具名 Harness 运行。仅模型支持视觉、仅输出图片或仅用多模态裁判打分都不算；“混合任务集”展示的是整套总分，不是多模态子集分数。</span></div>
+        <button id="clear-collection" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#icon-x"></use></svg>清除专题</button>
       </div>
 
       <section id="panel-leaderboard" role="tabpanel" aria-labelledby="tab-leaderboard">
         <div class="leaderboard-layout">
           <aside class="bench-sidebar" aria-label="Benchmark 列表">
-            <div class="sidebar-heading"><span>Benchmarks</span><strong><b id="bench-count"></b> 个</strong></div>
+            <div class="sidebar-heading"><span><svg class="ui-icon" aria-hidden="true"><use href="#icon-leaderboard"></use></svg>Benchmarks</span><strong><b id="bench-count"></b> 个</strong></div>
             <div id="benchmark-nav"></div>
           </aside>
           <div class="leaderboard-main">
@@ -90,7 +114,7 @@
 
       <section id="panel-compare" role="tabpanel" aria-labelledby="tab-compare" hidden>
         <div class="section-head compare-head">
-          <div><p class="eyebrow">按共同 Benchmark 对照</p><h2>模型对比</h2></div>
+          <div><p class="eyebrow icon-label"><svg class="ui-icon" aria-hidden="true"><use href="#icon-compare"></use></svg>按共同 Benchmark 对照</p><h2>模型对比</h2></div>
           <p>不同 Benchmark 不做归一化或总分。表格只并排列出公开原值和口径。</p>
         </div>
         <div class="compare-controls">
@@ -105,7 +129,7 @@
 
       <section id="panel-matrix" role="tabpanel" aria-labelledby="tab-matrix" hidden>
         <div class="section-head">
-          <div><p class="eyebrow">Benchmark × 模型</p><h2>覆盖矩阵</h2></div>
+          <div><p class="eyebrow icon-label"><svg class="ui-icon" aria-hidden="true"><use href="#icon-grid"></use></svg>Benchmark × 模型</p><h2>覆盖矩阵</h2></div>
           <p>单元格显示该口径最高公开值；橙点表示同模型存在多条不同结果。悬停可查看设置。</p>
         </div>
         <div class="table-wrap matrix-wrap"><table class="data-table matrix-table" id="matrix-table"></table></div>
@@ -113,7 +137,7 @@
 
       <section id="panel-models" role="tabpanel" aria-labelledby="tab-models" hidden>
         <div class="section-head">
-          <div><p class="eyebrow">版本与模态</p><h2>模型目录</h2></div>
+          <div><p class="eyebrow icon-label"><svg class="ui-icon" aria-hidden="true"><use href="#icon-model"></use></svg>版本与模态</p><h2>模型目录</h2></div>
           <p>点击任一模型查看它报告过的全部 Benchmark、口径与逐条来源；日期快照不会与稳定名称混在一起。</p>
         </div>
         <div class="table-wrap"><table class="data-table" id="models-table"></table></div>
@@ -121,7 +145,7 @@
 
       <section id="panel-sources" role="tabpanel" aria-labelledby="tab-sources" hidden>
         <div class="section-head">
-          <div><p class="eyebrow">原始发布页</p><h2>来源登记</h2></div>
+          <div><p class="eyebrow icon-label"><svg class="ui-icon" aria-hidden="true"><use href="#icon-link"></use></svg>原始发布页</p><h2>来源登记</h2></div>
           <p>优先模型厂商、Benchmark 官方榜与技术报告；厂商测友商的数据会保留发布方身份。</p>
         </div>
         <div class="table-wrap"><table class="data-table" id="sources-table"></table></div>
@@ -131,15 +155,15 @@
   </main>
 
   <footer>
-    <div><strong>BenchBoard</strong><span>公开资料汇总，不代表独立复测或商业推荐。</span></div>
-    <a href="README.md">维护说明</a>
+    <div><svg class="ui-icon" aria-hidden="true"><use href="#icon-database"></use></svg><strong>BenchBoard</strong><span>公开资料汇总，不代表独立复测或商业推荐。</span></div>
+    <a class="nav-item" href="README.md"><svg class="ui-icon" aria-hidden="true"><use href="#icon-book"></use></svg>维护说明</a>
   </footer>
 
   <div class="drawer-backdrop" id="model-drawer-backdrop" hidden></div>
   <aside class="model-drawer" id="model-drawer" role="dialog" aria-modal="true" aria-labelledby="model-drawer-title" aria-hidden="true" hidden>
     <div class="drawer-topbar">
-      <span>模型详情</span>
-      <button class="drawer-close" id="model-drawer-close" type="button" aria-label="关闭模型详情">关闭 ×</button>
+      <span class="icon-label"><svg class="ui-icon" aria-hidden="true"><use href="#icon-model"></use></svg>模型详情</span>
+      <button class="drawer-close" id="model-drawer-close" type="button" aria-label="关闭模型详情"><svg class="ui-icon" aria-hidden="true"><use href="#icon-x"></use></svg>关闭</button>
     </div>
     <div id="model-drawer-content"></div>
   </aside>

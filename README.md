@@ -17,11 +17,9 @@ BenchBoard indexes published benchmark results for current AI models. Every scor
 
 ## Use the data
 
-| Find a result | Compare models | Check the source | Take it with you |
-| --- | --- | --- | --- |
-| Browse the full benchmark index or use `Ctrl+F` / `Cmd+F`. | Place up to three releases side by side. | Open the release page, model card, paper, or official leaderboard behind a score. | Export the filtered table as CSV or share its URL. |
+<p align="center"><a href="https://syuan03.github.io/benchboard/"><img src="assets/benchboard-features.svg" width="100%" alt="Find results, compare model releases, trace every score to its source, and export filtered data"></a></p>
 
-Opening a model shows every recorded result and setting for that release. The coverage matrix records how completely each source has been checked, and conflicting published values remain visible.
+Search or scan the complete benchmark index, compare up to three releases, and export the current view as CSV. Opening a model shows every recorded result and setting for that release. The coverage matrix records how completely each source has been checked, and conflicting published values remain visible.
 
 ## News
 

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="250" viewBox="0 0 1200 250" role="img" aria-labelledby="title desc">
+  <title id="title">Four ways to use BenchBoard</title>
+  <desc id="desc">Find benchmark results, compare model releases, trace every score to its source, and export filtered data.</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-15%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#1d3154" flood-opacity=".06"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="250" rx="18" fill="#f5f7fb"/>
+  <g filter="url(#shadow)">
+    <rect x="18" y="18" width="276" height="214" rx="14" fill="#fff" stroke="#dfe5ee"/>
+    <rect x="314" y="18" width="276" height="214" rx="14" fill="#fff" stroke="#dfe5ee"/>
+    <rect x="610" y="18" width="276" height="214" rx="14" fill="#fff" stroke="#dfe5ee"/>
+    <rect x="906" y="18" width="276" height="214" rx="14" fill="#fff" stroke="#dfe5ee"/>
+  </g>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3">
+    <rect x="40" y="41" width="42" height="42" rx="10" fill="#edf4ff" stroke="none"/>
+    <circle cx="59" cy="59" r="8" stroke="#245fda"/>
+    <path d="m65 65 7 7" stroke="#245fda"/>
+
+    <rect x="336" y="41" width="42" height="42" rx="10" fill="#f1efff" stroke="none"/>
+    <path d="M347 54h20m-5-5 5 5-5 5m5 10h-20m5-5-5 5 5 5" stroke="#6854ca"/>
+
+    <rect x="632" y="41" width="42" height="42" rx="10" fill="#eaf7f2" stroke="none"/>
+    <path d="M645 64a6 6 0 0 0 9 .6l4-4a6 6 0 0 0-8.5-8.5l-2 2m12 6a6 6 0 0 0-9-.6l-4 4a6 6 0 0 0 8.5 8.5l2-2" stroke="#167457"/>
+
+    <rect x="928" y="41" width="42" height="42" rx="10" fill="#fff2e8" stroke="none"/>
+    <path d="M949 49v19m-6-6 6 6 6-6m-13 12h14" stroke="#b65b1f"/>
+  </g>
+
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="40" y="115" fill="#172033" font-size="18" font-weight="700">Find a result</text>
+    <text x="40" y="142" fill="#66758b" font-size="13.5">Search models and benchmarks,</text>
+    <text x="40" y="163" fill="#66758b" font-size="13.5">or scan the complete index.</text>
+    <rect x="40" y="188" width="105" height="24" rx="6" fill="#edf4ff"/>
+    <text x="52" y="204" fill="#245fda" font-size="10.5" font-weight="700">SEARCH + INDEX</text>
+
+    <text x="336" y="115" fill="#172033" font-size="18" font-weight="700">Compare releases</text>
+    <text x="336" y="142" fill="#66758b" font-size="13.5">Place up to three models beside</text>
+    <text x="336" y="163" fill="#66758b" font-size="13.5">each other on shared benchmarks.</text>
+    <rect x="336" y="188" width="104" height="24" rx="6" fill="#f1efff"/>
+    <text x="348" y="204" fill="#6854ca" font-size="10.5" font-weight="700">SIDE BY SIDE</text>
+
+    <text x="632" y="115" fill="#172033" font-size="18" font-weight="700">Trace the source</text>
+    <text x="632" y="142" fill="#66758b" font-size="13.5">Keep release, setting, metric, and</text>
+    <text x="632" y="163" fill="#66758b" font-size="13.5">original publication attached.</text>
+    <rect x="632" y="188" width="106" height="24" rx="6" fill="#eaf7f2"/>
+    <text x="644" y="204" fill="#167457" font-size="10.5" font-weight="700">SOURCE FIRST</text>
+
+    <text x="928" y="115" fill="#172033" font-size="18" font-weight="700">Export and share</text>
+    <text x="928" y="142" fill="#66758b" font-size="13.5">Download filtered rows as CSV or</text>
+    <text x="928" y="163" fill="#66758b" font-size="13.5">share a focused leaderboard URL.</text>
+    <rect x="928" y="188" width="91" height="24" rx="6" fill="#fff2e8"/>
+    <text x="940" y="204" fill="#b65b1f" font-size="10.5" font-weight="700">CSV + URL</text>
+  </g>
+</svg>

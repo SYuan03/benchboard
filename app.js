@@ -59,6 +59,7 @@
   const escapeHtml = (value) => String(value ?? "")
     .replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+  const icon = (name, className = "") => `<svg class="ui-icon${className ? ` ${className}` : ""}" aria-hidden="true"><use href="#icon-${name}"></use></svg>`;
   const unique = (items) => [...new Set(items.filter(Boolean))];
   const normalize = (value) => String(value ?? "").toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/g, " ").trim();
   const matchesSearch = (haystack, needle) => {
@@ -150,7 +151,7 @@
       const own = source.vendorId === model.vendorId;
       const benchmarkOfficial = source.kind === "benchmark";
       const label = own ? `${source.publisher} · 厂商官方` : `${source.publisher} · ${benchmarkOfficial ? "Benchmark 官方" : "他测"}`;
-      return `<a class="${own ? "" : "cross"}" href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(label)} ↗</a>`;
+      return `<a class="${own ? "" : "cross"}" href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(label)}${icon("external", "link-icon")}</a>`;
     }).join("");
   }
 
@@ -179,13 +180,13 @@
     });
     const mergedCount = observations.length;
     const stats = [
-      [data.models.length, "模型与版本"],
-      [allBenchmarkFamilies.length, "已登记 Benchmark"],
-      [mergedCount, "去重公开成绩"],
-      [data.sources.length, "官方来源"]
+      [data.models.length, "模型与版本", "model", "blue"],
+      [allBenchmarkFamilies.length, "已登记 Benchmark", "leaderboard", "violet"],
+      [mergedCount, "去重公开成绩", "database", "green"],
+      [data.sources.length, "官方来源", "link", "orange"]
     ];
-    els.stats.innerHTML = stats.map(([value, label]) => `<div class="stat"><strong>${value}</strong><span>${label}</span></div>`).join("");
-    els.freshness.textContent = `更新于 ${data.meta.updated}`;
+    els.stats.innerHTML = stats.map(([value, label, iconName, tone]) => `<div class="stat"><span class="stat-icon ${tone}">${icon(iconName)}</span><div><strong>${value}</strong><span>${label}</span></div></div>`).join("");
+    els.freshness.innerHTML = `${icon("calendar")}<span>更新于 ${escapeHtml(data.meta.updated)}</span>`;
     els.multimodalHarness.classList.toggle("active", state.collection === "multimodal-harness");
     els.multimodalHarness.setAttribute("aria-pressed", String(state.collection === "multimodal-harness"));
     els.collectionStrip.hidden = state.collection !== "multimodal-harness";
@@ -287,7 +288,7 @@
       const count = pool.filter((obs) => obs.benchmarkId === variant.benchmarkId).length;
       return `<button class="benchmark-variant ${variant.benchmarkId === bench.id ? "active" : ""}" type="button" data-benchmark="${escapeHtml(variant.benchmarkId)}">${escapeHtml(variant.label)}<small>${count}</small></button>`;
     }).join("")}</div>` : "";
-    els.leaderboardHeading.innerHTML = `<div class="leaderboard-title"><p class="eyebrow">${escapeHtml(bench.category)}</p><h2>${escapeHtml(family.name)}</h2>${variantNav}<p><strong class="selected-variant">${escapeHtml(selectedVariant?.label || "Overall")}</strong>${escapeHtml(bench.description)}</p></div><div class="leaderboard-meta">${scopeMeta}${inputMeta}${harnessMeta}<span class="chip green">${rows.length} 条成绩</span>${conflictModels.length ? `<span class="chip orange">${conflictModels.length} 个模型多口径</span>` : ""}<span class="chip ${comparable ? "" : "orange"}">${sortLabel}</span></div>`;
+    els.leaderboardHeading.innerHTML = `<div class="leaderboard-title"><p class="eyebrow icon-label">${icon("leaderboard")}${escapeHtml(bench.category)}</p><h2>${escapeHtml(family.name)}</h2>${variantNav}<p><strong class="selected-variant">${escapeHtml(selectedVariant?.label || "Overall")}</strong>${escapeHtml(bench.description)}</p></div><div class="leaderboard-meta">${scopeMeta}${inputMeta}${harnessMeta}<span class="chip green">${icon("checks")}${rows.length} 条成绩</span>${conflictModels.length ? `<span class="chip orange">${icon("alert")}${conflictModels.length} 个模型多口径</span>` : ""}<span class="chip ${comparable ? "" : "orange"}">${sortLabel}</span></div>`;
     els.leaderboardTable.innerHTML = `<thead><tr><th class="rank">排名</th><th>模型</th><th>成绩</th><th>模态</th><th>测评设置与备注</th><th>来源</th></tr></thead><tbody>${rows.length ? rows.map((obs, index) => {
       const model = modelsById.get(obs.modelId);
       const conflict = conflictFor(bench.id, model.id, pool);
@@ -336,7 +337,7 @@
           : model.scoreStatus === "comparison-only"
             ? `<span class="status-comparison">对照记录</span><br>${count} 条`
             : `${count} 条`;
-      return `<tr class="model-row" data-model-id="${escapeHtml(model.id)}"><td class="model-title"><button class="model-row-button" type="button" data-model-id="${escapeHtml(model.id)}" aria-label="查看 ${escapeHtml(model.name)} 的全部 Benchmark"><strong>${escapeHtml(model.name)}</strong><span class="muted">${escapeHtml((model.aliases || []).join(" · "))}</span></button></td><td>${escapeHtml(model.vendor)}</td><td><span class="modality">${escapeHtml(modalityLabels[model.modality])}</span></td><td>${escapeHtml(model.modalityDetail)}</td><td>${escapeHtml(model.context)}</td><td>${escapeHtml(model.releaseDate)}</td><td>${escapeHtml(model.access)}</td><td>${status}<br><span class="detail-hint">查看详情 →</span>${source ? `<br><a class="muted" href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">模型出处 ↗</a>` : ""}</td></tr>`;
+      return `<tr class="model-row" data-model-id="${escapeHtml(model.id)}"><td class="model-title"><button class="model-row-button" type="button" data-model-id="${escapeHtml(model.id)}" aria-label="查看 ${escapeHtml(model.name)} 的全部 Benchmark"><strong>${escapeHtml(model.name)}</strong><span class="muted">${escapeHtml((model.aliases || []).join(" · "))}</span></button></td><td>${escapeHtml(model.vendor)}</td><td><span class="modality">${escapeHtml(modalityLabels[model.modality])}</span></td><td>${escapeHtml(model.modalityDetail)}</td><td>${escapeHtml(model.context)}</td><td>${escapeHtml(model.releaseDate)}</td><td>${escapeHtml(model.access)}</td><td>${status}<br><span class="detail-hint">查看详情 →</span>${source ? `<br><a class="muted inline-link" href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">模型出处${icon("external", "link-icon")}</a>` : ""}</td></tr>`;
     }).join("") : `<tr><td colspan="8" class="empty">没有匹配的模型。</td></tr>`}</tbody>`;
   }
 
@@ -363,7 +364,7 @@
             : audit?.status === "inaccessible"
               ? `<span class="audit-inaccessible" title="${escapeHtml(audit.note || "")}">当前不可访问</span>`
             : `<span class="muted" title="${escapeHtml(audit?.note || "")}">待整表核对</span>`;
-      return `<tr><td>${escapeHtml(source.date)}</td><td class="source-title"><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.title)} ↗</a></td><td>${escapeHtml(source.publisher)}</td><td><span class="modality">${type}</span></td><td>${auditCell}</td><td>${count} 条</td></tr>`;
+      return `<tr><td>${escapeHtml(source.date)}</td><td class="source-title"><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.title)}${icon("external", "link-icon")}</a></td><td>${escapeHtml(source.publisher)}</td><td><span class="modality">${type}</span></td><td>${auditCell}</td><td>${count} 条</td></tr>`;
     }).join("") : `<tr><td colspan="6" class="empty">没有匹配的来源。</td></tr>`}</tbody>`;
   }
 
@@ -427,20 +428,20 @@
     const modelSources = modelReferenceSources(model);
     els.drawerContent.innerHTML = `
       <header class="drawer-hero">
-        <p class="eyebrow">${escapeHtml(model.vendor)} · ${escapeHtml(modalityLabels[model.modality])}</p>
+        <p class="eyebrow icon-label">${icon("model")}${escapeHtml(model.vendor)} · ${escapeHtml(modalityLabels[model.modality])}</p>
         <h2 id="model-drawer-title">${escapeHtml(model.name)}</h2>
         <p>${escapeHtml(model.summary)}</p>
-        <div class="drawer-badges"><span>${rows.length} 条公开记录</span><span>${familyResults.size} 个 Benchmark</span><span>${escapeHtml(model.access)}</span></div>
+        <div class="drawer-badges"><span>${icon("database")}${rows.length} 条公开记录</span><span>${icon("leaderboard")}${familyResults.size} 个 Benchmark</span><span>${icon("eye")}${escapeHtml(model.access)}</span></div>
       </header>
       <dl class="model-meta">
-        <div><dt>原生模态</dt><dd>${escapeHtml(model.modalityDetail)}</dd></div>
-        <div><dt>上下文</dt><dd>${escapeHtml(model.context)}</dd></div>
-        <div><dt>发布日期</dt><dd>${escapeHtml(model.releaseDate)}</dd></div>
-        <div><dt>别名 / API 名</dt><dd>${escapeHtml((model.aliases || []).join(" · ") || "—")}</dd></div>
+        <div><dt>${icon("eye")}原生模态</dt><dd>${escapeHtml(model.modalityDetail)}</dd></div>
+        <div><dt>${icon("book")}上下文</dt><dd>${escapeHtml(model.context)}</dd></div>
+        <div><dt>${icon("calendar")}发布日期</dt><dd>${escapeHtml(model.releaseDate)}</dd></div>
+        <div><dt>${icon("tag")}别名 / API 名</dt><dd>${escapeHtml((model.aliases || []).join(" · ") || "—")}</dd></div>
       </dl>
-      ${modelSources.length ? `<div class="model-reference-list"><strong>模型资料与核对状态</strong>${modelSources.map((source) => {
+      ${modelSources.length ? `<div class="model-reference-list"><strong>${icon("shield")}模型资料与核对状态</strong>${modelSources.map((source) => {
         const audit = sourceAuditLabel(source.id);
-        return `<a class="primary-source" href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer"><span>${escapeHtml(source.title)} ↗</span><small class="source-audit-pill ${escapeHtml(audit.className)}">${escapeHtml(audit.label)}</small></a>`;
+        return `<a class="primary-source" href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer"><span>${escapeHtml(source.title)}${icon("external", "link-icon")}</span><small class="source-audit-pill ${escapeHtml(audit.className)}">${escapeHtml(audit.label)}</small></a>`;
       }).join("")}</div>` : ""}
       <div class="drawer-results">
         ${rows.length ? [...groups.entries()].map(([category, families]) => `
