@@ -22,7 +22,7 @@ The seven sources contribute 636 observations.
 - One benchmark family contains its related metric, subset, version, and protocol views.
 - Workspace-Bench Full 1.0 and Workspace-Bench-Lite remain separate because the task sets differ.
 - Claw-Eval's control labeled `Image` downloads the table as an image; it is not a benchmark subset.
-- PinchBench v2 uses the current 148-task description, not the older 147-task wording.
+- PinchBench v2 has a task-count conflict as checked on 2026-10-11: the [live leaderboard](https://pinchbench.com/) displays 147 tasks, while the [official v2.0.0 release notes](https://github.com/pinchbench/skill/releases/tag/v2.0.0) say 148. Both counts are retained in result settings until the maintainer clarifies the scoring scope.
 - Harness, effort, route, task count, run count, judge, and snapshot details remain attached to observations when published.
 
 The following diagnostics and derivatives are outside the current headline-leaderboard scope: SkillsBench gain and wall-clock charts; PinchBench category awards and per-run pages; WildClawBench category breakdowns; QwenClawBench component averages and per-task drill-downs; Workspace-Bench-Lite difficulty summaries; Claw-Eval safety and token-efficiency diagnostics; and RNG-Bench raw win/tie/loss counts. These can be added later as separately named metric views without altering the stored headline results.

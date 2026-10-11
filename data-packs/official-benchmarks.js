@@ -404,7 +404,7 @@
   for (const [label, best, average, date, runCount] of pinchRows) {
     const id = pinchModelIds.get(label);
     const route = label.endsWith("-fast") ? " · fast route" : "";
-    const base = `OpenClaw · PinchBench v2.0.0 · 148 tasks${route}`;
+    const base = `OpenClaw · PinchBench v2.0.0 · task count: 147 on live leaderboard / 148 in v2.0.0 release notes${route}`;
     add("pinchbench-v2", "pinchbench-v2-best", id, best, "%", `${base} · best run`, `leaderboard submission ${date}`);
     add("pinchbench-v2", "pinchbench-v2-average", id, average, "%", `${base} · average across ${runCount} run${runCount === 1 ? "" : "s"}`, `leaderboard submission ${date}`);
   }
@@ -605,7 +605,7 @@
     scopeLabel: "v2 主榜已核",
     expectedObservationCount: 118,
     benchmarkIds: ["pinchbench-v2-best", "pinchbench-v2-average"],
-    note: "59 models × two headline success-rate metrics. The current v2 release notes say 148 tasks; older 147-task labels are not carried forward."
+    note: "59 models × two headline success-rate metrics. Rechecked 2026-10-11: the live leaderboard displays 147 tasks, while the official v2.0.0 release notes say 148; the task-count conflict is retained in each result setting."
   });
   patchAudit("wildclawbench", {
     status: "complete",
