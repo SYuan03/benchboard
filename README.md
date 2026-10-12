@@ -11,13 +11,18 @@
 BenchBoard indexes published benchmark results for current AI models. Every score keeps its model release, benchmark variant, evaluation setting, and original source attached. Results from different harnesses or versions remain separate, and the site does not invent a cross-benchmark composite score.
 
 <!-- DATA_SUMMARY_START -->
-<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="149 models and versions, 548 benchmark families, 7,368 public results, 273 primary sources"></p>
-<p align="center"><sub>124 curated releases + 25 comparison-only models · 1,194 separately ranked metric and version views</sub></p>
+<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="153 models and versions, 551 benchmark families, 7,393 public results, 275 primary sources"></p>
+<p align="center"><sub>126 curated releases + 27 comparison-only models · 1,203 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
 <h2><img src="assets/readme-icon-news.svg" width="28" alt=""> News</h2>
 
 <table>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Voice benchmark audit"></td>
+    <td width="132"><strong>2026-10-12</strong><br><sub>VOICE BENCHMARK AUDIT</sub></td>
+    <td>Added the exact values from OpenAI's <a href="https://openai.com/index/introducing-gpt-live-1-in-the-api/">GPT-Live-1</a> and <a href="https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api/">GPT-Realtime-2</a> release charts: 25 results across nine voice benchmark views. Tau3 voice backends, Full Duplex Bench versions, reasoning settings, and turn-taking latency remain distinct.</td>
+  </tr>
   <tr>
     <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Leaderboard audit"></td>
     <td width="132"><strong>2026-10-11</strong><br><sub>LEADERBOARD AUDIT</sub></td>
