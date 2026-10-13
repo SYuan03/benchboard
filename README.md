@@ -11,13 +11,18 @@
 BenchBoard indexes published benchmark results for current AI models. Every score keeps its model release, benchmark variant, evaluation setting, and original source attached. Results from different harnesses or versions remain separate, and the site does not invent a cross-benchmark composite score.
 
 <!-- DATA_SUMMARY_START -->
-<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="153 models and versions, 551 benchmark families, 7,393 public results, 275 primary sources"></p>
-<p align="center"><sub>126 curated releases + 27 comparison-only models · 1,203 separately ranked metric and version views</sub></p>
+<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="155 models and versions, 552 benchmark families, 7,613 public results, 277 primary sources"></p>
+<p align="center"><sub>125 curated releases + 30 comparison-only models · 1,225 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
 <h2><img src="assets/readme-icon-news.svg" width="28" alt=""> News</h2>
 
 <table>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Benchmark audit"></td>
+    <td width="132"><strong>2026-10-13</strong><br><sub>BENCHMARK AUDIT</sub></td>
+    <td>Added the <a href="https://explorationbench.com/#leaderboard">ExplorationBench official leaderboard</a>: 220 separately labeled results for ten systems across AlienCode and AlienLogic. Baseline, Best@3, Mean@3, Worst@3, complete-rule references, auxiliary measures, and matched controls remain distinct. The <a href="https://github.com/Tencent-Hunyuan/ExplorationBench">official repository</a> also prints the 60 shared headline values.</td>
+  </tr>
   <tr>
     <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Voice benchmark audit"></td>
     <td width="132"><strong>2026-10-12</strong><br><sub>VOICE BENCHMARK AUDIT</sub></td>

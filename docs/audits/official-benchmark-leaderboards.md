@@ -16,6 +16,12 @@ Seven benchmark-owner leaderboards were transcribed at their current public vers
 
 The seven sources contribute 636 observations.
 
+## 2026-10-13 follow-up: ExplorationBench
+
+The [official leaderboard](https://explorationbench.com/#leaderboard) adds 220 unique table values: ten model labels × two separate worlds × eleven metric views. These comprise M0, M4 Best@3, Mean@3, Worst@3, two complete-rule reference conditions, one world-specific auxiliary diagnostic, and four matched controls. The autonomous control column repeats M4 Best@3 and is not imported twice. The [official repository](https://github.com/Tencent-Hunyuan/ExplorationBench) prints the same 60 M0, Best@3, and Mean@3 cells; these are shared provenance, not additional observations. The [technical report](https://arxiv.org/abs/2609.30199) supplies the four-round protocol, 70 held-out tasks per world, three independent trajectories per system and world, and three answers per task.
+
+The report identifies Qwen3.8-Max as the 0902 snapshot and Seed2.1 Pro as the 0915 snapshot, so those scores are kept separate from their earlier releases. Its DeepSeek-V4-Pro label gives no snapshot, so it remains separate from the known 0813 release. Reasoning levels come from the official leaderboard's per-system labels. AlienCode's rule count and AlienLogic's correct-refusal rate are auxiliary diagnostics and never share a ranking with held-out accuracy. The generated trajectory charts and task-level logs are outside the audited table scope.
+
 ## Representation decisions
 
 - Models introduced only by a benchmark-owner leaderboard use `scoreStatus: "comparison-only"`. Existing first-party target models keep their original status.
