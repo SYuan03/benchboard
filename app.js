@@ -229,9 +229,9 @@
         if (state.collection) {
           const aScope = Math.min(...a.benches.map((bench) => collectionScopeOrder[bench.collectionScope] ?? 9));
           const bScope = Math.min(...b.benches.map((bench) => collectionScopeOrder[bench.collectionScope] ?? 9));
-          return aScope - bScope || a.family.name.localeCompare(b.family.name);
+          return aScope - bScope || b.count - a.count || a.family.name.localeCompare(b.family.name);
         }
-        return a.groupName.localeCompare(b.groupName) || a.family.name.localeCompare(b.family.name);
+        return a.groupName.localeCompare(b.groupName) || b.count - a.count || a.family.name.localeCompare(b.family.name);
       })
       .reduce((groups, item) => {
         if (!groups.has(item.groupName)) groups.set(item.groupName, []);
@@ -256,7 +256,7 @@
         const inputs = unique(benches.flatMap((bench) => bench.inputModalities || []));
         const harnesses = unique(benches.flatMap((bench) => bench.harnesses || []));
         const detail = state.collection ? [`输入：${inputs.join(" / ")}`, `Harness：${harnesses.join(" / ")}`].join(" · ") : "";
-        const countLabel = variants.length > 1 ? `${variants.length} 指标` : `${count} 条`;
+        const countLabel = `${count} 条`;
         return `<button class="bench-nav-item ${active ? "active" : ""}" type="button" data-benchmark="${escapeHtml(target)}"><span class="bench-nav-copy"><span>${escapeHtml(family.name)}</span>${detail ? `<em>${escapeHtml(detail)}</em>` : ""}</span><small>${escapeHtml(countLabel)}</small></button>`;
       }).join("")}</div>
       </details>`;
