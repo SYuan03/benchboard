@@ -16,6 +16,14 @@ Seven benchmark-owner leaderboards were transcribed at their current public vers
 
 The seven sources contribute 636 observations.
 
+## 2026-10-14 follow-up: PerceptionBench
+
+The [official repository leaderboard](https://github.com/MoonshotAI/PerceptionBench) and [technical report, Table 1](https://arxiv.org/abs/2607.24957) agree on all 176 main-table cells: 16 model labels × overall accuracy and ten distinct atomic visual-perception categories. The 3,000 open-ended questions use unified prompts and a GPT-oss-120B judge. Each category has its own metric view; the overall score is not reused as a category score.
+
+The report identifies xhigh reasoning for GPT-5.5; max for GPT-5.6 Sol, Claude Fable 5, Claude Opus 4.8, and Kimi K3; high for the two Gemini models and Seed2.1 Pro; and thinking mode for Gemma 4 31B. Other models retain “highest available reasoning budget; level not specified.” Claude Fable 5 used Claude Opus 4.8 as a fallback for safety-filter refusals. The source labels Gemma-4-31B without a checkpoint suffix, so its results remain separate from BenchBoard's Gemma 4 31B IT record. GLM-4.6V is added as a comparison-only model.
+
+The previously stored Kimi K3 provider-reported 58.5% three-run average remains separate from this benchmark-owner 58.5% four-run mean, as identified in the report's Table 2. The separate run-consistency diagnostics in that table are outside the imported main-table scope.
+
 ## 2026-10-13 follow-up: ExplorationBench
 
 The [official leaderboard](https://explorationbench.com/#leaderboard) adds 220 unique table values: ten model labels × two separate worlds × eleven metric views. These comprise M0, M4 Best@3, Mean@3, Worst@3, two complete-rule reference conditions, one world-specific auxiliary diagnostic, and four matched controls. The autonomous control column repeats M4 Best@3 and is not imported twice. The [official repository](https://github.com/Tencent-Hunyuan/ExplorationBench) prints the same 60 M0, Best@3, and Mean@3 cells; these are shared provenance, not additional observations. The [technical report](https://arxiv.org/abs/2609.30199) supplies the four-round protocol, 70 held-out tasks per world, three independent trajectories per system and world, and three answers per task.

@@ -11,13 +11,18 @@
 BenchBoard indexes published benchmark results for current AI models. Every score keeps its model release, benchmark variant, evaluation setting, and original source attached. Results from different harnesses or versions remain separate, and the site does not invent a cross-benchmark composite score.
 
 <!-- DATA_SUMMARY_START -->
-<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="155 models and versions, 552 benchmark families, 7,613 public results, 277 primary sources"></p>
-<p align="center"><sub>125 curated releases + 30 comparison-only models · 1,225 separately ranked metric and version views</sub></p>
+<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="157 models and versions, 552 benchmark families, 7,789 public results, 279 primary sources"></p>
+<p align="center"><sub>125 curated releases + 32 comparison-only models · 1,235 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
 <h2><img src="assets/readme-icon-news.svg" width="28" alt=""> News</h2>
 
 <table>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Benchmark audit"></td>
+    <td width="132"><strong>2026-10-14</strong><br><sub>BENCHMARK AUDIT</sub></td>
+    <td>Added the <a href="https://github.com/MoonshotAI/PerceptionBench">PerceptionBench official leaderboard</a>: 176 results for 16 models across overall accuracy and ten distinct visual perception categories. All values match the authors' <a href="https://arxiv.org/abs/2607.24957">technical report</a>; reasoning settings and Claude Fable 5's fallback protocol remain attached to the scores.</td>
+  </tr>
   <tr>
     <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Benchmark audit"></td>
     <td width="132"><strong>2026-10-13</strong><br><sub>BENCHMARK AUDIT</sub></td>

@@ -35,6 +35,7 @@ const dataPackFiles = [
   "data-packs/releases-2026-10-11.js",
   "data-packs/voice-release-2026-10-12.js",
   "data-packs/explorationbench-2026-10-13.js",
+  "data-packs/perceptionbench-2026-10-14.js",
   "data-packs/normalize.js"
 ];
 for (const filename of dataPackFiles) {
