@@ -1,5 +1,11 @@
 # First-party source-surface audit
 
+## 2026-10-15 follow-up: GPT-6.1 Sol
+
+OpenAI's [GPT-6.1 Sol release page](https://openai.com/index/introducing-gpt-6-1-sol/) contains 102 exact points in six capability charts: DeepSWE v1.1 (15), GDP.pdf (20), AutomationBench v1.0.6 (21), OSWorld 2.0 offline partial reward on v2026.08.08 (15), Terminal-Bench Science 0.1 (16), and factual error rate on difficult flagged conversations (15). All five effort settings and displayed per-task costs are attached to each point. The chart's Opus 5.5 with fallbacks is a separate comparison route; its fallback model is not identified. AutomationBench's Fable 5.1 cost omits fallbacks on roughly 40% of tasks, as the caption warns. GDP.pdf has its own chart-score view because the page does not define it as the all-pass or criterion-pass metric used in other reports.
+
+The [GPT-6.1 Sol system card addendum](https://deploymentsafety.openai.com/gpt-6-1-sol), published September 29, supplies eight target HealthBench values (four length-adjusted and four raw) and four target MentalHealthBench task means. MentalHealthBench reports four responses per task and separate task counts and standard errors for the overall and three acuity views. Its comparison columns were not transcribed in this pass. The remaining card tables and figures concern safety, robustness, alignment, monitoring, or deployment risk. The card notes that comparison values for earlier models can reflect later versions, so differing chart values from earlier launch pages retain their distinct source and setting.
+
 Audited on 2026-09-20.
 
 This pass covers Gemini 3 Flash, GLM-5.2, GPT-5.2 / Pro, GPT-5.3-Codex, GPT-5.5 / Pro, Claude Sonnet 4.6, and Claude Sonnet 5. It checks official release pages, model cards, and linked evaluation or system-card documents separately. A source marked target-complete guarantees the named model columns only; it does not imply that every comparison column was imported.

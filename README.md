@@ -11,13 +11,23 @@
 BenchBoard indexes published benchmark results for current AI models. Every score keeps its model release, benchmark variant, evaluation setting, and original source attached. Results from different harnesses or versions remain separate, and the site does not invent a cross-benchmark composite score.
 
 <!-- DATA_SUMMARY_START -->
-<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="157 models and versions, 552 benchmark families, 7,789 public results, 279 primary sources"></p>
-<p align="center"><sub>125 curated releases + 32 comparison-only models · 1,235 separately ranked metric and version views</sub></p>
+<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="160 models and versions, 553 benchmark families, 7,907 public results, 281 primary sources"></p>
+<p align="center"><sub>126 curated releases + 34 comparison-only models · 1,237 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
 <h2><img src="assets/readme-icon-news.svg" width="28" alt=""> News</h2>
 
 <table>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Model release audit"></td>
+    <td width="132"><strong>2026-10-15</strong><br><sub>MODEL SOURCE AUDIT</sub></td>
+    <td>Added the previously missed <a href="https://openai.com/index/introducing-gpt-6-1-sol/">GPT-6.1 Sol first-party release charts</a>: 102 exact chart points across six benchmark views, with model versions, reasoning efforts, and per-task costs attached. The <a href="https://deploymentsafety.openai.com/gpt-6-1-sol">September 29 system card addendum</a> supplies 12 separately labeled HealthBench and MentalHealthBench results for GPT-6.1 Sol.</td>
+  </tr>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Leaderboard audit"></td>
+    <td width="132"><strong>2026-10-15</strong><br><sub>LEADERBOARD AUDIT</sub></td>
+    <td>Updated the <a href="https://pinchbench.com/">PinchBench v2 maintainer leaderboard</a> with Best and Average scores for two newly listed NVIDIA Nemotron 3.5 Bolt variants. All 59 previously stored model rows still match the live board; its 147-task display remains at odds with the v2.0.0 release note's 148.</td>
+  </tr>
   <tr>
     <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Benchmark audit"></td>
     <td width="132"><strong>2026-10-14</strong><br><sub>BENCHMARK AUDIT</sub></td>

@@ -1,5 +1,9 @@
 # Official benchmark leaderboard audit
 
+## 2026-10-15 follow-up: PinchBench v2
+
+The [live maintainer leaderboard](https://pinchbench.com/) now lists 61 model labels. The 59 previously stored rows still match the displayed Best and Average scores. Two additional NVIDIA Nemotron 3.5 Bolt 74B-A9B labels contribute four new observations: BF16 (Best 91.7%, Average 90.4%; ten runs; submission 2026-10-08) and 24GB (Best 90.1%, Average 87.8%; ten runs; submission 2026-10-10). The variants remain separate because the maintainer labels them separately. The live page still says 147 tasks, while the v2.0.0 release note says 148; both counts stay attached to each result.
+
 Audited on 2026-09-20.
 
 Seven benchmark-owner leaderboards were transcribed at their current public versions. Their expected counts are enforced by the data validator.
@@ -7,14 +11,14 @@ Seven benchmark-owner leaderboards were transcribed at their current public vers
 | Source | Included result surface | Observations |
 | --- | --- | ---: |
 | SkillsBench 1.1 | With Skills and Without Skills resolution rates | 49 |
-| PinchBench v2.0.0 | Best and average success rates | 118 |
+| PinchBench v2.0.0 | Best and average success rates | 122 |
 | WildClawBench | Overall, multimodal, pure-text, elapsed time, and published cost | 169 |
 | QwenClawBench v1.1 | Final task score | 12 |
 | Workspace-Bench-Lite | Total rubric pass rate for every model and harness row | 45 |
 | Claw-Eval v1.1 | Pass³ and Pass@3 for Overall, General, Multi-turn, and Multimodal | 174 |
 | RNG-Bench | Nine single-player metrics plus Win%, Score%, and Elo for duel | 69 |
 
-The seven sources contribute 636 observations.
+The seven sources contribute 640 observations.
 
 ## 2026-10-14 follow-up: PerceptionBench
 
