@@ -2,7 +2,7 @@ window.BENCH_DATA = (() => {
   const meta = {
     title: "BenchBoard",
     updated: "2026-09-28",
-    scope: "截至 2026-09-28 的领先通用、多模态与 Agent 模型公开成绩"
+    scope: "领先通用、多模态与 Agent 模型公开成绩"
   };
 
   const sources = [

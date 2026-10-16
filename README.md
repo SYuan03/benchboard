@@ -11,13 +11,23 @@
 BenchBoard indexes published benchmark results for current AI models. Every score keeps its model release, benchmark variant, evaluation setting, and original source attached. Results from different harnesses or versions remain separate, and the site does not invent a cross-benchmark composite score.
 
 <!-- DATA_SUMMARY_START -->
-<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="160 models and versions, 553 benchmark families, 7,907 public results, 281 primary sources"></p>
-<p align="center"><sub>126 curated releases + 34 comparison-only models · 1,237 separately ranked metric and version views</sub></p>
+<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="162 models and versions, 555 benchmark families, 8,249 public results, 283 primary sources"></p>
+<p align="center"><sub>126 curated releases + 36 comparison-only models · 1,259 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
 <h2><img src="assets/readme-icon-news.svg" width="28" alt=""> News</h2>
 
 <table>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Benchmark audit"></td>
+    <td width="132"><strong>2026-10-16</strong><br><sub>VISUAL AGENT BENCHMARK</sub></td>
+    <td>Added the <a href="https://blenderworld.github.io/#leaderboard">BlenderWorld official leaderboard</a>: 195 results for 13 models across the six main-table metrics and nine 3D-creation categories. Text-only and image/video-reference tasks, rubric scores, visual-quality scores, and fully satisfied rubrics remain separate; category means retain the precision in the maintainer's site data.</td>
+  </tr>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Benchmark audit"></td>
+    <td width="132"><strong>2026-10-16</strong><br><sub>AGENT BENCHMARK AUDIT</sub></td>
+    <td>Added 147 previously missed results from <a href="https://github.com/QwenLM/E-CommerceBench/blob/2c2fdedd382c0f2d507b6338ab80a5f7e0ddeb4c/README.md">E-Commerce Bench's official 21-row table</a>: final assets and six separate negotiation, fraud, solvency, efficiency, return, and learning measures. The Preview model labels, high/max reasoning settings, and later evaluations remain distinct.</td>
+  </tr>
   <tr>
     <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Model release audit"></td>
     <td width="132"><strong>2026-10-15</strong><br><sub>MODEL SOURCE AUDIT</sub></td>

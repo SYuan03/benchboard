@@ -874,6 +874,6 @@
   completeAudit("cursorbench", "All 52 model-effort rows on the CursorBench 4.0 public leaderboard are recorded.", "Leaderboard 整表已核");
 
   data.meta.updated = "2026-09-28";
-  data.meta.scope = "截至 2026-09-28 的领先通用、多模态与 Agent 模型公开成绩";
+  data.meta.scope = "领先通用、多模态与 Agent 模型公开成绩";
   observations.forEach((observation, index) => { observation.id = `o${index + 1}`; });
 })();

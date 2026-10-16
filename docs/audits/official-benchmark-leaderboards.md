@@ -1,5 +1,17 @@
 # Official benchmark leaderboard audit
 
+## 2026-10-16 follow-up: BlenderWorld
+
+The [official BlenderWorld leaderboard](https://blenderworld.github.io/#leaderboard) publishes 13 model labels on the same 223 Blender creation tasks: 78 text-only, 130 image-reference, and 15 video-reference tasks. We imported all 78 visible main-table values: overall, text subset, image/video subset, weighted rubric, visual-quality dimension, and fully satisfied rubric. The [site's published data](https://blenderworld.github.io/data/site-data.js) supplies 117 unrounded category means across nine creative domains. Each measure has its own view; all 195 values retain the benchmark-owner paper-run setting and GPT-5.6 Terra main judge. The public leaderboard does not state each candidate's reasoning effort or exact generation-agent harness. The separate rollout-resource table, individual artifacts, and judge-alignment study are outside this score audit.
+
+Seed2.1 Pro 0915 remains distinct from the earlier Seed2.1 Pro release. The text/image/video results establish that the 0915 system was evaluated on visual-reference tasks, without asserting its native input routing. The other model labels do not name exact API snapshots, so the observation settings say so; Qwen3.8 Max is not assigned to its identified 0902 snapshot.
+
+## 2026-10-16 follow-up: E-Commerce Bench
+
+The [official E-Commerce Bench repository Table 1](https://github.com/QwenLM/E-CommerceBench/blob/2c2fdedd382c0f2d507b6338ab80a5f7e0ddeb4c/README.md) prints 21 model-effort rows under a 365-day, five-episode merchant simulation. We imported 147 cells across seven scored columns: mean final assets, honest-deal negotiation, fraudulent-supplier spend, drawdown, yuan per tool call, controllable returns, and repeat-order AnchorRatio. The paper's original 18 rows and three later Qwen3.8 Max / GLM-5.3 evaluations retain the same stated protocol. Exact snapshot IDs are absent for unversioned labels; Qwen3.8 Max Preview and DeepSeek V4 Pro Preview have separate comparison records. GLM-5.2 high and max are separate settings on one model.
+
+The repository also prints assets standard deviation, tool-call and turn counts, and bankrupt-run counts. These are excluded from the seven ranked views; the spread and bankruptcy counts are kept in score notes. GPT-5.5's population-spread and three-run AnchorRatio footnotes remain attached to those results. The source coverage entry is therefore marked partial for the full public table, with all 147 declared scored cells audited.
+
 ## 2026-10-15 follow-up: PinchBench v2
 
 The [live maintainer leaderboard](https://pinchbench.com/) now lists 61 model labels. The 59 previously stored rows still match the displayed Best and Average scores. Two additional NVIDIA Nemotron 3.5 Bolt 74B-A9B labels contribute four new observations: BF16 (Best 91.7%, Average 90.4%; ten runs; submission 2026-10-08) and 24GB (Best 90.1%, Average 87.8%; ten runs; submission 2026-10-10). The variants remain separate because the maintainer labels them separately. The live page still says 147 tasks, while the v2.0.0 release note says 148; both counts stay attached to each result.
