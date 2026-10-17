@@ -40,6 +40,7 @@ const dataPackFiles = [
   "data-packs/pinchbench-2026-10-15.js",
   "data-packs/ecommercebench-2026-10-16.js",
   "data-packs/blenderworld-2026-10-16.js",
+  "data-packs/clbench-2026-10-17.js",
   "data-packs/normalize.js"
 ];
 for (const filename of dataPackFiles) {

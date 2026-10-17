@@ -11,13 +11,18 @@
 BenchBoard indexes published benchmark results for current AI models. Every score keeps its model release, benchmark variant, evaluation setting, and original source attached. Results from different harnesses or versions remain separate, and the site does not invent a cross-benchmark composite score.
 
 <!-- DATA_SUMMARY_START -->
-<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="162 models and versions, 555 benchmark families, 8,249 public results, 283 primary sources"></p>
-<p align="center"><sub>126 curated releases + 36 comparison-only models · 1,259 separately ranked metric and version views</sub></p>
+<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="175 models and versions, 555 benchmark families, 8,545 public results, 285 primary sources"></p>
+<p align="center"><sub>126 curated releases + 49 comparison-only models · 1,266 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
 <h2><img src="assets/readme-icon-news.svg" width="28" alt=""> News</h2>
 
 <table>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Benchmark audit"></td>
+    <td width="132"><strong>2026-10-17</strong><br><sub>CONTEXT LEARNING BENCHMARKS</sub></td>
+    <td>Added 296 previously missed results from the official <a href="https://www.clbench.com/#section-clb">CL-bench</a> and <a href="https://www.clbench.com/#section-life">CL-bench Life</a> leaderboards: 36 and 29 model-mode rows across five professional-context and four real-life-context views. Candidate modes, single runs, published standard deviations, and the two benchmarks' task sets and judge settings remain separate.</td>
+  </tr>
   <tr>
     <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Benchmark audit"></td>
     <td width="132"><strong>2026-10-16</strong><br><sub>VISUAL AGENT BENCHMARK</sub></td>
