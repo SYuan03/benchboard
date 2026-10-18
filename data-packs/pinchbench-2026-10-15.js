@@ -21,8 +21,8 @@
   }
 
   const audit = sourceAudits.find((item) => item.sourceId === "pinchbench-v2");
-  audit.auditedAt = "2026-10-15";
+  audit.auditedAt = "2026-10-18";
   audit.expectedObservationCount = 122;
   audit.auditScope = "Current PinchBench v2.0.0 success-rate leaderboard: Best and Average for all 61 listed model labels; excludes speed, cost, value, category awards, and per-run pages.";
-  audit.note = "61 model labels × two headline success-rate metrics. The two Nemotron 3.5 Bolt variants use separate records. Rechecked 2026-10-15: the live leaderboard displays 147 tasks, while the official v2.0.0 release notes say 148; both counts remain in each result setting.";
+  audit.note = "Rechecked 2026-10-18: all 61 model labels and 122 stored headline values still match the live data. The two Nemotron 3.5 Bolt variants use separate records. The live leaderboard displays 147 tasks, while the official v2.0.0 release notes say 148; both counts remain in each result setting.";
 })();

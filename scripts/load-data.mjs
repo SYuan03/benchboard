@@ -41,6 +41,8 @@ const dataPackFiles = [
   "data-packs/ecommercebench-2026-10-16.js",
   "data-packs/blenderworld-2026-10-16.js",
   "data-packs/clbench-2026-10-17.js",
+  "data-packs/recreationbench-2026-10-18.js",
+  "data-packs/omnicapbench-2026-10-18.js",
   "data-packs/normalize.js"
 ];
 for (const filename of dataPackFiles) {
