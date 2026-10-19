@@ -1,5 +1,11 @@
 # Official benchmark leaderboard audit
 
+## 2026-10-19 follow-up: SurveyReview v1.0
+
+The [official SurveyReview repository leaderboard](https://github.com/zai-org/SurveyReview/blob/f2352dc2eef4a52a6943002f40a4902cc0d84879/README.md) and [project page](https://surveyreview.github.io/) publish the same 84 values: seven model labels across Human-aligned Score (HAS), MSE and MAE for readability, criticalness, comprehensiveness, and structure, their separate average errors, and Reason Quality Score (RQS). MSE and MAE are lower-is-better; HAS and RQS are higher-is-better. HAS combines reviewer-score alignment and rationale quality, while RQS measures semantic consistency with human-review-based reference rationales. The twelve measures have distinct ranked views.
+
+These are v1.0 results. The repository also has a v1.1 cleaned-article-text release but does not publish a v1.1 leaderboard in this table. Its seven original labels are retained. SurveyReviewer and Qwen3-32B have no verified matching model record, so they use comparison-only records; SurveyReviewer is not equated with the project's SurveyAlign name. GLM-4.7 also has a separate comparison record because neither this board nor CL-bench identifies an exact common snapshot. The summary leaderboard does not specify candidate API snapshots, reasoning effort, prompts, run counts, or harness. The official README and project page agree on all 84 numeric cells.
+
 On 2026-10-18, the current [Terminal-Bench 4.0](https://www.tbench.ai/) still had 35 model-agent-effort rows. All stored scores, confidence intervals, agents, efforts, dates, token totals, and cost numbers matched the maintainer data. The [PinchBench v2](https://pinchbench.com/) live data still had 61 model labels and all 122 stored Best/Average values matched; its visible count remains 147 tasks versus 148 in the v2.0.0 release notes.
 
 ## 2026-10-18 follow-up: RecreationBench
