@@ -44,6 +44,7 @@ const dataPackFiles = [
   "data-packs/recreationbench-2026-10-18.js",
   "data-packs/omnicapbench-2026-10-18.js",
   "data-packs/surveyreview-2026-10-19.js",
+  "data-packs/codememorybench-2026-10-20.js",
   "data-packs/normalize.js"
 ];
 for (const filename of dataPackFiles) {
