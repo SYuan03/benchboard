@@ -11,13 +11,18 @@
 BenchBoard indexes published benchmark results for current AI models. Every score keeps its model release, benchmark variant, evaluation setting, and original source attached. Results from different harnesses or versions remain separate, and the site does not invent a cross-benchmark composite score.
 
 <!-- DATA_SUMMARY_START -->
-<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="184 models and versions, 559 benchmark families, 9,128 public results, 289 primary sources"></p>
-<p align="center"><sub>126 curated releases + 58 comparison-only models · 1,329 separately ranked metric and version views</sub></p>
+<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="184 models and versions, 561 benchmark families, 9,148 public results, 290 primary sources"></p>
+<p align="center"><sub>126 curated releases + 58 comparison-only models · 1,336 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
 <h2><img src="assets/readme-icon-news.svg" width="28" alt=""> News</h2>
 
 <table>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Coding evaluation"></td>
+    <td width="132"><strong>2026-10-21</strong><br><sub>CODING EVALUATION</sub></td>
+    <td>Added 20 exact results from OpenAI's <a href="https://openai.com/index/low-resource-programming-languages/">low-resource coding evaluation</a>: MultiLangBench test pass rates and estimated API costs, plus separate COBOL migration accuracy. The four published language examples, 20-language averages, model versions, and reasoning settings remain distinct; unprinted chart cells are outside this audit.</td>
+  </tr>
   <tr>
     <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Benchmark audit"></td>
     <td width="132"><strong>2026-10-20</strong><br><sub>CODING MEMORY BENCHMARK</sub></td>
