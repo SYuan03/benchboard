@@ -173,6 +173,11 @@ input[type="search"]:focus, select:focus { border-color: var(--blue); box-shadow
 .section-head { min-height: 94px; display: flex; justify-content: space-between; gap: 30px; align-items: end; padding: 19px 18px; border-bottom: 1px solid var(--line); }
 .section-head .eyebrow { margin-bottom: 6px; }
 .matrix-wrap { max-height: 760px; overflow: auto; }
+.matrix-pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 9px 18px; color: var(--muted); border-bottom: 1px solid var(--line); font-size: 11px; font-variant-numeric: tabular-nums; }
+.matrix-pagination > div { display: flex; align-items: center; gap: 10px; }
+.matrix-pagination button { padding: 5px 9px; color: var(--blue); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 5px; font-size: 11px; }
+.matrix-pagination button:hover:not(:disabled) { background: var(--blue-soft); }
+.matrix-pagination button:disabled { color: var(--quiet); cursor: default; opacity: .5; }
 .matrix-table th:first-child, .matrix-table td:first-child { position: sticky; left: 0; z-index: 2; min-width: 210px; background: var(--surface); }
 .matrix-table th:first-child { z-index: 4; background: var(--surface-2); }
 .matrix-table td:not(:first-child) { min-width: 100px; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
