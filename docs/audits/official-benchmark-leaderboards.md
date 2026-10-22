@@ -1,5 +1,13 @@
 # Official benchmark leaderboard audit
 
+## 2026-10-22 follow-up: DeepSeek V4.1 Flash 1017
+
+The [official 1017 model card](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017) and [DeepSeek API changelog](https://api-docs.deepseek.com/updates/) agree on all 12 exact target values: the full and text-only HLE results plus ten other benchmark results. The 1017 checkpoint, released 2026-10-17, is separate from the September V4.1 Flash checkpoint. Automation-Bench v1.0.6 and Apex Bench v1.1 have distinct views from version-unspecified results. The changelog identifies Claude Code for Terminal-Bench 4.0, Mini-SWE-V2 for DeepSWE v1.1, and pass@5 for ZeroBench-main; other candidate harnesses and reasoning effort are not specified. The provider-run 42.3 Terminal-Bench score is separate from the benchmark maintainer's published rows. Both source audits cover only the 1017 target column; the model card's comparison columns and release graphics' runtime, length, and cost points remain outside scope.
+
+The live [PinchBench v2 leaderboard](https://pinchbench.com/) still has 61 model labels. All 122 stored Best/Average values match the current embedded leaderboard data as of October 22. The previously noted 147/148 task-count discrepancy remains documented; the task counter itself was not rechecked in this pass.
+
+The [Terminal-Bench 4.0 maintainer leaderboard](https://www.tbench.ai/) still has 35 model–agent–effort rows. Their displayed scores, confidence intervals, agents, efforts, dates, token totals, and cost numbers match the stored results. Two stored cost labels retain explanatory wording beyond the site's display text.
+
 ## 2026-10-20 follow-up: CodeMemoryBench paper
 
 Tencent Hunyuan's [official CodeMemoryBench paper](https://github.com/Tencent-Hunyuan/Hy-Memory/blob/fba347ad8d04eefbc51a466fa4cbd7d4e1936109/docs/papers/CMB_A_Coding_Memory_Benchmark_for_Long_Horizon_and_Interleaved_Coding_Agents.pdf) reports Claude Sonnet 5 and DeepSeek V4 Flash with distinct memory configurations in the same mini-swe-agent scaffold. We checked 42 headline percentages against rendered Tables 2 and 3: 14 model–method rows each for Code Resolved and QA score on CodeMemoryBench, plus 14 Resolved values on the separate SWE-ContextBench Lite Related evaluation. The Code track has 216 tasks across nine repositories and requires both F2P and P2P tests to pass. QA scores 750 open questions by mean judge-derived requirement matches. The 99-task SWE-ContextBench run determines Resolved from F2P, while reporting P2P separately; its scores do not share the CMB Code view.

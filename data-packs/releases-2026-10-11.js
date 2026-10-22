@@ -8,9 +8,9 @@
     vendorId: "terminal-bench",
     publisher: "Terminal-Bench / Stanford / Harbor / Laude Institute",
     kind: "benchmark",
-    date: "2026-10-18",
+    date: "2026-10-22",
     tier: "official",
-    title: "Terminal-Bench 4.0 — Official Leaderboard (2026-10-18 recheck)",
+    title: "Terminal-Bench 4.0 — Official Leaderboard (2026-10-22 recheck)",
     url: "https://www.tbench.ai/"
   };
   const currentSource = sources.find((item) => item.id === source.id);
@@ -84,11 +84,11 @@
     sourceId: source.id,
     status: "complete",
     scopeLabel: "4.0 主榜已核",
-    auditedAt: "2026-10-18",
+    auditedAt: "2026-10-22",
     auditScope: "Current Terminal-Bench 4.0 official leaderboard: resolution rate for all 35 displayed model–agent–effort rows; confidence intervals, token totals, and cost labels retained in each setting.",
     expectedObservationCount: rows.length,
     benchmarkIds: ["terminal-bench-4-0"],
-    note: "Rechecked 2026-10-18: all 35 displayed rows still match stored score, CI, agent, effort, date, token, and cost labels, including multiple effort settings for GPT-6 Astra, Claude Fable 5.1, and Claude Opus 5. These measurements remain separate from provider-reported runs because harness, effort, and execution settings can differ."
+    note: "Rechecked 2026-10-22: all 35 displayed rows still match stored score, CI, agent, effort, date, token, and cost number, including multiple effort settings for GPT-6 Astra, Claude Fable 5.1, and Claude Opus 5. The stored Grok 4.7 and Muse Spark cost labels carry explanatory annotations. These measurements remain separate from provider-reported runs because harness, effort, and execution settings can differ."
   };
   const currentAudit = sourceAudits.find((item) => item.sourceId === source.id);
   if (currentAudit) Object.assign(currentAudit, audit);
