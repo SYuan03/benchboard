@@ -78,6 +78,10 @@ The [official leaderboard](https://explorationbench.com/#leaderboard) adds 220 u
 
 The report identifies Qwen3.8-Max as the 0902 snapshot and Seed2.1 Pro as the 0915 snapshot, so those scores are kept separate from their earlier releases. Its DeepSeek-V4-Pro label gives no snapshot, so it remains separate from the known 0813 release. Reasoning levels come from the official leaderboard's per-system labels. AlienCode's rule count and AlienLogic's correct-refusal rate are auxiliary diagnostics and never share a ranking with held-out accuracy. The generated trajectory charts and task-level logs are outside the audited table scope.
 
+## 2026-10-22 follow-up: SkillsBench source coverage
+
+The [SkillsBench source-by-source audit](skillsbench-2026-10-22.md) adds 253 observations: Vals AI's complete paired accuracy/cost/duration table (210), plus missing SkillsBench results and relative harness metrics from Hy4, Atria, Ling, Qwen, openPangu, dots3, and GitHub Copilot (43). BenchFlow's 49 headline values were rechecked and remain unchanged. Undated DeepSeek Pro is no longer assigned to 0813; Qwen's 78-task and Hy4's 79-task results are no longer in the 87-task view. All SkillsBench variants now share one navigation family. The audit documents each source's protocol and remaining gaps, including full model-card tables outside this focused scope.
+
 ## Representation decisions
 
 - Models introduced only by a benchmark-owner leaderboard use `scoreStatus: "comparison-only"`. Existing first-party target models keep their original status.

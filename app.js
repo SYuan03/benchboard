@@ -189,7 +189,7 @@
     return obs.sourceIds.map((id) => sourcesById.get(id)).filter(Boolean).map((source) => {
       const own = source.vendorId === model.vendorId;
       const benchmarkOfficial = source.kind === "benchmark";
-      const label = own ? `${source.publisher} · 厂商官方` : `${source.publisher} · ${benchmarkOfficial ? "Benchmark 官方" : "他测"}`;
+      const label = own ? `${source.publisher} · 厂商官方` : `${source.publisher} · ${benchmarkOfficial ? "Benchmark 官方" : source.kind === "evaluator" ? "独立评测" : "他测"}`;
       return `<a class="${own ? "" : "cross"}" href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(label)}${icon("external", "link-icon")}</a>`;
     }).join("");
   }
@@ -428,7 +428,7 @@
     sources.sort((a, b) => String(b.date).localeCompare(String(a.date)));
     els.sourcesTable.innerHTML = `<thead><tr><th>日期</th><th>来源</th><th>发布方</th><th>类型</th><th>覆盖审计</th><th>引用记录</th></tr></thead><tbody>${sources.length ? sources.map((source) => {
       const count = sourceCounts.get(source.id) || 0;
-      const type = source.kind === "benchmark" ? "Benchmark 官方" : "模型厂商官方";
+      const type = source.kind === "benchmark" ? "Benchmark 官方" : source.kind === "evaluator" ? "独立评测机构" : "模型厂商官方";
       const audit = sourceAuditsById.get(source.id);
       const targetAuditCount = audit?.targetModels?.length || (audit?.targetModelId ? 1 : 0);
       const targetObservationCount = audit?.targetModels

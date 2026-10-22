@@ -50,7 +50,7 @@ for (const audit of data.sourceAudits || []) {
   if (!new Set(["complete", "target-complete", "partial", "pending", "metadata-only", "inaccessible"]).has(audit.status)) errors.push(`invalid source audit status: ${audit.sourceId} -> ${audit.status}`);
   if (!audit.note) errors.push(`source audit has no note: ${audit.sourceId}`);
   const sourceObservations = data.observations.filter((observation) => observation.sourceIds.includes(audit.sourceId));
-  if (audit.status === "complete") {
+  if (audit.status === "complete" || (audit.status === "partial" && Number.isInteger(audit.expectedObservationCount))) {
     if (sourceObservations.length !== audit.expectedObservationCount) {
       errors.push(`source audit count mismatch: ${audit.sourceId} -> expected ${audit.expectedObservationCount}, got ${sourceObservations.length}`);
     }

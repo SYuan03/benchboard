@@ -18,6 +18,7 @@ Screenshots of the original table are useful in a pull request, but every record
 
 1. Add small records to `data.js`. Put a large source audit in a focused file under `data-packs/` and load it from both `index.html` and `scripts/load-data.mjs`.
 2. Update `sourceAudits` with the scope you checked. Use `complete` only for every numeric result in that source scope, or `target-complete` for fully checked model columns. Include expected counts so later omissions fail validation.
+   A focused `partial` audit can also set `expectedObservationCount` and `benchmarkIds` for the imported scope; these counts are validated without claiming that the whole publication was imported. Independent evaluator sources use `kind: "evaluator"`, distinct from the benchmark author and the model provider.
 3. Run `npm run check` to validate IDs, references, units, model-version mappings, duplicate observations, and source-audit counts.
 4. Run `npm run sync-readme` and `npm run sync-source-matrix` to refresh the coverage counts and the model-to-source audit matrix.
 5. Run `npm run check-readme`, `npm run check-source-matrix`, and `node --check app.js`.
