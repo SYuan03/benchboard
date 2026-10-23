@@ -48,6 +48,11 @@ const dataPackFiles = [
   "data-packs/low-resource-coding-2026-10-21.js",
   "data-packs/skillsbench-2026-10-22.js",
   "data-packs/deepseek-1017-2026-10-22.js",
+  "data-packs/atria-dawn-2026-10-23.js",
+  "data-packs/minimax-m31f-2026-10-23.js",
+  "data-packs/ling-sante-2026-10-23.js",
+  "data-packs/voxtral3-2026-10-23.js",
+  "data-packs/minimax-m31f-vals-2026-10-23.js",
   "data-packs/normalize.js"
 ];
 for (const filename of dataPackFiles) {

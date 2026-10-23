@@ -8,9 +8,9 @@
     vendorId: "terminal-bench",
     publisher: "Terminal-Bench / Stanford / Harbor / Laude Institute",
     kind: "benchmark",
-    date: "2026-10-22",
+    date: "2026-10-23",
     tier: "official",
-    title: "Terminal-Bench 4.0 — Official Leaderboard (2026-10-22 recheck)",
+    title: "Terminal-Bench 4.0 — Official Leaderboard (2026-10-23 recheck)",
     url: "https://www.tbench.ai/"
   };
   const currentSource = sources.find((item) => item.id === source.id);
@@ -40,7 +40,7 @@
     ["glm-5-3", 41.8, "Claude Code", "max", 3.2, "Aug 14, 2026", "8.7B", "$2.7k"],
     ["grok-4-7", 37.6, "Grok Build", "xhigh", 3.5, "Sep 21, 2026", "5.5B", "$3.68k (cost partial: 324/330 trials)"],
     ["gpt-5-6-sol", 37.3, "Codex", "max", 3.8, "Jun 26, 2026", "4.4B", "$2.5k"],
-    ["glm-5-3-flash", 35.8, "Claude Code", "none", 3.5, "Aug 26, 2026", "2.9B", "$2.9k"],
+    ["glm-5-3-flash", 35.8, "Claude Code", "none", 3.5, "Aug 26, 2026", "2.9B", "$118.74"],
     ["claude-opus-5", 34.8, "Claude Code", "low", 3.9, "Jul 24, 2026", "2.7B", "$2.4k"],
     ["qwen3-8-max-0902", 27.0, "Claude Code", "max", 3.8, "Sep 2, 2026", "3.0B", "$4.6k"],
     ["claude-opus-4-8", 23.6, "Claude Code", "max", 3.6, "May 28, 2026", "6.4B", "$6.5k"],
@@ -84,11 +84,11 @@
     sourceId: source.id,
     status: "complete",
     scopeLabel: "4.0 主榜已核",
-    auditedAt: "2026-10-22",
+    auditedAt: "2026-10-23",
     auditScope: "Current Terminal-Bench 4.0 official leaderboard: resolution rate for all 35 displayed model–agent–effort rows; confidence intervals, token totals, and cost labels retained in each setting.",
     expectedObservationCount: rows.length,
     benchmarkIds: ["terminal-bench-4-0"],
-    note: "Rechecked 2026-10-22: all 35 displayed rows still match stored score, CI, agent, effort, date, token, and cost number, including multiple effort settings for GPT-6 Astra, Claude Fable 5.1, and Claude Opus 5. The stored Grok 4.7 and Muse Spark cost labels carry explanatory annotations. These measurements remain separate from provider-reported runs because harness, effort, and execution settings can differ."
+    note: "Rechecked 2026-10-23: all 35 displayed rows match stored score, CI, agent, effort, date, token, and cost number. The maintainer changed the existing GLM-5.3-Flash row's displayed cost to $118.74 at 00:29 UTC; its score, CI, tokens and row ID remain the same, so this is recorded as a displayed-cost correction, not a new score. The stored Grok 4.7 and Muse Spark cost labels carry explanatory annotations. These measurements remain separate from provider-reported runs because harness, effort, and execution settings can differ."
   };
   const currentAudit = sourceAudits.find((item) => item.sourceId === source.id);
   if (currentAudit) Object.assign(currentAudit, audit);

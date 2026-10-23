@@ -11,13 +11,38 @@
 BenchBoard indexes published benchmark results for current AI models. Every score keeps its model release, benchmark variant, evaluation setting, and original source attached. Results from different harnesses or versions remain separate, and the site does not invent a cross-benchmark composite score.
 
 <!-- DATA_SUMMARY_START -->
-<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="194 models and versions, 560 benchmark families, 9,413 public results, 304 primary sources"></p>
-<p align="center"><sub>131 curated releases + 63 comparison-only models · 1,348 separately ranked metric and version views</sub></p>
+<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="200 models and versions, 582 benchmark families, 9,565 public results, 313 primary sources"></p>
+<p align="center"><sub>137 curated releases + 63 comparison-only models · 1,386 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
 <h2><img src="assets/readme-icon-news.svg" width="28" alt=""> News</h2>
 
 <table>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Speech model update"></td>
+    <td width="132"><strong>2026-10-23</strong><br><sub>VOXTRAL 3 AUDIT</sub></td>
+    <td>Added 19 exact target values from Mistral's <a href="https://mistral.ai/news/voxtral-3/">Voxtral 3 release charts</a> for Small/Mini Transcribe 3, Mini Realtime 3, and Mini TTS 3. FLEURS language and latency settings, diarization cpWER, contextual keyphrase recall, and four speech-quality metrics have separate views. The TTS language-count discrepancy between the launch and <a href="https://docs.mistral.ai/models/voxtral-mini-tts-3-0">model docs</a> is recorded.</td>
+  </tr>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Model update"></td>
+    <td width="132"><strong>2026-10-23</strong><br><sub>LING MODEL CARD AUDIT</sub></td>
+    <td>Added all 16 target values from the <a href="https://huggingface.co/inclusionAI/Ling-3.0-flash-Sante">Ling-3.0-flash-Sante official model card</a>. The published image spans medical, research, and agent benchmarks. Three AFU evaluations are labeled internal; metric or unit details absent from the card remain unspecified, and GDPval-V2-AA and DeepSearchQA use separate source-specific views.</td>
+  </tr>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Model update"></td>
+    <td width="132"><strong>2026-10-23</strong><br><sub>MINIMAX MODEL RELEASE</sub></td>
+    <td>Added <a href="https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash">MiniMax M3.1 Flash</a> and all 15 exact scores in its official model-card target column, plus nine separate <a href="https://www.vals-ai.com/models/minimax_MiniMax-M3.1-flash">Vals AI maintainer results</a>. The <a href="https://www.minimax.io/blog/minimax-m31f">October 19 release</a> rounds CyberGym 82.2% to 82%; benchmark variants and harnesses remain distinct, and Vals' conflicting cost and output-cap metadata are documented without importing them.</td>
+  </tr>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Source audit"></td>
+    <td width="132"><strong>2026-10-23</strong><br><sub>ATRIA SOURCE AUDIT</sub></td>
+    <td>Completed the <a href="https://huggingface.co/internlm/Atria-Dawn-Preview">Atria Dawn Preview model-card</a> and <a href="https://arxiv.org/html/2609.15818v2">technical-report</a> main table: 100 exact cells across 16 benchmark views, including 93 results absent from the previous SkillsBench-only audit. GDPval Elo, MLE-Bench Lite HumanRank, search-score variants, harnesses, and judges remain separate.</td>
+  </tr>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-audit.svg" width="32" alt="Leaderboard correction"></td>
+    <td width="132"><strong>2026-10-23</strong><br><sub>LEADERBOARD CORRECTION</sub></td>
+    <td>Rechecked all 35 <a href="https://www.tbench.ai/">Terminal-Bench 4.0 maintainer rows</a> and corrected GLM-5.3-Flash's displayed total cost from $2.9k to $118.74. Its score, confidence interval, agent, effort, date, and token count still match the same published row.</td>
+  </tr>
   <tr>
     <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Model update"></td>
     <td width="132"><strong>2026-10-22</strong><br><sub>DEEPSEEK MODEL UPDATE</sub></td>
