@@ -53,6 +53,8 @@ const dataPackFiles = [
   "data-packs/ling-sante-2026-10-23.js",
   "data-packs/voxtral3-2026-10-23.js",
   "data-packs/minimax-m31f-vals-2026-10-23.js",
+  "data-packs/gemini38-live-2026-10-24.js",
+  "data-packs/grok-voice3-2026-10-24.js",
   "data-packs/normalize.js"
 ];
 for (const filename of dataPackFiles) {

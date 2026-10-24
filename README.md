@@ -11,13 +11,23 @@
 BenchBoard indexes published benchmark results for current AI models. Every score keeps its model release, benchmark variant, evaluation setting, and original source attached. Results from different harnesses or versions remain separate, and the site does not invent a cross-benchmark composite score.
 
 <!-- DATA_SUMMARY_START -->
-<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="200 models and versions, 582 benchmark families, 9,565 public results, 313 primary sources"></p>
-<p align="center"><sub>137 curated releases + 63 comparison-only models · 1,386 separately ranked metric and version views</sub></p>
+<p align="center"><img src="assets/benchboard-stats.svg?v=2" width="100%" alt="203 models and versions, 585 benchmark families, 9,584 public results, 319 primary sources"></p>
+<p align="center"><sub>140 curated releases + 63 comparison-only models · 1,395 separately ranked metric and version views</sub></p>
 <!-- DATA_SUMMARY_END -->
 
 <h2><img src="assets/readme-icon-news.svg" width="28" alt=""> News</h2>
 
 <table>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Voice model update"></td>
+    <td width="132"><strong>2026-10-24</strong><br><sub>GROK VOICE AUDIT</sub></td>
+    <td>Added Grok Voice 3.0 and ten separate results from its <a href="https://x.ai/news/grok-voice-3">release</a> and <a href="https://artificialanalysis.ai/speech-to-speech">Artificial Analysis leaderboard</a>. Speech quality, reasoning, agentic tasks, conversational dynamics, preference, EVA-Bench accuracy, latency, and input-audio cost keep their own metrics. The October 13 release Elo and October 24 live Elo remain separate; the live Gemini 3.8 Live Index is also stored apart from Google's September result.</td>
+  </tr>
+  <tr>
+    <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Voice model audit"></td>
+    <td width="132"><strong>2026-10-24</strong><br><sub>GEMINI LIVE AUDIT</sub></td>
+    <td>Added eight exact results for Gemini 3.8 Live and Live Extended Thinking from Google's <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/">release</a> and <a href="https://deepmind.google/models/evals-methodology/gemini-3-8-live/">evaluation charts</a>. Speech quality, agentic voice performance, Sierra banking, Big Bench Audio, and measured input-audio cost have separate views; model IDs and modality limits follow the <a href="https://deepmind.google/models/model-cards/gemini-3-8-audio/">model card</a>.</td>
+  </tr>
   <tr>
     <td align="center" width="48"><img src="assets/news-release.svg" width="32" alt="Speech model update"></td>
     <td width="132"><strong>2026-10-23</strong><br><sub>VOXTRAL 3 AUDIT</sub></td>
